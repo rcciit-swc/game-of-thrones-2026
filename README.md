@@ -24,13 +24,11 @@ The repository follows a modular structure to ensure clarity and ease of mainten
 Contains the source code for the application.
 
 - **`app`**: Entry point of the application.
-
   - `components`: Shared components categorized into:
     - `common`: Generic components reused across the app.
     - `home`: Components specific to the home page.
 
 - **`lib`**: Contains business logic and application-specific utilities.
-
   - `actions`: Functions that handle user or system actions.
   - `stores`: State management logic. Each store should be unique and include various reducers with their respective actions.
   - `types`: TypeScript types and interfaces.
@@ -46,16 +44,13 @@ Each folder uses a **barrel export pattern** via `index.ts` files to centralize 
 ## Naming Conventions
 
 1. **Files and Folders**
-
    - Use `camelCase` for files (e.g., `getUserData.ts`).
    - Use `kebab-case` for folder names (e.g., `node-modules`).
 
 2. **Components**
-
    - React components should use `PascalCase` (e.g., `Hero.tsx`).
 
 3. **Variables and Constants**
-
    - Use `camelCase` for variables.
    - Use `UPPER_CASE` for constants (e.g., `MAX_RETRIES`).
 
@@ -67,24 +62,20 @@ Each folder uses a **barrel export pattern** via `index.ts` files to centralize 
 ## Development Guidelines
 
 1. **Setup**
-
    - Install pnpm (if not installed) using npm `npm install -g pnpm`.
    - Install dependencies using `pnpm install`.
    - Start the development server using `pnpm dev`.
 
 2. **Branching**
-
    - Follow the Git branching model:
      - `main`: Stable production-ready code.
      - `feature/*`: New feature development.
      - `bugfix/*`: Bug fixes.
 
 3. **Testing**
-
    - Ensure all features are tested before raising a pull request.
 
 4. **Documentation**
-
    - Add comments for all complex functions.
    - Update the README for significant changes in functionality.
 
@@ -96,17 +87,14 @@ Each folder uses a **barrel export pattern** via `index.ts` files to centralize 
 ## Best Practices for Next.js Development
 
 1. **Search Engine Optimization (SEO)**
-
    - Use **constructMetaData** function to include meta tags for title, description, and other SEO attributes.
    - Ensure each page has a unique and descriptive title.
 
 2. **Image Optimization**
-
    - Use the Next.js `<Image>` component to automatically optimize images.
    - Provide appropriate `alt` text for all images to improve accessibility and SEO.
 
 3. **Code Splitting**
-
    - Leverage dynamic imports using `next/dynamic` for large components or modules that are not critical during initial page load.
 
 4. **Environment Variables**
@@ -118,22 +106,11 @@ Each folder uses a **barrel export pattern** via `index.ts` files to centralize 
 ## Coding Standards
 
 1. **TypeScript**
-
    - Strict type checking is enabled. Ensure all variables and functions have proper types.
 
 2. **Linting and Formatting**
-
    - Run `pnpm lint` to check for linting errors.
    - Run `pnpm format` to auto-format code using Prettier.
-   - Configure Prettier with the following settings in `package.json` or `.prettierrc`:
-     ```json
-     {
-       "semi": true,
-       "singleQuote": true,
-       "tabWidth": 2,
-       "trailingComma": "all"
-     }
-     ```
 
 3. **Folder Imports**
    - Use `index.ts` files to centralize exports for folders. For example:

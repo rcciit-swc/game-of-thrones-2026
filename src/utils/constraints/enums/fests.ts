@@ -1,4 +1,3 @@
-
 export enum fests {
   GOT = 'Game of Thrones 2026',
   TECHTRIX = 'TechTrix 2026',
