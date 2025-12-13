@@ -6,8 +6,8 @@ import './hero-animations.css';
 const Hero = () => {
   return (
     <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-14.5 md:pt-30">
-      {/* Floating particles - Stranger Things style */}
-      <div className="absolute inset-0 z-5 pointer-events-none">
+      {/* Floating particles - Stranger Things style - Hidden on mobile for performance */}
+      <div className="hidden md:block absolute inset-0 z-5 pointer-events-none">
         <div className="particle"></div>
         <div className="particle"></div>
         <div className="particle"></div>
@@ -20,8 +20,8 @@ const Hero = () => {
         <div className="particle"></div>
       </div>
 
-      {/* Glittering stars */}
-      <div className="absolute inset-0 z-5 pointer-events-none">
+      {/* Glittering stars - Hidden on mobile for performance */}
+      <div className="hidden md:block absolute inset-0 z-5 pointer-events-none">
         <div
           className="star star-small"
           style={{
@@ -159,8 +159,8 @@ const Hero = () => {
         ></div>
       </div>
 
-      {/* Static noise overlay */}
-      <div className="static-noise z-5"></div>
+      {/* Static noise overlay - Hidden on mobile for performance */}
+      <div className="hidden md:block static-noise z-5"></div>
 
       {/* Desktop background */}
       <div
@@ -175,9 +175,9 @@ const Hero = () => {
         }}
       />
 
-      {/* Mobile background */}
+      {/* Mobile background - No animations for better performance */}
       <div
-        className="md:hidden absolute inset-0 z-0 animate-electricPulse"
+        className="md:hidden absolute inset-0 z-0"
         style={{
           backgroundImage:
             "url('https://i.postimg.cc/gkFKvhQx/Rectangle-24.png')",
@@ -274,15 +274,15 @@ const Hero = () => {
           </span>
         </div>
 
-        {/* Mobile GOT block */}
+        {/* Mobile GOT block - Reduced animations for performance */}
         <div
-          className="md:hidden absolute left-1/2 -translate-x-1/2 top-22 z-30 animate-fadeIn animate-scaleGlow animate-flicker"
+          className="md:hidden absolute left-1/2 -translate-x-1/2 top-22 z-30 animate-fadeIn"
           style={{ animationDelay: '0.8s' }}
         >
           <div className="relative ">
-            {/* Small left branch on G (mobile) */}
+            {/* Small left branch on G (mobile) - No animation for performance */}
             <div
-              className="absolute left-5 top-1.25 z-40 pointer-events-none animate-float"
+              className="absolute left-5 top-1.25 z-40 pointer-events-none"
               style={{ animationDelay: '1s' }}
             >
               <Image
