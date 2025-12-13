@@ -10,12 +10,13 @@
 
 @font-face {
   font-family: 'Agency';
-  src: url('/fonts/AGENCYB.TTF') format('truetype');
+  src: url('/fonts/AGENCYB.ttF') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
 
 @custom-variant dark (&:is(.dark *));
+
 body {
   background-color: black;
   color: white;
@@ -132,6 +133,7 @@ body {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }

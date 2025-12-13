@@ -393,7 +393,7 @@
 }
 
 .rcc-text {
-  font-family: var(--font-cinzel), 'Georgia', serif;
+  font-family: 'Cinzel', 'Georgia', serif;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   font-weight: 600;

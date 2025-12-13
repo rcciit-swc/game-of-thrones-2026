@@ -37,7 +37,7 @@ export default function Navbar() {
             <Link
               key={link.label}
               href={link.href}
-              className="font-(family-name:--font-irish-grover) text-[#CCA855] text-[25px] hover:text-[#f5d68c] transition-colors duration-200"
+              className="font-['Irish_Grover'] text-[#CCA855] text-[25px] hover:text-[#f5d68c] transition-colors duration-200"
             >
               {link.label}
             </Link>
@@ -47,7 +47,7 @@ export default function Navbar() {
         {/* Register Button - Desktop */}
         <Link
           href="/register"
-          className="hidden lg:block w-42 py-2.5 bg-[#B60302] text-[#FAFAFA] text-[20px] font-(family-name:--font-irish-grover) rounded-[50px] shadow-[0_8px_15px_rgba(0,0,0,0.25)] hover:bg-[#8f0202] transition-colors duration-200 text-center"
+          className="hidden lg:block w-42 py-2.5 bg-[#B60302] text-[#FAFAFA] text-[20px] font-['Irish_Grover'] rounded-[50px] shadow-[0_8px_15px_rgba(0,0,0,0.25)] hover:bg-[#8f0202] transition-colors duration-200 text-center"
         >
           Register
         </Link>
@@ -88,14 +88,14 @@ export default function Navbar() {
               key={link.label}
               href={link.href}
               onClick={() => setIsMenuOpen(false)}
-              className="font-(family-name:--font-irish-grover) text-[#CCA855] text-[25px] hover:text-[#f5d68c] transition-colors duration-200"
+              className="font-['Irish_Grover'] text-[#CCA855] text-[25px] hover:text-[#f5d68c] transition-colors duration-200"
             >
               {link.label}
             </Link>
           ))}
           <Link
             href="/register"
-            className="w-42 py-2.5 bg-[#B60302] text-[#FAFAFA] text-[20px] font-(family-name:--font-irish-grover) rounded-[50px] shadow-[0_8px_15px_rgba(0,0,0,0.25)] hover:bg-[#8f0202] transition-colors duration-200 mt-2 text-center block"
+            className="w-42 py-2.5 bg-[#B60302] text-[#FAFAFA] text-[20px] font-['Irish_Grover'] rounded-[50px] shadow-[0_8px_15px_rgba(0,0,0,0.25)] hover:bg-[#8f0202] transition-colors duration-200 mt-2 text-center block"
           >
             Register
           </Link>

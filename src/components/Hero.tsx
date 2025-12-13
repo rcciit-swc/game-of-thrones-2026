@@ -258,7 +258,7 @@ const Hero = () => {
 
         <div
           className="w-115.5 h-14 text-center justify-start text-red-600 text-5xl md:text-6xl font-light mt-7 md:mt-2 mb-8 md:mb-2 opacity-0 animate-fadeInUp"
-          style={{ fontFamily: 'var(--font-agency)', animationDelay: '0.6s' }}
+          style={{ fontFamily: 'Agency', animationDelay: '0.6s' }}
         >
           GAME OF{' '}
           <span
@@ -308,7 +308,7 @@ const Hero = () => {
                     fill="white"
                     fontSize="280"
                     fontWeight="bold"
-                    fontFamily="var(--font-agency), Arial Black, sans-serif"
+                    fontFamily="Agency, Arial Black, sans-serif"
                   >
                     GOT
                   </text>
@@ -356,7 +356,7 @@ const Hero = () => {
                   fill="white"
                   fontSize="360"
                   fontWeight="bold"
-                  fontFamily="var(--font-agency), Arial Black, sans-serif"
+                  fontFamily="Agency, Arial Black, sans-serif"
                 >
                   GOT
                 </text>
@@ -390,7 +390,7 @@ const Hero = () => {
         <div
           className="text-center text-6xl md:text-8xl font-bold mt-70  md:mt-85 opacity-0 animate-fadeInUp"
           style={{
-            fontFamily: 'var(--font-agency)',
+            fontFamily: 'Agency',
             background: 'linear-gradient(90deg, #CCA855, #FF1B35)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
@@ -408,7 +408,7 @@ const Hero = () => {
         >
           <Link
             href="/register"
-            className="w-42 py-2.5 bg-[#B60302] text-[#FAFAFA] text-[20px] font-(family-name:--font-irish-grover) rounded-[50px] shadow-[0_8px_15px_rgba(0,0,0,0.25)] hover:bg-[#8f0202] transition-colors duration-200 text-center animate-pulse"
+            className="w-42 py-2.5 bg-[#B60302] text-[#FAFAFA] text-[20px] font-['Irish_Grover'] rounded-[50px] shadow-[0_8px_15px_rgba(0,0,0,0.25)] hover:bg-[#8f0202] transition-colors duration-200 text-center animate-pulse"
           >
             Register
           </Link>
