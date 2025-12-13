@@ -1,10 +1,11 @@
 'use client'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const Hero = () => {
     return (
         <div
-            className="relative min-h-screen w-full flex items-center justify-center overflow-hidden"
+            className="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-14.5 md:pt-30"
         >
             {/* Desktop background */}
             <div
@@ -68,7 +69,7 @@ const Hero = () => {
             </div>
 
             {/* RCC logo + text */}
-            <div className="top-30 text-center absolute uppercase scale-80 font-['Helvetica']">
+            <div className="top-32 md:top-40 text-center absolute uppercase scale-80 font-['Helvetica']">
                 <h1 className="text-xs">RCC Institute Of</h1>
                 <Image
                     src="/assets/rcc-logo.svg"
@@ -81,7 +82,7 @@ const Hero = () => {
             </div>
 
             {/* Main block with original vertical spacing but horizontally centered */}
-            <div className="absolute top-60 left-1/2 -translate-x-1/2 z-20">
+            <div className="absolute top-60 md:top-80 left-1/2 -translate-x-1/2 z-20">
                 <h1
                     className="text-2xl md:text-3xl lg:text-3xl font-bold text-center text-white drop-shadow-lg"
                     style={{ fontFamily: 'Rajdhani, sans-serif' }}
@@ -90,7 +91,7 @@ const Hero = () => {
                 </h1>
 
                 <div
-                    className="w-115.5 h-14 text-center justify-start text-red-600 text-5xl md:text-6xl font-light mt-7"
+                    className="w-115.5 h-14 text-center justify-start text-red-600 text-5xl md:text-6xl font-light mt-7 md:mt-2 mb-8 md:mb-2"
                     style={{ fontFamily: 'var(--font-agency)' }}
                 >
                     GAME OF{' '}
@@ -107,7 +108,7 @@ const Hero = () => {
                 </div>
 
                 {/* Mobile GOT block */}
-                <div className="md:hidden absolute left-1/2 -translate-x-1/2 top-25 z-20">
+                <div className="md:hidden absolute left-1/2 -translate-x-1/2 top-22 z-20">
                     <div className="relative ">
 
                         {/* Small left branch on G (mobile) */}
@@ -168,7 +169,7 @@ const Hero = () => {
                 </div>
 
                 {/* Desktop GOT block */}
-                <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-38.25 z-20">
+                <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-35 z-20">
                     <svg width="821.57" height="384" viewBox="0 0 822 384">
                         <defs>
                             <mask id="gotMaskDesktop">
@@ -213,7 +214,7 @@ const Hero = () => {
 
                 {/* 2025/2026 below GOT */}
                 <div
-                    className="text-center text-6xl md:text-8xl font-bold mt-77  md:mt-85 "
+                    className="text-center text-6xl md:text-8xl font-bold mt-70  md:mt-85 "
                     style={{
                         fontFamily: 'var(--font-agency)',
                         background: 'linear-gradient(90deg, #CCA855, #FF1B35)',
@@ -223,6 +224,13 @@ const Hero = () => {
                     }}
                 >
                     2026
+                </div>
+
+                {/* Register Button - Mobile only */}
+                <div className="md:hidden flex justify-center mt-10">
+                    <Link href="/register" className="w-42 py-2.5 bg-[#B60302] text-[#FAFAFA] text-[20px] font-(family-name:--font-irish-grover) rounded-[50px] shadow-[0_8px_15px_rgba(0,0,0,0.25)] hover:bg-[#8f0202] transition-colors duration-200 text-center">
+                        Register
+                    </Link>
                 </div>
             </div>
         </div >
