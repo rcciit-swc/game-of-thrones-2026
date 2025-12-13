@@ -1,15 +1,14 @@
 import Hero from '@/components/Hero';
 import React from 'react';
-import Navbar from '@/components/navbar';
-import Footer from '@/components/footer';
+import Footer from '@/components/Footer';
+import Navbar from '@/components/Navbar';
 
 const page = () => {
   return (
     <div>
-     
       <Navbar />
-       <Hero />
-      <Footer />
+      <Hero />
+      {/* <Footer /> */}
     </div>
   );
 };
