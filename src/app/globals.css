@@ -1,6 +1,20 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+@font-face {
+  font-family: 'Rajdhani';
+  src: url('/fonts/Rajdhani-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Agency';
+  src: url('/fonts/AGENCYB.TTF') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
 @custom-variant dark (&:is(.dark *));
 body {
   background-color: black;
