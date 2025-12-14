@@ -2,8 +2,22 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
+@font-face {
+  font-family: 'Rajdhani';
+  src: url('/fonts/Rajdhani-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Agency';
+  src: url('/fonts/AGENCYB.ttF') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
 
 @custom-variant dark (&:is(.dark *));
+
 body {
   background-color: black;
   color: white;
@@ -120,9 +134,9 @@ body {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
-  
   }
 }
 
@@ -131,10 +145,10 @@ body {
 }
 
 .no-scrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .no-scrollbar::-webkit-scrollbar {
-  display: none;  /* Chrome, Safari and Opera */
+  display: none; /* Chrome, Safari and Opera */
 }

@@ -1,19 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { constructMetaData } from '@/utils/functions';
-import { Irish_Grover, Rajdhani } from "next/font/google";
-
-const irishGrover = Irish_Grover({
-  weight: '400',
-  subsets: ['latin'],
-  variable: '--font-irish-grover',
-});
-
-const rajdhani = Rajdhani({
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-  variable: "--font-rajdhani",
-});
 
 export const metadata: Metadata = constructMetaData({
   title: 'Game of Thrones 2026',
@@ -22,12 +9,24 @@ export const metadata: Metadata = constructMetaData({
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" className="no-scrollbar">
-      <body className={`${irishGrover.variable} ${rajdhani.variable} antialiased no-scrollbar`} suppressHydrationWarning>{children}</body>
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Irish+Grover&family=Cinzel:wght@400;600;700&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }
