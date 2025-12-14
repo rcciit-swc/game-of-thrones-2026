@@ -1,10 +1,22 @@
 import type { Metadata } from 'next';
-import { Rajdhani } from 'next/font/google';
 import './globals.css';
 import { constructMetaData } from '@/utils/functions';
+import { Irish_Grover, Roboto_Condensed, Rajdhani } from 'next/font/google';
+
+const irishGrover = Irish_Grover({
+  weight: '400',
+  subsets: ['latin'],
+  variable: '--font-irish-grover',
+});
+
+const robotoCondensed = Roboto_Condensed({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  variable: '--font-roboto-condensed',
+});
 
 const rajdhani = Rajdhani({
-  weight: ['400', '500', '600', '700'],
+  weight: ['400', '600'],
   subsets: ['latin'],
   variable: '--font-rajdhani',
 });
@@ -33,7 +45,11 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={`${rajdhani.variable} antialiased`}>{children}</body>
+      <body
+        className={`${irishGrover.variable} ${robotoCondensed.variable} ${rajdhani.variable} antialiased`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
