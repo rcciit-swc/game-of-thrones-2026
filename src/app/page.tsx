@@ -1,10 +1,11 @@
 import React from 'react';
+import About from '@/components/about/about';
 
 const page = () => {
   return (
-    <div>
-      <h1>Game of Thrones 2026</h1>
-    </div>
+    <main className="min-h-screen">
+      <About />
+    </main>
   );
 };
 
