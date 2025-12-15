@@ -22,7 +22,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="shrink-0">
           <Image
-            src="/assets/GOT_logo.png"
+            src="https://i.postimg.cc/ns8zrs4m/GOT-logo.png"
             alt="Game of Thrones Logo"
             width={117}
             height={156}
