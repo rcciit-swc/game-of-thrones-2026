@@ -20,7 +20,7 @@ const EventsWrapper = () => {
           z-2
         "
       />
-        <div className="min-h-[50vh] md:min-h-[60vh] bg-[url('/assets/events/bg_res.svg')] lg:bg-[url('/assets/events/bg_eyes_copy.png')]  bg-cover lg:bg-contain bg-no-repeat bg-top flex  lg:items-center justify-center">
+        <div className="min-h-[50vh] md:min-h-[60vh] bg-[url('/assets/events/bg_res.svg')] lg:bg-[url('https://i.postimg.cc/Kj4ygcYw/bg-eyes-copy.png')]  bg-cover lg:bg-contain bg-no-repeat bg-top flex  lg:items-center justify-center">
             <h1 className="z-3 text-white rajdhanifont text-6xl md:text-8xl text-center translate-y-50  md:translate-y-22 ">
                 <span className="text-5xl md:text-7xl text font-thin">CHOOSE YOUR</span>
                 <span className="block font-bold">PLAYGROUND</span>
