@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { constructMetaData } from '@/utils/functions';
+import SessionProvider from '@/lib/SessionProvider';
 
 export const metadata: Metadata = constructMetaData({
   title: 'Game of Thrones 2026',
@@ -14,7 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="no-scrollbar">
-      <body className={`$antialiased no-scrollbar`}>{children}</body>
+      <body className={`$antialiased no-scrollbar`}>
+        <SessionProvider />
+        {children}
+      </body>
     </html>
   );
 }
