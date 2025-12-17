@@ -338,14 +338,17 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventName }) => {
         {/* Main Content */}
         <div className="md:max-h-[80vh] mb-10 rounded-3xl mt-5 w-full max-w-[95vw] md:max-w-[90vw] lg:max-w-[80vw] mx-auto backdrop-blur-md bg-white/10 border border-white/20 relative z-10 px-3 sm:px-4 md:px-8 lg:px-12 pb-6">
           <div className="z-0 backdrop-blur-sm bg-black/50 h-full w-[60%] rounded-r-3xl right-0 top-0 absolute hidden min-[1150px]:block" />
-          <div className=" flex justify-between mx-4 my-6 md:m-5">
-            <button className="flex items-center gap-2 bg-[#CCA855] hover:bg-red-800 text-white px-2 pr-4  py-2 rounded-full transition-colors">
+          <div className="flex justify-between mx-4 my-6 md:m-5">
+            <button
+              className="flex items-center gap-2 bg-[#CCA855] hover:bg-[#CCA855]/80 text-white px-2 pr-4 py-2 rounded-full transition-colors cursor-pointer"
+              onClick={() => router.back()}
+            >
               <Image
                 src="/assets/arrow-left.svg"
                 alt="Back"
                 width={20}
                 height={20}
-                className="rounded-full bg-orange-500 p-2 h-8 w-8"
+                className="rounded-full bg-[#FF003C] p-2 h-8 w-8"
               />
               <span className="font-bold">BACK</span>
             </button>

@@ -219,37 +219,43 @@ export function SoloEventRegistration({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-137.5 my-scrollbar bg-linear-to-br from-[#210000] to-[#3a0000] border-2 border-yellow-500/30 rounded-xl p-8 shadow-xl overflow-hidden">
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 overflow-hidden opacity-10">
-          <div className="absolute -right-20 -top-20 w-64 h-64 rounded-full bg-yellow-300 blur-3xl"></div>
-          <div className="absolute -left-20 -bottom-20 w-64 h-64 rounded-full bg-red-600 blur-3xl"></div>
-        </div>
+      <DialogContent
+        className="sm:max-w-[550px] my-scrollbar border-2 border-[#FF003C] rounded-xl p-8 shadow-xl overflow-hidden"
+        style={{
+          backgroundImage:
+            'url(https://i.postimg.cc/C5SMqWV1/cae8d04277c25697532890b8f73997b82d3609a1.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        {/* Dark overlay for readability */}
+        <div className="absolute inset-0 bg-black/60"></div>
 
         <DialogHeader className="relative z-10">
           <motion.div
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="flex items-center justify-center gap-3 mb-4"
+            className="flex items-center justify-center gap-3 mb-4 relative z-10"
           >
-            <PartyPopper size={32} className="text-yellow-300" />
-            <Music size={32} className="text-yellow-300" />
-            <Ticket size={32} className="text-yellow-300" />
+            <PartyPopper size={32} className="text-[#FF003C]" />
+            <Music size={32} className="text-[#FF003C]" />
+            <Ticket size={32} className="text-[#FF003C]" />
           </motion.div>
-          <DialogTitle className="text-center text-white font-antolia tracking-widest font-bold text-3xl bg-clip-text bg-linear-to-r from-yellow-200 to-yellow-500 pb-2">
+          <DialogTitle className="text-center text-white font-antolia tracking-widest font-bold text-3xl pb-2 relative z-10">
             Registration for {eventName}
           </DialogTitle>
           <div className="flex justify-center mt-2">
-            <div className="h-1 w-32 bg-linear-to-r from-yellow-500 to-red-500 rounded-full"></div>
+            <div className="h-1 w-32 bg-[#FF003C] rounded-full"></div>
           </div>
           <div className="flex justify-center mt-4">
             <div className="flex gap-4">
               <div
-                className={`w-3 h-3 rounded-full ${step === 1 ? 'bg-yellow-400' : 'bg-gray-600'} transition-colors duration-300`}
+                className={`w-3 h-3 rounded-full ${step === 1 ? 'bg-[#FF003C]' : 'bg-gray-600'} transition-colors duration-300`}
               ></div>
               <div
-                className={`w-3 h-3 rounded-full ${step === 2 ? 'bg-yellow-400' : 'bg-gray-600'} transition-colors duration-300`}
+                className={`w-3 h-3 rounded-full ${step === 2 ? 'bg-[#FF003C]' : 'bg-gray-600'} transition-colors duration-300`}
               ></div>
             </div>
           </div>
@@ -291,7 +297,7 @@ export function SoloEventRegistration({
                 <div className="grid gap-2">
                   <label
                     htmlFor="name"
-                    className="flex items-center gap-2 text-yellow-200 font-medium"
+                    className="flex items-center gap-2 text-[#CCA855] font-medium relative z-10"
                   >
                     <User size={18} />
                     <span>Name</span>
@@ -301,13 +307,13 @@ export function SoloEventRegistration({
                       id="name"
                       readOnly
                       {...registerSoloLead('name')}
-                      className="w-full bg-[#210000]/60 border font-antolia tracking-wider text-xl border-yellow-500/30 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none text-white rounded-md p-3 pl-10 transition-all duration-300"
+                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300 relative z-10"
                       placeholder="Enter your name"
                       defaultValue={userData?.name}
                     />
                     <User
                       size={18}
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500/70"
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70 z-10"
                     />
                   </div>
                   {soloLeadErrors.name && (
@@ -320,7 +326,7 @@ export function SoloEventRegistration({
                 <div className="grid gap-2">
                   <label
                     htmlFor="phone"
-                    className="flex items-center gap-2 text-yellow-200 font-medium"
+                    className="flex items-center gap-2 text-[#CCA855] font-medium relative z-10"
                   >
                     <Phone size={18} />
                     <span>Phone</span>
@@ -331,13 +337,13 @@ export function SoloEventRegistration({
                       type="tel"
                       readOnly
                       {...registerSoloLead('phone')}
-                      className="w-full bg-[#210000]/60 border font-antolia tracking-wider text-xl border-yellow-500/30 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none text-white rounded-md p-3 pl-10 transition-all duration-300"
+                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300 relative z-10"
                       placeholder="Enter your phone number"
                       defaultValue={userData?.phone}
                     />
                     <Phone
                       size={18}
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500/70"
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70 z-10"
                     />
                   </div>
                   {soloLeadErrors.phone && (
@@ -350,7 +356,7 @@ export function SoloEventRegistration({
                 <div className="grid gap-2">
                   <label
                     htmlFor="email"
-                    className="flex items-center gap-2 text-yellow-200 font-medium"
+                    className="flex items-center gap-2 text-[#CCA855] font-medium relative z-10"
                   >
                     <Mail size={18} />
                     <span>Email</span>
@@ -360,14 +366,14 @@ export function SoloEventRegistration({
                       id="email"
                       type="email"
                       {...registerSoloLead('email')}
-                      className="w-full bg-[#210000]/60 border font-antolia tracking-wider text-xl border-yellow-500/30 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none text-white rounded-md p-3 pl-10 transition-all duration-300"
+                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300 relative z-10"
                       placeholder="Enter your email"
                       defaultValue={userData?.email}
                       readOnly
                     />
                     <Mail
                       size={18}
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500/70"
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70 z-10"
                     />
                   </div>
                   {soloLeadErrors.email && (
@@ -380,7 +386,7 @@ export function SoloEventRegistration({
                 <div className="grid gap-2">
                   <label
                     htmlFor="college"
-                    className="flex items-center gap-2 text-yellow-200 font-medium"
+                    className="flex items-center gap-2 text-[#CCA855] font-medium relative z-10"
                   >
                     <Building size={18} />
                     <span>College</span>
@@ -390,12 +396,12 @@ export function SoloEventRegistration({
                       id="college"
                       autoFocus
                       {...registerSoloLead('college')}
-                      className="w-full bg-[#210000]/60 border font-antolia tracking-wider text-xl border-yellow-500/30 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none text-white rounded-md p-3 pl-10 transition-all duration-300"
+                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300 relative z-10"
                       placeholder="Enter your college name"
                     />
                     <Building
                       size={18}
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500/70"
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70 z-10"
                     />
                   </div>
                   {soloLeadErrors.college && (
@@ -406,19 +412,19 @@ export function SoloEventRegistration({
                 </div>
               </div>
 
-              <div className="flex justify-end gap-4 mt-6">
+              <div className="flex justify-end gap-4 mt-6 relative z-10">
                 <Button
                   type="button"
                   variant="outline"
                   onClick={onClose}
-                  className="bg-red-700 hover:bg-red-600 text-white flex items-center gap-2 px-4 py-2 rounded-md border-0 transition-all duration-300"
+                  className="bg-[#FF003C] hover:bg-[#FF003C]/90 text-white flex items-center gap-2 px-4 py-2 rounded-md border-0 transition-all duration-300"
                 >
                   <X size={18} />
                   <span>Close</span>
                 </Button>
                 <Button
                   type="submit"
-                  className="bg-linear-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
+                  className="bg-[#CCA855] hover:bg-[#CCA855]/90 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
                 >
                   <span>Next</span>
                   <ArrowRight size={18} />
@@ -439,7 +445,7 @@ export function SoloEventRegistration({
                 <div className="grid gap-2">
                   <label
                     htmlFor="transactionId"
-                    className="flex items-center gap-2 text-yellow-200 font-medium"
+                    className="flex items-center gap-2 text-[#CCA855] font-medium relative z-10"
                   >
                     <CreditCard size={18} />
                     <span>Transaction ID</span>
@@ -448,12 +454,12 @@ export function SoloEventRegistration({
                     <input
                       id="transactionId"
                       {...registerPayment('transactionId')}
-                      className="w-full bg-[#210000]/60 border font-antolia tracking-wider text-xl border-yellow-500/30 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none text-white rounded-md p-3 pl-10 transition-all duration-300"
+                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300 relative z-10"
                       placeholder="Enter transaction ID"
                     />
                     <CreditCard
                       size={18}
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500/70"
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70 z-10"
                     />
                   </div>
                   {paymentErrors.transactionId && (
@@ -463,10 +469,10 @@ export function SoloEventRegistration({
                   )}
                 </div>
 
-                <div className="grid gap-2 text-white">
+                <div className="grid gap-2 text-white relative z-10">
                   <label
                     htmlFor="paymentScreenshot"
-                    className="flex items-center gap-2 text-yellow-200 font-medium"
+                    className="flex items-center gap-2 text-[#CCA855] font-medium"
                   >
                     <Upload size={18} />
                     <span>Payment Screenshot</span>
@@ -476,7 +482,7 @@ export function SoloEventRegistration({
                       id="paymentScreenshot"
                       type="file"
                       {...registerPayment('paymentScreenshot')}
-                      className="w-full bg-[#210000]/60 border file:text-black border-yellow-500/30 focus:border-yellow-400 focus:outline-none rounded-md p-2 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-linear-to-r file:from-yellow-400 file:to-yellow-500 file:hover:from-yellow-500 file:hover:to-yellow-600 file:transition-all file:duration-300"
+                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] outline-none rounded-md p-2 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-[#FF003C] file:text-white file:font-medium file:hover:bg-[#FF003C]/90 file:transition-all file:duration-300 relative z-10"
                       accept="image/*"
                     />
                   </div>
@@ -492,15 +498,15 @@ export function SoloEventRegistration({
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2 }}
-                className="mt-8 mb-6"
+                className="mt-8 mb-6 relative z-10"
               >
                 <h1 className="text-white text-center text-2xl font-antolia tracking-widest font-semibold">
-                  Pay <span className="text-green-400">₹ {eventFees}</span>
+                  Pay <span className="text-[#FF003C]">₹ {eventFees}</span>
                 </h1>
                 <div className="mt-4 w-full flex items-center justify-center">
                   <div className="relative">
-                    <div className="absolute inset-0 bg-linear-to-r from-yellow-400 to-red-500 rounded-lg blur-lg opacity-50 animate-pulse"></div>
-                    <div className="relative p-1 bg-linear-to-r from-yellow-400 to-red-500 rounded-lg">
+                    <div className="absolute inset-0 bg-[#FF003C] rounded-lg blur-lg opacity-50 animate-pulse"></div>
+                    <div className="relative p-1 bg-[#FF003C] rounded-lg">
                       <Image
                         src="https://i.postimg.cc/0j5bd9Dy/Whats-App-Image-2025-04-25-at-04-49-14-be67b65c.jpg"
                         alt="Payment QR Code"
@@ -513,12 +519,12 @@ export function SoloEventRegistration({
                 </div>
               </motion.div>
 
-              <div className="flex flex-col sm:flex-row gap-4 mt-6 sm:justify-between">
+              <div className="flex flex-col sm:flex-row gap-4 mt-6 sm:justify-between relative z-10">
                 <Button
                   type="button"
                   variant="outline"
                   onClick={() => setStep(1)}
-                  className="bg-gray-700 hover:bg-gray-600 text-white flex items-center gap-2 px-4 py-2 rounded-md border-0 transition-all duration-300"
+                  className="bg-[#FF003C] hover:bg-[#FF003C]/90 text-white flex items-center gap-2 px-4 py-2 rounded-md border-0 transition-all duration-300"
                   disabled={isSubmitting}
                 >
                   <ArrowLeft size={18} />
@@ -526,7 +532,7 @@ export function SoloEventRegistration({
                 </Button>
                 <Button
                   type="submit"
-                  className="bg-linear-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
+                  className="bg-[#CCA855] hover:bg-[#CCA855]/90 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
