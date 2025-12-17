@@ -7,7 +7,7 @@ export default function Footer() {
     <footer
       className="w-full bg-center bg-cover relative overflow-hidden"
       style={{
-        backgroundImage: "url('/assets/footer.png')",
+        backgroundImage: "url('https://i.postimg.cc/yd95ZJh8/Footer.png')",
       }}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-12 md:py-16 flex flex-col justify-between relative min-h-[600px]">
