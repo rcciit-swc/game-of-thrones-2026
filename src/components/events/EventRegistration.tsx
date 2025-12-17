@@ -1,9 +1,14 @@
 'use client';
 import React, { useState } from 'react';
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useEvents } from '@/lib/stores';
-import RegistrationBtn from '../RegistrationBtn';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
+import { useEvents, useUser } from '@/lib/stores';
+import { login } from '@/utils/functions/auth/login';
+import { SoloEventRegistration } from '@/components/events/EventRegistrationDialog';
+import { TeamEventRegistration } from '@/components/events/TeamEventRegistration';
 
 type EventRegistrationProps = {
   // eventsId from route; treated as the event id
@@ -108,7 +113,12 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventName }) => {
     return match ? match[0].trim() : input;
   }
   const { eventsData, eventsLoading } = useEvents();
+  const { userData, userLoading } = useUser();
+  const router = useRouter();
+
   const [activeTab, setActiveTab] = useState<TabType>('description');
+  const [isSoloOpen, setIsSoloOpen] = useState(false);
+  const [isTeamOpen, setIsTeamOpen] = useState(false);
 
   // compute selected event directly (no memoization)
   const selectedEvent =
@@ -265,126 +275,192 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventName }) => {
     }
   };
 
+  const handleRegister = async () => {
+    if (userLoading) {
+      toast.info('Please wait while we check your login status');
+      return;
+    }
+
+    if (!userData) {
+      await login();
+      return;
+    }
+
+    if (
+      !userData.phone ||
+      !userData.name ||
+      userData.phone.trim() === '' ||
+      userData.name.trim() === ''
+    ) {
+      router.push(
+        `/profile?onboarding=true&callback=${encodeURIComponent(
+          `/events/${selectedEvent?.id}`
+        )}`
+      );
+      return;
+    }
+
+    if (selectedEvent?.max_team_size === 1) {
+      setIsSoloOpen(true);
+    } else {
+      setIsTeamOpen(true);
+    }
+  };
+
   return (
-    <div
-      className="min-h-screen w-full relative overflow-x-hidden rajdhanifont"
-      style={{
-        backgroundImage: `url('${bg}')`,
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-      }}
-    >
-      {/* Background glow effects */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px]" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/15 rounded-full blur-[120px]" />
+    <>
+      <div
+        className="min-h-screen w-full relative overflow-x-hidden rajdhanifont"
+        style={{
+          backgroundImage: `url('${bg}')`,
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+          backgroundPosition: 'center',
+        }}
+      >
+        {/* Background glow effects */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/15 rounded-full blur-[120px]" />
 
-      {/* Header with Back and Register buttons */}
-      <div className="relative z-20 flex justify-center rajdhanifont text-white font-bold items-center px-4 sm:px-6 md:px-8 py-4">
-        <h1
-          className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
-          style={{
-            WebkitTextStroke: '1px rgba(0,0,0,0.85)',
-            textShadow: '0 1px 1px rgba(0,0,0,0.6)',
-          }}
-        >
-          {selectedEvent?.name || 'Event'}
-        </h1>
-      </div>
-
-      {/* Main Content */}
-      <div className="md:max-h-[80vh] mb-10 rounded-3xl mt-5 w-full max-w-[95vw] md:max-w-[90vw] lg:max-w-[80vw] mx-auto backdrop-blur-md bg-white/10 border border-white/20 relative z-10 px-3 sm:px-4 md:px-8 lg:px-12 pb-6">
-        <div className="z-0 backdrop-blur-sm bg-black/50 h-full w-[60%] rounded-r-3xl right-0 top-0 absolute hidden min-[1150px]:block" />
-        <div className=" flex justify-between mx-4 my-6 md:m-5">
-          <button className="flex items-center gap-2 bg-[#CCA855] hover:bg-red-800 text-white px-2 pr-4  py-2 rounded-full transition-colors">
-            <Image
-              src="/assets/arrow-left.svg"
-              alt="Back"
-              width={20}
-              height={20}
-              className="rounded-full bg-orange-500 p-2 h-8 w-8"
-            />
-            <span className="font-bold">BACK</span>
-          </button>
-
-          {/* Register Now Button */}
-          {selectedEvent?.id && (
-            <RegistrationBtn eventId={String(selectedEvent.id)} />
-          )}
+        {/* Header with Back and Register buttons */}
+        <div className="relative z-20 flex justify-center rajdhanifont text-white font-bold items-center px-4 sm:px-6 md:px-8 py-4">
+          <h1
+            className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
+            style={{
+              WebkitTextStroke: '1px rgba(0,0,0,0.85)',
+              textShadow: '0 1px 1px rgba(0,0,0,0.6)',
+            }}
+          >
+            {selectedEvent?.name || 'Event'}
+          </h1>
         </div>
-        <div className="flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-12 max-w-7xl mx-auto px-2">
-          {/* Left Side - Event Poster */}
-          <div className="w-full lg:w-2/5 h-full">
-            {/* Event Card/Poster */}
-            <div className="w-full sm:w-[90%] md:w-[80%] h-[45vh] md:h-[55vh] lg:h-[60vh] rounded-2xl overflow-hidden flex justify-center items-center mx-auto">
-              <img
-                src={
-                  selectedEvent?.image_url || '/assets/events/default-event.jpg'
-                }
-                alt={selectedEvent?.name || 'Event Poster'}
-                className="w-full h-full object-cover"
+
+        {/* Main Content */}
+        <div className="md:max-h-[80vh] mb-10 rounded-3xl mt-5 w-full max-w-[95vw] md:max-w-[90vw] lg:max-w-[80vw] mx-auto backdrop-blur-md bg-white/10 border border-white/20 relative z-10 px-3 sm:px-4 md:px-8 lg:px-12 pb-6">
+          <div className="z-0 backdrop-blur-sm bg-black/50 h-full w-[60%] rounded-r-3xl right-0 top-0 absolute hidden min-[1150px]:block" />
+          <div className=" flex justify-between mx-4 my-6 md:m-5">
+            <button className="flex items-center gap-2 bg-[#CCA855] hover:bg-red-800 text-white px-2 pr-4  py-2 rounded-full transition-colors">
+              <Image
+                src="/assets/arrow-left.svg"
+                alt="Back"
+                width={20}
+                height={20}
+                className="rounded-full bg-orange-500 p-2 h-8 w-8"
               />
-            </div>
+              <span className="font-bold">BACK</span>
+            </button>
 
-            {/* Registration Fee */}
-            <div className="mt-4 text-center">
-              <p className="text-white text-lg md:text-xl">
-                Registration Fees:-{' '}
-                <span className="font-bold text-2xl">{registrationFees}/-</span>
-              </p>
-            </div>
-          </div>
-
-          {/* Right Side - Event Details */}
-          <div className="z-10 w-full lg:w-3/5 h-full flex flex-col overflow-hidden rounded-2xl p-4 md:p-6">
-            {/* Tabs */}
-            <div className="flex gap-4 md:gap-6 lg:gap-10 border-b border-gray-700 mb-6 overflow-x-auto whitespace-nowrap -mx-2 px-2">
-              {tabs.map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`pb-3 text-sm md:text-base font-medium transition-colors relative ${
-                    activeTab === tab.id
-                      ? 'text-yellow-400'
-                      : 'text-gray-400 hover:text-gray-200'
-                  }`}
+            {/* Register Now Button */}
+            {selectedEvent?.id && (
+              <div className="flex">
+                <motion.button
+                  whileTap={{ scale: 0.96 }}
+                  type="button"
+                  onClick={handleRegister}
+                  className="w-42 py-2.5 bg-[#B60302] text-[#FAFAFA] text-[20px] cursor-pointer font-['Irish_Grover'] rounded-[50px] shadow-[0_8px_15px_rgba(0,0,0,0.25)] hover:bg-[#8f0202] transition-colors duration-200 text-center animate-pulse"
                 >
-                  {tab.label}
-                  {activeTab === tab.id && (
-                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-yellow-400" />
-                  )}
-                </button>
-              ))}
+                  Register Now
+                </motion.button>
+              </div>
+            )}
+          </div>
+          <div className="flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-12 max-w-7xl mx-auto px-2">
+            {/* Left Side - Event Poster */}
+            <div className="w-full lg:w-2/5 h-full">
+              {/* Event Card/Poster */}
+              <div className="w-full sm:w-[90%] md:w-[80%] h-[45vh] md:h-[55vh] lg:h-[60vh] rounded-2xl overflow-hidden flex justify-center items-center mx-auto">
+                <img
+                  src={
+                    selectedEvent?.image_url ||
+                    '/assets/events/default-event.jpg'
+                  }
+                  alt={selectedEvent?.name || 'Event Poster'}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Registration Fee */}
+              <div className="mt-4 text-center">
+                <p className="text-white text-lg md:text-xl">
+                  Registration Fees:-{' '}
+                  <span className="font-bold text-2xl">
+                    {registrationFees}/-
+                  </span>
+                </p>
+              </div>
             </div>
 
-            {/* Tab Content */}
-            <div className="mb-8 overflow-auto max-h-[40vh] sm:max-h-[45vh] md:max-h-[30vh] scrollbar-transparent">
-              {renderTabContent()}
-            </div>
+            {/* Right Side - Event Details */}
+            <div className="z-10 w-full lg:w-3/5 h-full flex flex-col overflow-hidden rounded-2xl p-4 md:p-6">
+              {/* Tabs */}
+              <div className="flex gap-4 md:gap-6 lg:gap-10 border-b border-gray-700 mb-6 overflow-x-auto whitespace-nowrap -mx-2 px-2">
+                {tabs.map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={`pb-3 text-sm md:text-base font-medium transition-colors relative ${
+                      activeTab === tab.id
+                        ? 'text-yellow-400'
+                        : 'text-gray-400 hover:text-gray-200'
+                    }`}
+                  >
+                    {tab.label}
+                    {activeTab === tab.id && (
+                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-yellow-400" />
+                    )}
+                  </button>
+                ))}
+              </div>
 
-            {/* Schedule Section */}
-            <div className="mb-8">
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                Schedule:-
-              </h2>
-              <div className="space-y-2">
-                {scheduleLines.length > 0 ? (
-                  scheduleLines.map((line, i) => (
-                    <p key={i} className="text-gray-300 text-sm md:text-base">
-                      {line}
+              {/* Tab Content */}
+              <div className="mb-8 overflow-auto max-h-[40vh] sm:max-h-[45vh] md:max-h-[30vh] scrollbar-transparent">
+                {renderTabContent()}
+              </div>
+
+              {/* Schedule Section */}
+              <div className="mb-8">
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                  Schedule:-
+                </h2>
+                <div className="space-y-2">
+                  {scheduleLines.length > 0 ? (
+                    scheduleLines.map((line, i) => (
+                      <p key={i} className="text-gray-300 text-sm md:text-base">
+                        {line}
+                      </p>
+                    ))
+                  ) : (
+                    <p className="text-gray-300 text-sm md:text-base">
+                      No schedule available
                     </p>
-                  ))
-                ) : (
-                  <p className="text-gray-300 text-sm md:text-base">
-                    No schedule available
-                  </p>
-                )}
+                  )}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      {selectedEvent && (
+        <>
+          <SoloEventRegistration
+            isOpen={isSoloOpen}
+            onClose={() => setIsSoloOpen(false)}
+            eventID={selectedEvent.id as string}
+            eventName={selectedEvent.name}
+            eventFees={selectedEvent.registration_fees}
+          />
+          <TeamEventRegistration
+            eventFees={selectedEvent.registration_fees}
+            isOpen={isTeamOpen}
+            onClose={() => setIsTeamOpen(false)}
+            eventID={selectedEvent.id as string}
+            eventName={selectedEvent.name}
+            minTeamSize={Number(selectedEvent.min_team_size)}
+            maxTeamSize={Number(selectedEvent.max_team_size)}
+          />
+        </>
+      )}
+    </>
   );
 };
 
