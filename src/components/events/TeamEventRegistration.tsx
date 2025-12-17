@@ -415,7 +415,7 @@ export function TeamEventRegistration({
         }
       }}
     >
-      <DialogContent className="sm:max-w-[550px] max-h-[80vh] my-scrollbar bg-gradient-to-br from-[#210000] to-[#3a0000] border-2 border-yellow-500/30 rounded-xl p-8 shadow-xl overflow-y-scroll">
+      <DialogContent className="sm:max-w-137.5 max-h-[80vh] my-scrollbar bg-linear-to-br from-[#210000] to-[#3a0000] border-2 border-yellow-500/30 rounded-xl p-8 shadow-xl overflow-y-scroll">
         {/* Background decorative elements */}
         <div className="absolute inset-0 overflow-hidden opacity-10">
           <div className="absolute -right-20 -top-20 w-64 h-64 rounded-full bg-yellow-300 blur-3xl"></div>
@@ -433,7 +433,7 @@ export function TeamEventRegistration({
             <UsersRound size={32} className="text-yellow-300" />
             <Music size={32} className="text-yellow-300" />
           </motion.div>
-          <DialogTitle className="text-center text-white font-antolia tracking-widest font-bold text-3xl bg-clip-text text-transparent bg-gradient-to-r from-yellow-200 to-yellow-500 pb-2">
+          <DialogTitle className="text-center text-white font-antolia tracking-widest font-bold text-3xl bg-clip-text bg-linear-to-r from-yellow-200 to-yellow-500 pb-2">
             Team Registration
           </DialogTitle>
           <div className="flex justify-center">
@@ -442,7 +442,7 @@ export function TeamEventRegistration({
             </h2>
           </div>
           <div className="flex justify-center mt-2">
-            <div className="h-1 w-32 bg-gradient-to-r from-yellow-500 to-red-500 rounded-full"></div>
+            <div className="h-1 w-32 bg-linear-to-r from-yellow-500 to-red-500 rounded-full"></div>
           </div>
 
           <div className="flex flex-col items-center mt-4">
@@ -695,7 +695,7 @@ export function TeamEventRegistration({
                     </Button>
                     <Button
                       type="submit"
-                      className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
+                      className="bg-linear-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
                     >
                       <span>Next</span>
                       <ArrowRight size={18} />
@@ -865,7 +865,7 @@ export function TeamEventRegistration({
                         </Button>
                         <Button
                           type="submit"
-                          className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
+                          className="bg-linear-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
                         >
                           {editingMemberIndex !== null ? (
                             <>
@@ -909,9 +909,9 @@ export function TeamEventRegistration({
                             <div className="flex items-center gap-2 mb-2 bg-yellow-900/20 p-2 rounded-md">
                               <UserCheck
                                 size={16}
-                                className="text-yellow-400 flex-shrink-0"
+                                className="text-yellow-400 shrink-0"
                               />
-                              <div className="flex-grow">
+                              <div className="grow">
                                 <span className="font-medium">
                                   {teamLeadData?.name}
                                 </span>
@@ -929,7 +929,7 @@ export function TeamEventRegistration({
                                 <div className="flex items-center gap-2">
                                   <User
                                     size={16}
-                                    className="text-gray-400 flex-shrink-0"
+                                    className="text-gray-400 shrink-0"
                                   />
                                   <span className="font-medium">
                                     {member.name}
@@ -963,7 +963,7 @@ export function TeamEventRegistration({
                           <Button
                             type="button"
                             onClick={() => setIsAddingMember(true)}
-                            className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
+                            className="bg-linear-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
                           >
                             <UserPlus size={18} />
                             <span>Add Member</span>
@@ -984,7 +984,7 @@ export function TeamEventRegistration({
                           <Button
                             type="button"
                             onClick={handleProceedToPayment}
-                            className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
+                            className="bg-linear-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
                             disabled={
                               totalTeamCount < minTeamSize ||
                               totalTeamCount > maxTeamSize
@@ -1115,7 +1115,7 @@ export function TeamEventRegistration({
                     </Button>
                     <Button
                       type="submit"
-                      className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
+                      className="bg-linear-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
                       disabled={isRegistering}
                     >
                       {isRegistering ? (
