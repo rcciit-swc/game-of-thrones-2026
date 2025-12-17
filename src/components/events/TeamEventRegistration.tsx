@@ -406,737 +406,750 @@ export function TeamEventRegistration({
   };
 
   return (
-    <Dialog
-      open={isOpen}
-      onOpenChange={(open) => {
-        if (!open) {
-          handleDialogClose();
-        }
-      }}
-    >
-      <DialogContent className="sm:max-w-137.5 max-h-[80vh] my-scrollbar bg-linear-to-br from-[#210000] to-[#3a0000] border-2 border-yellow-500/30 rounded-xl p-8 shadow-xl overflow-y-scroll">
-        {/* Background decorative elements */}
-        <div className="absolute inset-0 overflow-hidden opacity-10">
-          <div className="absolute -right-20 -top-20 w-64 h-64 rounded-full bg-yellow-300 blur-3xl"></div>
-          <div className="absolute -left-20 -bottom-20 w-64 h-64 rounded-full bg-red-600 blur-3xl"></div>
-        </div>
-
-        <DialogHeader className="relative z-10">
-          <motion.div
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center justify-center gap-3 mb-4"
-          >
-            <Trophy size={32} className="text-yellow-300" />
-            <UsersRound size={32} className="text-yellow-300" />
-            <Music size={32} className="text-yellow-300" />
-          </motion.div>
-          <DialogTitle className="text-center text-white font-antolia tracking-widest font-bold text-3xl bg-clip-text bg-linear-to-r from-yellow-200 to-yellow-500 pb-2">
-            Team Registration
-          </DialogTitle>
-          <div className="flex justify-center">
-            <h2 className="text-white font-antolia tracking-widest text-xl">
-              {eventName}
-            </h2>
-          </div>
-          <div className="flex justify-center mt-2">
-            <div className="h-1 w-32 bg-linear-to-r from-yellow-500 to-red-500 rounded-full"></div>
+    <>
+      <Dialog
+        open={isOpen}
+        onOpenChange={(open) => {
+          if (!open) {
+            handleDialogClose();
+          }
+        }}
+      >
+        <DialogContent
+          className="sm:max-w-[550px] max-h-[80vh] my-scrollbar border-2 border-[#FF003C] rounded-xl p-8 shadow-xl overflow-y-scroll"
+          style={{
+            backgroundImage:
+              'url(https://i.postimg.cc/C5SMqWV1/cae8d04277c25697532890b8f73997b82d3609a1.jpg)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+          }}
+        >
+          {/* Dark overlay for readability */}
+          <div className="absolute inset-0 bg-black/60"></div>
+          {/* Background decorative elements */}
+          <div className="absolute inset-0 overflow-hidden opacity-10 pointer-events-none z-0">
+            <div className="absolute -right-20 -top-20 w-64 h-64 rounded-full bg-[#FF003C] blur-3xl"></div>
+            <div className="absolute -left-20 -bottom-20 w-64 h-64 rounded-full bg-red-600 blur-3xl"></div>
           </div>
 
-          <div className="flex flex-col items-center mt-4">
-            <div className="flex gap-4 mb-2">
-              <div
-                className={`w-3 h-3 rounded-full ${step === 1 ? 'bg-yellow-400' : 'bg-gray-600'} transition-colors duration-300`}
-              ></div>
-              <div
-                className={`w-3 h-3 rounded-full ${step === 2 ? 'bg-yellow-400' : 'bg-gray-600'} transition-colors duration-300`}
-              ></div>
-              <div
-                className={`w-3 h-3 rounded-full ${step === 3 ? 'bg-yellow-400' : 'bg-gray-600'} transition-colors duration-300`}
-              ></div>
+          <DialogHeader className="relative z-10">
+            <motion.div
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center justify-center gap-3 mb-4"
+            >
+              <Trophy size={32} className="text-[#FF003C]" />
+              <UsersRound size={32} className="text-[#FF003C]" />
+              <Music size={32} className="text-[#FF003C]" />
+            </motion.div>
+            <DialogTitle className="text-center text-white font-antolia tracking-widest font-bold text-3xl pb-2 relative z-10">
+              Team Registration
+            </DialogTitle>
+            <div className="flex justify-center">
+              <h2 className="text-[#CCA855] font-antolia tracking-widest text-xl">
+                {eventName}
+              </h2>
+            </div>
+            <div className="flex justify-center mt-2">
+              <div className="h-1 w-32 bg-[#FF003C] rounded-full"></div>
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="flex items-center gap-2 bg-yellow-900/30 px-4 py-2 rounded-full mt-2"
-            >
-              <Users size={18} className="text-yellow-300" />
-              <p className="text-white font-antolia tracking-widest text-sm">
-                Team Members:{' '}
-                <span className="text-yellow-300">{totalTeamCount}</span>
-                <span className="text-gray-400">
-                  {' '}
-                  (Min: {minTeamSize}, Max: {maxTeamSize})
-                </span>
-              </p>
-            </motion.div>
-          </div>
+            <div className="flex flex-col items-center mt-4">
+              <div className="flex gap-4 mb-2">
+                <div
+                  className={`w-3 h-3 rounded-full ${step === 1 ? 'bg-[#FF003C]' : 'bg-gray-600'} transition-colors duration-300`}
+                ></div>
+                <div
+                  className={`w-3 h-3 rounded-full ${step === 2 ? 'bg-[#FF003C]' : 'bg-gray-600'} transition-colors duration-300`}
+                ></div>
+                <div
+                  className={`w-3 h-3 rounded-full ${step === 3 ? 'bg-[#FF003C]' : 'bg-gray-600'} transition-colors duration-300`}
+                ></div>
+              </div>
 
-          {teamMembers.length > 0 && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.3 }}
-              className="flex justify-center mt-2"
-            >
-              <div
-                className="flex items-center gap-1 text-yellow-200 font-antolia cursor-pointer text-sm hover:underline"
-                onClick={() => {
-                  setShowConfirmTeam(false);
-                  setIsSheetOpen(true);
-                }}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="flex items-center gap-2 bg-[#FF003C]/10 px-4 py-2 rounded-full mt-2"
               >
-                <Eye size={16} />
-                <span>View & Edit Added Members</span>
-              </div>
-            </motion.div>
-          )}
-        </DialogHeader>
+                <Users size={18} className="text-[#FF003C]" />
+                <p className="text-white font-antolia tracking-widest text-sm">
+                  Team Members:{' '}
+                  <span className="text-[#CCA855]">{totalTeamCount}</span>
+                  <span className="text-gray-400">
+                    {' '}
+                    (Min: {minTeamSize}, Max: {maxTeamSize})
+                  </span>
+                </p>
+              </motion.div>
+            </div>
 
-        <AnimatePresence mode="wait">
-          {showSuccess ? (
-            <motion.div
-              key="success"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              className="flex flex-col items-center justify-center py-12"
-            >
-              <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mb-6">
-                <Check size={40} className="text-white" />
-              </div>
-              <h2 className="text-2xl font-bold text-white mb-2">
-                Registration Successful!
-              </h2>
-              <p className="text-gray-300 text-center mb-4">
-                Your team "{teamLeadData?.teamName}" has been registered for{' '}
-                {eventName}
-              </p>
-              <p className="text-yellow-300 font-medium">
-                We're excited to see your team at the fest!
-              </p>
-            </motion.div>
-          ) : (
-            <>
-              {/* Step 1: Team Lead Details */}
-              {step === 1 && (
-                <motion.form
-                  key="step1"
-                  variants={fadeVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  onSubmit={handleTeamLeadSubmit(onTeamLeadSubmit)}
-                  className="overflow-y-auto my-scrollbar relative z-10 mt-4"
+            {teamMembers.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="flex justify-center mt-2"
+              >
+                <div
+                  className="flex items-center gap-1 text-[#CCA855] font-antolia cursor-pointer text-sm hover:underline"
+                  onClick={() => {
+                    setShowConfirmTeam(false);
+                    setIsSheetOpen(true);
+                  }}
                 >
-                  <div className="grid gap-6 py-4">
-                    {/* Team Name Field */}
-                    <div className="grid gap-2">
-                      <label
-                        htmlFor="teamName"
-                        className="flex items-center gap-2 text-yellow-200 font-medium"
-                      >
-                        <Users size={18} />
-                        <span>Team Name</span>
-                      </label>
-                      <div className="relative">
-                        <input
-                          id="teamName"
-                          {...registerTeamLead('teamName')}
-                          defaultValue={teamLeadData?.teamName}
-                          className="w-full bg-[#210000]/60 border font-antolia tracking-wider text-xl border-yellow-500/30 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none text-white rounded-md p-3 pl-10 transition-all duration-300"
-                          placeholder="Enter your team name"
-                          autoFocus
-                        />
-                        <Users
-                          size={18}
-                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500/70"
-                        />
-                      </div>
-                      {teamLeadErrors.teamName && (
-                        <p className="text-red-400 text-sm ml-2">
-                          {teamLeadErrors.teamName.message}
-                        </p>
-                      )}
-                    </div>
+                  <Eye size={16} />
+                  <span>View & Edit Added Members</span>
+                </div>
+              </motion.div>
+            )}
+          </DialogHeader>
 
-                    <div className="grid gap-2">
-                      <label
-                        htmlFor="name"
-                        className="flex items-center gap-2 text-yellow-200 font-medium"
-                      >
-                        <UserCheck size={18} />
-                        <span>Team Lead Name</span>
-                      </label>
-                      <div className="relative">
-                        <input
-                          id="name"
-                          readOnly
-                          {...registerTeamLead('name')}
-                          className="w-full bg-[#210000]/60 border font-antolia tracking-wider text-xl border-yellow-500/30 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none text-white rounded-md p-3 pl-10 transition-all duration-300"
-                          placeholder="Enter team lead name"
-                          defaultValue={userData?.name}
-                        />
-                        <UserCheck
-                          size={18}
-                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500/70"
-                        />
-                      </div>
-                      {teamLeadErrors.name && (
-                        <p className="text-red-400 text-sm ml-2">
-                          {teamLeadErrors.name.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="grid gap-2">
-                      <label
-                        htmlFor="phone"
-                        className="flex items-center gap-2 text-yellow-200 font-medium"
-                      >
-                        <Phone size={18} />
-                        <span>Team Lead Phone</span>
-                      </label>
-                      <div className="relative">
-                        <input
-                          id="phone"
-                          type="tel"
-                          readOnly
-                          defaultValue={userData?.phone}
-                          {...registerTeamLead('phone')}
-                          className="w-full bg-[#210000]/60 border font-antolia tracking-wider text-xl border-yellow-500/30 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none text-white rounded-md p-3 pl-10 transition-all duration-300"
-                          placeholder="Enter team lead phone number"
-                        />
-                        <Phone
-                          size={18}
-                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500/70"
-                        />
-                      </div>
-                      {teamLeadErrors.phone && (
-                        <p className="text-red-400 text-sm ml-2">
-                          {teamLeadErrors.phone.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="grid gap-2">
-                      <label
-                        htmlFor="email"
-                        className="flex items-center gap-2 text-yellow-200 font-medium"
-                      >
-                        <Mail size={18} />
-                        <span>Team Lead Email</span>
-                      </label>
-                      <div className="relative">
-                        <input
-                          id="email"
-                          type="email"
-                          defaultValue={userData?.email}
-                          {...registerTeamLead('email')}
-                          className="w-full bg-[#210000]/60 border font-antolia tracking-wider text-xl border-yellow-500/30 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none text-white rounded-md p-3 pl-10 transition-all duration-300"
-                          placeholder="Enter team lead email"
-                          readOnly
-                        />
-                        <Mail
-                          size={18}
-                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500/70"
-                        />
-                      </div>
-                      {teamLeadErrors.email && (
-                        <p className="text-red-400 text-sm ml-2">
-                          {teamLeadErrors.email.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="grid gap-2">
-                      <label
-                        htmlFor="collegeName"
-                        className="flex items-center gap-2 text-yellow-200 font-medium"
-                      >
-                        <Building size={18} />
-                        <span>College Name</span>
-                      </label>
-                      <div className="relative">
-                        <input
-                          id="collegeName"
-                          {...registerTeamLead('collegeName')}
-                          defaultValue={
-                            teamLeadData?.collegeName || userData?.college
-                          }
-                          className="w-full bg-[#210000]/60 border font-antolia tracking-wider text-xl border-yellow-500/30 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none text-white rounded-md p-3 pl-10 transition-all duration-300"
-                          placeholder="Enter college name"
-                        />
-                        <Building
-                          size={18}
-                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500/70"
-                        />
-                      </div>
-                      {teamLeadErrors.collegeName && (
-                        <p className="text-red-400 text-sm ml-2">
-                          {teamLeadErrors.collegeName.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="flex justify-end gap-4 mt-6">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={handleDialogClose}
-                      className="bg-red-700 hover:bg-red-600 text-white flex items-center gap-2 px-4 py-2 rounded-md border-0 transition-all duration-300"
-                    >
-                      <X size={18} />
-                      <span>Close</span>
-                    </Button>
-                    <Button
-                      type="submit"
-                      className="bg-linear-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
-                    >
-                      <span>Next</span>
-                      <ArrowRight size={18} />
-                    </Button>
-                  </div>
-                </motion.form>
-              )}
-
-              {/* ViewTeamMembers component would be rendered here */}
-              <ViewTeamMembers
-                isOpen={isSheetOpen}
-                onOpenChange={setIsSheetOpen}
-                teamMembers={teamMembers}
-                teamLeadData={teamLeadData}
-                showConfirmTeam={showConfirmTeam}
-                registerLoading={registerLoading}
-                onRemoveMember={onRemoveMember}
-                isFree={eventFees === 0}
-                confirmTeam={async () => {
-                  setIsConfirmedTeam(true);
-                  eventFees === 0 && setRegisterLoading(true);
-                  eventFees === 0 ? await registerForSWCPaid() : setStep(3);
-                  setRegisterLoading(false);
-                  setIsSheetOpen(false);
-                }}
-                onEditTeamLead={() => {
-                  setStep(1);
-                  setIsSheetOpen(false);
-                }}
-                onEditMember={(index: number) => {
-                  setEditingMemberIndex(index);
-                  setIsAddingMember(true);
-                  setIsSheetOpen(false);
-                }}
-              />
-
-              {/* Step 2: Manage Team Members */}
-              {step === 2 && (
-                <motion.div
-                  key="step2"
-                  variants={fadeVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  className="overflow-y-auto my-scrollbar max-h-[60vh] relative z-10 mt-4"
-                >
-                  {isAddingMember ? (
-                    <motion.form
-                      onSubmit={handleTeamMemberSubmit((data) => {
-                        if (editingMemberIndex !== null) {
-                          const updatedMembers = [...teamMembers];
-                          updatedMembers[editingMemberIndex] = data;
-                          setTeamMembers(updatedMembers);
-                          setEditingMemberIndex(null);
-                        } else {
-                          onAddTeamMember(data);
-                        }
-                        setIsAddingMember(false);
-                      })}
-                      className="grid gap-6 py-4"
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <h3 className="text-center text-yellow-300 font-antolia tracking-widest text-xl">
-                        {editingMemberIndex !== null
-                          ? 'Edit Team Member'
-                          : 'Add Team Member'}
-                      </h3>
-
+          <AnimatePresence mode="wait">
+            {showSuccess ? (
+              <motion.div
+                key="success"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.8, opacity: 0 }}
+                className="flex flex-col items-center justify-center py-12"
+              >
+                <div className="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mb-6">
+                  <Check size={40} className="text-white" />
+                </div>
+                <h2 className="text-2xl font-bold text-white mb-2">
+                  Registration Successful!
+                </h2>
+                <p className="text-gray-300 text-center mb-4">
+                  Your team "{teamLeadData?.teamName}" has been registered for{' '}
+                  {eventName}
+                </p>
+                <p className="text-yellow-300 font-medium">
+                  We're excited to see your team at the fest!
+                </p>
+              </motion.div>
+            ) : (
+              <>
+                {/* Step 1: Team Lead Details */}
+                {step === 1 && (
+                  <motion.form
+                    key="step1"
+                    variants={fadeVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    onSubmit={handleTeamLeadSubmit(onTeamLeadSubmit)}
+                    className="overflow-y-auto my-scrollbar relative z-10 mt-4"
+                  >
+                    <div className="grid gap-6 py-4">
+                      {/* Team Name Field */}
                       <div className="grid gap-2">
                         <label
-                          htmlFor="memberName"
-                          className="flex items-center gap-2 text-yellow-200 font-medium"
+                          htmlFor="teamName"
+                          className="flex items-center gap-2 text-[#CCA855] font-medium"
                         >
-                          <User size={18} />
-                          <span>Member Name</span>
+                          <Users size={18} />
+                          <span>Team Name</span>
                         </label>
                         <div className="relative">
                           <input
-                            id="memberName"
-                            {...registerTeamMember('name')}
-                            className="w-full bg-[#210000]/60 border font-antolia tracking-wider text-xl border-yellow-500/30 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none text-white rounded-md p-3 pl-10 transition-all duration-300"
-                            placeholder="Enter member name"
+                            id="teamName"
+                            {...registerTeamLead('teamName')}
+                            defaultValue={teamLeadData?.teamName}
+                            className="w-full bg-[#090B0D] border font-antolia tracking-wider text-xl border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300"
+                            placeholder="Enter your team name"
                             autoFocus
                           />
-                          <User
+                          <Users
                             size={18}
-                            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500/70"
+                            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70"
                           />
                         </div>
-                        {teamMemberErrors.name && (
+                        {teamLeadErrors.teamName && (
                           <p className="text-red-400 text-sm ml-2">
-                            {teamMemberErrors.name.message}
+                            {teamLeadErrors.teamName.message}
                           </p>
                         )}
                       </div>
 
                       <div className="grid gap-2">
                         <label
-                          htmlFor="memberPhone"
-                          className="flex items-center gap-2 text-yellow-200 font-medium"
+                          htmlFor="name"
+                          className="flex items-center gap-2 text-[#CCA855] font-medium"
                         >
-                          <Phone size={18} />
-                          <span>Member Phone</span>
+                          <UserCheck size={18} />
+                          <span>Team Lead Name</span>
                         </label>
                         <div className="relative">
                           <input
-                            id="memberPhone"
+                            id="name"
+                            readOnly
+                            {...registerTeamLead('name')}
+                            className="w-full bg-[#090B0D] border font-antolia tracking-wider text-xl border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300"
+                            placeholder="Enter team lead name"
+                            defaultValue={userData?.name}
+                          />
+                          <UserCheck
+                            size={18}
+                            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70"
+                          />
+                        </div>
+                        {teamLeadErrors.name && (
+                          <p className="text-red-400 text-sm ml-2">
+                            {teamLeadErrors.name.message}
+                          </p>
+                        )}
+                      </div>
+
+                      <div className="grid gap-2">
+                        <label
+                          htmlFor="phone"
+                          className="flex items-center gap-2 text-[#CCA855] font-medium"
+                        >
+                          <Phone size={18} />
+                          <span>Team Lead Phone</span>
+                        </label>
+                        <div className="relative">
+                          <input
+                            id="phone"
                             type="tel"
-                            {...registerTeamMember('phone')}
-                            className="w-full bg-[#210000]/60 border font-antolia tracking-wider text-xl border-yellow-500/30 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none text-white rounded-md p-3 pl-10 transition-all duration-300"
-                            placeholder="Enter member phone number"
+                            readOnly
+                            defaultValue={userData?.phone}
+                            {...registerTeamLead('phone')}
+                            className="w-full bg-[#090B0D] border font-antolia tracking-wider text-xl border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300"
+                            placeholder="Enter team lead phone number"
                           />
                           <Phone
                             size={18}
-                            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500/70"
+                            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70"
                           />
                         </div>
-                        {teamMemberErrors.phone && (
+                        {teamLeadErrors.phone && (
                           <p className="text-red-400 text-sm ml-2">
-                            {teamMemberErrors.phone.message}
+                            {teamLeadErrors.phone.message}
                           </p>
                         )}
                       </div>
 
                       <div className="grid gap-2">
                         <label
-                          htmlFor="memberEmail"
-                          className="flex items-center gap-2 text-yellow-200 font-medium"
+                          htmlFor="email"
+                          className="flex items-center gap-2 text-[#CCA855] font-medium"
                         >
                           <Mail size={18} />
-                          <span>Member Email</span>
+                          <span>Team Lead Email</span>
                         </label>
                         <div className="relative">
                           <input
-                            id="memberEmail"
+                            id="email"
                             type="email"
-                            {...registerTeamMember('email')}
-                            className="w-full bg-[#210000]/60 border font-antolia tracking-wider text-xl border-yellow-500/30 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none text-white rounded-md p-3 pl-10 transition-all duration-300"
-                            placeholder="Enter member email"
+                            defaultValue={userData?.email}
+                            {...registerTeamLead('email')}
+                            className="w-full bg-[#090B0D] border font-antolia tracking-wider text-xl border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300"
+                            placeholder="Enter team lead email"
+                            readOnly
                           />
                           <Mail
                             size={18}
-                            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500/70"
+                            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70"
                           />
                         </div>
-                        {teamMemberErrors.email && (
+                        {teamLeadErrors.email && (
                           <p className="text-red-400 text-sm ml-2">
-                            {teamMemberErrors.email.message}
+                            {teamLeadErrors.email.message}
                           </p>
                         )}
                       </div>
 
-                      <div className="flex flex-row flex-wrap gap-4 mt-4 justify-between">
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={() => {
-                            setIsAddingMember(false);
-                            setEditingMemberIndex(null);
-                          }}
-                          className="bg-red-700 hover:bg-red-600 text-white flex items-center gap-2 px-4 py-2 rounded-md border-0 transition-all duration-300"
+                      <div className="grid gap-2">
+                        <label
+                          htmlFor="collegeName"
+                          className="flex items-center gap-2 text-[#CCA855] font-medium"
                         >
-                          <X size={18} />
-                          <span>Cancel</span>
-                        </Button>
-                        <Button
-                          type="submit"
-                          className="bg-linear-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
-                        >
-                          {editingMemberIndex !== null ? (
-                            <>
-                              <Pencil size={18} />
-                              <span>Update Member</span>
-                            </>
-                          ) : (
-                            <>
-                              <Plus size={18} />
-                              <span>Add Member</span>
-                            </>
-                          )}
-                        </Button>
-                      </div>
-                    </motion.form>
-                  ) : (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="flex flex-col gap-6"
-                    >
-                      <div className="text-center">
-                        <h3 className="text-yellow-300 font-antolia tracking-widest text-xl mb-4">
-                          Manage Team Members
-                        </h3>
-                        <p className="text-gray-300">
-                          {teamMembers.length === 0
-                            ? 'Add team members to continue with registration.'
-                            : `You have added ${teamMembers.length} team member${teamMembers.length !== 1 ? 's' : ''}.`}
-                        </p>
-                      </div>
-
-                      {teamMembers.length > 0 && (
-                        <div className="bg-[#300000]/40 rounded-lg p-4 border border-yellow-500/20">
-                          <h4 className="text-yellow-200 font-medium mb-3 flex items-center gap-2">
-                            <Users size={18} />
-                            <span>Team Overview</span>
-                          </h4>
-                          <div className="text-white">
-                            <div className="flex items-center gap-2 mb-2 bg-yellow-900/20 p-2 rounded-md">
-                              <UserCheck
-                                size={16}
-                                className="text-yellow-400 shrink-0"
-                              />
-                              <div className="grow">
-                                <span className="font-medium">
-                                  {teamLeadData?.name}
-                                </span>
-                                <span className="text-gray-400 text-sm ml-2">
-                                  (Team Lead)
-                                </span>
-                              </div>
-                            </div>
-
-                            {teamMembers.map((member, idx) => (
-                              <div
-                                key={idx}
-                                className="flex items-center justify-between gap-2 mb-2 bg-gray-900/30 p-2 rounded-md"
-                              >
-                                <div className="flex items-center gap-2">
-                                  <User
-                                    size={16}
-                                    className="text-gray-400 shrink-0"
-                                  />
-                                  <span className="font-medium">
-                                    {member.name}
-                                  </span>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                  <button
-                                    onClick={() => {
-                                      setEditingMemberIndex(idx);
-                                      setIsAddingMember(true);
-                                    }}
-                                    className="text-blue-400 hover:text-blue-300 transition-colors p-1"
-                                  >
-                                    <Pencil size={16} />
-                                  </button>
-                                  <button
-                                    onClick={() => onRemoveMember(idx)}
-                                    className="text-red-400 hover:text-red-300 transition-colors p-1"
-                                  >
-                                    <X size={16} />
-                                  </button>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
+                          <Building size={18} />
+                          <span>College Name</span>
+                        </label>
+                        <div className="relative">
+                          <input
+                            id="collegeName"
+                            {...registerTeamLead('collegeName')}
+                            defaultValue={
+                              teamLeadData?.collegeName || userData?.college
+                            }
+                            className="w-full bg-[#090B0D] border font-antolia tracking-wider text-xl border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300"
+                            placeholder="Enter college name"
+                          />
+                          <Building
+                            size={18}
+                            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70"
+                          />
                         </div>
-                      )}
-
-                      <div className="flex flex-wrap gap-4 justify-between mt-2">
-                        {teamMembers.length < maxTeamSize - 1 && (
-                          <Button
-                            type="button"
-                            onClick={() => setIsAddingMember(true)}
-                            className="bg-linear-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
-                          >
-                            <UserPlus size={18} />
-                            <span>Add Member</span>
-                          </Button>
+                        {teamLeadErrors.collegeName && (
+                          <p className="text-red-400 text-sm ml-2">
+                            {teamLeadErrors.collegeName.message}
+                          </p>
                         )}
+                      </div>
+                    </div>
 
-                        <div className="flex gap-4">
+                    <div className="flex justify-end gap-4 mt-6">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={handleDialogClose}
+                        className="bg-[#FF003C] hover:bg-[#FF003C]/90 text-white flex items-center gap-2 px-4 py-2 rounded-md border-0 transition-all duration-300"
+                      >
+                        <X size={18} />
+                        <span>Close</span>
+                      </Button>
+                      <Button
+                        type="submit"
+                        className="bg-[#CCA855] hover:bg-[#CCA855]/90 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
+                      >
+                        <span>Next</span>
+                        <ArrowRight size={18} />
+                      </Button>
+                    </div>
+                  </motion.form>
+                )}
+
+                {/* ViewTeamMembers component would be rendered here */}
+                <ViewTeamMembers
+                  isOpen={isSheetOpen}
+                  onOpenChange={setIsSheetOpen}
+                  teamMembers={teamMembers}
+                  teamLeadData={teamLeadData}
+                  showConfirmTeam={showConfirmTeam}
+                  registerLoading={registerLoading}
+                  onRemoveMember={onRemoveMember}
+                  isFree={eventFees === 0}
+                  confirmTeam={async () => {
+                    setIsConfirmedTeam(true);
+                    eventFees === 0 && setRegisterLoading(true);
+                    eventFees === 0 ? await registerForSWCPaid() : setStep(3);
+                    setRegisterLoading(false);
+                    setIsSheetOpen(false);
+                  }}
+                  onEditTeamLead={() => {
+                    setStep(1);
+                    setIsSheetOpen(false);
+                  }}
+                  onEditMember={(index: number) => {
+                    setEditingMemberIndex(index);
+                    setIsAddingMember(true);
+                    setIsSheetOpen(false);
+                  }}
+                />
+
+                {/* Step 2: Manage Team Members */}
+                {step === 2 && (
+                  <motion.div
+                    key="step2"
+                    variants={fadeVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    className="overflow-y-auto my-scrollbar max-h-[60vh] relative z-10 mt-4"
+                  >
+                    {isAddingMember ? (
+                      <motion.form
+                        onSubmit={handleTeamMemberSubmit((data) => {
+                          if (editingMemberIndex !== null) {
+                            const updatedMembers = [...teamMembers];
+                            updatedMembers[editingMemberIndex] = data;
+                            setTeamMembers(updatedMembers);
+                            setEditingMemberIndex(null);
+                          } else {
+                            onAddTeamMember(data);
+                          }
+                          setIsAddingMember(false);
+                        })}
+                        className="grid gap-6 py-4"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <h3 className="text-center text-[#CCA855] font-antolia tracking-widest text-xl">
+                          {editingMemberIndex !== null
+                            ? 'Edit Team Member'
+                            : 'Add Team Member'}
+                        </h3>
+
+                        <div className="grid gap-2">
+                          <label
+                            htmlFor="memberName"
+                            className="flex items-center gap-2 text-[#CCA855] font-medium"
+                          >
+                            <User size={18} />
+                            <span>Member Name</span>
+                          </label>
+                          <div className="relative">
+                            <input
+                              id="memberName"
+                              {...registerTeamMember('name')}
+                              className="w-full bg-[#090B0D] border font-antolia tracking-wider text-xl border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300"
+                              placeholder="Enter member name"
+                              autoFocus
+                            />
+                            <User
+                              size={18}
+                              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70"
+                            />
+                          </div>
+                          {teamMemberErrors.name && (
+                            <p className="text-red-400 text-sm ml-2">
+                              {teamMemberErrors.name.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <div className="grid gap-2">
+                          <label
+                            htmlFor="memberPhone"
+                            className="flex items-center gap-2 text-[#CCA855] font-medium"
+                          >
+                            <Phone size={18} />
+                            <span>Member Phone</span>
+                          </label>
+                          <div className="relative">
+                            <input
+                              id="memberPhone"
+                              type="tel"
+                              {...registerTeamMember('phone')}
+                              className="w-full bg-[#090B0D] border font-antolia tracking-wider text-xl border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300"
+                              placeholder="Enter member phone number"
+                            />
+                            <Phone
+                              size={18}
+                              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70"
+                            />
+                          </div>
+                          {teamMemberErrors.phone && (
+                            <p className="text-red-400 text-sm ml-2">
+                              {teamMemberErrors.phone.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <div className="grid gap-2">
+                          <label
+                            htmlFor="memberEmail"
+                            className="flex items-center gap-2 text-[#CCA855] font-medium"
+                          >
+                            <Mail size={18} />
+                            <span>Member Email</span>
+                          </label>
+                          <div className="relative">
+                            <input
+                              id="memberEmail"
+                              type="email"
+                              {...registerTeamMember('email')}
+                              className="w-full bg-[#090B0D] border font-antolia tracking-wider text-xl border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300"
+                              placeholder="Enter member email"
+                            />
+                            <Mail
+                              size={18}
+                              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70"
+                            />
+                          </div>
+                          {teamMemberErrors.email && (
+                            <p className="text-red-400 text-sm ml-2">
+                              {teamMemberErrors.email.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <div className="flex flex-row flex-wrap gap-4 mt-4 justify-between">
                           <Button
                             type="button"
                             variant="outline"
-                            onClick={() => setStep(1)}
-                            className="bg-red-700/70 hover:bg-red-600 text-white flex items-center gap-2 px-4 py-2 rounded-md border-0 transition-all duration-300"
+                            onClick={() => {
+                              setIsAddingMember(false);
+                              setEditingMemberIndex(null);
+                            }}
+                            className="bg-[#FF003C] hover:bg-[#FF003C]/90 text-white flex items-center gap-2 px-4 py-2 rounded-md border-0 transition-all duration-300"
                           >
-                            <ArrowLeft size={18} />
-                            <span>Back</span>
+                            <X size={18} />
+                            <span>Cancel</span>
                           </Button>
-
                           <Button
-                            type="button"
-                            onClick={handleProceedToPayment}
-                            className="bg-linear-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
-                            disabled={
-                              totalTeamCount < minTeamSize ||
-                              totalTeamCount > maxTeamSize
-                            }
+                            type="submit"
+                            className="bg-[#CCA855] hover:bg-[#CCA855]/90 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
                           >
-                            <span>
-                              {' '}
-                              {eventFees === 0 ? 'Register' : 'Make Payment'}
-                            </span>
-                            <ArrowRight size={18} />
+                            {editingMemberIndex !== null ? (
+                              <>
+                                <Pencil size={18} />
+                                <span>Update Member</span>
+                              </>
+                            ) : (
+                              <>
+                                <Plus size={18} />
+                                <span>Add Member</span>
+                              </>
+                            )}
                           </Button>
                         </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </motion.div>
-              )}
-
-              {/* Step 3: Payment Details */}
-              {step === 3 && (
-                <motion.form
-                  key="step3"
-                  variants={fadeVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                  onSubmit={handlePaymentSubmit(onPaymentSubmit)}
-                  className="overflow-y-auto my-scrollbar py-4  relative z-10 mt-4"
-                >
-                  <div className="grid gap-6 py-4">
-                    <div className="text-center mb-4">
-                      <h3 className="text-yellow-300 font-antolia tracking-widest text-xl mb-2">
-                        Payment Details
-                      </h3>
-                      <div className="flex items-center justify-center gap-2 bg-yellow-900/30 px-4 py-2 rounded-full">
-                        <CreditCard size={18} className="text-yellow-300" />
-                        <p className="text-white font-medium">
-                          Amount:{' '}
-                          <span className="text-yellow-300">₹{eventFees}</span>
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="grid gap-2">
-                      <label
-                        htmlFor="transactionId"
-                        className="flex items-center gap-2 text-yellow-200 font-medium"
+                      </motion.form>
+                    ) : (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className="flex flex-col gap-6"
                       >
-                        <Ticket size={18} />
-                        <span>Transaction ID</span>
-                      </label>
-                      <div className="relative">
-                        <input
-                          id="transactionId"
-                          {...registerPayment('transactionId')}
-                          className="w-full bg-[#210000]/60 border font-antolia tracking-wider text-xl border-yellow-500/30 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none text-white rounded-md p-3 pl-10 transition-all duration-300"
-                          placeholder="Enter transaction ID"
-                        />
-                        <Ticket
-                          size={18}
-                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500/70"
-                        />
+                        <div className="text-center">
+                          <h3 className="text-[#CCA855] font-antolia tracking-widest text-xl mb-4">
+                            Manage Team Members
+                          </h3>
+                          <p className="text-gray-300">
+                            {teamMembers.length === 0
+                              ? 'Add team members to continue with registration.'
+                              : `You have added ${teamMembers.length} team member${teamMembers.length !== 1 ? 's' : ''}.`}
+                          </p>
+                        </div>
+
+                        {teamMembers.length > 0 && (
+                          <div className="bg-[#FF003C]/10 rounded-lg p-4 border border-[#FF003C]/30">
+                            <h4 className="text-[#CCA855] font-medium mb-3 flex items-center gap-2">
+                              <Users size={18} />
+                              <span>Team Overview</span>
+                            </h4>
+                            <div className="text-white">
+                              <div className="flex items-center gap-2 mb-2 bg-[#FF003C]/20 p-2 rounded-md">
+                                <UserCheck
+                                  size={16}
+                                  className="text-[#CCA855] shrink-0"
+                                />
+                                <div className="grow">
+                                  <span className="font-medium">
+                                    {teamLeadData?.name}
+                                  </span>
+                                  <span className="text-gray-400 text-sm ml-2">
+                                    (Team Lead)
+                                  </span>
+                                </div>
+                              </div>
+
+                              {teamMembers.map((member, idx) => (
+                                <div
+                                  key={idx}
+                                  className="flex items-center justify-between gap-2 mb-2 bg-gray-900/30 p-2 rounded-md"
+                                >
+                                  <div className="flex items-center gap-2">
+                                    <User
+                                      size={16}
+                                      className="text-gray-400 shrink-0"
+                                    />
+                                    <span className="font-medium">
+                                      {member.name}
+                                    </span>
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <button
+                                      onClick={() => {
+                                        setEditingMemberIndex(idx);
+                                        setIsAddingMember(true);
+                                      }}
+                                      className="text-blue-400 hover:text-blue-300 transition-colors p-1"
+                                    >
+                                      <Pencil size={16} />
+                                    </button>
+                                    <button
+                                      onClick={() => onRemoveMember(idx)}
+                                      className="text-red-400 hover:text-red-300 transition-colors p-1"
+                                    >
+                                      <X size={16} />
+                                    </button>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
+
+                        <div className="flex flex-wrap gap-4 justify-between mt-2">
+                          {teamMembers.length < maxTeamSize - 1 && (
+                            <Button
+                              type="button"
+                              onClick={() => setIsAddingMember(true)}
+                              className="bg-[#CCA855] hover:bg-[#CCA855]/90 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
+                            >
+                              <UserPlus size={18} />
+                              <span>Add Member</span>
+                            </Button>
+                          )}
+
+                          <div className="flex gap-4">
+                            <Button
+                              type="button"
+                              variant="outline"
+                              onClick={() => setStep(1)}
+                              className="bg-[#FF003C] hover:bg-[#FF003C]/90 text-white flex items-center gap-2 px-4 py-2 rounded-md border-0 transition-all duration-300"
+                            >
+                              <ArrowLeft size={18} />
+                              <span>Back</span>
+                            </Button>
+
+                            <Button
+                              type="button"
+                              onClick={handleProceedToPayment}
+                              className="bg-[#CCA855] hover:bg-[#CCA855]/90 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
+                              disabled={
+                                totalTeamCount < minTeamSize ||
+                                totalTeamCount > maxTeamSize
+                              }
+                            >
+                              <span>
+                                {' '}
+                                {eventFees === 0 ? 'Register' : 'Make Payment'}
+                              </span>
+                              <ArrowRight size={18} />
+                            </Button>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </motion.div>
+                )}
+
+                {/* Step 3: Payment Details */}
+                {step === 3 && (
+                  <motion.form
+                    key="step3"
+                    variants={fadeVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    onSubmit={handlePaymentSubmit(onPaymentSubmit)}
+                    className="overflow-y-auto my-scrollbar py-4  relative z-10 mt-4"
+                  >
+                    <div className="grid gap-6 py-4">
+                      <div className="text-center mb-4">
+                        <h3 className="text-[#CCA855] font-antolia tracking-widest text-xl mb-2">
+                          Payment Details
+                        </h3>
+                        <div className="flex items-center justify-center gap-2 bg-[#FF003C]/10 px-4 py-2 rounded-full">
+                          <CreditCard size={18} className="text-[#CCA855]" />
+                          <p className="text-white font-medium">
+                            Amount:{' '}
+                            <span className="text-[#CCA855]">₹{eventFees}</span>
+                          </p>
+                        </div>
                       </div>
-                      {paymentErrors.transactionId && (
-                        <p className="text-red-400 text-sm ml-2">
-                          {paymentErrors.transactionId.message}
-                        </p>
-                      )}
+
+                      <div className="grid gap-2">
+                        <label
+                          htmlFor="transactionId"
+                          className="flex items-center gap-2 text-[#CCA855] font-medium"
+                        >
+                          <Ticket size={18} />
+                          <span>Transaction ID</span>
+                        </label>
+                        <div className="relative">
+                          <input
+                            id="transactionId"
+                            {...registerPayment('transactionId')}
+                            className="w-full bg-[#090B0D] border font-antolia tracking-wider text-xl border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300"
+                            placeholder="Enter transaction ID"
+                          />
+                          <Ticket
+                            size={18}
+                            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70"
+                          />
+                        </div>
+                        {paymentErrors.transactionId && (
+                          <p className="text-red-400 text-sm ml-2">
+                            {paymentErrors.transactionId.message}
+                          </p>
+                        )}
+                      </div>
+
+                      <div className="grid gap-2">
+                        <label
+                          htmlFor="paymentScreenshot"
+                          className="flex items-center gap-2 text-[#CCA855] font-medium"
+                        >
+                          <Upload size={18} />
+                          <span>Payment Screenshot</span>
+                        </label>
+                        <div className="relative">
+                          <input
+                            id="paymentScreenshot"
+                            type="file"
+                            {...registerPayment('paymentScreenshot')}
+                            className="w-full bg-[#090B0D] border font-antolia tracking-wider border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300"
+                            accept="image/*"
+                          />
+                          <Upload
+                            size={18}
+                            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70"
+                          />
+                        </div>
+                        {paymentErrors.paymentScreenshot && (
+                          <p className="text-red-400 text-sm ml-2">
+                            {String(paymentErrors.paymentScreenshot.message)}
+                          </p>
+                        )}
+                      </div>
+
+                      <div className="mt-6 flex items-center justify-center">
+                        <div className="border-2 border-[#FF003C]/30 rounded-lg p-2 flex flex-col items-center">
+                          <h4 className="text-white text-center text-lg font-bold mb-2">
+                            Scan QR Code to Pay
+                          </h4>
+                          <Image
+                            src="https://i.postimg.cc/0j5bd9Dy/Whats-App-Image-2025-04-25-at-04-49-14-be67b65c.jpg"
+                            alt="Payment QR Code"
+                            width={200}
+                            height={200}
+                            className="rounded-lg mb-2"
+                          />
+                          <p className="text-[#CCA855] text-sm text-center">
+                            After payment, enter Transaction ID and upload
+                            screenshot
+                          </p>
+                        </div>
+                      </div>
                     </div>
 
-                    <div className="grid gap-2">
-                      <label
-                        htmlFor="paymentScreenshot"
-                        className="flex items-center gap-2 text-yellow-200 font-medium"
+                    <div className="flex justify-end gap-4 mt-6">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={() => setStep(2)}
+                        className="bg-[#FF003C] hover:bg-[#FF003C]/90 text-white flex items-center gap-2 px-4 py-2 rounded-md border-0 transition-all duration-300"
                       >
-                        <Upload size={18} />
-                        <span>Payment Screenshot</span>
-                      </label>
-                      <div className="relative">
-                        <input
-                          id="paymentScreenshot"
-                          type="file"
-                          {...registerPayment('paymentScreenshot')}
-                          className="w-full bg-[#210000]/60 border font-antolia tracking-wider border-yellow-500/30 focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 focus:outline-none text-white rounded-md p-3 pl-10 transition-all duration-300"
-                          accept="image/*"
-                        />
-                        <Upload
-                          size={18}
-                          className="absolute left-3 top-1/2 transform -translate-y-1/2 text-yellow-500/70"
-                        />
-                      </div>
-                      {paymentErrors.paymentScreenshot && (
-                        <p className="text-red-400 text-sm ml-2">
-                          {String(paymentErrors.paymentScreenshot.message)}
-                        </p>
-                      )}
+                        <ArrowLeft size={18} />
+                        <span>Back</span>
+                      </Button>
+                      <Button
+                        type="submit"
+                        className="bg-[#CCA855] hover:bg-[#CCA855]/90 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
+                        disabled={isRegistering}
+                      >
+                        {isRegistering ? (
+                          <>
+                            <span>Registering...</span>
+                          </>
+                        ) : (
+                          <>
+                            <Check size={18} />
+                            <span>Complete Registration</span>
+                          </>
+                        )}
+                      </Button>
                     </div>
+                  </motion.form>
+                )}
+              </>
+            )}
+          </AnimatePresence>
 
-                    <div className="mt-6 flex items-center justify-center">
-                      <div className="border-2 border-yellow-500/30 rounded-lg p-2 flex flex-col items-center">
-                        <h4 className="text-white text-center text-lg font-bold mb-2">
-                          Scan QR Code to Pay
-                        </h4>
-                        <Image
-                          src="https://i.postimg.cc/0j5bd9Dy/Whats-App-Image-2025-04-25-at-04-49-14-be67b65c.jpg"
-                          alt="Payment QR Code"
-                          width={200}
-                          height={200}
-                          className="rounded-lg mb-2"
-                        />
-                        <p className="text-yellow-300 text-sm text-center">
-                          After payment, enter Transaction ID and upload
-                          screenshot
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex justify-end gap-4 mt-6">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      onClick={() => setStep(2)}
-                      className="bg-red-700 hover:bg-red-600 text-white flex items-center gap-2 px-4 py-2 rounded-md border-0 transition-all duration-300"
-                    >
-                      <ArrowLeft size={18} />
-                      <span>Back</span>
-                    </Button>
-                    <Button
-                      type="submit"
-                      className="bg-linear-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
-                      disabled={isRegistering}
-                    >
-                      {isRegistering ? (
-                        <>
-                          <span>Registering...</span>
-                        </>
-                      ) : (
-                        <>
-                          <Check size={18} />
-                          <span>Complete Registration</span>
-                        </>
-                      )}
-                    </Button>
-                  </div>
-                </motion.form>
-              )}
-            </>
-          )}
-        </AnimatePresence>
-
-        <Toaster position="top-center" richColors />
-      </DialogContent>
-    </Dialog>
+          <Toaster position="top-center" richColors />
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
