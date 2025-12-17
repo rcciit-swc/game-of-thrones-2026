@@ -31,7 +31,6 @@ import {
   Music,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { whatsAppLinks } from '@/utils/constraints/constants/whatsApp';
 
 interface SoloEventRegistrationDialogProps {
   isOpen: boolean;
