@@ -9,6 +9,11 @@ export const handleSaveChanges = async (
 ) => {
   const formDataObj = Object.fromEntries(formData.entries());
 
+  console.log('handleSaveChanges called with:', {
+    formData: formDataObj,
+    userData,
+  });
+
   if (!formDataObj.gender) {
     toast.error('Gender is required');
     return;
@@ -21,6 +26,7 @@ export const handleSaveChanges = async (
   }
 
   if (!userData?.id) {
+    console.error('User data missing ID:', userData);
     toast.error('User data not found');
     return;
   }

@@ -29,7 +29,10 @@ export default function ProfilePage() {
 
   useEffect(() => {
     const cb = searchParams.get('callback');
-    if (cb) router.replace(cb);
+    const onboarding = searchParams.get('onboarding');
+    if (cb && onboarding !== 'true') {
+      router.replace(cb);
+    }
   }, [searchParams, router]);
 
   useEffect(() => {
@@ -65,9 +68,13 @@ export default function ProfilePage() {
   };
 
   const handleProfileSave = async (formData: FormData) => {
-    await handleSaveChanges(formData, userData, updateUserData, () =>
-      setIsEditModalOpen(false)
-    );
+    await handleSaveChanges(formData, userData, updateUserData, () => {
+      setIsEditModalOpen(false);
+      const cb = searchParams.get('callback');
+      if (cb) {
+        router.replace(cb);
+      }
+    });
   };
 
   if (userLoading) return <ProfileSkeleton />;
