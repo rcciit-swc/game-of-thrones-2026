@@ -55,7 +55,7 @@ export const getEventsData = async (all: boolean = true) => {
     }
 
     const p_user_id = sessionData?.session?.user?.id || null;
-    const p_fest_id = '9b890292-2425-4c61-8753-9a1fcdd37acc';
+    const p_fest_id = 'a4bc08e4-9af9-4212-8d32-cd88d2437f18';
     const rolesData: {
       role: string;
       event_category_id?: string;

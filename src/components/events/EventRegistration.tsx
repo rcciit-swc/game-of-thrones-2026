@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
+import Image from 'next/image';
 import { useEvents } from '@/lib/stores';
 
 type EventRegistrationProps = {
@@ -25,14 +26,8 @@ function getBackgroundForEvent(name?: string) {
   return '/assets/events/bg.svg';
 }
 
-/**
- * Parse messy HTML rules (ul/li fragments) into a cleaned array of rules.
- * - Uses a temporary DOM element to extract <li> contents when present.
- * - Merges adjacent <li> fragments that look like broken sentences.
- */
 function parseRulesHtml(html?: string): string[] {
   if (!html) return [];
-  // Safe-guard: ensure DOM is available (this component is client-side anyway)
   if (typeof document === 'undefined') {
     // fallback simple split
     return html
@@ -44,7 +39,6 @@ function parseRulesHtml(html?: string): string[] {
   const div = document.createElement('div');
   div.innerHTML = html;
 
-  // Prefer <li> items; if not found, fall back to <p> items
   let nodes: Element[] = Array.from(div.querySelectorAll('li'));
   if (nodes.length === 0) {
     nodes = Array.from(div.querySelectorAll('p'));
@@ -60,7 +54,6 @@ function parseRulesHtml(html?: string): string[] {
     let text = raw[i];
     if (!text) continue;
 
-    // Merge with following fragments if current fragment doesn't end with terminal punctuation
     while (i + 1 < raw.length) {
       const nextRaw = raw[i + 1];
       if (!nextRaw) {
@@ -72,14 +65,12 @@ function parseRulesHtml(html?: string): string[] {
       const nextStartsWithLower = /^[a-z]/.test(nextRaw);
       const nextIsShort = nextRaw.length < 6;
 
-      // Also treat cases like 'game time.' where fragments split mid-sentence -> merge when next starts lowercase or is very short
       if (!endsWithPunct && (nextStartsWithLower || nextIsShort)) {
         text = `${text} ${nextRaw}`;
         i++;
         continue;
       }
 
-      // Merge numeric list continuations when the next fragment looks like a continuation (doesn't start with an uppercase or number+dot)
       const nextLooksLikeContinuation =
         /^[a-z0-9]/i.test(nextRaw) && !/^[0-9]+\./.test(nextRaw);
       if (!endsWithPunct && nextLooksLikeContinuation) {
@@ -90,18 +81,13 @@ function parseRulesHtml(html?: string): string[] {
 
       break;
     }
-
-    // Normalize common issues
     text = text.replace(/&amp;/g, '&');
-    // Fix common concatenation typos like 'theraid' -> 'the raid'
     text = text.replace(/the(?=raid)/gi, 'the ');
     text = text.replace(/theraid/gi, 'the raid');
     text = text.replace(/\s+\./g, '.');
-
     cleaned.push(text);
   }
 
-  // Fallback: if nothing parsed, split by paragraphs/newlines
   if (cleaned.length === 0) {
     return html
       .replace(/<br\s*\/?>/gi, '\n')
@@ -280,7 +266,7 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventName }) => {
 
   return (
     <div
-      className="min-h-screen w-full relative overflow-hidden"
+      className="min-h-screen w-full relative overflow-x-hidden rajdhanifont"
       style={{
         backgroundImage: `url('${bg}')`,
         backgroundSize: 'cover',
@@ -293,49 +279,55 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventName }) => {
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/15 rounded-full blur-[120px]" />
 
       {/* Header with Back and Register buttons */}
-      <div className="relative z-20 flex justify-center rajdhanifont text-white text-5xl font-bold items-center px-8 py-4">
+      <div className="relative z-20 flex justify-center rajdhanifont text-white font-bold items-center px-4 sm:px-6 md:px-8 py-4">
         <h1
-          className=""
+          className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
           style={{
             WebkitTextStroke: '1px rgba(0,0,0,0.85)',
             textShadow: '0 1px 1px rgba(0,0,0,0.6)',
           }}
         >
-          {selectedEvent?.name || 'Event'} Registration
+          {selectedEvent?.name || 'Event'}
         </h1>
       </div>
 
       {/* Main Content */}
-      <div className="rounded-3xl max-w-[80vw] mx-auto backdrop-blur-md bg-white/10 border border-white/20 relative z-10 px-4 md:px-8 lg:px-12 pb-10">
-        <div className="z-0 backdrop-blur-sm bg-black/50 h-full w-[60%] rounded-r-3xl right-0 absolute " />
-        <div className=" flex justify-between m-10">
-          <button className="flex items-center gap-2 bg-blue-900/80 hover:bg-blue-800 text-white px-4 py-2 rounded-full transition-colors">
-            <ArrowLeft className="w-5 h-5 text-yellow-400" />
+      <div className="md:max-h-[80vh] mb-10 rounded-3xl mt-5 w-full max-w-[95vw] md:max-w-[90vw] lg:max-w-[80vw] mx-auto backdrop-blur-md bg-white/10 border border-white/20 relative z-10 px-3 sm:px-4 md:px-8 lg:px-12 pb-6">
+        <div className="z-0 backdrop-blur-sm bg-black/50 h-full w-[60%] rounded-r-3xl right-0 top-0 absolute hidden min-[1150px]:block" />
+        <div className=" flex justify-between mx-4 my-6 md:m-5">
+          <button className="flex items-center gap-2 bg-[#CCA855] hover:bg-red-800 text-white px-2 pr-4  py-2 rounded-full transition-colors">
+            <Image
+              src="/assets/arrow-left.svg"
+              alt="Back"
+              width={20}
+              height={20}
+              className="rounded-full bg-orange-500 p-2 h-8 w-8"
+            />
             <span className="font-bold">BACK</span>
           </button>
 
           {/* Register Now Button */}
-          <button className="z-10 bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 py-3 rounded-full font-bold text-lg transition-all shadow-lg shadow-red-900/50">
+          <button className="relative z-10 bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-500 text-white px-6 py-3 rounded-full font-bold text-lg transition-all before:absolute before:inset-0 before:-z-10 before:rounded-full shadow-[0_0_10px_rgba(239,68,68,0.6),0_0_20px_rgba(239,68,68,0.4)] hover:shadow-[0_0_20px_rgba(239,68,68,0.8),0_0_30px_rgba(239,68,68,0.6)]">
             Register Now
           </button>
         </div>
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-12 max-w-7xl mx-auto px-2">
           {/* Left Side - Event Poster */}
-          <div className="lg:w-2/5 h-full">
+          <div className="w-full lg:w-2/5 h-full">
             {/* Event Card/Poster */}
-            <div className="w-[80%] h-[55vh] rounded-2xl overflow-hidden flex justify-center items-center mx-auto">
+            <div className="w-full sm:w-[90%] md:w-[80%] h-[45vh] md:h-[55vh] lg:h-[60vh] rounded-2xl overflow-hidden flex justify-center items-center mx-auto">
               <img
                 src={
                   selectedEvent?.image_url || '/assets/events/default-event.jpg'
                 }
                 alt={selectedEvent?.name || 'Event Poster'}
-                className="  w-full h-full object-cover"
+                className="w-full h-full object-cover"
               />
             </div>
 
             {/* Registration Fee */}
             <div className="mt-4 text-center">
-              <p className="text-white text-xl">
+              <p className="text-white text-lg md:text-xl">
                 Registration Fees:-{' '}
                 <span className="font-bold text-2xl">{registrationFees}/-</span>
               </p>
@@ -343,9 +335,9 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventName }) => {
           </div>
 
           {/* Right Side - Event Details */}
-          <div className="z-10 lg:w-3/5 h-full flex flex-col overflow-hidden  rounded-2xl p-6">
+          <div className="z-10 w-full lg:w-3/5 h-full flex flex-col overflow-hidden rounded-2xl p-4 md:p-6">
             {/* Tabs */}
-            <div className="flex gap-6 md:gap-10 border-b border-gray-700 mb-6">
+            <div className="flex gap-4 md:gap-6 lg:gap-10 border-b border-gray-700 mb-6 overflow-x-auto whitespace-nowrap -mx-2 px-2">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
@@ -365,7 +357,7 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventName }) => {
             </div>
 
             {/* Tab Content */}
-            <div className="mb-8 overflow-auto max-h-[30vh] scrollbar-transparent">
+            <div className="mb-8 overflow-auto max-h-[40vh] sm:max-h-[45vh] md:max-h-[30vh] scrollbar-transparent">
               {renderTabContent()}
             </div>
 

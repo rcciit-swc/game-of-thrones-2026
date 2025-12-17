@@ -187,5 +187,3 @@ export const getRoles = async () => {
     console.log(e);
   }
 };
-
-export { updateUserData };
