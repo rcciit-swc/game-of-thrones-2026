@@ -9,16 +9,16 @@ import Image from 'next/image';
 ---------------------------- */
 
 const sportsImages = [
-  { id: 1, src: '/assest/pics/Rectangle 14.svg', alt: 'Sport 1' },
-  { id: 2, src: '/assest/pics/Rectangle 15.svg', alt: 'Sport 2' },
-  { id: 3, src: '/assest/pics/Rectangle 16.svg', alt: 'Sport 3' },
-  { id: 4, src: '/assest/pics/Rectangle 17.svg', alt: 'Sport 4' },
-  { id: 5, src: '/assest/pics/Rectangle 18.svg', alt: 'Sport 5' },
-  { id: 6, src: '/assest/pics/Rectangle 19.svg', alt: 'Sport 6' },
-  { id: 7, src: '/assest/pics/Rectangle 20.svg', alt: 'Sport 7' },
-  { id: 8, src: '/assest/pics/Rectangle 21.svg', alt: 'Sport 8' },
-  { id: 9, src: '/assest/pics/Rectangle 22.svg', alt: 'Sport 9' },
-  { id: 10, src: '/assest/pics/Rectangle 24.svg', alt: 'Sport 10' },
+  { id: 1, src: '/assest/pics/Ellipse 7.svg', alt: 'Sport 1' },
+  { id: 2, src: '/assest/pics/Ellipse 8.svg', alt: 'Sport 2' },
+  { id: 3, src: '/assest/pics/Ellipse 3.svg', alt: 'Sport 3' },
+  { id: 4, src: '/assest/pics/Ellipse 4.svg', alt: 'Sport 4' },
+  { id: 5, src: '/assest/pics/Ellipse 9.svg', alt: 'Sport 5' },
+  { id: 6, src: '/assest/pics/Ellipse 10.svg', alt: 'Sport 6' },
+  { id: 7, src: '/assest/pics/Ellipse 11.svg', alt: 'Sport 7' },
+  { id: 8, src: '/assest/pics/Ellipse 12.svg', alt: 'Sport 8' },
+  { id: 9, src: '/assest/pics/Ellipse 5.svg', alt: 'Sport 9' },
+  { id: 10, src: '/assest/pics/Ellipse 6.svg', alt: 'Sport 10' },
 ];
 
 /* ---------------------------

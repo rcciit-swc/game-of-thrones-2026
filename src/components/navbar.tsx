@@ -16,7 +16,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 w-full flex justify-center px-4 py-2 z-50">
+    <nav className="sticky top-0 w-full flex justify-center px-4 py-2 z-50">
       {/* Navbar Container */}
       <div className="w-full max-w-100 h-16 lg:max-w-317 lg:h-26 rounded-[15px] bg-[linear-gradient(90deg,rgba(77,4,4,0.15),rgba(32,7,7,0.15))] shadow-[0_5px_25px_4px_#FF003C] backdrop-blur-[25px] px-4 lg:px-25.25 flex items-center justify-between">
         {/* Logo */}
