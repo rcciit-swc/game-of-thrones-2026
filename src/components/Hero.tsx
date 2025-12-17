@@ -5,7 +5,7 @@ import './hero-animations.css';
 
 const Hero = () => {
   return (
-    <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-14.5 md:pt-30">
+    <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden pt-20 md:pt-28 pb-8">
       {/* Floating particles - Stranger Things style - Hidden on mobile for performance */}
       <div className="hidden md:block absolute inset-0 z-5 pointer-events-none">
         <div className="particle"></div>
@@ -171,7 +171,6 @@ const Hero = () => {
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          backgroundAttachment: 'fixed',
         }}
       />
 
