@@ -47,7 +47,6 @@ import {
   UsersRound,
   Eye,
 } from 'lucide-react';
-import { whatsAppLinks } from '@/utils/constraints/constants/whatsApp';
 
 interface EventRegistrationDialogProps {
   isOpen: boolean;
