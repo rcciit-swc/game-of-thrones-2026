@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import { useEvents } from '@/lib/stores';
+import RegistrationBtn from '../RegistrationBtn';
 
 type EventRegistrationProps = {
   // eventsId from route; treated as the event id
@@ -307,9 +308,9 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventName }) => {
           </button>
 
           {/* Register Now Button */}
-          <button className="relative z-10 bg-linear-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-500 text-white px-6 py-3 rounded-full font-bold text-lg transition-all before:absolute before:inset-0 before:-z-10 before:rounded-full shadow-[0_0_10px_rgba(239,68,68,0.6),0_0_20px_rgba(239,68,68,0.4)] hover:shadow-[0_0_20px_rgba(239,68,68,0.8),0_0_30px_rgba(239,68,68,0.6)]">
-            Register Now
-          </button>
+          {selectedEvent?.id && (
+            <RegistrationBtn eventId={String(selectedEvent.id)} />
+          )}
         </div>
         <div className="flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-12 max-w-7xl mx-auto px-2">
           {/* Left Side - Event Poster */}
