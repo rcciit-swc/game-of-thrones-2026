@@ -1,14 +1,16 @@
 'use client';
-import { useEvents, useUser } from '@/lib/stores';
+
+import { useUser } from '@/lib/stores/user';
+import { useEvents } from '@/lib/stores';
 import { useEffect } from 'react';
 
 const SessionProvider = () => {
   const setUser = useUser((state) => state.setUserData);
-  const setEvents = useEvents((state) => state.setEventsData);
+  const setEvent = useEvents((state) => state.setEventsData);
 
   useEffect(() => {
     setUser();
-    setEvents();
+    setEvent(true);
   }, [setUser]);
 
   return null;
