@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { constructMetaData } from '@/utils/functions';
+import SessionProvider from '@/lib/SessionProvider';
 import { Irish_Grover, Roboto_Condensed, Rajdhani } from 'next/font/google';
 
 const irishGrover = Irish_Grover({
@@ -20,6 +21,7 @@ const rajdhani = Rajdhani({
   subsets: ['latin'],
   variable: '--font-rajdhani',
 });
+
 
 export const metadata: Metadata = constructMetaData({
   title: 'Game of Thrones 2026',
@@ -48,6 +50,7 @@ export default function RootLayout({
       <body
         className={`${irishGrover.variable} ${robotoCondensed.variable} ${rajdhani.variable} antialiased`}
       >
+        <SessionProvider />
         {children}
       </body>
     </html>
