@@ -1,36 +1,80 @@
 'use client';
 
-import { cn } from '@/lib/utils';
+import { cn, htmlToLines } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
 const Card = ({
   className,
   image,
+  title,
+  venue,
+  entryPrice,
+  showDetails,
+  isHovered,
   children,
 }: {
   className?: string;
   image?: string;
+  title?: string;
+  venue?: string;
+  entryPrice?: string | number;
+  showDetails?: boolean;
   children?: React.ReactNode;
+  isHovered?: boolean;
 }) => {
   return (
     <div
       className={cn(
-        'w-[350px] cursor-pointer h-[400px] overflow-hidden rounded-2xl shadow-[0_0_10px_rgba(0,0,0,0.02)]',
+        'w-[350px] cursor-pointer  overflow-hidden rounded-2xl transition-shadow duration-300',
+        isHovered
+          ? 'shadow-2xl shadow-red-600/60'
+          : 'shadow-lg shadow-red-600/20',
         className
       )}
     >
       {image && (
-        <div className="relative h-95 rounded-xl shadow-lg overflow-hidden w-[calc(100%-1rem)] mx-2 mt-2">
+        <div
+          className={` relative h-[350px] overflow-hidden w-full mt-0 ${showDetails === false ? 'rounded-2xl' : 'rounded-t-xl'}`}
+        >
           <img
             src={image}
             alt="card"
-            className="object-cover mt-0 w-full h-full"
+            className={cn(
+              'object-cover mt-0 w-full h-full object-center transform-gpu transition-transform duration-500 ease-out',
+              isHovered ? 'scale-105' : 'scale-100'
+            )}
           />
         </div>
       )}
-      {children && (
-        <div className="px-4 p-2 flex flex-col gap-y-2">{children}</div>
+
+      {showDetails !== false && (
+        <div className=" px-4 py-3 flex flex-col gap-y-2 bg-red-700/30 backdrop-blur-md border border-red-600/30 text-white rounded-b-xl">
+          {title && (
+            <div className="text-xl font-bold tracking-wider rajdhanifont">
+              {title}
+            </div>
+          )}
+          {venue && (
+            <div className="text-sm text-gray-200">
+              <div className="font-medium">Venue:</div>
+              <div className="mt-1 space-y-1">
+                {htmlToLines(venue).map((line, i) => (
+                  <div className="leading-snug" key={i}>
+                    {line}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          {typeof entryPrice !== 'undefined' && (
+            <div className="text-sm text-gray-200">
+              Entry:{' '}
+              {typeof entryPrice === 'number' ? `₹${entryPrice}` : entryPrice}
+            </div>
+          )}
+          {children}
+        </div>
       )}
     </div>
   );
@@ -38,6 +82,9 @@ const Card = ({
 
 interface CardData {
   image: string;
+  title?: string;
+  venue?: string;
+  entryPrice?: string | number;
 }
 
 const StackedCardsInteraction = ({
@@ -53,12 +100,15 @@ const StackedCardsInteraction = ({
 }) => {
   const [isHovering, setIsHovering] = useState(false);
 
-  // Limit to maximum of 2 cards
   const limitedCards = cards.slice(0, 2);
 
   return (
     <div className="relative w-full h-full flex items-center justify-center">
-      <div className="relative w-[350px] h-[400px]">
+      <div
+        className="relative w-[350px] h-[400px]"
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+      >
         {limitedCards.map((card, index) => {
           const isFirst = index === 0;
 
@@ -66,8 +116,6 @@ const StackedCardsInteraction = ({
           let rotation = 0;
 
           if (limitedCards.length > 1) {
-            // First card goes right
-            // Second card goes left
             if (index === 0) {
               xOffset = spreadDistance;
               rotation = rotationAngle;
@@ -93,12 +141,15 @@ const StackedCardsInteraction = ({
                 delay: index * animationDelay,
                 type: 'spring',
               }}
-              onHoverStart={() => setIsHovering(true)}
-              onHoverEnd={() => setIsHovering(false)}
             >
               <Card
                 className={isFirst ? 'z-10 cursor-pointer' : 'z-0'}
                 image={card.image}
+                title={card.title}
+                venue={card.venue}
+                entryPrice={card.entryPrice}
+                showDetails={isFirst}
+                isHovered={isHovering}
               ></Card>
             </motion.div>
           );

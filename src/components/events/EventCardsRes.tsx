@@ -2,13 +2,15 @@
 
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import React from 'react';
+import { htmlToLines } from '@/lib/utils';
 
 interface EventCardProps {
   title: string;
-  description: string;
   image: string;
+  venue?: string;
+  entryPrice?: string | number;
+  description?: string;
   category?: string;
   date?: string;
   isActive: boolean;
@@ -22,6 +24,8 @@ const EventCardRes = ({
   category,
   date,
   isActive,
+  venue,
+  entryPrice,
   onClick,
 }: EventCardProps) => {
   return (
@@ -32,27 +36,46 @@ const EventCardRes = ({
         'relative w-full max-w-sm mx-auto cursor-pointer overflow-hidden rounded-2xl',
         'border-4 border-red-600',
         'transition-all duration-300',
-        'h-[280px]',
+        '',
+        'group',
         isActive
           ? 'shadow-2xl shadow-red-600/80'
-          : 'shadow-lg shadow-red-600/20 hover:shadow-2xl hover:shadow-red-600/60'
+          : 'shadow-lg shadow-red-600/20'
       )}
     >
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0">
-        <img src={image} alt={title} className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-black/60" />
+      <div className="relative w-full overflow-hidden rounded-t-xl">
+        <img
+          src={image}
+          alt={title}
+          className={cn(
+            'w-full h-full object-cover transform-gpu transition-transform duration-500 ease-out',
+            isActive ? 'scale-105' : 'scale-100',
+            'group-hover:scale-105'
+          )}
+        />
       </div>
-
-      {/* Content Overlay */}
-      <div className="relative z-10 h-full flex flex-col items-center justify-center p-6 text-center">
-        <h3 className="text-3xl md:text-4xl font-bold text-white tracking-wider mb-4 rajdhanifont">
+      <div className="px-4 py-3 flex flex-col gap-y-2 bg-red-700/30 backdrop-blur-md border border-red-600/30 text-white rounded-b-xl text-center">
+        <h3 className="text-2xl md:text-3xl font-bold tracking-wider rajdhanifont">
           {title}
         </h3>
 
-        <p className="text-sm md:text-base text-gray-200 leading-relaxed max-w-xs">
-          {description}
-        </p>
+        {venue && (
+          <div className="text-sm md:text-base text-white leading-relaxed max-w-xs mx-auto">
+            <div className="font-medium">Venue:</div>
+            <div className="mt-1 space-y-1">
+              {htmlToLines(venue).map((line, i) => (
+                <div key={i}>{line}</div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {typeof entryPrice !== 'undefined' && (
+          <p className="text-sm md:text-base text-white leading-relaxed max-w-xs mt-1 mx-auto">
+            Entry:{' '}
+            {typeof entryPrice === 'number' ? `₹${entryPrice}` : entryPrice}
+          </p>
+        )}
       </div>
     </motion.div>
   );
@@ -69,7 +92,7 @@ const EventCardsRes = ({ events }: EventCardsResProps) => {
 
   return (
     <div
-      className="grid grid-cols-1 gap-6 p-4 min-[1150px]:hidden"
+      className="grid grid-cols-1 gap-20 p-4 min-[1150px]:hidden"
       onClick={(e) => {
         if (e.target === e.currentTarget) {
           setActiveCardIndex(null);
@@ -84,7 +107,10 @@ const EventCardsRes = ({ events }: EventCardsResProps) => {
           transition={{ delay: index * 0.1 }}
         >
           <EventCardRes
-            {...event}
+            title={event.title}
+            image={event.image}
+            venue={event.venue}
+            entryPrice={event.entryPrice}
             isActive={activeCardIndex === index}
             onClick={() => setActiveCardIndex(index)}
           />
