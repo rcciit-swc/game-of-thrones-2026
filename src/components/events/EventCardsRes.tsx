@@ -2,10 +2,12 @@
 
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { htmlToLines } from '@/lib/utils';
 
 interface EventCardProps {
+  id: string | number;
   title: string;
   image: string;
   venue?: string;
@@ -18,6 +20,7 @@ interface EventCardProps {
 }
 
 const EventCardRes = ({
+  id,
   title,
   description,
   image,
@@ -89,6 +92,7 @@ const EventCardsRes = ({ events }: EventCardsResProps) => {
   const [activeCardIndex, setActiveCardIndex] = React.useState<number | null>(
     null
   );
+  const router = useRouter();
 
   return (
     <div
@@ -107,12 +111,18 @@ const EventCardsRes = ({ events }: EventCardsResProps) => {
           transition={{ delay: index * 0.1 }}
         >
           <EventCardRes
+            id={event.id as any}
             title={event.title}
             image={event.image}
             venue={event.venue}
             entryPrice={event.entryPrice}
             isActive={activeCardIndex === index}
-            onClick={() => setActiveCardIndex(index)}
+            onClick={() => {
+              setActiveCardIndex(index);
+              if (event.id !== undefined && event.id !== null) {
+                router.push(`/events/${event.id}`);
+              }
+            }}
           />
         </motion.div>
       ))}
