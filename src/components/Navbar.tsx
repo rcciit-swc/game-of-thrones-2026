@@ -2,11 +2,39 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { userDataType } from '@/lib/types';
+import { useState, Dispatch, SetStateAction, useEffect, memo } from 'react';
+import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
+import { useUser } from '@/lib/stores';
+import { login } from '@/utils/functions/auth/login';
+import { logout } from '@/utils/functions/auth/logout';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Skeleton } from '@/components/ui/skeleton';
+import { supabase } from '@/lib/supabase/client';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { userData, userLoading } = useUser();
+  const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
+  // Fetch user session only once on mount
+  useEffect(() => {
+    const readUserSession = async () => {
+      const { data } = await supabase.auth.getSession();
+      if (data?.session?.user.user_metadata?.avatar_url) {
+        setProfileImage(data.session.user.user_metadata.avatar_url);
+      }
+    };
+    readUserSession();
+  }, []);
   // Configurable navigation links - edit href to match your routes
   const navLinks = [
     { label: 'About', href: '/about' },
@@ -51,6 +79,13 @@ export default function Navbar() {
         >
           Register
         </Link>
+        <SignInButton
+          userData={userData}
+          userLoading={userLoading}
+          imageLoaded={imageLoaded}
+          image={profileImage}
+          setImageLoaded={setImageLoaded}
+        />
 
         {/* Mobile Hamburger Icon */}
         <button
@@ -104,3 +139,85 @@ export default function Navbar() {
     </nav>
   );
 }
+
+// Memoized SignInButton
+const SignInButton = memo(
+  ({
+    userData,
+    userLoading,
+    imageLoaded,
+    image,
+    setImageLoaded,
+  }: {
+    userData: userDataType | null;
+    userLoading: boolean;
+    imageLoaded: boolean;
+    image: string | null;
+    setImageLoaded: Dispatch<SetStateAction<boolean>>;
+  }) => {
+    const router = useRouter();
+
+    if (userLoading) {
+      return <Skeleton className="w-10 h-10 rounded-full bg-gray-600" />;
+    }
+
+    if (userData && image) {
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger className="group relative focus:outline-none cursor-pointer transition-transform duration-200 hover:scale-110 active:scale-95">
+            <Avatar className="relative h-10 w-10 transition-all ring-2 ring-pink-300/50 group-hover:ring-yellow-100/50">
+              {!imageLoaded && (
+                <Skeleton className="absolute inset-0 h-10 w-10 rounded-full bg-white/20" />
+              )}
+              <AvatarImage
+                src={image}
+                alt="Profile"
+                onLoad={() => setImageLoaded(true)}
+                className={`h-full w-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+              />
+              <AvatarFallback className="bg-gradient-to-br from-pink-200/40 to-yellow-100/30 text-white font-bold">
+                {!userLoading && userData?.name
+                  ? userData.name.charAt(0).toUpperCase()
+                  : ''}
+              </AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            align="end"
+            className="mt-2 w-48 rounded-lg border border-pink-200/20 bg-gradient-to-b from-pink-100/20 to-yellow-100/10 backdrop-blur-md shadow-xl"
+          >
+            <DropdownMenuItem
+              className="cursor-pointer px-4 py-2 text-white/90 transition-colors hover:bg-pink-200/10"
+              onSelect={() => router.push('/profile')}
+            >
+              Profile
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="cursor-pointer px-4 py-2 text-white/90 transition-colors hover:bg-pink-200/10"
+              onSelect={logout}
+            >
+              Logout
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      );
+    }
+
+    return (
+      <motion.button
+        onClick={login}
+        className="relative rounded-full px-5 py-2 text-base font-semibold text-pink-100 border border-pink-200/50 bg-white/10 hover:bg-pink-100/10 transition-all shadow-lg drop-shadow-text"
+        whileHover={{
+          scale: 1.05,
+          boxShadow: '0 0 15px rgba(255, 182, 193, 0.6)',
+        }}
+        whileTap={{ scale: 0.95 }}
+      >
+        Sign In
+        <span className="absolute -inset-[2px] rounded-full blur-md bg-pink-200/20 opacity-40"></span>
+      </motion.button>
+    );
+  }
+);
+
+SignInButton.displayName = 'SignInButton';
