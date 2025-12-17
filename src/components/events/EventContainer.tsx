@@ -7,6 +7,7 @@ import { useEvents } from '@/lib/stores';
 
 const EventContainer = () => {
   const { eventsData, eventsLoading } = useEvents();
+  console.log('Events Data:', eventsData);
   return (
     <div className="relative bg-[url('/assets/events/bg.svg')] bg-cover bg-top bg-no-repeat min-h-screen flex flex-col items-center justify-center pt-20">
       {/* Bigger top black gradient */}
@@ -21,6 +22,7 @@ const EventContainer = () => {
         events={
           eventsData
             ? eventsData.map((event: any) => ({
+                id: event.id,
                 title: event.name,
                 image: event.image_url,
                 venue: event.schedule,
@@ -59,6 +61,7 @@ const EventContainer = () => {
               >
                 {row.map((event: any, idx: number) => {
                   const mapped = {
+                    id: event.id,
                     image: event.image_url || event.image,
                     title: event.name || event.title,
                     venue: event.schedule || event.venue,

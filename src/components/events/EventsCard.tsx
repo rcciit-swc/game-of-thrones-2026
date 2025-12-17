@@ -2,6 +2,7 @@
 
 import { cn, htmlToLines } from '@/lib/utils';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 const Card = ({
@@ -13,6 +14,7 @@ const Card = ({
   showDetails,
   isHovered,
   children,
+  onClick,
 }: {
   className?: string;
   image?: string;
@@ -22,9 +24,11 @@ const Card = ({
   showDetails?: boolean;
   children?: React.ReactNode;
   isHovered?: boolean;
+  onClick?: () => void;
 }) => {
   return (
     <div
+      onClick={onClick}
       className={cn(
         'w-[350px] cursor-pointer  overflow-hidden rounded-2xl transition-shadow duration-300',
         isHovered
@@ -81,6 +85,7 @@ const Card = ({
 };
 
 interface CardData {
+  id: string | number;
   image: string;
   title?: string;
   venue?: string;
@@ -99,6 +104,7 @@ const StackedCardsInteraction = ({
   animationDelay?: number;
 }) => {
   const [isHovering, setIsHovering] = useState(false);
+  const router = useRouter();
 
   const limitedCards = cards.slice(0, 2);
 
@@ -150,6 +156,11 @@ const StackedCardsInteraction = ({
                 entryPrice={card.entryPrice}
                 showDetails={isFirst}
                 isHovered={isHovering}
+                onClick={() => {
+                  if (card.id !== undefined && card.id !== null) {
+                    router.push(`/events/${card.id}`);
+                  }
+                }}
               ></Card>
             </motion.div>
           );

@@ -152,3 +152,21 @@ body {
 .no-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
 }
+
+/* Transparent scrollbar track utility for content areas */
+.scrollbar-transparent {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
+}
+.scrollbar-transparent::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.scrollbar-transparent::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-transparent::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.35);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+}
