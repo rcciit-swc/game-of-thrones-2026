@@ -19,7 +19,7 @@ import { useUser } from '@/lib/stores';
 import { toast, Toaster } from 'sonner';
 import { useEvents } from '@/lib/stores';
 import confetti from 'canvas-confetti';
-import { ViewTeamMembers } from './ViewTeamMembers';
+import { ViewTeamMembers } from '@/components/events/ViewTeamMembers';
 import {
   RegisterTeamParams,
   registerTeamWithParticipants,
