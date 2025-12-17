@@ -3,7 +3,7 @@ import { supabase } from '@/lib/supabase/client';
 
 export async function uploadPaymentScreenshot(file: File, eventName: string) {
   const bucket = 'fests';
-  const fileName = `${new Date()}-${file.name}`;
+  const fileName = `${Date.now()}-${file.name}`;
   const filePath = `regalia-2025/${eventName}/${fileName}`;
   const { data, error } = await supabase.storage
     .from(bucket)
