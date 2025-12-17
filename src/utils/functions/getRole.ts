@@ -1,10 +1,7 @@
-import { createClient } from '@/lib/supabase/server';
-import { cookies } from 'next/headers';
+import { createServer } from '@/lib/supabase/server';
 
 export async function getUserRoles() {
-  // Create an instance of the Supabase client
-  const cookieStore = cookies();
-  const supabase = await createClient(cookieStore);
+  const supabase = await createServer();
   const { data } = await supabase.auth.getUser();
 
   // Query the roles table with nested event_categories and fests

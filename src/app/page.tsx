@@ -1,12 +1,17 @@
-import UserProfile from '@/components/TESTUserProfile';
+import Hero from '@/components/Hero';
+import Playground from '@/components/Playground';
+import About from '@/components/about/about';
+import Footer from '@/components/Footer';
+import Navbar from '@/components/Navbar';
 
 const page = () => {
   return (
-    <div className="p-8">
-      <h1 className="text-4xl font-bold mb-8">Game of Thrones 2026</h1>
-      <div className="space-y-6">
-        <UserProfile />
-      </div>
+    <div className="flex flex-col min-h-screen overflow-hidden">
+      <Navbar />
+      <Hero />
+      <About />
+      {/* <Playground /> */}
+      <Footer />
     </div>
   );
 };
