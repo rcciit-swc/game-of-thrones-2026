@@ -1,5 +1,5 @@
 'use client';
-
+import type { Variants } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -277,31 +277,43 @@ export function ViewTeamMembers({
     </div>
   );
 
-  const desktopSidebarVariants = {
+  const desktopSidebarVariants: Variants = {
     hidden: { x: '100%', opacity: 0 },
     visible: {
       x: 0,
       opacity: 1,
-      transition: { duration: 0.3, ease: 'easeOut' },
+      transition: {
+        duration: 0.3,
+        ease: 'easeOut', // or 'easeOut' as const
+      },
     },
     exit: {
       x: '100%',
       opacity: 0,
-      transition: { duration: 0.2, ease: 'easeIn' },
+      transition: {
+        duration: 0.2,
+        ease: 'easeIn',
+      },
     },
   };
 
-  const mobileDrawerVariants = {
+  const mobileDrawerVariants: Variants = {
     hidden: { y: '100%', opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.3, ease: 'easeOut' },
+      transition: {
+        duration: 0.3,
+        ease: 'easeOut',
+      },
     },
     exit: {
       y: '100%',
       opacity: 0,
-      transition: { duration: 0.2, ease: 'easeIn' },
+      transition: {
+        duration: 0.2,
+        ease: 'easeIn',
+      },
     },
   };
 
