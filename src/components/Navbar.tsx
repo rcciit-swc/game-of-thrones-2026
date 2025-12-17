@@ -182,7 +182,7 @@ const SignInButton = memo(
                   onLoad={() => setImageLoaded(true)}
                   className={`h-full w-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
                 />
-                <AvatarFallback className="bg-gradient-to-br from-pink-200/40 to-yellow-100/30 text-white font-bold">
+                <AvatarFallback className="bg-linear-to-br from-pink-200/40 to-yellow-100/30 text-white font-bold">
                   {!userLoading && userData?.name
                     ? userData.name.charAt(0).toUpperCase()
                     : ''}
@@ -192,7 +192,7 @@ const SignInButton = memo(
           </DropdownMenuTrigger>
           <DropdownMenuContent
             align="end"
-            className="mt-2 w-48 rounded-lg border border-pink-200/20 bg-gradient-to-b from-pink-100/20 to-yellow-100/10 backdrop-blur-md shadow-xl"
+            className="mt-2 w-48 rounded-lg border border-pink-200/20 bg-linear-to-b from-pink-100/20 to-yellow-100/10 backdrop-blur-md shadow-xl"
           >
             <DropdownMenuItem
               className="cursor-pointer px-4 py-2 text-white/90 transition-colors hover:bg-pink-200/10"
@@ -214,7 +214,7 @@ const SignInButton = memo(
     return (
       <motion.button
         onClick={login}
-        className="relative w-42 py-2.5 bg-[#B60302] text-[#FAFAFA] text-[20px] font-['Irish_Grover'] rounded-[50px] shadow-[0_8px_15px_rgba(0,0,0,0.25)] hover:bg-[#8f0202] transition-colors duration-200 mt-2 text-center block transition-all shadow-lg drop-shadow-text"
+        className="relative w-42 py-2.5 bg-[#B60302] text-[#FAFAFA] text-[20px] font-['Irish_Grover'] rounded-[50px] shadow-[0_8px_15px_rgba(0,0,0,0.25)] hover:bg-[#8f0202] transition-colors duration-200 mt-2 text-center block drop-shadow-text"
         whileHover={{
           scale: 1.05,
           boxShadow: '0 0 15px rgba(255, 182, 193, 0.6)',
@@ -222,7 +222,7 @@ const SignInButton = memo(
         whileTap={{ scale: 0.95 }}
       >
         Register
-        <span className="absolute -inset-[2px] rounded-full blur-md bg-pink-200/20 opacity-40"></span>
+        <span className="absolute -inset-0.5 rounded-full blur-md bg-pink-200/20 opacity-40"></span>
       </motion.button>
     );
   }

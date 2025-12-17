@@ -419,7 +419,7 @@ export function SoloEventRegistration({
                 </Button>
                 <Button
                   type="submit"
-                  className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
+                  className="bg-linear-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
                 >
                   <span>Next</span>
                   <ArrowRight size={18} />
@@ -477,7 +477,7 @@ export function SoloEventRegistration({
                       id="paymentScreenshot"
                       type="file"
                       {...registerPayment('paymentScreenshot')}
-                      className="w-full bg-[#210000]/60 border file:text-black border-yellow-500/30 focus:border-yellow-400 focus:outline-none rounded-md p-2 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-gradient-to-r file:from-yellow-400 file:to-yellow-500 file:hover:from-yellow-500 file:hover:to-yellow-600 file:transition-all file:duration-300"
+                      className="w-full bg-[#210000]/60 border file:text-black border-yellow-500/30 focus:border-yellow-400 focus:outline-none rounded-md p-2 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-linear-to-r file:from-yellow-400 file:to-yellow-500 file:hover:from-yellow-500 file:hover:to-yellow-600 file:transition-all file:duration-300"
                       accept="image/*"
                     />
                   </div>
@@ -500,8 +500,8 @@ export function SoloEventRegistration({
                 </h1>
                 <div className="mt-4 w-full flex items-center justify-center">
                   <div className="relative">
-                    <div className="absolute inset-0 bg-gradient-to-r from-yellow-400 to-red-500 rounded-lg blur-lg opacity-50 animate-pulse"></div>
-                    <div className="relative p-1 bg-gradient-to-r from-yellow-400 to-red-500 rounded-lg">
+                    <div className="absolute inset-0 bg-linear-to-r from-yellow-400 to-red-500 rounded-lg blur-lg opacity-50 animate-pulse"></div>
+                    <div className="relative p-1 bg-linear-to-r from-yellow-400 to-red-500 rounded-lg">
                       <Image
                         src="https://i.postimg.cc/0j5bd9Dy/Whats-App-Image-2025-04-25-at-04-49-14-be67b65c.jpg"
                         alt="Payment QR Code"
@@ -527,7 +527,7 @@ export function SoloEventRegistration({
                 </Button>
                 <Button
                   type="submit"
-                  className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
+                  className="bg-linear-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-medium flex items-center gap-2 px-6 py-2 rounded-md border-0 transition-all duration-300"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
