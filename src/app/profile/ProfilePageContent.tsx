@@ -143,19 +143,6 @@ export default function ProfilePage() {
           >
             <CalendarDays className="w-5 h-5" /> My Events
           </button>
-          {(userData?.email.includes('@rcciit.org.in') ||
-            userData?.email.includes('@rccinstitute.org')) && (
-            <button
-              onClick={() => setActiveTab('pass')}
-              className={`flex items-center gap-2 pb-2 transition-all duration-300 ${
-                activeTab === 'pass'
-                  ? 'border-b-2 border-white text-white font-bold'
-                  : 'text-white/60 hover:text-white/80'
-              }`}
-            >
-              <Ticket className="w-5 h-5" /> Event Pass
-            </button>
-          )}
         </div>
 
         {/* Tab Content */}

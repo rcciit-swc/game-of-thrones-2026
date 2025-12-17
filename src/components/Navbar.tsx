@@ -3,7 +3,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { userDataType } from '@/lib/types';
-import { useState, Dispatch, SetStateAction, useEffect, memo } from 'react';
+import {
+  useRef,
+  useState,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  memo,
+  useCallback,
+} from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useUser } from '@/lib/stores';
@@ -73,12 +81,6 @@ export default function Navbar() {
         </div>
 
         {/* Register Button - Desktop */}
-        <Link
-          href="/register"
-          className="hidden lg:block w-42 py-2.5 bg-[#B60302] text-[#FAFAFA] text-[20px] font-['Irish_Grover'] rounded-[50px] shadow-[0_8px_15px_rgba(0,0,0,0.25)] hover:bg-[#8f0202] transition-colors duration-200 text-center"
-        >
-          Register
-        </Link>
         <SignInButton
           userData={userData}
           userLoading={userLoading}
@@ -164,23 +166,29 @@ const SignInButton = memo(
     if (userData && image) {
       return (
         <DropdownMenu>
-          <DropdownMenuTrigger className="group relative focus:outline-none cursor-pointer transition-transform duration-200 hover:scale-110 active:scale-95">
-            <Avatar className="relative h-10 w-10 transition-all ring-2 ring-pink-300/50 group-hover:ring-yellow-100/50">
-              {!imageLoaded && (
-                <Skeleton className="absolute inset-0 h-10 w-10 rounded-full bg-white/20" />
-              )}
-              <AvatarImage
-                src={image}
-                alt="Profile"
-                onLoad={() => setImageLoaded(true)}
-                className={`h-full w-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-              />
-              <AvatarFallback className="bg-gradient-to-br from-pink-200/40 to-yellow-100/30 text-white font-bold">
-                {!userLoading && userData?.name
-                  ? userData.name.charAt(0).toUpperCase()
-                  : ''}
-              </AvatarFallback>
-            </Avatar>
+          <DropdownMenuTrigger asChild>
+            <motion.button
+              className="group relative focus:outline-none"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Avatar className="relative h-10 w-10 transition-all ring-2 ring-pink-300/50 group-hover:ring-yellow-100/50">
+                {!imageLoaded && (
+                  <Skeleton className="absolute inset-0 h-10 w-10 rounded-full bg-white/20" />
+                )}
+                <AvatarImage
+                  src={image}
+                  alt="Profile"
+                  onLoad={() => setImageLoaded(true)}
+                  className={`h-full w-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                />
+                <AvatarFallback className="bg-gradient-to-br from-pink-200/40 to-yellow-100/30 text-white font-bold">
+                  {!userLoading && userData?.name
+                    ? userData.name.charAt(0).toUpperCase()
+                    : ''}
+                </AvatarFallback>
+              </Avatar>
+            </motion.button>
           </DropdownMenuTrigger>
           <DropdownMenuContent
             align="end"
@@ -206,14 +214,14 @@ const SignInButton = memo(
     return (
       <motion.button
         onClick={login}
-        className="relative rounded-full px-5 py-2 text-base font-semibold text-pink-100 border border-pink-200/50 bg-white/10 hover:bg-pink-100/10 transition-all shadow-lg drop-shadow-text"
+        className="relative w-42 py-2.5 bg-[#B60302] text-[#FAFAFA] text-[20px] font-['Irish_Grover'] rounded-[50px] shadow-[0_8px_15px_rgba(0,0,0,0.25)] hover:bg-[#8f0202] transition-colors duration-200 mt-2 text-center block transition-all shadow-lg drop-shadow-text"
         whileHover={{
           scale: 1.05,
           boxShadow: '0 0 15px rgba(255, 182, 193, 0.6)',
         }}
         whileTap={{ scale: 0.95 }}
       >
-        Sign In
+        Register
         <span className="absolute -inset-[2px] rounded-full blur-md bg-pink-200/20 opacity-40"></span>
       </motion.button>
     );
