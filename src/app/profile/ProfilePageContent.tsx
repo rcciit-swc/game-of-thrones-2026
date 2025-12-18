@@ -14,7 +14,8 @@ import { toast } from 'sonner';
 import { handleSaveChanges } from '@/utils/functions/profile/functions';
 import ProfileSkeleton from './ProfileSkeleton';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { LogOut, Pencil, CalendarDays, UserCircle, Ticket } from 'lucide-react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 export default function ProfilePage() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -26,7 +27,6 @@ export default function ProfilePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [registeredEvents, setRegisteredEvents] = useState<events[]>([]);
-  const [activeTab, setActiveTab] = useState('events'); // 'events' or 'pass'
 
   useEffect(() => {
     const cb = searchParams.get('callback');
@@ -81,21 +81,97 @@ export default function ProfilePage() {
   if (userLoading) return <ProfileSkeleton />;
 
   return (
-    <div className="min-h-screen mt-32">
-      <main className="max-w-6xl mx-auto px-4 py-8">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
+    <div
+      className="min-h-screen relative rajdhanifont"
+      style={{
+        backgroundImage: "url('/about/aboutbackground.png')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+      }}
+    >
+      {/* Navbar */}
+      <Navbar />
+
+      <main className="pt-40 md:pt-48 pb-8">
+        {/* Player Profile Title */}
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="bg-gradient-to-br from-[#1a0a0a] to-[#0f0c29] rounded-xl p-8 font-cogley tracking-widest shadow-xl border border-white/20 backdrop-blur-md"
+          transition={{ duration: 0.6 }}
+          className="text-center rajdhanifont font-bold text-[40px] md:text-[60px] text-white mb-8 md:mb-12 tracking-[-2.4px]"
         >
-          <div className="flex flex-col md:flex-row gap-6 items-start">
-            <motion.div
-              initial={{ scale: 0.8 }}
-              animate={{ scale: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <Avatar className="w-32 h-32 relative border-4 border-white/20 shadow-lg">
+          Player Profile
+        </motion.h1>
+
+        {/* Profile Card Container */}
+        <div className="max-w-7xl mx-auto px-4 md:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="backdrop-blur-[12.95px] rounded-[24px] p-6 md:p-8 relative overflow-hidden"
+            style={{
+              backgroundImage:
+                'linear-gradient(168deg, rgba(0, 0, 0, 0.25) 5%, rgba(255, 255, 255, 0.25) 95%)',
+            }}
+          >
+            {/* Desktop Layout */}
+            <div className="hidden md:flex items-start gap-8">
+              {/* Avatar */}
+              <div className="relative shrink-0">
+                <Avatar className="w-[200px] h-[200px] border-4 border-white/10">
+                  {!imageLoaded && (
+                    <Skeleton className="w-full h-full rounded-full absolute inset-0" />
+                  )}
+                  <AvatarImage
+                    src={profileImage || '/default-avatar.png'}
+                    alt={userData?.name || 'Profile'}
+                    onLoad={() => setImageLoaded(true)}
+                    className={imageLoaded ? 'block object-cover' : 'hidden'}
+                  />
+                  <AvatarFallback className="bg-muted text-white text-4xl rajdhanifont">
+                    {userData?.name?.[0] || 'U'}
+                  </AvatarFallback>
+                </Avatar>
+              </div>
+
+              {/* User Info */}
+              <div className="flex flex-col gap-6 items-start">
+                <div className="flex flex-col gap-[7px] text-white text-center md:text-left">
+                  <h2 className="rajdhanifont font-bold text-[36px] md:text-[48px] uppercase leading-tight">
+                    {userData?.name || name}
+                  </h2>
+                  <p className="rajdhanifont font-medium text-[18px] md:text-[20px]">
+                    {userData?.email}
+                  </p>
+                  <p className="rajdhanifont font-medium text-[18px] md:text-[20px]">
+                    {userData?.phone}
+                  </p>
+                </div>
+
+                {/* Buttons */}
+                <div className="flex gap-4">
+                  <button
+                    onClick={() => setIsEditModalOpen(true)}
+                    className="h-[50px] w-[135px] bg-[#dd5b1b] rounded-[15px] shadow-[0px_4px_15px_rgba(0,0,0,0.25)] rajdhanifont font-semibold text-[#f2efe9] text-[20px] md:text-[21px] uppercase hover:bg-[#c94f15] transition-colors"
+                  >
+                    EDIT
+                  </button>
+                  <button
+                    onClick={handleLogout}
+                    className="h-[50px] w-[135px] bg-[#f2efe9] rounded-[15px] shadow-[0px_4px_15px_rgba(0,0,0,0.25)] rajdhanifont font-semibold text-black text-[20px] uppercase hover:bg-[#e0ddd7] transition-colors"
+                  >
+                    LOG OUT
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Layout */}
+            <div className="flex flex-col items-center md:hidden gap-6">
+              {/* Avatar */}
+              <Avatar className="w-[200px] h-[200px] md:w-[250px] md:h-[250px] border-4 border-white/10">
                 {!imageLoaded && (
                   <Skeleton className="w-full h-full rounded-full absolute inset-0" />
                 )}
@@ -103,94 +179,95 @@ export default function ProfilePage() {
                   src={profileImage || '/default-avatar.png'}
                   alt={userData?.name || 'Profile'}
                   onLoad={() => setImageLoaded(true)}
-                  className={imageLoaded ? 'block' : 'hidden'}
+                  className={imageLoaded ? 'block object-cover' : 'hidden'}
                 />
-                <AvatarFallback className="bg-muted text-white">
+                <AvatarFallback className="bg-muted text-white text-4xl rajdhanifont">
                   {userData?.name?.[0] || 'U'}
                 </AvatarFallback>
               </Avatar>
-            </motion.div>
 
-            <div className="space-y-4 flex-1">
-              <div>
-                <h1 className="text-3xl font-bold uppercase text-white flex items-center gap-2">
-                  <UserCircle className="w-6 h-6 text-white" />
+              {/* User Info */}
+              <div className="flex flex-col gap-[7px] text-white text-center w-full max-w-[321px]">
+                <h2 className="rajdhanifont font-bold text-[32px] md:text-[40px] uppercase leading-tight">
                   {userData?.name || name}
-                </h1>
-                <p className="text-white/80 text-lg">{userData?.email}</p>
+                </h2>
+                <p className="rajdhanifont font-medium text-[18px] md:text-[20px]">
+                  {userData?.email}
+                </p>
+                <p className="rajdhanifont font-medium text-[18px] md:text-[20px]">
+                  {userData?.phone}
+                </p>
               </div>
-              <div className="flex flex-wrap gap-4">
-                <Button
-                  variant="secondary"
+
+              {/* Buttons */}
+              <div className="flex flex-col gap-3 w-full max-w-[287px]">
+                <button
                   onClick={() => setIsEditModalOpen(true)}
-                  className="flex items-center gap-2"
+                  className="h-[48px] w-full bg-[#dd5b1b] rounded-[15px] shadow-[0px_4px_15px_rgba(0,0,0,0.25)] rajdhanifont font-semibold text-[#f2efe9] text-[21px] uppercase hover:bg-[#c94f15] transition-colors"
                 >
-                  <Pencil className="w-4 h-4" /> Edit Profile
-                </Button>
-                <Button
-                  variant="destructive"
+                  EDIT
+                </button>
+                <button
                   onClick={handleLogout}
-                  className="flex items-center gap-2"
+                  className="h-[50px] w-full bg-[#f2efe9] rounded-[15px] shadow-[0px_4px_15px_rgba(0,0,0,0.25)] rajdhanifont font-semibold text-black text-[20px] uppercase hover:bg-[#e0ddd7] transition-colors"
                 >
-                  <LogOut className="w-4 h-4" /> Logout
-                </Button>
+                  LOG OUT
+                </button>
               </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
 
-        {/* Tab Navigation */}
-        <div className="mt-10 mb-6 flex space-x-6 border-b border-white/20 pb-4">
-          <button
-            onClick={() => setActiveTab('events')}
-            className={`flex items-center gap-2 pb-2 transition-all duration-300 ${
-              activeTab === 'events'
-                ? 'border-b-2 border-white text-white font-bold'
-                : 'text-white/60 hover:text-white/80'
-            }`}
-          >
-            <CalendarDays className="w-5 h-5" /> My Events
-          </button>
-        </div>
-
-        {/* Tab Content */}
-        {activeTab === 'events' && (
+          {/* Registered Events Section */}
           <motion.div
-            key="events-tab"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mt-16 md:mt-24"
           >
-            <h2 className="text-2xl font-bold mb-4 text-white font-cogley tracking-widest flex items-center gap-2">
-              <CalendarDays className="w-6 h-6" /> Events Registered
+            {/* Section Title */}
+            <h2
+              className="text-center rajdhanifont font-bold text-[40px] md:text-[60px] text-white mb-12 md:mb-16 underline decoration-4 underline-offset-8"
+              style={{
+                textShadow: '0px 0px 15px #b60302, 0px 3px 0px #ff003c',
+              }}
+            >
+              Registered Events
             </h2>
 
+            {/* Events Grid */}
             {registeredEvents.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 justify-items-center">
                 {registeredEvents.map((event, index) => (
                   <motion.div
                     key={index}
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ type: 'spring', stiffness: 300 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    className="w-full max-w-[398px]"
                   >
                     <EventsCard {...event} eventID={event.id!} />
                   </motion.div>
                 ))}
               </div>
             ) : (
-              <div className="text-center text-white font-antolia tracking-widest mt-6">
-                <p className="text-lg mb-4">
+              <div className="text-center text-white rajdhanifont mt-6">
+                <p className="text-lg md:text-xl mb-6">
                   You have not registered for any event. Register now!
                 </p>
-                <Button className="mt-4" onClick={() => router.push('/events')}>
+                <Button
+                  className="bg-[#dd5b1b] hover:bg-[#c94f15] text-[#f2efe9] rajdhanifont font-semibold text-lg px-8 py-3 rounded-[15px]"
+                  onClick={() => router.push('/events')}
+                >
                   Browse Events
                 </Button>
               </div>
             )}
           </motion.div>
-        )}
+        </div>
       </main>
+
+      {/* Footer */}
+      <Footer />
 
       <EditProfileDialog
         open={isEditModalOpen}
