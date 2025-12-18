@@ -385,7 +385,6 @@ const Hero = () => {
           </svg>
         </div>
 
-        {/* 2025/2026 below GOT */}
         <div
           className="text-center text-6xl md:text-8xl font-bold mt-70  md:mt-85 opacity-0 animate-fadeInUp"
           style={{

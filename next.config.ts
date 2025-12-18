@@ -8,10 +8,21 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: 'i.postimg.cc',
+        pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'picsum.photos',
+      },
+      {
+        protocol: 'https',
+        hostname: 'i.imgur.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'sfrxivbavmvrjmmrmfxq.supabase.co',
+        pathname: '/storage/v1/object/public/**',
       },
     ],
   },

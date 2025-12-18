@@ -170,3 +170,29 @@ body {
   border-radius: 9999px;
   border: 2px solid transparent;
 }
+
+/* Global scrollbar styling - thin, slick, and dark */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #090b0d;
+  border-radius: 3px;
+  border: 2px solid #090b0d;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #ff003c;
+}
+
+/* Firefox scrollbar styling */
+* {
+  scrollbar-color: #090b0d transparent;
+  scrollbar-width: thin;
+}

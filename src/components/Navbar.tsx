@@ -3,20 +3,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { userDataType } from '@/lib/types';
-import {
-  useRef,
-  useState,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  memo,
-  useCallback,
-} from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, Dispatch, SetStateAction, useEffect, memo } from 'react';
 import { motion } from 'framer-motion';
 import { useUser } from '@/lib/stores';
 import { login } from '@/utils/functions/auth/login';
 import { logout } from '@/utils/functions/auth/logout';
+import { User, LogOut } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -32,6 +24,11 @@ export default function Navbar() {
   const { userData, userLoading } = useUser();
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
+
+  const itemVariants = {
+    closed: { opacity: 0, x: -20 },
+    open: { opacity: 1, x: 0 },
+  };
 
   // Fetch user session only once on mount
   useEffect(() => {
@@ -81,13 +78,15 @@ export default function Navbar() {
         </div>
 
         {/* Register Button - Desktop */}
-        <SignInButton
-          userData={userData}
-          userLoading={userLoading}
-          imageLoaded={imageLoaded}
-          image={profileImage}
-          setImageLoaded={setImageLoaded}
-        />
+        <div className="hidden lg:block">
+          <SignInButton
+            userData={userData}
+            userLoading={userLoading}
+            imageLoaded={imageLoaded}
+            image={profileImage}
+            setImageLoaded={setImageLoaded}
+          />
+        </div>
 
         {/* Mobile Hamburger Icon */}
         <button
@@ -116,10 +115,10 @@ export default function Navbar() {
       {/* Mobile Dropdown Menu */}
       <div
         className={`lg:hidden fixed top-35 left-0 right-0 mx-4 rounded-[15px] bg-[linear-gradient(90deg,rgba(77,4,4,0.95),rgba(32,7,7,0.95))] shadow-[0_5px_25px_4px_#FF003C] backdrop-blur-[25px] transition-all duration-300 overflow-hidden z-40 ${
-          isMenuOpen ? 'max-h-100 opacity-100' : 'max-h-0 opacity-0'
+          isMenuOpen ? 'max-h-[600px] opacity-100 py-8' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="flex flex-col items-center gap-6 py-8">
+        <div className="flex flex-col items-center gap-6">
           {navLinks.map((link) => (
             <Link
               key={link.label}
@@ -130,12 +129,63 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/register"
-            className="w-42 py-2.5 bg-[#B60302] text-[#FAFAFA] text-[20px] font-['Irish_Grover'] rounded-[50px] shadow-[0_8px_15px_rgba(0,0,0,0.25)] hover:bg-[#8f0202] transition-colors duration-200 mt-2 text-center block"
-          >
-            Register
-          </Link>
+
+          {/* User Specific Links and Section for Mobile */}
+          {userData ? (
+            <>
+              <Link
+                href="/profile"
+                onClick={() => setIsMenuOpen(false)}
+                className="font-['Irish_Grover'] text-[#CCA855] text-[25px] hover:text-[#f5d68c] transition-colors duration-200"
+              >
+                Profile
+              </Link>
+
+              <motion.div
+                className="w-full px-6 pt-6 mt-4 border-t border-[#CCA855]/20 flex items-center justify-between"
+                initial="closed"
+                animate={isMenuOpen ? 'open' : 'closed'}
+              >
+                <div className="flex items-center gap-3">
+                  <Avatar className="h-10 w-10 ring-2 ring-[#CCA855]/50">
+                    <AvatarImage src={profileImage || ''} alt="Profile" />
+                    <AvatarFallback className="bg-gradient-to-br from-[#B60302]/40 to-[#CCA855]/30 text-white text-md font-bold">
+                      {userData.name
+                        ? userData.name.charAt(0).toUpperCase()
+                        : 'U'}
+                    </AvatarFallback>
+                  </Avatar>
+                  <span className="text-[#CCA855] font-medium truncate text-sm">
+                    {userData.name || 'User'}
+                  </span>
+                </div>
+
+                <button
+                  onClick={() => {
+                    logout();
+                    setIsMenuOpen(false);
+                  }}
+                  className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors"
+                  aria-label="Logout"
+                >
+                  <LogOut className="w-5 h-5 text-[#CCA855]" />
+                </button>
+              </motion.div>
+            </>
+          ) : (
+            <motion.button
+              variants={itemVariants}
+              onClick={() => {
+                login();
+                setIsMenuOpen(false);
+              }}
+              className="w-42 py-2.5 bg-[#B60302] text-[#FAFAFA] text-[20px] font-['Irish_Grover'] rounded-[50px] shadow-[0_8px_15px_rgba(0,0,0,0.25)] hover:bg-[#8f0202] transition-colors duration-200 mt-2 text-center block"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Register
+            </motion.button>
+          )}
         </div>
       </div>
     </nav>
@@ -157,8 +207,6 @@ const SignInButton = memo(
     image: string | null;
     setImageLoaded: Dispatch<SetStateAction<boolean>>;
   }) => {
-    const router = useRouter();
-
     if (userLoading) {
       return <Skeleton className="w-10 h-10 rounded-full bg-gray-600" />;
     }
@@ -182,7 +230,7 @@ const SignInButton = memo(
                   onLoad={() => setImageLoaded(true)}
                   className={`h-full w-full object-cover transition-opacity duration-300 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
                 />
-                <AvatarFallback className="bg-gradient-to-br from-pink-200/40 to-yellow-100/30 text-white font-bold">
+                <AvatarFallback className="bg-linear-to-br from-pink-200/40 to-yellow-100/30 text-white font-bold">
                   {!userLoading && userData?.name
                     ? userData.name.charAt(0).toUpperCase()
                     : ''}
@@ -192,16 +240,16 @@ const SignInButton = memo(
           </DropdownMenuTrigger>
           <DropdownMenuContent
             align="end"
-            className="mt-2 w-48 rounded-lg border border-pink-200/20 bg-gradient-to-b from-pink-100/20 to-yellow-100/10 backdrop-blur-md shadow-xl"
+            className="mt-2 w-48 rounded-lg border border-[#CCA855]/20 bg-black/60 backdrop-blur-xl shadow-[0_5px_25px_-5px_#FF003C]"
           >
             <DropdownMenuItem
-              className="cursor-pointer px-4 py-2 text-white/90 transition-colors hover:bg-pink-200/10"
-              onSelect={() => router.push('/profile')}
+              asChild
+              className="cursor-pointer px-4 py-2 text-[#CCA855] font-['Irish_Grover'] transition-colors hover:bg-[#CCA855]/10 focus:bg-[#CCA855]/10 focus:text-[#f5d68c]"
             >
-              Profile
+              <Link href="/profile">Profile</Link>
             </DropdownMenuItem>
             <DropdownMenuItem
-              className="cursor-pointer px-4 py-2 text-white/90 transition-colors hover:bg-pink-200/10"
+              className="cursor-pointer px-4 py-2 text-[#CCA855] font-['Irish_Grover'] transition-colors hover:bg-[#CCA855]/10 focus:bg-[#CCA855]/10 focus:text-[#f5d68c]"
               onSelect={logout}
             >
               Logout
@@ -214,7 +262,7 @@ const SignInButton = memo(
     return (
       <motion.button
         onClick={login}
-        className="relative w-42 py-2.5 bg-[#B60302] text-[#FAFAFA] text-[20px] font-['Irish_Grover'] rounded-[50px] shadow-[0_8px_15px_rgba(0,0,0,0.25)] hover:bg-[#8f0202] transition-colors duration-200 mt-2 text-center block transition-all shadow-lg drop-shadow-text"
+        className="relative w-42 py-2.5 bg-[#B60302] text-[#FAFAFA] text-[20px] font-['Irish_Grover'] rounded-[50px] shadow-[0_8px_15px_rgba(0,0,0,0.25)] hover:bg-[#8f0202] transition-colors duration-200 mt-2 text-center block drop-shadow-text"
         whileHover={{
           scale: 1.05,
           boxShadow: '0 0 15px rgba(255, 182, 193, 0.6)',
@@ -222,7 +270,7 @@ const SignInButton = memo(
         whileTap={{ scale: 0.95 }}
       >
         Register
-        <span className="absolute -inset-[2px] rounded-full blur-md bg-pink-200/20 opacity-40"></span>
+        <span className="absolute -inset-0.5 rounded-full blur-md bg-pink-200/20 opacity-40"></span>
       </motion.button>
     );
   }
