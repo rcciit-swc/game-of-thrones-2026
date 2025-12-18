@@ -9,6 +9,7 @@ import { useUser, useEvents } from '@/lib/stores';
 import { supabase } from '@/lib/supabase/client';
 import { EditProfileDialog } from './EditProfileDialog';
 import type { events } from '@/lib/types';
+import EventsCard from '@/components/profile/EventsCard';
 import { toast } from 'sonner';
 import { handleSaveChanges } from '@/utils/functions/profile/functions';
 import ProfileSkeleton from './ProfileSkeleton';
@@ -173,7 +174,7 @@ export default function ProfilePage() {
                     whileHover={{ scale: 1.02 }}
                     transition={{ type: 'spring', stiffness: 300 }}
                   >
-                    {/* <EventsCard {...event} eventID={event.id!} /> */}
+                    <EventsCard {...event} eventID={event.id!} />
                   </motion.div>
                 ))}
               </div>
