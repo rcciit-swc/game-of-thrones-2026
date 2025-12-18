@@ -30,7 +30,7 @@ const Card = ({
     <div
       onClick={onClick}
       className={cn(
-        'w-[350px] cursor-pointer  overflow-hidden rounded-2xl transition-shadow duration-300',
+        'w-87.5 cursor-pointer  overflow-hidden rounded-2xl transition-shadow duration-300',
         isHovered
           ? 'shadow-2xl shadow-red-600/60'
           : 'shadow-lg shadow-red-600/20',
@@ -39,7 +39,7 @@ const Card = ({
     >
       {image && (
         <div
-          className={` relative h-[350px] overflow-hidden w-full mt-0 ${showDetails === false ? 'rounded-2xl' : 'rounded-t-xl'}`}
+          className={` relative h-87.5 overflow-hidden w-full mt-0 ${showDetails === false ? 'rounded-2xl' : 'rounded-t-xl'}`}
         >
           <img
             src={image}
@@ -111,7 +111,7 @@ const StackedCardsInteraction = ({
   return (
     <div className="relative w-full h-full flex items-center justify-center">
       <div
-        className="relative w-[350px] h-[400px]"
+        className="relative w-87.5 h-100"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >

@@ -127,7 +127,7 @@ const Autocarousel = () => {
             return (
               <motion.div
                 key={`${item.id}-${index}`}
-                className="flex-shrink-0 rounded-xl overflow-hidden shadow-2xl"
+                className="shrink-0 rounded-xl overflow-hidden shadow-2xl"
                 style={{
                   width: ITEM_WIDTH,
                   height,
