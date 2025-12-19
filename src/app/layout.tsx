@@ -9,6 +9,8 @@ import {
   Cinzel,
 } from 'next/font/google';
 import { Toaster } from 'sonner';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 const irishGrover = Irish_Grover({
   weight: '400',
@@ -58,9 +60,11 @@ export default function RootLayout({
         className={`${irishGrover.variable} ${robotoCondensed.variable} ${rajdhani.variable} ${cinzel.variable} antialiased`}
         suppressHydrationWarning
       >
+        <Navbar />
         {children}
         <Toaster position="bottom-right" richColors duration={5000} />
         <SessionProvider />
+        <Footer />
       </body>
     </html>
   );
