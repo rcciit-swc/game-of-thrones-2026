@@ -84,10 +84,10 @@ export default function ProfilePage() {
     <div
       className="min-h-screen relative rajdhanifont"
       style={{
-        backgroundImage: "url('/about/aboutbackground.png')",
+        backgroundImage: "url('/about/playerprofilebg.png')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
+        backgroundAttachment: 'scroll',
       }}
     >
       {/* Navbar */}
