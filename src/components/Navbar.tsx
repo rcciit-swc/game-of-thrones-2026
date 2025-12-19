@@ -25,11 +25,6 @@ export default function Navbar() {
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  const itemVariants = {
-    closed: { opacity: 0, x: -20 },
-    open: { opacity: 1, x: 0 },
-  };
-
   // Fetch user session only once on mount
   useEffect(() => {
     const readUserSession = async () => {
