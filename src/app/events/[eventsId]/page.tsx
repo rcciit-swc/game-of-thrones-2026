@@ -8,5 +8,5 @@ interface EventPageProps {
 
 export default async function Page({ params }: EventPageProps) {
   const { eventsId } = await params;
-  return <EventRegistration eventName={eventsId} />;
+  return <EventRegistration eventId={eventsId} />;
 }

@@ -12,7 +12,7 @@ import { TeamEventRegistration } from '@/components/events/TeamEventRegistration
 
 type EventRegistrationProps = {
   // eventsId from route; treated as the event id
-  eventName?: string;
+  eventId?: string;
 };
 
 function normalizeBackgroundName(name?: string) {
@@ -107,7 +107,7 @@ function parseRulesHtml(html?: string): string[] {
 
 type TabType = 'description' | 'rules' | 'coordinators' | 'more';
 
-const EventRegistration: React.FC<EventRegistrationProps> = ({ eventName }) => {
+const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
   function getStringBeforeBracket(input: string): string {
     const match = input.match(/^[^(]*/);
     return match ? match[0].trim() : input;
@@ -123,15 +123,15 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventName }) => {
 
   // compute selected event directly (no memoization)
   const selectedEvent =
-    eventsData && eventName
-      ? eventsData.find((e: any) => String(e.id) === String(eventName))
+    eventsData && eventId
+      ? eventsData.find((e: any) => String(e.id) === String(eventId))
       : undefined;
   console.log('Selected Event:', selectedEvent);
   // Choose background by event name if available
   const bg = getBackgroundForEvent(
     selectedEvent?.name
       ? getStringBeforeBracket(selectedEvent.name)
-      : eventName || ''
+      : eventId || ''
   );
   console.log('Background Image URL:', bg);
 
@@ -323,7 +323,7 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventName }) => {
   return (
     <>
       <div
-        className="min-h-screen w-full relative overflow-x-hidden rajdhanifont"
+        className="min-h-screen w-full relative overflow-x-hidden rajdhanifont pt-20 md:pt-28"
         style={{
           backgroundImage: `url('${bg}')`,
           backgroundSize: 'cover',
