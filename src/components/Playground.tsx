@@ -41,7 +41,7 @@ const Playground = () => {
         <div
           className="absolute inset-0 hidden lg:block"
           style={{
-            backgroundImage: "url('/assest/background/Rectangle 23.svg')",
+            backgroundImage: "url('/assest/background/Rectangle 23.png')",
             backgroundSize: '100% auto',
             backgroundPosition: 'top center',
             backgroundRepeat: 'no-repeat',

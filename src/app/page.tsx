@@ -1,14 +1,15 @@
 import Hero from '@/components/Hero';
-import Playground from '@/components/Playground';
 import About from '@/components/about/about';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
+import Playground from '@/components/Playground';
 
 const page = () => {
   return (
     <div className="flex flex-col min-h-screen overflow-hidden">
       <Hero />
       <About />
+      <Playground />
     </div>
   );
 };
