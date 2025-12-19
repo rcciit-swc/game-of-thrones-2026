@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import './coming-soon-animations.css';
 
 // Pre-defined static particle positions to avoid hydration mismatch
@@ -97,10 +98,31 @@ const PARTICLES = [
 ];
 
 const ComingSoon = () => {
+  const pathname = usePathname();
+  const isComingSoonRoute = ['/about', '/teams', '/gallery'].includes(pathname);
+
   return (
-    <div className="coming-soon-container">
-      {/* Animated background grid */}
-      <div className="grid-background"></div>
+    <div className="coming-soon-container ">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0 bg-[url('/assets/events/NotFound.jpeg')] bg-cover bg-center"></div>
+
+      {/* Black darkening overlay */}
+      <div className="black-overlay" />
+
+      {/* Radial red overlay effect */}
+      <div className="radial-red-overlay" />
+
+      {/* Dark vignette overlay */}
+      <div className="horror-vignette" />
+
+      {/* Animated fog layers */}
+      <div className="fog-layer fog-1" />
+      <div className="fog-layer fog-2" />
+
+      {/* Creepy shadow overlay */}
+      <div className="shadow-overlay" />
+
+      {/* Breathing red side glows */}
 
       {/* Floating particles */}
       <div className="particles-container">
@@ -114,43 +136,91 @@ const ComingSoon = () => {
         {/* Glowing orb */}
         <div className="glow-orb"></div>
 
-        {/* Coming Soon text with flicker effect */}
+        {/* Title with flicker effect */}
         <h1 className="coming-soon-title flicker-text">
-          <span className="letter" style={{ animationDelay: '0s' }}>
-            C
-          </span>
-          <span className="letter" style={{ animationDelay: '0.1s' }}>
-            O
-          </span>
-          <span className="letter" style={{ animationDelay: '0.2s' }}>
-            M
-          </span>
-          <span className="letter" style={{ animationDelay: '0.3s' }}>
-            I
-          </span>
-          <span className="letter" style={{ animationDelay: '0.4s' }}>
-            N
-          </span>
-          <span className="letter" style={{ animationDelay: '0.5s' }}>
-            G
-          </span>
-          <span className="space"> </span>
-          <span className="letter" style={{ animationDelay: '0.6s' }}>
-            S
-          </span>
-          <span className="letter" style={{ animationDelay: '0.7s' }}>
-            O
-          </span>
-          <span className="letter" style={{ animationDelay: '0.8s' }}>
-            O
-          </span>
-          <span className="letter" style={{ animationDelay: '0.9s' }}>
-            N
-          </span>
+          {isComingSoonRoute ? (
+            // Coming Soon
+            <>
+              <span className="letter" style={{ animationDelay: '0s' }}>
+                C
+              </span>
+              <span className="letter" style={{ animationDelay: '0.1s' }}>
+                O
+              </span>
+              <span className="letter" style={{ animationDelay: '0.2s' }}>
+                M
+              </span>
+              <span className="letter" style={{ animationDelay: '0.3s' }}>
+                I
+              </span>
+              <span className="letter" style={{ animationDelay: '0.4s' }}>
+                N
+              </span>
+              <span className="letter" style={{ animationDelay: '0.5s' }}>
+                G
+              </span>
+              <span className="space"> </span>
+              <span className="letter" style={{ animationDelay: '0.6s' }}>
+                S
+              </span>
+              <span className="letter" style={{ animationDelay: '0.7s' }}>
+                O
+              </span>
+              <span className="letter" style={{ animationDelay: '0.8s' }}>
+                O
+              </span>
+              <span className="letter" style={{ animationDelay: '0.9s' }}>
+                N
+              </span>
+            </>
+          ) : (
+            // Error 404
+            <>
+              <span className="letter" style={{ animationDelay: '0s' }}>
+                E
+              </span>
+              <span className="letter" style={{ animationDelay: '0.1s' }}>
+                R
+              </span>
+              <span className="letter" style={{ animationDelay: '0.2s' }}>
+                R
+              </span>
+              <span className="letter" style={{ animationDelay: '0.3s' }}>
+                O
+              </span>
+              <span className="letter" style={{ animationDelay: '0.4s' }}>
+                R
+              </span>
+              <span className="space"> </span>
+              <span className="letter" style={{ animationDelay: '0.5s' }}>
+                4
+              </span>
+              <span className="letter" style={{ animationDelay: '0.6s' }}>
+                0
+              </span>
+              <span className="letter" style={{ animationDelay: '0.7s' }}>
+                4
+              </span>
+            </>
+          )}
         </h1>
 
         {/* Subtitle */}
-        <p className="subtitle-text">Something mysterious is brewing...</p>
+        {isComingSoonRoute ? (
+          <p className="subtitle-text">Something mysterious is brewing...</p>
+        ) : (
+          <>
+            <p className="subtitle-text">
+              You've wandered into the darkness...
+            </p>
+            <p
+              className="subtitle-text"
+              style={{ fontSize: '0.9rem', marginTop: '0.5rem', opacity: 0.6 }}
+            >
+              The page you seek has been consumed by shadows
+            </p>
+          </>
+        )}
 
         {/* Animated dots */}
         <div className="loading-dots">
@@ -162,7 +232,9 @@ const ComingSoon = () => {
         {/* Back to home button */}
         <Link href="/" className="back-home-btn">
           <span className="btn-glow"></span>
-          <span className="btn-text">Return Home</span>
+          <span className="btn-text">
+            {isComingSoonRoute ? 'Return Home' : 'Escape to Safety'}
+          </span>
         </Link>
 
         {/* Decorative elements */}

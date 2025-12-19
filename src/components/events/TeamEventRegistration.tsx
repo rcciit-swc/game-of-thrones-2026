@@ -416,7 +416,7 @@ export function TeamEventRegistration({
         }}
       >
         <DialogContent
-          className="sm:max-w-[550px] max-h-[80vh] my-scrollbar border-2 border-[#FF003C] rounded-xl p-8 shadow-xl overflow-y-scroll"
+          className="sm:max-w-137.5 max-h-[80vh] my-scrollbar border-2 border-[#FF003C] rounded-xl p-8 shadow-xl overflow-y-scroll"
           style={{
             backgroundImage:
               'url(https://i.postimg.cc/C5SMqWV1/cae8d04277c25697532890b8f73997b82d3609a1.jpg)',

@@ -25,8 +25,9 @@ const EventContainer = () => {
                 id: event.id,
                 title: event.name,
                 image: event.image_url,
-                venue: event.schedule,
-                entryPrice: event.registration_fee,
+                schedule: event.schedule,
+                registrationFee: event.registration_fee,
+                registered: event.registered,
                 // add other required fields here if needed
               }))
             : []
@@ -64,8 +65,9 @@ const EventContainer = () => {
                     id: event.id,
                     image: event.image_url || event.image,
                     title: event.name || event.title,
-                    venue: event.schedule || event.venue,
-                    entryPrice: event.registration_fee ?? event.entryPrice,
+                    schedule: event.schedule || event.venue,
+                    registrationFee: event.registration_fee ?? event.entryPrice,
+                    registered: event.registered,
                   };
 
                   return (

@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -119,6 +119,7 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventName }) => {
   const [activeTab, setActiveTab] = useState<TabType>('description');
   const [isSoloOpen, setIsSoloOpen] = useState(false);
   const [isTeamOpen, setIsTeamOpen] = useState(false);
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   // compute selected event directly (no memoization)
   const selectedEvent =
@@ -133,6 +134,15 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventName }) => {
       : eventName || ''
   );
   console.log('Background Image URL:', bg);
+
+  useEffect(() => {
+    // Only redirect when events have finished loading and no matching event was found
+    if (!eventsLoading && !selectedEvent && !isRedirecting) {
+      setIsRedirecting(true);
+      // Replace history entry so user can't go back to the invalid event
+      router.replace('/404');
+    }
+  }, [eventsLoading, selectedEvent, router, isRedirecting]);
 
   const tabs: { id: TabType; label: string }[] = [
     { id: 'description', label: 'Description' },
@@ -236,6 +246,9 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventName }) => {
   }
 
   const scheduleLines = parseScheduleLines(scheduleText);
+
+  // If we're already redirecting, avoid rendering UI briefly
+  if (isRedirecting) return null;
 
   const renderTabContent = () => {
     switch (activeTab) {
