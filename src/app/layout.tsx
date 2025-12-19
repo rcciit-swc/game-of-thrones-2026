@@ -56,6 +56,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${irishGrover.variable} ${robotoCondensed.variable} ${rajdhani.variable} ${cinzel.variable} antialiased`}
+        suppressHydrationWarning
       >
         {children}
         <Toaster position="bottom-right" richColors duration={5000} />

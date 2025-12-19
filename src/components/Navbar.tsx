@@ -45,73 +45,120 @@ export default function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 w-full flex justify-center px-4 py-2 z-50">
+      {/* Background Glow Effect - realistic red aura */}
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        {/* Soft ambient glow spread */}
+        <div
+          className="absolute top-10 left-1/2 -translate-x-1/2 w-[92vw] max-w-[1200px] h-28 lg:h-40 blur-[48px] opacity-90"
+          style={{
+            backgroundImage:
+              'radial-gradient(ellipse at center, rgba(255,0,60,0.35) 0%, rgba(255,0,60,0.18) 45%, rgba(255,0,60,0.08) 70%, transparent 85%)',
+            filter: 'saturate(1.2)',
+          }}
+        />
+        {/* Bottom bleed to simulate light fall-off */}
+        <div
+          className="absolute top-20 left-1/2 -translate-x-1/2 w-[80vw] max-w-[1000px] h-20 blur-[36px] opacity-80"
+          style={{
+            backgroundImage:
+              'radial-gradient(ellipse at center, rgba(255,0,60,0.5) 0%, rgba(255,0,60,0.18) 55%, transparent 85%)',
+          }}
+        />
+      </div>
+
       {/* Navbar Container */}
-      <div className="w-full max-w-100 h-16 lg:max-w-317 lg:h-26 rounded-[15px] bg-[linear-gradient(90deg,rgba(77,4,4,0.15),rgba(32,7,7,0.15))] shadow-[0_5px_25px_4px_#FF003C] backdrop-blur-[25px] px-4 lg:px-25.25 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="shrink-0">
-          <Image
-            src="https://i.postimg.cc/ns8zrs4m/GOT-logo.png"
-            alt="Game of Thrones Logo"
-            width={117}
-            height={156}
-            className="w-20 h-17.5 lg:w-29.25 lg:h-39"
-            priority
-          />
-        </Link>
+      <div className="w-full max-w-100 h-16 lg:max-w-317 lg:h-26 rounded-[15px] relative group">
+        {/* Tight halo around edges */}
+        <div
+          className="absolute inset-0 rounded-[15px] pointer-events-none transition-opacity duration-300"
+          style={{
+            boxShadow:
+              '0 0 24px 10px rgba(255,0,60,0.22), 0 14px 36px rgba(255,0,60,0.18)',
+            opacity: 0.9,
+          }}
+        />
 
-        {/* Desktop Menu Links */}
-        <div className="hidden lg:flex items-center gap-15">
-          {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              className="font-['Irish_Grover'] text-[#CCA855] text-[25px] hover:text-[#f5d68c] transition-colors duration-200"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-
-        {/* Register Button - Desktop */}
-        <div className="hidden lg:block">
-          <SignInButton
-            userData={userData}
-            userLoading={userLoading}
-            imageLoaded={imageLoaded}
-            image={profileImage}
-            setImageLoaded={setImageLoaded}
+        {/* Inner red bloom without changing navbar color */}
+        <div className="absolute inset-0 rounded-[15px] p-[1px]">
+          <div
+            className="w-full h-full rounded-[14px] bg-[linear-gradient(90deg,rgba(77,4,4,0.15),rgba(32,7,7,0.15))] backdrop-blur-[25px]"
+            style={{ boxShadow: 'inset 0 0 18px rgba(255,0,60,0.16)' }}
           />
         </div>
 
-        {/* Mobile Hamburger Icon */}
-        <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="lg:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 z-50"
-          aria-label="Toggle menu"
-        >
-          <span
-            className={`w-7 h-0.5 bg-[#CCA855] transition-all duration-300 ${
-              isMenuOpen ? 'rotate-45 translate-y-2' : ''
-            }`}
-          />
-          <span
-            className={`w-7 h-0.5 bg-[#CCA855] transition-all duration-300 ${
-              isMenuOpen ? 'opacity-0' : ''
-            }`}
-          />
-          <span
-            className={`w-7 h-0.5 bg-[#CCA855] transition-all duration-300 ${
-              isMenuOpen ? '-rotate-45 -translate-y-2' : ''
-            }`}
-          />
-        </button>
+        {/* Main Content */}
+        <div className="absolute inset-0 px-4 lg:px-25.25 flex items-center justify-between rounded-[15px]">
+          {/* Logo */}
+          <Link href="/" className="shrink-0">
+            <Image
+              src="https://i.postimg.cc/ns8zrs4m/GOT-logo.png"
+              alt="Game of Thrones Logo"
+              width={117}
+              height={156}
+              className="w-20 h-17.5 lg:w-29.25 lg:h-39"
+              priority
+            />
+          </Link>
+
+          {/* Desktop Menu Links */}
+          <div className="hidden lg:flex items-center gap-15">
+            {navLinks.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="font-['Irish_Grover'] text-[#CCA855] text-[25px] hover:text-[#f5d68c] transition-colors duration-200"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+
+          {/* Register Button - Desktop */}
+          <div className="hidden lg:block">
+            <SignInButton
+              userData={userData}
+              userLoading={userLoading}
+              imageLoaded={imageLoaded}
+              image={profileImage}
+              setImageLoaded={setImageLoaded}
+            />
+          </div>
+
+          {/* Mobile Hamburger Icon */}
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="lg:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 z-50 relative"
+            aria-label="Toggle menu"
+          >
+            <span
+              className={`w-7 h-0.5 bg-[#CCA855] transition-all duration-300 ${
+                isMenuOpen ? 'rotate-45 translate-y-2' : ''
+              }`}
+            />
+            <span
+              className={`w-7 h-0.5 bg-[#CCA855] transition-all duration-300 ${
+                isMenuOpen ? 'opacity-0' : ''
+              }`}
+            />
+            <span
+              className={`w-7 h-0.5 bg-[#CCA855] transition-all duration-300 ${
+                isMenuOpen ? '-rotate-45 -translate-y-2' : ''
+              }`}
+            />
+          </button>
+        </div>
       </div>
 
       {/* Mobile Dropdown Menu */}
       <div
-        className={`lg:hidden fixed top-35 left-0 right-0 mx-4 rounded-[15px] bg-[linear-gradient(90deg,rgba(77,4,4,0.95),rgba(32,7,7,0.95))] shadow-[0_5px_25px_4px_#FF003C] backdrop-blur-[25px] transition-all duration-300 overflow-hidden z-40 ${
+        className={`lg:hidden fixed top-35 left-0 right-0 mx-4 rounded-[15px] bg-[linear-gradient(90deg,rgba(77,4,4,0.95),rgba(32,7,7,0.95))] backdrop-blur-[25px] transition-all duration-300 overflow-hidden z-40 ${
           isMenuOpen ? 'max-h-[600px] opacity-100 py-8' : 'max-h-0 opacity-0'
         }`}
+        style={{
+          boxShadow: isMenuOpen
+            ? '0 8px 32px rgba(255, 0, 60, 0.4), 0 16px 64px rgba(255, 0, 60, 0.2), inset 0 1px 0 rgba(255, 0, 60, 0.3)'
+            : '0 0 0 rgba(255, 0, 60, 0)',
+        }}
       >
         <div className="flex flex-col items-center gap-6">
           {navLinks.map((link) => (
@@ -272,3 +319,16 @@ const SignInButton = memo(
 );
 
 SignInButton.displayName = 'SignInButton';
+
+const itemVariants = {
+  open: {
+    opacity: 1,
+    y: 0,
+    transition: { type: 'spring', stiffness: 320, damping: 24 },
+  },
+  closed: {
+    opacity: 0,
+    y: 14,
+    transition: { duration: 0.2 },
+  },
+};
