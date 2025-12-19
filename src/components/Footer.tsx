@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer
+    <div
       className="w-full relative overflow-hidden"
       style={{
         backgroundImage: "url('https://i.postimg.cc/yd95ZJh8/Footer.png')",
@@ -13,16 +13,6 @@ export default function Footer() {
         backgroundRepeat: 'no-repeat',
       }}
     >
-      {/* Mobile: Adjust background */}
-      <style jsx>{`
-        @media (max-width: 1023px) {
-          footer {
-            background-size: auto 100% !important;
-            background-position: center center !important;
-          }
-        }
-      `}</style>
-
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-12 md:py-16 flex flex-col justify-between relative min-h-[600px]">
         {/* Desktop Crown overlayed on the bat's head */}
         <div
@@ -285,6 +275,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-    </footer>
+    </div>
   );
 }

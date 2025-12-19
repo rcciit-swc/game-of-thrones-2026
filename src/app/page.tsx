@@ -9,6 +9,7 @@ const page = () => {
     <div className="flex flex-col min-h-screen overflow-hidden">
       <Hero />
       <About />
+      <Playground />
     </div>
   );
 };

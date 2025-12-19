@@ -226,7 +226,7 @@ export default function ProfilePage() {
           >
             {/* Section Title */}
             <h2
-              className="text-center rajdhanifont font-bold text-[40px] md:text-[60px] text-white mb-12 md:mb-16 underline decoration-4 underline-offset-8"
+              className="text-center rajdhanifont font-bold text-[40px] md:text-[60px] text-white mb-12 md:mb-16 decoration-4 underline-offset-8"
               style={{
                 textShadow: '0px 0px 15px #b60302, 0px 3px 0px #ff003c',
               }}
