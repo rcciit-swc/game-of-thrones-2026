@@ -58,6 +58,7 @@ export default function RootLayout({
       </head>
       <body
         className={`${irishGrover.variable} ${robotoCondensed.variable} ${rajdhani.variable} ${cinzel.variable} antialiased`}
+        suppressHydrationWarning
       >
         <Navbar />
         {children}
