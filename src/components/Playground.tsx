@@ -26,7 +26,7 @@ const Playground = () => {
   return (
     <>
       <div className="pointer-events-none absolute bottom-0 rotate-180 left-0 w-full h-185 bg-gradient-to-b from-black via-black/20 to-transparent z-2" />
-      <section className="top-10 w-full min-h-full flex flex-col items-center pb-28 relative">
+      <section className="top-10 w-full min-h-full flex flex-col items-center pb-10 lg:pb-28 relative">
         {/* Mobile/Tablet Background (< lg) */}
         <div
           className="absolute inset-0 lg:hidden"
@@ -49,7 +49,7 @@ const Playground = () => {
         />
         <div className="pointer-events-none absolute top-0 left-0 w-full h-185 bg-gradient-to-b from-black via-black/20 to-transparent z-2" />
         {/* Content */}
-        <div className="relative mt-60 lg:mt-70 z-10 flex flex-col items-center w-full  px-4">
+        <div className="relative mt-18 lg:mt-70 z-10 flex flex-col items-center w-full  px-4">
           {/* ================= MOBILE TITLE ================= */}
           <div className="lg:hidden w-full flex justify-center mb-6">
             <Image
@@ -57,7 +57,7 @@ const Playground = () => {
               alt="The Playground Arena"
               width={420}
               height={80}
-              className="w-full max-w-[420px] h-auto -translate-y-20"
+              className="w-full max-w-[620px] h-auto -translate-y-40"
             />
           </div>
 
@@ -73,7 +73,7 @@ const Playground = () => {
           </div>
 
           {/* ================= AUTOCAROUSEL (Mobile/Tablet) ================= */}
-          <div className="lg:hidden w-full px-4 relative top-10">
+          <div className="lg:hidden w-full px-4 relative top-2">
             <Autocarsoule />
           </div>
 
@@ -155,7 +155,7 @@ const Playground = () => {
         </div>
 
         {/* ================= HALL OF FAME SECTION ================= */}
-        <div className="relative z-10 flex flex-col items-center w-full px-4 mt-20 lg:mt-64">
+        <div className="relative z-10 flex flex-col items-center w-full px-4 -mt-16 lg:mt-64">
           {/* Title Section */}
           <div className="flex flex-col items-center gap-4 lg:gap-6 mb-8 lg:mb-12">
             <h2 className="font-['Irish_Grover'] text-[30px] lg:text-[60px] text-[#CCA855] text-center leading-normal uppercase">
