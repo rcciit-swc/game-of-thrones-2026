@@ -1,10 +1,9 @@
-import { createClient } from '@/lib/supabase/server';
-import { cookies } from 'next/headers';
+import { createServer } from '@/lib/supabase/server';
+
 import type { events } from '@/lib/types';
 
 const getEventByName = async (name: string): Promise<events | null> => {
-  const cookieStore = cookies();
-  const supabaseServer = await createClient(cookieStore);
+  const supabaseServer = await createServer();
   const p_event_name = name;
 
   const { data, error } = await supabaseServer.rpc(

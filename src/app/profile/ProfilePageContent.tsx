@@ -15,7 +15,6 @@ import { handleSaveChanges } from '@/utils/functions/profile/functions';
 import ProfileSkeleton from './ProfileSkeleton';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 
 export default function ProfilePage() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -265,9 +264,6 @@ export default function ProfilePage() {
           </motion.div>
         </div>
       </main>
-
-      {/* Footer */}
-      <Footer />
 
       <EditProfileDialog
         open={isEditModalOpen}

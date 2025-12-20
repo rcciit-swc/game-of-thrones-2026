@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 import { useUser } from '@/lib/stores';
 import { login } from '@/utils/functions/auth/login';
 import { logout } from '@/utils/functions/auth/logout';
-import { User, LogOut } from 'lucide-react';
+import { LogOut } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -324,7 +324,7 @@ const itemVariants = {
   open: {
     opacity: 1,
     y: 0,
-    transition: { type: 'spring', stiffness: 320, damping: 24 },
+    transition: { type: 'spring' as const, stiffness: 320, damping: 24 },
   },
   closed: {
     opacity: 0,

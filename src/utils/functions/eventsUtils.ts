@@ -216,9 +216,13 @@ export const getApprovalDashboardData = async (
 ): Promise<EventData[] | null> => {
   try {
     const rolesData = await getRoles();
-    const isAdmin = rolesData?.find((role) => role.role === 'super_admin');
+    const isAdmin = rolesData?.find(
+      (role: { role: string; event_category_id?: string; event_id?: string }) =>
+        role.role === 'super_admin'
+    );
     const isCoordinator = rolesData?.find(
-      (role) => role.role === 'coordinator'
+      (role: { role: string; event_category_id?: string; event_id?: string }) =>
+        role.role === 'coordinator'
     );
     // const roleCategory = rolesData?.map((roles: { event_category_id: string | null }) =>
     //   roles.event_category_id !== null ? roles.event_category_id : null
@@ -291,7 +295,7 @@ export const getSecurity = async (id: string) => {
       console.error('Error fetching security:', error);
       return null;
     }
-    return data?.flatMap((item) => {
+    return data?.flatMap((item: any) => {
       return [
         {
           id: item.id,
@@ -315,7 +319,7 @@ export const acceptSecurity = async (id: string) => {
       .select('*')
       .eq('user_id', id);
     if (data && data.length > 0) {
-      const securityRole = data.find((role) => role.role === 'security');
+      const securityRole = data.find((role: any) => role.role === 'security');
       if (securityRole && securityRole.event_id !== null) {
         return;
       }
