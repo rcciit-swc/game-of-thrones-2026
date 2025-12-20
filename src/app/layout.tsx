@@ -1,7 +1,16 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { constructMetaData } from '@/utils/functions';
-import { Irish_Grover, Roboto_Condensed, Rajdhani } from 'next/font/google';
+import SessionProvider from '@/lib/SessionProvider';
+import {
+  Irish_Grover,
+  Roboto_Condensed,
+  Rajdhani,
+  Cinzel,
+} from 'next/font/google';
+import { Toaster } from 'sonner';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 
 const irishGrover = Irish_Grover({
   weight: '400',
@@ -19,6 +28,12 @@ const rajdhani = Rajdhani({
   weight: ['400', '600'],
   subsets: ['latin'],
   variable: '--font-rajdhani',
+});
+
+const cinzel = Cinzel({
+  weight: ['400', '600', '700'],
+  subsets: ['latin'],
+  variable: '--font-cinzel',
 });
 
 export const metadata: Metadata = constructMetaData({
@@ -40,15 +55,16 @@ export default function RootLayout({
           href="https://fonts.gstatic.com"
           crossOrigin="anonymous"
         />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Irish+Grover&family=Cinzel:wght@400;600;700&display=swap"
-          rel="stylesheet"
-        />
       </head>
       <body
-        className={`${irishGrover.variable} ${robotoCondensed.variable} ${rajdhani.variable} antialiased`}
+        className={`${irishGrover.variable} ${robotoCondensed.variable} ${rajdhani.variable} ${cinzel.variable} antialiased`}
+        suppressHydrationWarning
       >
+        <Navbar />
         {children}
+        <Toaster position="bottom-right" richColors duration={5000} />
+        <SessionProvider />
+        <Footer />
       </body>
     </html>
   );
