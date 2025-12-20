@@ -266,9 +266,6 @@ export default function ProfilePage() {
         </div>
       </main>
 
-      {/* Footer */}
-      <Footer />
-
       <EditProfileDialog
         open={isEditModalOpen}
         onOpenChange={setIsEditModalOpen}
