@@ -249,14 +249,14 @@ const Hero = () => {
       {/* Main block with original vertical spacing but horizontally centered */}
       <div className="absolute top-60 md:top-80 left-1/2 -translate-x-1/2 z-20">
         <h1
-          className="text-2xl md:text-3xl lg:text-3xl font-bold text-center text-white drop-shadow-lg opacity-0 animate-fadeInUp"
+          className="hidden md:block text-2xl md:text-3xl lg:text-3xl font-bold text-center text-white drop-shadow-lg opacity-0 animate-fadeInUp"
           style={{ fontFamily: 'Rajdhani, sans-serif', animationDelay: '0.4s' }}
         >
           Presents
         </h1>
 
         <div
-          className="w-115.5 h-14 text-center justify-start text-red-600 text-5xl md:text-6xl font-light mt-7 md:mt-2 mb-8 md:mb-2 opacity-0 animate-fadeInUp"
+          className="w-115.5 h-14 text-center justify-start text-red-600 text-5xl md:text-6xl font-light mt-16 md:mt-2 mb-8 md:mb-2 opacity-0 animate-fadeInUp"
           style={{ fontFamily: 'Agency', animationDelay: '0.6s' }}
         >
           GAME OF{' '}
@@ -275,7 +275,7 @@ const Hero = () => {
 
         {/* Mobile GOT block - Reduced animations for performance */}
         <div
-          className="md:hidden absolute left-1/2 -translate-x-1/2 top-22 z-30 animate-fadeIn"
+          className="md:hidden absolute left-1/2 -translate-x-1/2 top-16 z-30 animate-fadeIn"
           style={{ animationDelay: '0.8s' }}
         >
           <div className="relative ">
@@ -305,7 +305,7 @@ const Hero = () => {
                     textAnchor="middle"
                     dominantBaseline="middle"
                     fill="white"
-                    fontSize="280"
+                    fontSize="240"
                     fontWeight="bold"
                     fontFamily="Agency, Arial Black, sans-serif"
                   >
@@ -340,7 +340,7 @@ const Hero = () => {
 
         {/* Desktop GOT block */}
         <div
-          className="hidden md:block absolute left-1/2 -translate-x-1/2 top-35 z-30 animate-fadeIn animate-scaleGlow animate-flicker"
+          className="hidden md:block absolute left-1/2 -translate-x-1/2 top-28 z-30 animate-fadeIn animate-scaleGlow animate-flicker"
           style={{ animationDelay: '0.8s' }}
         >
           <svg width="821.57" height="384" viewBox="0 0 822 384">
@@ -353,7 +353,7 @@ const Hero = () => {
                   textAnchor="middle"
                   dominantBaseline="middle"
                   fill="white"
-                  fontSize="360"
+                  fontSize="300"
                   fontWeight="bold"
                   fontFamily="Agency, Arial Black, sans-serif"
                 >
@@ -386,7 +386,7 @@ const Hero = () => {
         </div>
 
         <div
-          className="text-center text-6xl md:text-8xl font-bold mt-70  md:mt-85 opacity-0 animate-fadeInUp"
+          className="text-center text-5xl md:text-7xl font-bold mt-56 md:mt-72 opacity-0 animate-fadeInUp"
           style={{
             fontFamily: 'Agency',
             background: 'linear-gradient(90deg, #CCA855, #FF1B35)',
@@ -399,10 +399,69 @@ const Hero = () => {
           2026
         </div>
 
+        {/* Event Dates Section */}
+        <div
+          className="text-center mt-4 md:mt-6 px-4 opacity-0 animate-fadeInUp"
+          style={{ animationDelay: '1.2s' }}
+        >
+          {/* Decorative top divider */}
+          <div className="flex items-center justify-center mb-3">
+            <div className="h-px w-12 md:w-20 bg-gradient-to-r from-transparent to-[#CCA855]"></div>
+            <div className="mx-3 w-1.5 h-1.5 rounded-full bg-[#CCA855] animate-pulse"></div>
+            <div className="h-px w-12 md:w-20 bg-gradient-to-l from-transparent to-[#CCA855]"></div>
+          </div>
+
+          {/* Dates container */}
+          <div className="inline-block bg-gradient-to-r from-transparent via-black/30 to-transparent px-6 py-3 rounded-lg backdrop-blur-sm border border-[#CCA855]/20">
+            <div
+              className="text-base md:text-xl font-bold tracking-wide animate-shimmer"
+              style={{
+                fontFamily: 'Rajdhani, sans-serif',
+                background:
+                  'linear-gradient(90deg, #CCA855, #FFD700, #CCA855, #FFD700, #CCA855)',
+                backgroundSize: '200% auto',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                filter: 'drop-shadow(0 0 8px rgba(204, 168, 85, 0.4))',
+              }}
+            >
+              10th-11th January
+            </div>
+            <div className="flex items-center justify-center my-1">
+              <div className="w-1 h-1 rounded-full bg-[#CCA855] mx-1"></div>
+              <div className="w-1 h-1 rounded-full bg-[#FFD700] mx-1"></div>
+              <div className="w-1 h-1 rounded-full bg-[#CCA855] mx-1"></div>
+            </div>
+            <div
+              className="text-base md:text-xl font-bold tracking-wide animate-shimmer"
+              style={{
+                fontFamily: 'Rajdhani, sans-serif',
+                background:
+                  'linear-gradient(90deg, #CCA855, #FFD700, #CCA855, #FFD700, #CCA855)',
+                backgroundSize: '200% auto',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                filter: 'drop-shadow(0 0 8px rgba(204, 168, 85, 0.4))',
+              }}
+            >
+              16th, 17th, 18th January 2026
+            </div>
+          </div>
+
+          {/* Decorative bottom divider */}
+          <div className="flex items-center justify-center mt-3">
+            <div className="h-px w-12 md:w-20 bg-gradient-to-r from-transparent to-[#CCA855]"></div>
+            <div className="mx-3 w-1.5 h-1.5 rounded-full bg-[#CCA855] animate-pulse"></div>
+            <div className="h-px w-12 md:w-20 bg-gradient-to-l from-transparent to-[#CCA855]"></div>
+          </div>
+        </div>
+
         {/* Register Button - Mobile only */}
         <div
           className="md:hidden flex justify-center mt-10 opacity-0 animate-fadeInUp"
-          style={{ animationDelay: '1.2s' }}
+          style={{ animationDelay: '1.4s' }}
         >
           <Link
             href="/register"

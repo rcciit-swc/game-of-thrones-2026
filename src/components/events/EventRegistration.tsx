@@ -127,6 +127,7 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
     eventsData && eventId
       ? eventsData.find((e: any) => String(e.id) === String(eventId))
       : undefined;
+  console.log(selectedEvent);
   const bg = getBackgroundForEvent(
     selectedEvent?.name
       ? getStringBeforeBracket(selectedEvent.name)
@@ -401,15 +402,23 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
 
   return (
     <>
-      <div
-        className="min-h-screen w-full relative overflow-x-hidden rajdhanifont pt-20 md:pt-28 pb-10"
-        style={{
-          backgroundImage: `url('${bg}')`,
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repeat',
-          backgroundPosition: 'center',
-        }}
-      >
+      <div className="min-h-screen w-full relative overflow-x-hidden rajdhanifont pt-20 md:pt-28 pb-10">
+        {/* Lazy-loaded background image */}
+        {bg && (
+          <Image
+            src={bg}
+            alt="Event background"
+            fill
+            className="object-cover"
+            loading="lazy"
+            priority={false}
+            quality={75}
+            sizes="100vw"
+          />
+        )}
+
+        {/* Dark overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/40 z-0" />
         {/* Animated Background glow effects */}
         <motion.div
           animate={{
@@ -482,7 +491,63 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
             </motion.button>
 
             {selectedEvent?.id &&
-              (selectedEvent.registered ? (
+              (!selectedEvent.reg_status ? (
+                // Registration Closed Button
+                <motion.button
+                  whileHover={{
+                    scale: 1.02,
+                  }}
+                  animate={{
+                    boxShadow: [
+                      '0 8px 16px rgba(239, 68, 68, 0.3)',
+                      '0 10px 24px rgba(239, 68, 68, 0.5)',
+                      '0 8px 16px rgba(239, 68, 68, 0.3)',
+                    ],
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                  }}
+                  type="button"
+                  disabled
+                  className="relative px-7 py-3 bg-gradient-to-r from-gray-600 to-gray-700 text-gray-300 text-[18px] md:text-[20px] cursor-not-allowed font-['Irish_Grover'] rounded-[50px] transition-all duration-300 text-center border-2 border-red-500/50 overflow-hidden opacity-75"
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    <motion.span
+                      animate={{ rotate: [0, 10, -10, 0] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      🔒
+                    </motion.span>
+                    Registration Closed
+                  </span>
+                  {/* Diagonal strike-through effect */}
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-br from-red-500/20 via-transparent to-red-500/20"
+                    animate={{
+                      backgroundPosition: ['0% 0%', '100% 100%'],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                    }}
+                    style={{
+                      backgroundSize: '200% 200%',
+                    }}
+                  />
+                  {/* Pulsing border effect */}
+                  <motion.div
+                    className="absolute inset-0 rounded-[50px] border-2 border-red-500"
+                    animate={{
+                      opacity: [0.3, 0.7, 0.3],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                    }}
+                  />
+                </motion.button>
+              ) : selectedEvent.registered ? (
                 // Already Registered Button
                 <motion.button
                   whileHover={{
@@ -637,7 +702,7 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="z-10 w-full lg:w-3/5 flex flex-col rounded-2xl p-4 md:p-6"
+              className="z-10 w-full lg:w-3/5 flex flex-col rounded-2xl p-4 md:p-3"
             >
               {/* Tabs */}
               <div className="flex gap-4 md:gap-6 lg:gap-10 border-b-2 border-white/20 mb-6 overflow-x-auto whitespace-nowrap -mx-2 px-2">
