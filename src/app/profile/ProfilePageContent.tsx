@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useUser, useEvents } from '@/lib/stores';
@@ -26,6 +26,9 @@ export default function ProfilePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [registeredEvents, setRegisteredEvents] = useState<events[]>([]);
+  const { scrollYProgress } = useScroll();
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0.7]);
+  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
 
   useEffect(() => {
     const cb = searchParams.get('callback');
@@ -79,9 +82,53 @@ export default function ProfilePage() {
 
   if (userLoading) return <ProfileSkeleton />;
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  };
+
+  const cardHoverVariants = {
+    rest: { scale: 1, rotateY: 0 },
+    hover: {
+      scale: 1.02,
+      rotateY: 2,
+      transition: {
+        duration: 0.3,
+      },
+    },
+  };
+
+  const buttonVariants = {
+    rest: { scale: 1 },
+    hover: {
+      scale: 1.05,
+      transition: {
+        duration: 0.2,
+      },
+    },
+    tap: { scale: 0.95 },
+  };
+
   return (
     <div
-      className="min-h-screen relative rajdhanifont"
+      className="min-h-screen relative rajdhanifont overflow-hidden"
       style={{
         backgroundImage: "url('/about/playerprofilebg.png')",
         backgroundSize: 'cover',
@@ -89,177 +136,385 @@ export default function ProfilePage() {
         backgroundAttachment: 'scroll',
       }}
     >
+      {/* Animated Background Overlay */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(circle at 50% 50%, rgba(221, 91, 27, 0.1) 0%, transparent 70%)',
+        }}
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.3, 0.5, 0.3],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+        }}
+      />
+
       {/* Navbar */}
       <Navbar />
 
-      <main className="pt-40 md:pt-48 pb-8">
-        {/* Player Profile Title */}
+      <main className="pt-40 md:pt-32 pb-2 relative z-10">
+        {/* Player Profile Title with Enhanced Animation */}
         <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center rajdhanifont font-bold text-[40px] md:text-[60px] text-white mb-8 md:mb-12 tracking-[-2.4px]"
+          initial={{ opacity: 0, y: -50, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{
+            duration: 0.8,
+          }}
+          style={{ opacity, scale }}
+          className="text-center rajdhanifont font-bold text-[32px] md:text-[48px] text-white mb-6 md:mb-8 tracking-[-2px]"
         >
-          Player Profile
+          <motion.span
+            animate={{
+              textShadow: [
+                '0px 0px 20px rgba(221, 91, 27, 0.8)',
+                '0px 0px 40px rgba(221, 91, 27, 0.6)',
+                '0px 0px 20px rgba(221, 91, 27, 0.8)',
+              ],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+            }}
+          >
+            Player Profile
+          </motion.span>
         </motion.h1>
 
         {/* Profile Card Container */}
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="backdrop-blur-[12.95px] rounded-[24px] p-6 md:p-8 relative overflow-hidden"
+            initial={{ opacity: 0, y: 60, rotateX: -15 }}
+            animate={{ opacity: 1, y: 0, rotateX: 0 }}
+            transition={{
+              duration: 0.8,
+            }}
+            whileHover="hover"
+            variants={cardHoverVariants}
+            className="backdrop-blur-[12.95px] rounded-[20px] p-5 md:p-6 relative overflow-hidden"
             style={{
               backgroundImage:
                 'linear-gradient(168deg, rgba(0, 0, 0, 0.25) 5%, rgba(255, 255, 255, 0.25) 95%)',
+              transformStyle: 'preserve-3d',
             }}
           >
+            {/* Animated Border Glow */}
+            <motion.div
+              className="absolute inset-0 rounded-[24px] pointer-events-none"
+              style={{
+                background:
+                  'linear-gradient(90deg, transparent, rgba(221, 91, 27, 0.5), transparent)',
+              }}
+              animate={{
+                x: ['-100%', '200%'],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: 'linear',
+                repeatDelay: 1,
+              }}
+            />
+
             {/* Desktop Layout */}
-            <div className="hidden md:flex items-start gap-8">
-              {/* Avatar */}
-              <div className="relative shrink-0">
-                <Avatar className="w-[200px] h-[200px] border-4 border-white/10">
-                  {!imageLoaded && (
-                    <Skeleton className="w-full h-full rounded-full absolute inset-0" />
-                  )}
-                  <AvatarImage
-                    src={profileImage || '/default-avatar.png'}
-                    alt={userData?.name || 'Profile'}
-                    onLoad={() => setImageLoaded(true)}
-                    className={imageLoaded ? 'block object-cover' : 'hidden'}
-                  />
-                  <AvatarFallback className="bg-muted text-white text-4xl rajdhanifont">
-                    {userData?.name?.[0] || 'U'}
-                  </AvatarFallback>
-                </Avatar>
-              </div>
+            <motion.div
+              className="hidden md:flex items-start gap-8"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
+              {/* Avatar with Pulse Animation */}
+              <motion.div className="relative shrink-0" variants={itemVariants}>
+                <motion.div
+                  animate={{
+                    boxShadow: [
+                      '0 0 20px rgba(221, 91, 27, 0.3)',
+                      '0 0 40px rgba(221, 91, 27, 0.6)',
+                      '0 0 20px rgba(221, 91, 27, 0.3)',
+                    ],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                  }}
+                  className="rounded-full"
+                >
+                  <Avatar className="w-[160px] h-[160px] border-3 border-white/10">
+                    {!imageLoaded && (
+                      <Skeleton className="w-full h-full rounded-full absolute inset-0" />
+                    )}
+                    <AvatarImage
+                      src={profileImage || '/default-avatar.png'}
+                      alt={userData?.name || 'Profile'}
+                      onLoad={() => setImageLoaded(true)}
+                      className={imageLoaded ? 'block object-cover' : 'hidden'}
+                    />
+                    <AvatarFallback className="bg-muted text-white text-4xl rajdhanifont">
+                      {userData?.name?.[0] || 'U'}
+                    </AvatarFallback>
+                  </Avatar>
+                </motion.div>
+              </motion.div>
 
               {/* User Info */}
               <div className="flex flex-col gap-6 items-start">
-                <div className="flex flex-col gap-[7px] text-white text-center md:text-left">
-                  <h2 className="rajdhanifont font-bold text-[36px] md:text-[48px] uppercase leading-tight">
+                <motion.div
+                  className="flex flex-col gap-[7px] text-white text-center md:text-left"
+                  variants={itemVariants}
+                >
+                  <motion.h2
+                    className="rajdhanifont font-bold text-[28px] md:text-[36px] uppercase leading-tight"
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                  >
                     {userData?.name || name}
-                  </h2>
-                  <p className="rajdhanifont font-medium text-[18px] md:text-[20px]">
+                  </motion.h2>
+                  <motion.p
+                    className="rajdhanifont font-medium text-[16px] md:text-[18px]"
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.4 }}
+                  >
                     {userData?.email}
-                  </p>
-                  <p className="rajdhanifont font-medium text-[18px] md:text-[20px]">
+                  </motion.p>
+                  <motion.p
+                    className="rajdhanifont font-medium text-[16px] md:text-[18px]"
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6, delay: 0.5 }}
+                  >
                     {userData?.phone}
-                  </p>
-                </div>
+                  </motion.p>
+                </motion.div>
 
-                {/* Buttons */}
-                <div className="flex gap-4">
-                  <button
+                {/* Buttons with Enhanced Animations */}
+                <motion.div className="flex gap-4" variants={itemVariants}>
+                  <motion.button
                     onClick={() => setIsEditModalOpen(true)}
-                    className="h-[50px] w-[135px] bg-[#dd5b1b] rounded-[15px] shadow-[0px_4px_15px_rgba(0,0,0,0.25)] rajdhanifont font-semibold text-[#f2efe9] text-[20px] md:text-[21px] uppercase hover:bg-[#c94f15] transition-colors"
+                    className="h-[44px] w-[120px] bg-[#dd5b1b] rounded-[12px] shadow-[0px_4px_15px_rgba(0,0,0,0.25)] rajdhanifont font-semibold text-[#f2efe9] text-[18px] uppercase transition-colors relative overflow-hidden"
+                    variants={buttonVariants}
+                    initial="rest"
+                    whileHover="hover"
+                    whileTap="tap"
                   >
-                    EDIT
-                  </button>
-                  <button
+                    <motion.span
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                      initial={{ x: '-100%' }}
+                      whileHover={{ x: '100%' }}
+                      transition={{ duration: 0.5 }}
+                    />
+                    <span className="relative z-10">EDIT</span>
+                  </motion.button>
+                  <motion.button
                     onClick={handleLogout}
-                    className="h-[50px] w-[135px] bg-[#f2efe9] rounded-[15px] shadow-[0px_4px_15px_rgba(0,0,0,0.25)] rajdhanifont font-semibold text-black text-[20px] uppercase hover:bg-[#e0ddd7] transition-colors"
+                    className="h-[44px] w-[120px] bg-[#f2efe9] rounded-[12px] shadow-[0px_4px_15px_rgba(0,0,0,0.25)] rajdhanifont font-semibold text-black text-[18px] uppercase transition-colors relative overflow-hidden"
+                    variants={buttonVariants}
+                    initial="rest"
+                    whileHover="hover"
+                    whileTap="tap"
                   >
-                    LOG OUT
-                  </button>
-                </div>
+                    <motion.span
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-black/10 to-transparent"
+                      initial={{ x: '-100%' }}
+                      whileHover={{ x: '100%' }}
+                      transition={{ duration: 0.5 }}
+                    />
+                    <span className="relative z-10">LOG OUT</span>
+                  </motion.button>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Mobile Layout */}
-            <div className="flex flex-col items-center md:hidden gap-6">
+            <motion.div
+              className="flex flex-col items-center md:hidden gap-6"
+              variants={containerVariants}
+              initial="hidden"
+              animate="visible"
+            >
               {/* Avatar */}
-              <Avatar className="w-[200px] h-[200px] md:w-[250px] md:h-[250px] border-4 border-white/10">
-                {!imageLoaded && (
-                  <Skeleton className="w-full h-full rounded-full absolute inset-0" />
-                )}
-                <AvatarImage
-                  src={profileImage || '/default-avatar.png'}
-                  alt={userData?.name || 'Profile'}
-                  onLoad={() => setImageLoaded(true)}
-                  className={imageLoaded ? 'block object-cover' : 'hidden'}
-                />
-                <AvatarFallback className="bg-muted text-white text-4xl rajdhanifont">
-                  {userData?.name?.[0] || 'U'}
-                </AvatarFallback>
-              </Avatar>
+              <motion.div variants={itemVariants}>
+                <motion.div
+                  animate={{
+                    boxShadow: [
+                      '0 0 20px rgba(221, 91, 27, 0.3)',
+                      '0 0 40px rgba(221, 91, 27, 0.6)',
+                      '0 0 20px rgba(221, 91, 27, 0.3)',
+                    ],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                  }}
+                  className="rounded-full"
+                >
+                  <Avatar className="w-[160px] h-[160px] border-3 border-white/10">
+                    {!imageLoaded && (
+                      <Skeleton className="w-full h-full rounded-full absolute inset-0" />
+                    )}
+                    <AvatarImage
+                      src={profileImage || '/default-avatar.png'}
+                      alt={userData?.name || 'Profile'}
+                      onLoad={() => setImageLoaded(true)}
+                      className={imageLoaded ? 'block object-cover' : 'hidden'}
+                    />
+                    <AvatarFallback className="bg-muted text-white text-4xl rajdhanifont">
+                      {userData?.name?.[0] || 'U'}
+                    </AvatarFallback>
+                  </Avatar>
+                </motion.div>
+              </motion.div>
 
               {/* User Info */}
-              <div className="flex flex-col gap-[7px] text-white text-center w-full max-w-[321px]">
-                <h2 className="rajdhanifont font-bold text-[32px] md:text-[40px] uppercase leading-tight">
+              <motion.div
+                className="flex flex-col gap-[7px] text-white text-center w-full max-w-[321px]"
+                variants={itemVariants}
+              >
+                <h2 className="rajdhanifont font-bold text-[26px] md:text-[32px] uppercase leading-tight">
                   {userData?.name || name}
                 </h2>
-                <p className="rajdhanifont font-medium text-[18px] md:text-[20px]">
+                <p className="rajdhanifont font-medium text-[16px] md:text-[18px]">
                   {userData?.email}
                 </p>
-                <p className="rajdhanifont font-medium text-[18px] md:text-[20px]">
+                <p className="rajdhanifont font-medium text-[16px] md:text-[18px]">
                   {userData?.phone}
                 </p>
-              </div>
+              </motion.div>
 
               {/* Buttons */}
-              <div className="flex flex-col gap-3 w-full max-w-[287px]">
-                <button
+              <motion.div
+                className="flex flex-col gap-3 w-full max-w-[287px]"
+                variants={itemVariants}
+              >
+                <motion.button
                   onClick={() => setIsEditModalOpen(true)}
-                  className="h-[48px] w-full bg-[#dd5b1b] rounded-[15px] shadow-[0px_4px_15px_rgba(0,0,0,0.25)] rajdhanifont font-semibold text-[#f2efe9] text-[21px] uppercase hover:bg-[#c94f15] transition-colors"
+                  className="h-[42px] w-full bg-[#dd5b1b] rounded-[12px] shadow-[0px_4px_15px_rgba(0,0,0,0.25)] rajdhanifont font-semibold text-[#f2efe9] text-[18px] uppercase transition-colors relative overflow-hidden"
+                  variants={buttonVariants}
+                  initial="rest"
+                  whileHover="hover"
+                  whileTap="tap"
                 >
-                  EDIT
-                </button>
-                <button
+                  <motion.span
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                    initial={{ x: '-100%' }}
+                    whileHover={{ x: '100%' }}
+                    transition={{ duration: 0.5 }}
+                  />
+                  <span className="relative z-10">EDIT</span>
+                </motion.button>
+                <motion.button
                   onClick={handleLogout}
-                  className="h-[50px] w-full bg-[#f2efe9] rounded-[15px] shadow-[0px_4px_15px_rgba(0,0,0,0.25)] rajdhanifont font-semibold text-black text-[20px] uppercase hover:bg-[#e0ddd7] transition-colors"
+                  className="h-[42px] w-full bg-[#f2efe9] rounded-[12px] shadow-[0px_4px_15px_rgba(0,0,0,0.25)] rajdhanifont font-semibold text-black text-[18px] uppercase transition-colors relative overflow-hidden"
+                  variants={buttonVariants}
+                  initial="rest"
+                  whileHover="hover"
+                  whileTap="tap"
                 >
-                  LOG OUT
-                </button>
-              </div>
-            </div>
+                  <motion.span
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-black/10 to-transparent"
+                    initial={{ x: '-100%' }}
+                    whileHover={{ x: '100%' }}
+                    transition={{ duration: 0.5 }}
+                  />
+                  <span className="relative z-10">LOG OUT</span>
+                </motion.button>
+              </motion.div>
+            </motion.div>
           </motion.div>
 
           {/* Registered Events Section */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-16 md:mt-24"
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="mt-16 md:mt-4"
           >
-            {/* Section Title */}
-            <h2
-              className="text-center rajdhanifont font-bold text-[40px] md:text-[60px] text-white mb-12 md:mb-16 decoration-4 underline-offset-8"
+            {/* Section Title with Animated Underline */}
+            <motion.h2
+              className="text-center rajdhanifont font-bold text-[32px] md:text-[48px] text-white mb-8 md:mb-10 relative inline-block w-full"
               style={{
                 textShadow: '0px 0px 15px #b60302, 0px 3px 0px #ff003c',
               }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
             >
               Registered Events
-            </h2>
+              <motion.span
+                className="absolute bottom-0 left-1/2 h-1 bg-gradient-to-r from-transparent via-[#dd5b1b] to-transparent"
+                initial={{ width: 0, x: '-50%' }}
+                animate={{ width: '60%', x: '-50%' }}
+                transition={{ duration: 1, delay: 0.8 }}
+              />
+            </motion.h2>
 
             {/* Events Grid */}
             {registeredEvents.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 justify-items-center">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 justify-items-center">
                 {registeredEvents.map((event, index) => (
                   <motion.div
                     key={index}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    className="w-full max-w-[398px]"
+                    transition={{
+                      duration: 0.5,
+                      delay: 0.6 + index * 0.1,
+                    }}
+                    whileHover={{
+                      scale: 1.05,
+                      y: -10,
+                    }}
+                    className="w-full max-w-[340px]"
                   >
                     <EventsCard {...event} eventID={event.id!} />
                   </motion.div>
                 ))}
               </div>
             ) : (
-              <div className="text-center text-white rajdhanifont mt-6">
-                <p className="text-lg md:text-xl mb-6">
-                  You have not registered for any event. Register now!
-                </p>
-                <Button
-                  className="bg-[#dd5b1b] hover:bg-[#c94f15] text-[#f2efe9] rajdhanifont font-semibold text-lg px-8 py-3 rounded-[15px]"
-                  onClick={() => router.push('/events')}
+              <motion.div
+                className="text-center text-white rajdhanifont mt-6"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
+                <motion.p
+                  className="text-lg md:text-xl mb-6"
+                  animate={{
+                    opacity: [0.7, 1, 0.7],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                  }}
                 >
-                  Browse Events
-                </Button>
-              </div>
+                  You have not registered for any event. Register now!
+                </motion.p>
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button
+                    className="bg-[#dd5b1b] hover:bg-[#c94f15] text-[#f2efe9] rajdhanifont font-semibold text-lg px-8 py-3 rounded-[15px] relative overflow-hidden"
+                    onClick={() => router.push('/events')}
+                  >
+                    <motion.span
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                      animate={{ x: ['-100%', '200%'] }}
+                      transition={{
+                        duration: 2,
+                        repeat: Infinity,
+                        ease: 'linear',
+                        repeatDelay: 0.5,
+                      }}
+                    />
+                    <span className="relative z-10">Browse Events</span>
+                  </Button>
+                </motion.div>
+              </motion.div>
             )}
           </motion.div>
         </div>
