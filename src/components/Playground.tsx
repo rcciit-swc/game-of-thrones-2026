@@ -2,11 +2,14 @@
 
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
+import { get_events_by_fest } from '@/utils/functions/eventsUtils';
+import Link from 'next/link';
 const Autocarsoule = dynamic(() => import('./Autocarsoule'), { ssr: false });
 import './playground-animations.css';
 
-// Sports images with positions (10 images, 36° apart)
-const sportsImages = [
+// Fallback sports images (used if no events found)
+const fallbackImages = [
   { id: 1, src: '/assest/pics/Ellipse 7.svg', alt: 'Sport 1', angle: 0 },
   { id: 2, src: '/assest/pics/Ellipse 8.svg', alt: 'Sport 2', angle: 36 },
   { id: 3, src: '/assest/pics/Ellipse 3.svg', alt: 'Sport 3', angle: 72 },
@@ -22,6 +25,43 @@ const sportsImages = [
 const Playground = () => {
   const imageSize = 20; // size of orbiting images (% of ring)
   const orbitRadius = 45; // radius from center (%)
+  const [events, setEvents] = useState<any[]>(fallbackImages); // Initialize with fallbackImages
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const festId = 'a4bc08e4-9af9-4212-8d32-cd88d2437f18'; // GOT fest ID
+        const data = await get_events_by_fest(festId);
+
+        if (data && data.length > 0) {
+          // Map events to the format needed for display
+          const mappedEvents = data
+            .slice(0, 10)
+            .map((event: any, index: number) => ({
+              id: event.id,
+              src:
+                event.image_url ||
+                fallbackImages[index]?.src ||
+                '/assest/pics/Ellipse 7.svg',
+              alt: event.name || `Event ${index + 1}`,
+              name: event.name,
+              angle: index * 36, // Distribute evenly around circle
+            }));
+          setEvents(mappedEvents);
+        } else {
+          setEvents(fallbackImages);
+        }
+      } catch (error) {
+        console.error('Error fetching events:', error);
+        setEvents(fallbackImages);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
 
   return (
     <>
@@ -74,7 +114,7 @@ const Playground = () => {
 
           {/* ================= AUTOCAROUSEL (Mobile/Tablet) ================= */}
           <div className="lg:hidden w-full px-4 relative top-10">
-            <Autocarsoule />
+            <Autocarsoule events={events} loading={loading} />
           </div>
 
           {/* ================= MOON ANCHOR (Laptop+) ================= */}
@@ -104,40 +144,70 @@ const Playground = () => {
               />
             </div>
 
-            {/* Orbiting Images */}
-            {sportsImages.map((sport, index) => {
-              const angleRad = ((sport.angle - 90) * Math.PI) / 180;
-              const x = 50 + orbitRadius * Math.cos(angleRad);
-              const y = 50 + orbitRadius * Math.sin(angleRad);
+            {/* Orbiting Images - Dynamic Events */}
+            {!loading &&
+              events.map((event, index) => {
+                const angleRad = ((event.angle - 90) * Math.PI) / 180;
+                const x = 50 + orbitRadius * Math.cos(angleRad);
+                const y = 50 + orbitRadius * Math.sin(angleRad);
 
-              return (
-                <div
-                  key={sport.id}
-                  className="absolute"
-                  style={{
-                    width: `${imageSize}%`,
-                    height: `${imageSize}%`,
-                    left: `${x}%`,
-                    top: `${y}%`,
-                    transform: 'translate(-50%, -50%)',
-                  }}
-                >
+                const discContent = (
                   <div
-                    className={`relative w-full h-full rounded-full overflow-hidden border-[3px] border-white/80
-                    ${index % 2 === 0 ? 'rotate-slow' : 'rotate-medium'}
-                    ${index % 3 === 0 ? 'rotate-reverse' : ''}
-                  `}
+                    className={`relative w-full h-full rounded-full overflow-hidden border-[3px] border-transparent
+                  bg-gradient-to-br from-[#B60302] via-[#FF003C] to-[#CCA855] p-[3px]
+                  hover:scale-110 hover:shadow-2xl hover:shadow-[#CCA855]/50
+                  transition-all duration-300 cursor-pointer
+                  ${index % 2 === 0 ? 'rotate-slow' : 'rotate-medium'}
+                  ${index % 3 === 0 ? 'rotate-reverse' : ''}
+                `}
                   >
-                    <Image
-                      src={sport.src}
-                      alt={sport.alt}
-                      fill
-                      className="object-cover"
-                    />
+                    <div className="relative w-full h-full rounded-full overflow-hidden bg-black">
+                      <Image
+                        src={event.src}
+                        alt={event.alt}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                      {/* Impressive hover overlay */}
+                      {event.name && (
+                        <div className="absolute inset-0 bg-gradient-to-br from-black/95 via-[#B60302]/80 to-black/95 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center backdrop-blur-sm rounded-full">
+                          <div className="text-center px-2 transform scale-75 group-hover:scale-100 transition-transform duration-500">
+                            <p className="text-white text-[10px] lg:text-xs xl:text-sm font-bold leading-tight mb-1 animate-pulse">
+                              {event.name}
+                            </p>
+                            <div className="h-0.5 w-8 mx-auto bg-gradient-to-r from-transparent via-[#CCA855] to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-200"></div>
+                          </div>
+                          {/* Animated corner accents (adjusted for circular shape) */}
+                          <div className="absolute top-1 left-1 w-4 h-4 border-l-2 border-t-2 border-[#CCA855] rounded-tl-full opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100"></div>
+                          <div className="absolute top-1 right-1 w-4 h-4 border-r-2 border-t-2 border-[#CCA855] rounded-tr-full opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100"></div>
+                          <div className="absolute bottom-1 left-1 w-4 h-4 border-l-2 border-b-2 border-[#CCA855] rounded-bl-full opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100"></div>
+                          <div className="absolute bottom-1 right-1 w-4 h-4 border-r-2 border-b-2 border-[#CCA855] rounded-br-full opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100"></div>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+
+                return (
+                  <div
+                    key={event.id || index}
+                    className="absolute group"
+                    style={{
+                      width: `${imageSize}%`,
+                      height: `${imageSize}%`,
+                      left: `${x}%`,
+                      top: `${y}%`,
+                      transform: 'translate(-50%, -50%)',
+                    }}
+                  >
+                    {event.id && typeof event.id === 'string' ? (
+                      <Link href={`/events/${event.id}`}>{discContent}</Link>
+                    ) : (
+                      discContent
+                    )}
+                  </div>
+                );
+              })}
 
             {/* Center Quote */}
             <div className="absolute inset-0 flex items-center justify-center text-center px-[15%] pointer-events-none">

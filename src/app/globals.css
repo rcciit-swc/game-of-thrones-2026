@@ -171,28 +171,116 @@ body {
   border: 2px solid transparent;
 }
 
-/* Global scrollbar styling - thin, slick, and dark */
+/* Global scrollbar styling - Game of Thrones themed with gradient */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 12px;
+  height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3),
+    rgba(20, 20, 30, 0.5)
+  );
+  border-radius: 10px;
+  border: 1px solid rgba(255, 215, 0, 0.1);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #090b0d;
-  border-radius: 3px;
-  border: 2px solid #090b0d;
+  background: linear-gradient(
+    135deg,
+    #b60302 0%,
+    #d60302 25%,
+    #ff003c 50%,
+    #d4b76a 75%,
+    #cca855 100%
+  );
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  box-shadow:
+    0 2px 8px rgba(182, 3, 2, 0.4),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #ff003c;
+  background: linear-gradient(
+    135deg,
+    #ff003c 0%,
+    #d60302 25%,
+    #cca855 50%,
+    #d4b76a 75%,
+    #ffd700 100%
+  );
+  box-shadow:
+    0 4px 12px rgba(255, 215, 0, 0.6),
+    inset 0 1px 3px rgba(255, 255, 255, 0.3);
+  border-color: rgba(204, 168, 85, 0.5);
 }
 
-/* Firefox scrollbar styling */
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(135deg, #b60302 0%, #cca855 50%, #d4b76a 100%);
+  box-shadow:
+    0 2px 6px rgba(182, 3, 2, 0.8),
+    inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Firefox scrollbar styling - Game of Thrones themed */
 * {
-  scrollbar-color: #090b0d transparent;
+  scrollbar-color: #b60302 rgba(20, 20, 30, 0.5);
   scrollbar-width: thin;
+}
+
+/* Thin scrollbar variant for specific components */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(182, 3, 2, 0.8) transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #b60302 0%, #ff003c 50%, #cca855 100%);
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #ff003c 0%, #cca855 50%, #ffd700 100%);
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.5);
+}
+
+/* Custom yellow-themed scrollbar for specific sections */
+.scrollbar-thumb-yellow-400\/50 {
+  scrollbar-color: rgba(250, 204, 21, 0.5) transparent;
+}
+
+.scrollbar-thumb-yellow-400\/50::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    135deg,
+    rgba(250, 204, 21, 0.5) 0%,
+    rgba(251, 191, 36, 0.6) 100%
+  );
+}
+
+.scrollbar-thumb-yellow-400\/50::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(250, 204, 21, 0.8) 0%,
+    rgba(251, 191, 36, 0.9) 100%
+  );
+  box-shadow: 0 2px 6px rgba(250, 204, 21, 0.4);
+}
+
+.scrollbar-track-white\/5::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
 }

@@ -348,3 +348,22 @@ export const rejectSecurity = async (id: string) => {
     return null;
   }
 };
+
+export const get_events_by_fest = async (festId: string, userId?: string) => {
+  try {
+    const { data, error } = await supabase.rpc('get_events_by_fest', {
+      p_fest_id: festId,
+      p_user_id: userId || null,
+    });
+
+    if (error) {
+      console.error('Error fetching events by fest:', error);
+      return null;
+    }
+
+    return data;
+  } catch (err) {
+    console.error('Unexpected error:', err);
+    return null;
+  }
+};
