@@ -1,7 +1,15 @@
 'use client';
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
-import { motion } from 'framer-motion';
+import {
+  ArrowLeft,
+  ChevronLeft,
+  ChevronRight,
+  Phone,
+  User,
+  Trophy,
+  Calendar,
+} from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
@@ -11,15 +19,12 @@ import { SoloEventRegistration } from '@/components/events/EventRegistrationDial
 import { TeamEventRegistration } from '@/components/events/TeamEventRegistration';
 
 type EventRegistrationProps = {
-  // eventsId from route; treated as the event id
   eventId?: string;
 };
 
 function normalizeBackgroundName(name?: string) {
   if (!name) return undefined;
-  // Remove spaces and special characters to match file names like "TableTennis.svg"
   const compact = name.replace(/[^a-zA-Z0-9]/g, '').trim();
-  // Capitalize first letter, keep rest as-is to align with existing assets
   return compact.charAt(0).toUpperCase() + compact.slice(1);
 }
 
@@ -28,14 +33,11 @@ function getBackgroundForEvent(name?: string) {
   if (normalized) {
     return `/assets/events/Background/${normalized}.svg`;
   }
-  // Fallback background
-  return '/assets/events/bg.svg';
 }
 
 function parseRulesHtml(html?: string): string[] {
   if (!html) return [];
   if (typeof document === 'undefined') {
-    // fallback simple split
     return html
       .split(/\r?\n|\u2022|\*/)
       .map((s) => s.trim())
@@ -105,7 +107,7 @@ function parseRulesHtml(html?: string): string[] {
   return cleaned;
 }
 
-type TabType = 'description' | 'rules' | 'coordinators' | 'more';
+type TabType = 'description' | 'rules';
 
 const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
   function getStringBeforeBracket(input: string): string {
@@ -121,34 +123,19 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
   const [isTeamOpen, setIsTeamOpen] = useState(false);
   const [isRedirecting, setIsRedirecting] = useState(false);
 
-  // compute selected event directly (no memoization)
   const selectedEvent =
     eventsData && eventId
       ? eventsData.find((e: any) => String(e.id) === String(eventId))
       : undefined;
-  console.log('Selected Event:', selectedEvent);
-  // Choose background by event name if available
   const bg = getBackgroundForEvent(
     selectedEvent?.name
       ? getStringBeforeBracket(selectedEvent.name)
       : eventId || ''
   );
-  console.log('Background Image URL:', bg);
-
-  useEffect(() => {
-    // Only redirect when events have finished loading and no matching event was found
-    if (!eventsLoading && !selectedEvent && !isRedirecting) {
-      setIsRedirecting(true);
-      // Replace history entry so user can't go back to the invalid event
-      router.replace('/404');
-    }
-  }, [eventsLoading, selectedEvent, router, isRedirecting]);
 
   const tabs: { id: TabType; label: string }[] = [
     { id: 'description', label: 'Description' },
     { id: 'rules', label: 'Rules' },
-    { id: 'coordinators', label: 'Coordinators' },
-    { id: 'more', label: 'More Details' },
   ];
 
   let rulesFromEvent: string[] = [];
@@ -219,9 +206,11 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
     (selectedEvent as any)?.registration_fee ??
     '—';
 
+  const prizePool =
+    (selectedEvent as any)?.prize_pool ?? (selectedEvent as any)?.prizes ?? '—';
+
   const scheduleText = (selectedEvent as any)?.schedule || '';
 
-  // Extract schedule lines: prefer <p> contents, then <br> or newline-split fallbacks
   function parseScheduleLines(html?: string): string[] {
     if (!html) return [];
     if (typeof document === 'undefined') {
@@ -237,7 +226,6 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
       .map((p) => (p.textContent || '').trim())
       .filter(Boolean);
     if (ps.length) return ps;
-    // If no <p>, split on <br> or newlines in textContent
     const text = (div.textContent || '').replace(/\u00A0/g, ' ').trim();
     return text
       .split(/\r?\n+/)
@@ -247,41 +235,132 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
 
   const scheduleLines = parseScheduleLines(scheduleText);
 
-  // If we're already redirecting, avoid rendering UI briefly
   if (isRedirecting) return null;
+
+  const tabContentVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.3 },
+    },
+    exit: {
+      opacity: 0,
+      x: 20,
+      transition: { duration: 0.2 },
+    },
+  };
 
   const renderTabContent = () => {
     switch (activeTab) {
       case 'description':
         return (
-          <p className="text-gray-300 leading-relaxed text-sm md:text-base">
-            {descriptionFromEvent}
-          </p>
+          <motion.div
+            key="description"
+            variants={tabContentVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="space-y-6"
+          >
+            <p className="text-gray-200 leading-relaxed text-sm md:text-base">
+              {descriptionFromEvent}
+            </p>
+
+            {/* Schedule Section */}
+            {scheduleLines.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="pt-4"
+              >
+                <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent mb-4 flex items-center gap-2">
+                  <Calendar className="w-6 h-6 text-yellow-400" />
+                  Schedule
+                </h3>
+                <div className="space-y-2 bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md rounded-xl p-4 border border-white/20">
+                  {scheduleLines.map((line, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.3 + i * 0.05 }}
+                      whileHover={{ x: 5 }}
+                      className="text-gray-200 text-sm md:text-base flex items-start gap-3 p-2 rounded-lg hover:bg-white/5 transition-all duration-200"
+                    >
+                      <span className="text-yellow-400 font-bold text-base mt-0.5">
+                        →
+                      </span>
+                      <span className="flex-1">{line}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            {/* Event Coordinators */}
+            {coordinatorsFromEvent.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="pt-4"
+              >
+                <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent mb-4 flex items-center gap-2">
+                  <User className="w-6 h-6 text-yellow-400" />
+                  Event Coordinators
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {coordinatorsFromEvent.map((coord, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.5 + index * 0.1 }}
+                      whileHover={{ scale: 1.03, y: -2 }}
+                      className="bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md rounded-xl p-4 border border-white/20 hover:border-yellow-400/60 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-400/20 cursor-pointer group"
+                    >
+                      <p className="font-bold text-white text-base group-hover:text-yellow-300 transition-colors">
+                        {coord.name}
+                      </p>
+                      <div className="flex items-center gap-2 mt-2 text-gray-300 group-hover:text-gray-100 transition-colors">
+                        <Phone className="w-4 h-4 text-yellow-400" />
+                        <p className="text-sm font-medium">{coord.phone}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </motion.div>
         );
       case 'rules':
         return (
-          <ul className="text-gray-300 list-disc list-inside space-y-2">
-            {rulesFromEvent.map((rule, index) => (
-              <li key={index}>{rule}</li>
-            ))}
-          </ul>
-        );
-      case 'coordinators':
-        return (
-          <div className="space-y-3">
-            {coordinatorsFromEvent.map((coord, index) => (
-              <div key={index} className="text-gray-300">
-                <p className="font-semibold">{coord.name}</p>
-                <p className="text-sm">{coord.phone}</p>
-              </div>
-            ))}
-          </div>
-        );
-      case 'more':
-        return (
-          <p className="text-gray-300">
-            Additional event details will be shared soon.
-          </p>
+          <motion.div
+            key="rules"
+            variants={tabContentVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+          >
+            <ul className="space-y-3">
+              {rulesFromEvent.map((rule, index) => (
+                <motion.li
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.05 }}
+                  className="text-gray-200 text-sm md:text-base flex items-start gap-3 group"
+                >
+                  <span className="text-yellow-400 font-bold mt-1 group-hover:scale-110 transition-transform">
+                    •
+                  </span>
+                  <span className="flex-1">{rule}</span>
+                </motion.li>
+              ))}
+            </ul>
+          </motion.div>
         );
       default:
         return null;
@@ -323,7 +402,7 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
   return (
     <>
       <div
-        className="min-h-screen w-full relative overflow-x-hidden rajdhanifont pt-20 md:pt-28"
+        className="min-h-screen w-full relative overflow-x-hidden rajdhanifont pt-20 md:pt-28 pb-10"
         style={{
           backgroundImage: `url('${bg}')`,
           backgroundSize: 'cover',
@@ -331,12 +410,40 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
           backgroundPosition: 'center',
         }}
       >
-        {/* Background glow effects */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/15 rounded-full blur-[120px]" />
+        {/* Animated Background glow effects */}
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.3, 0.2],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: 'easeInOut',
+          }}
+          className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px]"
+        />
+        <motion.div
+          animate={{
+            scale: [1, 1.3, 1],
+            opacity: [0.15, 0.25, 0.15],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: 1,
+          }}
+          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/15 rounded-full blur-[120px]"
+        />
 
-        {/* Header with Back and Register buttons */}
-        <div className="relative z-20 flex justify-center rajdhanifont text-white font-bold items-center px-4 sm:px-6 md:px-8 py-4">
+        {/* Header with animated title */}
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="relative z-20 flex justify-center rajdhanifont text-white font-bold items-center px-4 sm:px-6 md:px-8 py-4"
+        >
           <h1
             className="text-center text-3xl sm:text-4xl md:text-5xl lg:text-6xl"
             style={{
@@ -346,14 +453,22 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
           >
             {selectedEvent?.name || 'Event'}
           </h1>
-        </div>
+        </motion.div>
 
         {/* Main Content */}
-        <div className="md:max-h-[80vh] mb-10 rounded-3xl mt-5 w-full max-w-[95vw] md:max-w-[90vw] lg:max-w-[80vw] mx-auto backdrop-blur-md bg-white/10 border border-white/20 relative z-10 px-3 sm:px-4 md:px-8 lg:px-12 pb-6">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="rounded-3xl mt-5 w-full max-w-[95vw] md:max-w-[90vw] xl:max-w-[80vw] mx-auto backdrop-blur-xl bg-gradient-to-br from-white/15 via-white/10 to-white/5 border-2 border-white/30 relative z-10 px-3 sm:px-4 md:px-8 lg:px-12 pb-6 shadow-2xl hover:shadow-3xl transition-shadow duration-500"
+        >
           <div className="z-0 backdrop-blur-sm bg-black/50 h-full w-[60%] rounded-r-3xl right-0 top-0 absolute hidden min-[1150px]:block" />
-          <div className="flex justify-between mx-4 my-6 md:m-5">
-            <button
-              className="flex items-center gap-2 bg-[#CCA855] hover:bg-[#CCA855]/80 text-white px-2 pr-4 py-2 rounded-full transition-colors cursor-pointer"
+
+          <div className="flex justify-between mx-4 my-6 md:m-5 relative z-20">
+            <motion.button
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-2 bg-gradient-to-r from-[#CCA855] to-[#D4B76A] hover:from-[#CCA855]/90 hover:to-[#D4B76A]/90 text-white px-3 pr-5 py-2.5 rounded-full transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl hover:shadow-[#CCA855]/30"
               onClick={() => router.back()}
             >
               <Image
@@ -361,60 +476,180 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
                 alt="Back"
                 width={20}
                 height={20}
-                className="rounded-full bg-[#FF003C] p-2 h-8 w-8"
+                className="rounded-full bg-gradient-to-br from-[#FF003C] to-[#C70030] p-2 h-9 w-9 shadow-md"
               />
-              <span className="font-bold">BACK</span>
-            </button>
+              <span className="font-bold text-sm md:text-base">BACK</span>
+            </motion.button>
 
-            {/* Register Now Button */}
-            {selectedEvent?.id && (
-              <div className="flex">
+            {selectedEvent?.id &&
+              (selectedEvent.registered ? (
+                // Already Registered Button
                 <motion.button
+                  whileHover={{
+                    scale: 1.05,
+                    y: -2,
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  animate={{
+                    boxShadow: [
+                      '0 8px 16px rgba(34, 197, 94, 0.3)',
+                      '0 10px 24px rgba(34, 197, 94, 0.4)',
+                      '0 8px 16px rgba(34, 197, 94, 0.3)',
+                    ],
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
+                  type="button"
+                  disabled
+                  className="relative px-7 py-3 bg-gradient-to-r from-emerald-600 to-green-600 text-white text-[18px] md:text-[20px] cursor-not-allowed font-['Irish_Grover'] rounded-[50px] transition-all duration-300 text-center border-2 border-emerald-400/50 overflow-hidden"
+                >
+                  <span className="relative z-10 flex items-center gap-2">
+                    <motion.span
+                      animate={{ scale: [1, 1.2, 1] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      ✓
+                    </motion.span>
+                    Already Registered
+                  </span>
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-emerald-400/0 via-emerald-400/20 to-emerald-400/0"
+                    animate={{ x: ['-100%', '100%'] }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: 'linear',
+                    }}
+                  />
+                </motion.button>
+              ) : (
+                // Register Now Button
+                <motion.button
+                  whileHover={{
+                    scale: 1.08,
+                    y: -3,
+                    boxShadow: '0 15px 35px rgba(182, 3, 2, 0.6)',
+                  }}
                   whileTap={{ scale: 0.96 }}
+                  animate={{
+                    boxShadow: [
+                      '0 10px 20px rgba(182, 3, 2, 0.3)',
+                      '0 12px 30px rgba(182, 3, 2, 0.5)',
+                      '0 10px 20px rgba(182, 3, 2, 0.3)',
+                    ],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: 'easeInOut',
+                  }}
                   type="button"
                   onClick={handleRegister}
-                  className="w-42 py-2.5 bg-[#B60302] text-[#FAFAFA] text-[20px] cursor-pointer font-['Irish_Grover'] rounded-[50px] shadow-[0_8px_15px_rgba(0,0,0,0.25)] hover:bg-[#8f0202] transition-colors duration-200 text-center animate-pulse"
+                  className="relative px-7 py-3 bg-gradient-to-r from-[#B60302] to-[#8f0202] text-[#FAFAFA] text-[18px] md:text-[20px] cursor-pointer font-['Irish_Grover'] rounded-[50px] hover:from-[#D60302] hover:to-[#B60302] transition-all duration-300 text-center border-2 border-[#FF003C]/30 hover:border-[#FF003C]/60 overflow-hidden group"
                 >
-                  Register Now
+                  <span className="relative z-10 flex items-center gap-2">
+                    Register Now
+                    <motion.span
+                      animate={{ x: [0, 5, 0] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      →
+                    </motion.span>
+                  </span>
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-[#FF003C]/0 via-[#FF003C]/20 to-[#FF003C]/0"
+                    animate={{ x: ['-100%', '100%'] }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: 'linear',
+                    }}
+                  />
                 </motion.button>
-              </div>
-            )}
+              ))}
           </div>
+
           <div className="flex flex-col lg:flex-row gap-6 md:gap-8 lg:gap-12 max-w-7xl mx-auto px-2">
-            {/* Left Side - Event Poster */}
-            <div className="w-full lg:w-2/5 h-full">
-              {/* Event Card/Poster */}
-              <div className="w-full sm:w-[90%] md:w-[80%] h-[45vh] md:h-[55vh] lg:h-[60vh] rounded-2xl overflow-hidden flex justify-center items-center mx-auto">
+            {/* Left Side - Event Poster & Info */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="w-full lg:w-2/5 flex flex-col gap-4"
+            >
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+                className="mx-auto w-[300px] md:w-[400px] h-fit rounded-2xl overflow-hidden shadow-2xl border-2 border-white/20"
+              >
                 <img
                   src={
                     selectedEvent?.image_url ||
                     '/assets/events/default-event.jpg'
                   }
                   alt={selectedEvent?.name || 'Event Poster'}
-                  className="w-full h-full object-cover"
+                  className="w-[300px] md:w-[400px] object-cover"
                 />
-              </div>
+              </motion.div>
 
-              {/* Registration Fee */}
-              <div className="mt-4 text-center">
-                <p className="text-white text-lg md:text-xl">
-                  Registration Fees:-{' '}
-                  <span className="font-bold text-2xl">
-                    {registrationFees}/-
-                  </span>
-                </p>
+              {/* Registration Fees & Prize Pool */}
+              <div className="grid grid-cols-1 md:grid-cols-2 mx-auto gap-3 w-full lg:w-4/5">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  className="bg-gradient-to-br from-emerald-500/20 via-emerald-500/10 to-transparent backdrop-blur-md rounded-xl p-4 border-2 border-emerald-400/30 shadow-lg hover:shadow-xl hover:border-emerald-400/50 transition-all duration-300"
+                >
+                  <p className="text-emerald-300 text-xs md:text-sm font-medium mb-1 uppercase tracking-wide">
+                    Registration Fees
+                  </p>
+                  <p className="font-bold text-2xl md:text-3xl bg-gradient-to-r from-emerald-400 via-emerald-300 to-emerald-400 bg-clip-text text-transparent">
+                    ₹{registrationFees}
+                  </p>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  className="bg-gradient-to-br from-amber-500/20 via-amber-500/10 to-transparent backdrop-blur-md rounded-xl p-4 border-2 border-amber-400/30 shadow-lg hover:shadow-xl hover:border-amber-400/50 transition-all duration-300"
+                >
+                  <div className="flex items-center gap-2 mb-1">
+                    <Trophy className="w-4 h-4 text-amber-400" />
+                    <p className="text-amber-300 text-xs md:text-sm font-medium uppercase tracking-wide">
+                      Prize Pool
+                    </p>
+                  </div>
+                  <p className="font-bold text-2xl md:text-3xl bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400 bg-clip-text text-transparent">
+                    ₹{prizePool}
+                  </p>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right Side - Event Details */}
-            <div className="z-10 w-full lg:w-3/5 h-full flex flex-col overflow-hidden rounded-2xl p-4 md:p-6">
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="z-10 w-full lg:w-3/5 flex flex-col rounded-2xl p-4 md:p-6"
+            >
               {/* Tabs */}
-              <div className="flex gap-4 md:gap-6 lg:gap-10 border-b border-gray-700 mb-6 overflow-x-auto whitespace-nowrap -mx-2 px-2">
-                {tabs.map((tab) => (
-                  <button
+              <div className="flex gap-4 md:gap-6 lg:gap-10 border-b-2 border-white/20 mb-6 overflow-x-auto whitespace-nowrap -mx-2 px-2">
+                {tabs.map((tab, index) => (
+                  <motion.button
                     key={tab.id}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 + index * 0.1 }}
+                    whileHover={{ y: -3, scale: 1.05 }}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`pb-3 text-sm md:text-base font-medium transition-colors relative ${
+                    className={`pb-3 px-2 text-sm md:text-base font-bold transition-all relative ${
                       activeTab === tab.id
                         ? 'text-yellow-400'
                         : 'text-gray-400 hover:text-gray-200'
@@ -422,39 +657,31 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
                   >
                     {tab.label}
                     {activeTab === tab.id && (
-                      <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-yellow-400" />
+                      <motion.div
+                        layoutId="activeTab"
+                        className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-400 rounded-t-full shadow-lg shadow-yellow-400/50"
+                        transition={{
+                          type: 'spring',
+                          stiffness: 380,
+                          damping: 30,
+                        }}
+                      />
                     )}
-                  </button>
+                  </motion.button>
                 ))}
               </div>
 
-              {/* Tab Content */}
-              <div className="mb-8 overflow-auto max-h-[40vh] sm:max-h-[45vh] md:max-h-[30vh] scrollbar-transparent">
-                {renderTabContent()}
+              {/* Tab Content - Scrollable only for rules */}
+              <div
+                className={`${activeTab === 'rules' ? 'overflow-auto max-h-[55vh] scrollbar-thin scrollbar-thumb-yellow-400/50 scrollbar-track-white/5' : ''}`}
+              >
+                <AnimatePresence mode="wait">
+                  {renderTabContent()}
+                </AnimatePresence>
               </div>
-
-              {/* Schedule Section */}
-              <div className="mb-8">
-                <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                  Schedule:-
-                </h2>
-                <div className="space-y-2">
-                  {scheduleLines.length > 0 ? (
-                    scheduleLines.map((line, i) => (
-                      <p key={i} className="text-gray-300 text-sm md:text-base">
-                        {line}
-                      </p>
-                    ))
-                  ) : (
-                    <p className="text-gray-300 text-sm md:text-base">
-                      No schedule available
-                    </p>
-                  )}
-                </div>
-              </div>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
       {selectedEvent && (
         <>
