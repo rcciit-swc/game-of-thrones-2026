@@ -86,9 +86,10 @@ const EventCardRes = ({
 
 interface EventCardsResProps {
   events: Omit<EventCardProps, 'isActive' | 'onClick'>[];
+  onCardClick?: (eventId: string | number) => void;
 }
 
-const EventCardsRes = ({ events }: EventCardsResProps) => {
+const EventCardsRes = ({ events, onCardClick }: EventCardsResProps) => {
   const [activeCardIndex, setActiveCardIndex] = React.useState<number | null>(
     null
   );
@@ -120,7 +121,12 @@ const EventCardsRes = ({ events }: EventCardsResProps) => {
             onClick={() => {
               setActiveCardIndex(index);
               if (event.id !== undefined && event.id !== null) {
-                router.push(`/events/${event.id}`);
+                const idString = String(event.id);
+                if (onCardClick) {
+                  onCardClick(event.id);
+                } else {
+                  router.push(`/events/${idString}`);
+                }
               }
             }}
           />

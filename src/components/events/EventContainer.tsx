@@ -1,15 +1,37 @@
 'use client';
-import React, { use } from 'react';
+import React, { use, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { StackedCardsInteraction } from './EventsCard';
 import EventCardsRes from './EventCardsRes';
+import LoaderOverlay from './LoaderOverlay';
 
 import { useEvents } from '@/lib/stores';
 
 const EventContainer = () => {
   const { eventsData, eventsLoading } = useEvents();
+  const router = useRouter();
+  const [showLoader, setShowLoader] = useState(false);
+  const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
+
   console.log('Events Data:', eventsData);
+
+  const handleEventClick = (eventId: string | number) => {
+    setSelectedEventId(String(eventId));
+    setShowLoader(true);
+  };
+
+  const handleLoaderComplete = () => {
+    if (selectedEventId) {
+      router.push(`/events/${selectedEventId}`);
+    }
+  };
   return (
     <div className="relative bg-[url('/assets/events/bg.svg')] bg-cover bg-top bg-no-repeat min-h-screen flex flex-col items-center justify-center pt-20">
+      {/* Loader Overlay */}
+      <LoaderOverlay
+        isVisible={showLoader}
+        onAnimationComplete={handleLoaderComplete}
+      />
       {/* Bigger top black gradient */}
       <div className="opointer-events-none absolute top-0 left-0 w-full h-72 bg-linear-to-b from-black via-black/70 to-transparent z-10" />
 
@@ -32,6 +54,7 @@ const EventContainer = () => {
               }))
             : []
         }
+        onCardClick={handleEventClick}
       />
 
       <div className="w-full  px-8 pb-20 hidden min-[1150px]:block">
@@ -74,6 +97,7 @@ const EventContainer = () => {
                     <StackedCardsInteraction
                       key={`${rowIdx}-${idx}`}
                       cards={[mapped, mapped]}
+                      onCardClick={handleEventClick}
                     />
                   );
                 })}

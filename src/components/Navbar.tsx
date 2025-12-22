@@ -41,6 +41,7 @@ export default function Navbar() {
     { label: 'Events', href: '/events' },
     { label: 'Gallery', href: '/gallery' },
     { label: 'Teams', href: '/teams' },
+    { label: 'Contact Us', href: '/contact' },
   ];
 
   return (
