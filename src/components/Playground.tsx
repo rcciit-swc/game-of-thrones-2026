@@ -247,7 +247,7 @@ const Playground = () => {
             <div className="absolute left-[28.6%] top-[19.1%] w-[43.6%] h-[13.3%]">
               <div className="relative w-full h-full border-[3px] border-black">
                 <Image
-                  src="/about/Rectangle 9.png" //
+                  src="/hall of fame/SAM_6680.JPG" //
                   alt="Hall of Fame 1"
                   fill
                   className="object-cover"
@@ -260,7 +260,7 @@ const Playground = () => {
             <div className="absolute left-[20.6%] top-[65.4%] w-[27.5%] h-[10.8%]">
               <div className="relative w-full h-full border-[3px] border-black">
                 <Image
-                  src="/about/Rectangle 10.png"
+                  src="/hall of fame/SAM_6726.JPG"
                   alt="Hall of Fame 2"
                   fill
                   className="object-cover"
@@ -272,7 +272,7 @@ const Playground = () => {
             {/* left: 169/440=38.4%, top: 537/704=76.2%, w: 102/440=23.1%, h: 92/704=13% */}
             <div className="absolute left-[38.4%] top-[76.2%] w-[23.1%] h-[13%] border-[3px] border-black">
               <Image
-                src="/about/Rectangle 12.png"
+                src="/hall of fame/SAM_7148.JPG"
                 alt="Hall of Fame 3"
                 fill
                 className="object-cover"
@@ -283,7 +283,7 @@ const Playground = () => {
             {/* left: 67/440=15.2%, top: 338/704=48%, w: 136/440=30.9%, h: 123/704=17.4% */}
             <div className="absolute left-[15.2%] top-[48%] w-[30.9%] h-[17.4%] border-[3px] border-black">
               <Image
-                src="/about/Rectangle 13.png"
+                src="/hall of fame/SAM_7160.JPG"
                 alt="Hall of Fame 4"
                 fill
                 className="object-cover"
@@ -294,7 +294,7 @@ const Playground = () => {
             {/* left: 102/440=23.1%, top: 229/704=32.5%, w: 118/440=26.8%, h: 109/704=15.4% */}
             <div className="absolute left-[23.1%] top-[32.5%] w-[26.8%] h-[15.4%] border-[3px] border-black">
               <Image
-                src="/about/Rectangle 18.png"
+                src="/hall of fame/SAM_7409.JPG"
                 alt="Hall of Fame 5"
                 fill
                 className="object-cover"
@@ -306,7 +306,7 @@ const Playground = () => {
             <div className="absolute left-[40.4%] top-[8.2%] w-[18.8%] h-[10.9%]">
               <div className="relative w-full h-full border-[3px] border-black">
                 <Image
-                  src="/about/Rectangle 17.png" //
+                  src="/hall of fame/_SUB1964.JPG" //
                   alt="Hall of Fame 6"
                   fill
                   className="object-cover"
@@ -319,7 +319,7 @@ const Playground = () => {
             <div className="absolute left-[50%] top-[32.5%] w-[26.8%] h-[15.4%]">
               <div className="relative w-full h-full border-[3px] border-black">
                 <Image
-                  src="/about/Rectangle 19.png"
+                  src="/hall of fame/_SUB2044.JPG"
                   alt="Hall of Fame 7"
                   fill
                   className="object-cover"
@@ -332,7 +332,7 @@ const Playground = () => {
             <div className="absolute left-[46.1%] top-[48%] w-[37.5%] h-[17.4%]">
               <div className="relative w-full h-full border-[3px] border-black">
                 <Image
-                  src="/about/Rectangle 20.png"
+                  src="/hall of fame/_SUB2592.JPG"
                   alt="Hall of Fame 8"
                   fill
                   className="object-cover"
@@ -344,7 +344,7 @@ const Playground = () => {
             {/* left: 210/440=47.7%, top: 461/704=65.4%, w: 102/440=23.1%, h: 76/704=10.8% */}
             <div className="absolute left-[47.7%] top-[65.4%] w-[23.1%] h-[10.8%] border-[3px] border-black">
               <Image
-                src="/about/Rectangle 21.png"
+                src="/hall of fame/_SUB2630.JPG"
                 alt="Hall of Fame 9"
                 fill
                 className="object-cover"
@@ -359,7 +359,7 @@ const Playground = () => {
             <div className="absolute left-[36.4%] top-[3%] w-[23%] h-[10.5%]">
               <div className="relative w-full h-full border-[5px] border-black">
                 <Image
-                  src="/about/Rectangle 9.png"
+                  src="/hall of fame/_SUB3705.JPG"
                   alt="Hall of Fame Top"
                   fill
                   className="object-cover"
@@ -372,7 +372,7 @@ const Playground = () => {
             <div className="absolute left-[48%] top-[13.3%] w-[16.5%] h-[14.2%]">
               <div className="relative w-full h-full border-[5px] border-black">
                 <Image
-                  src="/about/Rectangle 19.png"
+                  src="/hall of fame/_SUB3870.JPG"
                   alt="Hall of Fame"
                   fill
                   className="object-cover"
@@ -383,7 +383,7 @@ const Playground = () => {
             {/* Image: left 447/1420=31.4%, top 203/1523=13.3%, w 235/1420=16.5%, h 217/1523=14.2% */}
             <div className="absolute left-[31.4%] top-[13.3%] w-[16.5%] h-[14.2%] border-[5px] border-black">
               <Image
-                src="/about/Rectangle 18.png"
+                src="/hall of fame/_SUB4149.JPG"
                 alt="Hall of Fame"
                 fill
                 className="object-cover"
@@ -394,7 +394,7 @@ const Playground = () => {
             {/* Image: left 311/1420=21.9%, top 419/1523=27.5%, w 242/1420=17%, h 218/1523=14.3% */}
             <div className="absolute left-[21.9%] top-[27.5%] w-[17%] h-[14.3%] border-[5px] border-black">
               <Image
-                src="/about/Rectangle 13.png"
+                src="/hall of fame/_SUB4248.JPG"
                 alt="Hall of Fame"
                 fill
                 className="object-cover"
@@ -405,7 +405,7 @@ const Playground = () => {
             <div className="absolute left-[38.9%] top-[27.5%] w-[20%] h-[13.9%]">
               <div className="relative w-full h-full border-[5px] border-black">
                 <Image
-                  src="/about/Rectangle 20.png"
+                  src="/hall of fame/_SUB4533.JPG"
                   alt="Hall of Fame"
                   fill
                   className="object-cover"
@@ -416,7 +416,7 @@ const Playground = () => {
             {/* Image: left 838/1420=59%, top 419/1523=27.5%, w 242/1420=17%, h 218/1523=14.3% */}
             <div className="absolute left-[59%] top-[27.5%] w-[17%] h-[14.3%] border-[5px] border-black">
               <Image
-                src="/about/Rectangle 14.png"
+                src="/hall of fame/_SUB4784.JPG"
                 alt="Hall of Fame"
                 fill
                 className="object-cover"
@@ -427,7 +427,7 @@ const Playground = () => {
             {/* Image: left 553/1420=38.9%, top 632/1523=41.4%, w 285/1420=20%, h 231/1523=15.1% */}
             <div className="absolute left-[38.9%] top-[41.4%] w-[20%] h-[15.1%] border-[5px] border-black">
               <Image
-                src="/about/Rectangle 22.png"
+                src="/hall of fame/_SUB4798.JPG"
                 alt="Hall of Fame"
                 fill
                 className="object-cover"
@@ -439,7 +439,7 @@ const Playground = () => {
             <div className="absolute left-[14.2%] top-[41.8%] w-[24.6%] h-[14.4%]">
               <div className="relative w-full h-full border-[5px] border-black">
                 <Image
-                  src="/about/Rectangle 10.png"
+                  src="/hall of fame/_SUB4818.JPG"
                   alt="Hall of Fame"
                   fill
                   className="object-cover"
@@ -450,7 +450,7 @@ const Playground = () => {
             {/* Image: left 838/1420=59%, top 637/1523=41.8%, w 350/1420=24.6%, h 220/1523=14.4% */}
             <div className="absolute left-[59%] top-[41.8%] w-[24.6%] h-[14.4%] border-[5px] border-black">
               <Image
-                src="/about/Rectangle 11.png"
+                src="/hall of fame/SAI_1279 (1).JPG"
                 alt="Hall of Fame"
                 fill
                 className="object-cover"
@@ -461,7 +461,7 @@ const Playground = () => {
             {/* Image: left 311/1420=21.9%, top 857/1523=56.2%, w 242/1420=17%, h 218/1523=14.3% */}
             <div className="absolute left-[21.9%] top-[56.2%] w-[17%] h-[14.3%] border-[5px] border-black">
               <Image
-                src="/about/Rectangle 12.png"
+                src="/hall of fame/SAI_1477.JPG"
                 alt="Hall of Fame"
                 fill
                 className="object-cover"
@@ -471,7 +471,7 @@ const Playground = () => {
             {/* Image: left 553/1420=38.9%, top 863/1523=56.6%, w 285/1420=20%, h 212/1523=13.9% */}
             <div className="absolute left-[38.9%] top-[56.6%] w-[20%] h-[13.9%] border-[5px] border-black">
               <Image
-                src="/about/Rectangle 21.png"
+                src="/hall of fame/SAI_2633.JPG"
                 alt="Hall of Fame"
                 fill
                 className="object-cover"
@@ -481,7 +481,7 @@ const Playground = () => {
             {/* Image: left 838/1420=59%, top 857/1523=56.2%, w 242/1420=17%, h 218/1523=14.3% */}
             <div className="absolute left-[59%] top-[56.2%] w-[17%] h-[14.3%] border-[5px] border-black">
               <Image
-                src="/about/Rectangle 15.png"
+                src="/hall of fame/SAI_9676.JPG"
                 alt="Hall of Fame"
                 fill
                 className="object-cover"
@@ -493,7 +493,7 @@ const Playground = () => {
             <div className="absolute left-[31.4%] top-[70.5%] w-[16.5%] h-[14.2%]">
               <div className="relative w-full h-full border-[5px] border-black">
                 <Image
-                  src="/about/Rectangle 16.png"
+                  src="/hall of fame/SAI_9700.JPG"
                   alt="Hall of Fame"
                   fill
                   className="object-cover"
@@ -505,7 +505,7 @@ const Playground = () => {
             <div className="absolute left-[48%] top-[70.5%] w-[16.5%] h-[14.2%]">
               <div className="relative w-full h-full border-[5px] border-black">
                 <Image
-                  src="/about/Rectangle 17.png"
+                  src="/hall of fame/SAM_6049.JPG"
                   alt="Hall of Fame"
                   fill
                   className="object-cover"
@@ -518,7 +518,7 @@ const Playground = () => {
             <div className="absolute left-[36.4%] top-[84.8%] w-[23%] h-[10.5%]">
               <div className="relative w-full h-full border-[5px] border-black">
                 <Image
-                  src="/about/Rectangle 8.png"
+                  src="/hall of fame/SAM_6060.JPG"
                   alt="Hall of Fame Bottom"
                   fill
                   className="object-cover"
