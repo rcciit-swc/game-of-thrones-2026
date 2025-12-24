@@ -250,9 +250,10 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
             exit="exit"
             className="space-y-6"
           >
-            <p className="text-gray-200 leading-relaxed text-sm md:text-base">
-              {descriptionFromEvent}
-            </p>
+            <div
+              className="text-gray-200 leading-relaxed text-sm md:text-base prose prose-invert max-w-none"
+              dangerouslySetInnerHTML={{ __html: descriptionFromEvent || '' }}
+            />
 
             {/* Schedule Section */}
             {scheduleLines.length > 0 && (
