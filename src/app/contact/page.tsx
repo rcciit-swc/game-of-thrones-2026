@@ -262,7 +262,7 @@ const VenueSection = () => {
   );
 };
 
-const page = () => {
+const ContactPage = () => {
   const [activeTab, setActiveTab] = useState<'contacts' | 'venue'>('contacts');
 
   return (
@@ -381,4 +381,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default ContactPage;

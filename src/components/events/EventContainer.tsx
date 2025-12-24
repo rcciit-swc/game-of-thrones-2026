@@ -33,7 +33,7 @@ const EventContainer = () => {
         onAnimationComplete={handleLoaderComplete}
       />
       {/* Bigger top black gradient */}
-      <div className="opointer-events-none absolute top-0 left-0 w-full h-72 bg-linear-to-b from-black via-black/70 to-transparent z-10" />
+      <div className="pointer-events-none absolute top-0 left-0 w-full h-72 bg-linear-to-b from-black via-black/70 to-transparent z-10" />
 
       <h1 className=" max-w-lg relative   z-20 text-white rajdhanifont text-6xl md:text-7xl text-center font-semibold underline decoration-4 underline-offset-6 mb-28">
         The Arena: The Full Roster
