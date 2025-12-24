@@ -3,11 +3,7 @@
 import { motion, useMotionValue, useAnimationFrame } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
-
-const images = Array.from(
-  { length: 20 },
-  (_, i) => `https://picsum.photos/seed/picsum${i}/400`
-);
+import { hallOfFameImages } from '@/lib/constants/images';
 
 export default function ImageMarquee() {
   const [mounted, setMounted] = useState(false);
@@ -52,7 +48,7 @@ export default function ImageMarquee() {
           dragTransition={{ power: 0 }}
           dragConstraints={{ left: -10000, right: 0 }}
         >
-          {[...images, ...images].map((src, index) => (
+          {[...hallOfFameImages, ...hallOfFameImages].map((src, index) => (
             <div
               key={index}
               className="w-[280px] md:w-[320px] lg:w-[350px] shrink-0 relative"

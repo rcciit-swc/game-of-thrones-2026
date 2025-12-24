@@ -1,14 +1,52 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import bg_eyes from '@/assets/events/backgrounds/bg_eyes.svg';
 import { useEvents } from '@/lib/stores';
 import EventContainer from './EventContainer';
 import ImageMarquee from './ImageMarquee';
+import LoaderOverlay from './LoaderOverlay';
 
 const EventsWrapper = () => {
+  const { eventsData, eventsLoading } = useEvents();
+  const [showLoader, setShowLoader] = useState(true);
+  const [assetsLoaded, setAssetsLoaded] = useState(false);
+
+  useEffect(() => {
+    // Check if events are loaded
+    if (!eventsLoading && eventsData && eventsData.length > 0) {
+      // Wait a bit for images to start loading
+      const timer = setTimeout(() => {
+        setAssetsLoaded(true);
+      }, 500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [eventsLoading, eventsData]);
+
+  useEffect(() => {
+    // Hide loader when both events and assets are ready
+    if (assetsLoaded && !eventsLoading) {
+      const hideTimer = setTimeout(() => {
+        setShowLoader(false);
+      }, 300);
+
+      return () => clearTimeout(hideTimer);
+    }
+  }, [assetsLoaded, eventsLoading]);
+
+  const handleLoaderComplete = () => {
+    // Loader animation completed
+  };
+
   return (
     <>
+      {/* Loader Overlay - Shows until everything is ready */}
+      <LoaderOverlay
+        isVisible={showLoader}
+        onAnimationComplete={handleLoaderComplete}
+      />
+
       {/* Hero Section - Reduced height */}
       <div className="min-h-[35vh] md:min-h-[45vh] bg-[url('/assets/events/bg_res.svg')] lg:bg-[url('https://i.postimg.cc/Kj4ygcYw/bg-eyes-copy.png')] bg-cover lg:bg-contain bg-no-repeat bg-top flex lg:items-center justify-center">
         <h1 className="z-3 text-white rajdhanifont text-5xl md:text-7xl text-center translate-y-32 md:translate-y-16">
