@@ -4,28 +4,36 @@ import { createServer } from '@/lib/supabase/server';
 
 export const getUserData = async () => {
   try {
-    const { data } = await supabase.auth.getSession();
-    if (data) {
-      const userdetails = await supabase
-        .from('users')
-        .select('*')
-        .eq('id', data?.session?.user?.id);
+    const { data, error } = await supabase.auth.getSession();
 
-      if (userdetails && userdetails.data && userdetails.data.length > 0) {
-        const swcData = await supabase
-          .from('SWC-2025')
-          .select('*')
-          .eq('email', userdetails.data[0].email);
-        const returnValue = {
-          data: userdetails.data[0],
-          swcData:
-            swcData.data && swcData.data.length > 0 ? swcData.data[0] : null,
-        };
-        return returnValue;
-      }
+    // If there's no session or an error, return early without throwing
+    if (error || !data?.session) {
+      return null;
     }
+
+    const userdetails = await supabase
+      .from('users')
+      .select('*')
+      .eq('id', data.session.user.id);
+
+    if (userdetails && userdetails.data && userdetails.data.length > 0) {
+      const swcData = await supabase
+        .from('SWC-2025')
+        .select('*')
+        .eq('email', userdetails.data[0].email);
+      const returnValue = {
+        data: userdetails.data[0],
+        swcData:
+          swcData.data && swcData.data.length > 0 ? swcData.data[0] : null,
+      };
+      return returnValue;
+    }
+
+    return null;
   } catch (err) {
-    toast.error('Error fetching user data');
+    // Only log the error, don't show toast for auth errors when not logged in
+    console.error('Error fetching user data:', err);
+    return null;
   }
 };
 
@@ -178,12 +186,25 @@ export const getRoles = async () => {
   try {
     const { data: sessionData, error: sessionError } =
       await supabase.auth.getSession();
+
+    // If there's no session or an error, return early
+    if (sessionError || !sessionData?.session) {
+      return null;
+    }
+
     const { data: rolesData, error: rolesError } = await supabase
       .from('roles')
       .select('*')
-      .eq('user_id', sessionData?.session?.user?.id);
+      .eq('user_id', sessionData.session.user.id);
+
+    if (rolesError) {
+      console.error('Error fetching roles:', rolesError);
+      return null;
+    }
+
     return rolesData;
   } catch (e) {
-    console.log(e);
+    console.error('Error in getRoles:', e);
+    return null;
   }
 };

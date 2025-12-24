@@ -31,7 +31,7 @@ const Playground = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const festId = 'a4bc08e4-9af9-4212-8d32-cd88d2437f18'; // GOT fest ID
+        const festId = '5bff3a43-43b6-420a-8d42-9a96257cc351'; // GOT fest ID
         const data = await get_events_by_fest(festId);
 
         if (data && data.length > 0) {
