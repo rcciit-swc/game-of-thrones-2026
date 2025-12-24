@@ -4,10 +4,34 @@ import { motion, useMotionValue, useAnimationFrame } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
 
-const images = Array.from(
-  { length: 20 },
-  (_, i) => `https://picsum.photos/seed/picsum${i}/400`
-);
+const images = [
+  'https://i.postimg.cc/NMZHyHjx/SAI-1477.jpg',
+  'https://i.postimg.cc/7ZN0BhKP/SAM-6063.jpg',
+  'https://i.postimg.cc/t4zWrJ2m/SUB3870.jpg',
+  'https://i.postimg.cc/52mLPynR/SUB4149.jpg',
+  'https://i.postimg.cc/SKN8H4PQ/SUB4798.jpg',
+  'https://i.postimg.cc/GmZw53tv/SAI-1279-(1).jpg',
+  'https://i.postimg.cc/h4JYHRF3/SAI-2633.jpg',
+  'https://i.postimg.cc/3Nbb09D4/SAI-9676.jpg',
+  'https://i.postimg.cc/5NKM8SVM/SAI-9700.jpg',
+  'https://i.postimg.cc/W3zGqVmW/SAM-6049.jpg',
+  'https://i.postimg.cc/fbZ5L1rR/SAM-6060.jpg',
+  'https://i.postimg.cc/JhZVVwBn/SAM-6637.jpg',
+  'https://i.postimg.cc/y8fWgZfC/SAM-6680.jpg',
+  'https://i.postimg.cc/J4Ls9mDy/SAM-6726.jpg',
+  'https://i.postimg.cc/BnhtLKhW/SAM-7148.jpg',
+  'https://i.postimg.cc/YqYsCNCz/SAM-7160.jpg',
+  'https://i.postimg.cc/XJPwwPQG/SAM-7409.jpg',
+  'https://i.postimg.cc/HsRhpZm8/SUB1964.jpg',
+  'https://i.postimg.cc/ZqBYWDBQ/SUB2044.jpg',
+  'https://i.postimg.cc/PJmPPVcG/SUB2592.jpg',
+  'https://i.postimg.cc/JzhzLh1M/SUB2630.jpg',
+  'https://i.postimg.cc/HkPssCxx/SUB3705.jpg',
+  'https://i.postimg.cc/3Rqggqnd/SUB4248.jpg',
+  'https://i.postimg.cc/YCSCHStV/SUB4533.jpg',
+  'https://i.postimg.cc/zGLY7HzK/SUB4784.jpg',
+  'https://i.postimg.cc/T2kss2HY/SUB4818.jpg',
+];
 
 export default function ImageMarquee() {
   const [mounted, setMounted] = useState(false);
