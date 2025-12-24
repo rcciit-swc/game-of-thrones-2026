@@ -8,24 +8,10 @@ import Link from 'next/link';
 const Autocarsoule = dynamic(() => import('./Autocarsoule'), { ssr: false });
 import './playground-animations.css';
 
-// Fallback sports images (used if no events found)
-const fallbackImages = [
-  { id: 1, src: '/assest/pics/Ellipse 7.svg', alt: 'Sport 1', angle: 0 },
-  { id: 2, src: '/assest/pics/Ellipse 8.svg', alt: 'Sport 2', angle: 36 },
-  { id: 3, src: '/assest/pics/Ellipse 3.svg', alt: 'Sport 3', angle: 72 },
-  { id: 4, src: '/assest/pics/Ellipse 4.svg', alt: 'Sport 4', angle: 108 },
-  { id: 5, src: '/assest/pics/Ellipse 9.svg', alt: 'Sport 5', angle: 144 },
-  { id: 6, src: '/assest/pics/Ellipse 10.svg', alt: 'Sport 6', angle: 180 },
-  { id: 7, src: '/assest/pics/Ellipse 11.svg', alt: 'Sport 7', angle: 216 },
-  { id: 8, src: '/assest/pics/Ellipse 12.svg', alt: 'Sport 8', angle: 252 },
-  { id: 9, src: '/assest/pics/Ellipse 5.svg', alt: 'Sport 9', angle: 288 },
-  { id: 10, src: '/assest/pics/Ellipse 6.svg', alt: 'Sport 10', angle: 324 },
-];
-
 const Playground = () => {
   const imageSize = 20; // size of orbiting images (% of ring)
   const orbitRadius = 45; // radius from center (%)
-  const [events, setEvents] = useState<any[]>(fallbackImages); // Initialize with fallbackImages
+  const [events, setEvents] = useState<any[]>([]); // Initialize with fallbackImages
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -40,21 +26,18 @@ const Playground = () => {
             .slice(0, 10)
             .map((event: any, index: number) => ({
               id: event.id,
-              src:
-                event.image_url ||
-                fallbackImages[index]?.src ||
-                '/assest/pics/Ellipse 7.svg',
+              src: event.image_url || '/assest/pics/Ellipse 7.svg',
               alt: event.name || `Event ${index + 1}`,
               name: event.name,
               angle: index * 36, // Distribute evenly around circle
             }));
           setEvents(mappedEvents);
         } else {
-          setEvents(fallbackImages);
+          setEvents([]);
         }
       } catch (error) {
         console.error('Error fetching events:', error);
-        setEvents(fallbackImages);
+        setEvents([]);
       } finally {
         setLoading(false);
       }
