@@ -470,7 +470,18 @@ export default function ProfilePage() {
                     }}
                     className="w-full max-w-[340px]"
                   >
-                    <EventsCard {...event} eventID={event.id!} />
+                    <EventsCard
+                      event_id={event.event_id!}
+                      name={event.name}
+                      image_url={event.image_url}
+                      registration_fees={event.registration_fees}
+                      registered={event.registered}
+                      schedule={event.schedule}
+                      team_details={event.team_details ?? null}
+                      transaction_screenshot={
+                        event.transaction_screenshot ?? null
+                      }
+                    />
                   </motion.div>
                 ))}
               </div>

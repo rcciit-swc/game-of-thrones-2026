@@ -10,6 +10,7 @@ export interface Coordinator {
 
 export interface events {
   id?: string;
+  event_id?: string;
   name: string;
   event_category_id?: string;
   reg_status: boolean;
@@ -30,6 +31,8 @@ export interface events {
     url: string;
   }[];
   registered?: boolean;
+  team_details?: TeamMember[] | null;
+  transaction_screenshot?: string | null;
 }
 
 export interface eventCategories {

@@ -66,18 +66,24 @@ export const getEventsData = async (all: boolean = true) => {
 
     if (all || !rolesData || rolesData.length === 0) {
       // Fetch all events if `all` is true or rolesData is empty/null
-      ({ data, error } = await supabase.rpc('get_events_by_fest', {
-        p_fest_id,
-        p_user_id,
-      }));
+      ({ data, error } = await supabase.rpc(
+        'get_events_with_participants_by_fest',
+        {
+          p_fest_id,
+          p_user_id,
+        }
+      ));
     } else {
       // Determine the highest privileged role
       const roles = rolesData.map((role: { role: string }) => role.role);
       if (roles.includes('super_admin') || roles.includes('registrar')) {
-        ({ data, error } = await supabase.rpc('get_events_by_fest', {
-          p_fest_id,
-          p_user_id,
-        }));
+        ({ data, error } = await supabase.rpc(
+          'get_events_with_participants_by_fest',
+          {
+            p_fest_id,
+            p_user_id,
+          }
+        ));
       } else if (roles.includes('convenor')) {
         const eventCategoryIds = rolesData
           .filter(
@@ -140,10 +146,13 @@ export const getEventsForAdmin = async (
       if (!p_fest_id || !p_user_id) {
         throw new Error('Missing parameters for super_admin');
       }
-      ({ data, error } = await supabase.rpc('get_events_by_fest', {
-        p_fest_id,
-        p_user_id,
-      }));
+      ({ data, error } = await supabase.rpc(
+        'get_events_with_participants_by_fest',
+        {
+          p_fest_id,
+          p_user_id,
+        }
+      ));
     } else if (roles.includes('convenor')) {
       const eventCategoryIds = rolesData
         .filter(
@@ -351,10 +360,13 @@ export const rejectSecurity = async (id: string) => {
 
 export const get_events_by_fest = async (festId: string, userId?: string) => {
   try {
-    const { data, error } = await supabase.rpc('get_events_by_fest', {
-      p_fest_id: festId,
-      p_user_id: userId || null,
-    });
+    const { data, error } = await supabase.rpc(
+      'get_events_with_participants_by_fest',
+      {
+        p_fest_id: festId,
+        p_user_id: userId || null,
+      }
+    );
 
     if (error) {
       console.error('Error fetching events by fest:', error);
