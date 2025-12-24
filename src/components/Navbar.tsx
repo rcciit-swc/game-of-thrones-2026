@@ -82,10 +82,11 @@ export default function Navbar() {
   }, []);
   // Configurable navigation links - edit href to match your routes
   const navLinks = [
-    { label: 'About', href: '/about' },
+    { label: 'About', href: '/#legacy' },
     { label: 'Events', href: '/events' },
-    { label: 'Gallery', href: '/gallery' },
+    { label: 'Gallery', href: '/#hall-of-fame' },
     { label: 'Teams', href: '/teams' },
+    { label: 'Contact Us', href: '/contact' },
   ];
 
   return (

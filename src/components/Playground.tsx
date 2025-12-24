@@ -95,9 +95,9 @@ const Playground = () => {
             <Image
               src="/assest/font/Frame 20.svg"
               alt="The Playground Arena"
-              width={420}
-              height={80}
-              className="w-full max-w-[420px] h-auto -translate-y-20"
+              width={500}
+              height={100}
+              className="w-full max-w-[500px] h-auto -translate-y-20"
             />
           </div>
 
@@ -225,7 +225,10 @@ const Playground = () => {
         </div>
 
         {/* ================= HALL OF FAME SECTION ================= */}
-        <div className="relative z-10 flex flex-col items-center w-full px-4 mt-20 lg:mt-64">
+        <div
+          id="hall-of-fame"
+          className="relative z-10 flex flex-col items-center w-full px-4 mt-20 lg:mt-64"
+        >
           {/* Title Section */}
           <div className="flex flex-col items-center gap-4 lg:gap-6 mb-8 lg:mb-12">
             <h2 className="font-['Irish_Grover'] text-[30px] lg:text-[60px] text-[#CCA855] text-center leading-normal uppercase">

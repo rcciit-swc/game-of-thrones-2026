@@ -41,7 +41,7 @@ const Card = ({
     >
       {image && (
         <div
-          className={`relative h-87.5 overflow-hidden w-full mt-0 bg-gradient-to-br from-gray-900 via-black to-gray-900 ${showDetails === false ? 'rounded-2xl' : 'rounded-t-xl'}`}
+          className={`relative h-87.5 overflow-hidden w-full mt-0 bg-linear-to-br from-gray-900 via-black to-gray-900 ${showDetails === false ? 'rounded-2xl' : 'rounded-t-xl'}`}
         >
           <img
             src={image}
@@ -55,7 +55,7 @@ const Card = ({
           />
 
           {/* Gradient overlay for better text visibility */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
+          <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent pointer-events-none"></div>
 
           {/* Already Registered Badge */}
           {isRegistered && (
@@ -67,10 +67,10 @@ const Card = ({
             >
               <div className="relative group">
                 {/* Glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full blur-md opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-linear-to-r from-green-400 to-emerald-500 rounded-full blur-md opacity-75 group-hover:opacity-100 transition-opacity duration-300"></div>
 
                 {/* Badge content */}
-                <div className="relative flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full shadow-lg backdrop-blur-sm border border-green-400/30">
+                <div className="relative flex items-center gap-2 px-4 py-2 bg-linear-to-r from-green-500 to-emerald-600 rounded-full shadow-lg backdrop-blur-sm border border-green-400/30">
                   {/* Checkmark icon */}
                   <svg
                     className="w-5 h-5 text-white animate-pulse"
@@ -101,10 +101,10 @@ const Card = ({
       )}
 
       {showDetails !== false && (
-        <div className="px-4 py-4 flex flex-col gap-y-3 bg-gradient-to-br from-red-700/40 via-red-800/30 to-red-900/40 backdrop-blur-lg border border-red-600/40 text-white rounded-b-xl shadow-xl min-h-[180px]">
+        <div className="px-4 py-4 flex flex-col gap-y-3 bg-linear-to-br from-red-700/40 via-red-800/30 to-red-900/40 backdrop-blur-lg border border-red-600/40 text-white rounded-b-xl shadow-xl min-h-45">
           {title && (
             <motion.div
-              className="text-xl font-bold tracking-wider rajdhanifont bg-gradient-to-r from-red-200 to-orange-200 bg-clip-text text-transparent"
+              className="text-xl font-bold tracking-wider rajdhanifont bg-linear-to-r from-red-200 to-orange-200 bg-clip-text text-transparent"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
@@ -124,7 +124,7 @@ const Card = ({
                 transition={{ duration: 0.3, delay: 0.1 }}
               >
                 {/* Calendar Icon */}
-                <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-red-500/20 border border-red-400/30 flex items-center justify-center">
+                <div className="shrink-0 w-9 h-9 rounded-lg bg-red-500/20 border border-red-400/30 flex items-center justify-center">
                   <svg
                     className="w-5 h-5 text-red-300"
                     fill="none"
@@ -141,7 +141,7 @@ const Card = ({
                 </div>
                 <div className="flex-1">
                   <div className="font-bold text-red-200 mb-1.5 tracking-wide">
-                    Schedule
+                    Schedule & Venue
                   </div>
                   <div className="text-gray-200 space-y-0.5 text-xs leading-relaxed">
                     {htmlToLines(schedule).map((line, i) => (
@@ -163,7 +163,7 @@ const Card = ({
                 transition={{ duration: 0.3, delay: 0.2 }}
               >
                 {/* Rupee Icon Container */}
-                <div className="flex-shrink-0 w-9 h-9 rounded-lg bg-gradient-to-br from-yellow-500/20 to-orange-500/20 border border-yellow-400/30 flex items-center justify-center">
+                <div className="shrink-0 w-9 h-9 rounded-lg bg-linear-to-br from-yellow-500/20 to-orange-500/20 border border-yellow-400/30 flex items-center justify-center">
                   <svg
                     className="w-5 h-5 text-yellow-300"
                     fill="currentColor"
@@ -174,9 +174,9 @@ const Card = ({
                 </div>
                 <div className="flex flex-col">
                   <span className="font-bold text-yellow-200 tracking-wide text-xs">
-                    Entry Fee
+                    Registration Fees
                   </span>
-                  <span className="text-2xl font-extrabold text-transparent bg-gradient-to-r from-yellow-200 via-yellow-100 to-orange-200 bg-clip-text">
+                  <span className="text-2xl font-extrabold text-transparent bg-linear-to-r from-yellow-200 via-yellow-100 to-orange-200 bg-clip-text">
                     {typeof registrationFee === 'number'
                       ? `₹${registrationFee}`
                       : registrationFee}
@@ -185,6 +185,40 @@ const Card = ({
               </motion.div>
             )}
           </div>
+
+          {/* Register Button */}
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={(e) => {
+              e.stopPropagation();
+              onClick?.();
+            }}
+            className="relative w-full mt-3 px-6 py-3 bg-gradient-to-r from-[#B60302] to-[#8f0202] text-white font-['Irish_Grover'] text-base rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-[#FF003C]/30 hover:border-[#FF003C]/60 overflow-hidden group/btn"
+          >
+            <span className="relative z-10 flex items-center justify-center gap-2">
+              Register Now
+              <motion.span
+                animate={{ x: [0, 4, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                →
+              </motion.span>
+            </span>
+            {/* Shimmer effect */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+              animate={{ x: ['-100%', '100%'] }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+            />
+          </motion.button>
 
           {children}
         </div>
@@ -207,11 +241,13 @@ const StackedCardsInteraction = ({
   spreadDistance = 40,
   rotationAngle = 10,
   animationDelay = 0.1,
+  onCardClick,
 }: {
   cards: CardData[];
   spreadDistance?: number;
   rotationAngle?: number;
   animationDelay?: number;
+  onCardClick?: (cardId: string) => void;
 }) => {
   const [isHovering, setIsHovering] = useState(false);
   const router = useRouter();
@@ -269,7 +305,12 @@ const StackedCardsInteraction = ({
                 isHovered={isHovering}
                 onClick={() => {
                   if (card.id !== undefined && card.id !== null) {
-                    router.push(`/events/${card.id}`);
+                    const idString = String(card.id);
+                    if (onCardClick) {
+                      onCardClick(idString);
+                    } else {
+                      router.push(`/events/${idString}`);
+                    }
                   }
                 }}
               ></Card>
