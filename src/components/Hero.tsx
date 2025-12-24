@@ -330,7 +330,7 @@ const Hero = () => {
                     className="min-w-full min-h-full object-cover"
                     style={{ transform: 'scale(1.2)' }}
                   >
-                    <source src="/assets/fire.av1" type="video/mp4" />
+                    <source src="/assets/fire.webm" type="video/webm" />
                   </video>
                 </div>
               </foreignObject>
@@ -378,7 +378,7 @@ const Hero = () => {
                   className="min-w-full min-h-full object-cover"
                   style={{ transform: 'scale(1.2)' }}
                 >
-                  <source src="/assets/fire.av1" type="video/mp4" />
+                  <source src="/assets/fire.webm" type="video/webm" />
                 </video>
               </div>
             </foreignObject>
