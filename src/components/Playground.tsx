@@ -1,8 +1,9 @@
 'use client';
-
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
+import { useEvents } from '@/lib/stores';
+import { hallOfFameImages } from '@/lib/constants/images';
 import { get_events_by_fest } from '@/utils/functions/eventsUtils';
 import Link from 'next/link';
 const Autocarsoule = dynamic(() => import('./Autocarsoule'), { ssr: false });
@@ -78,9 +79,9 @@ const Playground = () => {
             <Image
               src="/assest/font/Frame 20.svg"
               alt="The Playground Arena"
-              width={420}
-              height={80}
-              className="w-full max-w-[420px] h-auto -translate-y-20"
+              width={500}
+              height={100}
+              className="w-full max-w-[500px] h-auto -translate-y-20"
             />
           </div>
 
@@ -208,9 +209,12 @@ const Playground = () => {
         </div>
 
         {/* ================= HALL OF FAME SECTION ================= */}
-        <div className="relative z-10 flex flex-col items-center w-full px-4 mt-20 lg:mt-64">
+        <div
+          id="hall-of-fame"
+          className="relative z-10 flex flex-col items-center w-full px-4 mt-20 lg:mt-64 mb-20"
+        >
           {/* Title Section */}
-          <div className="flex flex-col items-center gap-4 lg:gap-6 mb-8 lg:mb-12">
+          <div className="flex flex-col items-center gap-4 lg:gap-6 mb-12 lg:mb-16">
             <h2 className="font-['Irish_Grover'] text-[30px] lg:text-[60px] text-[#CCA855] text-center leading-normal uppercase">
               HALL OF FAME
             </h2>
@@ -223,290 +227,100 @@ const Playground = () => {
             </div>
           </div>
 
-          {/* Mobile Gallery (Using Percentage Positioning) */}
-          <div className="lg:hidden relative w-full max-w-[440px] aspect-[440/704] mx-auto">
-            {/* Image 1 - Top Center */}
-            {/* left: 126/440=28.6%, top: 135/704=19.1%, w: 192/440=43.6%, h: 94/704=13.3% */}
-            <div className="absolute left-[28.6%] top-[19.1%] w-[43.6%] h-[13.3%]">
-              <div className="relative w-full h-full border-[3px] border-black">
-                <Image
-                  src="/about/Rectangle 9.png" //
-                  alt="Hall of Fame 1"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
+          {/* Mobile Gallery - Creative Stacked Cards */}
+          <div className="lg:hidden w-full max-w-md mx-auto">
+            <div className="grid grid-cols-2 gap-3">
+              {hallOfFameImages.map((image, index) => (
+                <div
+                  key={index}
+                  className={`relative overflow-hidden rounded-xl border-2 border-[#CCA855]/30 shadow-lg hover:shadow-2xl transition-all duration-500 group cursor-pointer ${
+                    index % 3 === 0 ? 'col-span-2 h-48' : 'h-40'
+                  }`}
+                  style={{
+                    animationDelay: `${index * 0.05}s`,
+                  }}
+                >
+                  <Image
+                    src={image}
+                    alt={`Hall of Fame ${index + 1}`}
+                    fill
+                    className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-75"
+                  />
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-            {/* Image 2 - Middle Left */}
-            {/* left: 91/440=20.6%, top: 461/704=65.4%, w: 121/440=27.5%, h: 76/704=10.8% */}
-            <div className="absolute left-[20.6%] top-[65.4%] w-[27.5%] h-[10.8%]">
-              <div className="relative w-full h-full border-[3px] border-black">
-                <Image
-                  src="/about/Rectangle 10.png"
-                  alt="Hall of Fame 2"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
+                  {/* Hover Border Glow */}
+                  <div className="absolute inset-0 border-2 border-[#CCA855] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-xl" />
 
-            {/* Image 3 - Bottom Center Left */}
-            {/* left: 169/440=38.4%, top: 537/704=76.2%, w: 102/440=23.1%, h: 92/704=13% */}
-            <div className="absolute left-[38.4%] top-[76.2%] w-[23.1%] h-[13%] border-[3px] border-black">
-              <Image
-                src="/about/Rectangle 12.png"
-                alt="Hall of Fame 3"
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            {/* Image 4 - Center Left */}
-            {/* left: 67/440=15.2%, top: 338/704=48%, w: 136/440=30.9%, h: 123/704=17.4% */}
-            <div className="absolute left-[15.2%] top-[48%] w-[30.9%] h-[17.4%] border-[3px] border-black">
-              <Image
-                src="/about/Rectangle 13.png"
-                alt="Hall of Fame 4"
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            {/* Image 5 - Upper Center Left */}
-            {/* left: 102/440=23.1%, top: 229/704=32.5%, w: 118/440=26.8%, h: 109/704=15.4% */}
-            <div className="absolute left-[23.1%] top-[32.5%] w-[26.8%] h-[15.4%] border-[3px] border-black">
-              <Image
-                src="/about/Rectangle 18.png"
-                alt="Hall of Fame 5"
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            {/* Image 6 - Top Right */}
-            {/* left: 178/440=40.4%, top: 58/704=8.2%, w: 83/440=18.8%, h: 77/704=10.9% */}
-            <div className="absolute left-[40.4%] top-[8.2%] w-[18.8%] h-[10.9%]">
-              <div className="relative w-full h-full border-[3px] border-black">
-                <Image
-                  src="/about/Rectangle 17.png" //
-                  alt="Hall of Fame 6"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
-
-            {/* Image 7 - Upper Center Right */}
-            {/* left: 220/440=50%, top: 229/704=32.5%, w: 118/440=26.8%, h: 109/704=15.4% */}
-            <div className="absolute left-[50%] top-[32.5%] w-[26.8%] h-[15.4%]">
-              <div className="relative w-full h-full border-[3px] border-black">
-                <Image
-                  src="/about/Rectangle 19.png"
-                  alt="Hall of Fame 7"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
-
-            {/* Image 8 - Center Right */}
-            {/* left: 203/440=46.1%, top: 338/704=48%, w: 165/440=37.5%, h: 123/704=17.4% */}
-            <div className="absolute left-[46.1%] top-[48%] w-[37.5%] h-[17.4%]">
-              <div className="relative w-full h-full border-[3px] border-black">
-                <Image
-                  src="/about/Rectangle 20.png"
-                  alt="Hall of Fame 8"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
-
-            {/* Image 9 - Middle Right */}
-            {/* left: 210/440=47.7%, top: 461/704=65.4%, w: 102/440=23.1%, h: 76/704=10.8% */}
-            <div className="absolute left-[47.7%] top-[65.4%] w-[23.1%] h-[10.8%] border-[3px] border-black">
-              <Image
-                src="/about/Rectangle 21.png"
-                alt="Hall of Fame 9"
-                fill
-                className="object-cover"
-              />
+                  {/* Corner Accents */}
+                  <div className="absolute top-2 left-2 w-6 h-6 border-l-2 border-t-2 border-[#CCA855] opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-tl-lg" />
+                  <div className="absolute bottom-2 right-2 w-6 h-6 border-r-2 border-b-2 border-[#CCA855] opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-br-lg" />
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Desktop Gallery (Using Percentage Positioning) */}
-          <div className="hidden lg:block relative w-full max-w-[1420px] aspect-[1420/1523] mx-auto">
-            {/* Row 1 - Top */}
-            {/* left: 518/1420=36.4%, top: 47/1523=3%, w: 328/1420=23%, h: 160/1523=10.5% */}
-            <div className="absolute left-[36.4%] top-[3%] w-[23%] h-[10.5%]">
-              <div className="relative w-full h-full border-[5px] border-black">
-                <Image
-                  src="/about/Rectangle 9.png"
-                  alt="Hall of Fame Top"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
+          {/* Desktop Gallery - Advanced Masonry Grid */}
+          <div className="hidden lg:block w-full max-w-7xl mx-auto">
+            <div className="columns-4 gap-4 space-y-4">
+              {hallOfFameImages.map((image, index) => (
+                <div
+                  key={index}
+                  className="relative break-inside-avoid mb-4 group cursor-pointer"
+                  style={{
+                    animationDelay: `${index * 0.03}s`,
+                  }}
+                >
+                  <div className="relative overflow-hidden rounded-2xl border-2 border-[#CCA855]/30 shadow-xl hover:shadow-2xl transition-all duration-700 hover:-translate-y-2">
+                    <div
+                      className={`relative ${
+                        index % 5 === 0
+                          ? 'h-80'
+                          : index % 5 === 1
+                            ? 'h-64'
+                            : index % 5 === 2
+                              ? 'h-96'
+                              : index % 5 === 3
+                                ? 'h-72'
+                                : 'h-56'
+                      }`}
+                    >
+                      <Image
+                        src={image}
+                        alt={`Hall of Fame ${index + 1}`}
+                        fill
+                        className="object-cover transition-all duration-700 group-hover:scale-110 group-hover:brightness-75"
+                      />
 
-            {/* Row 2 - Check for overlap and relative pos */}
-            {/* Image: left 682/1420=48%, top 203/1523=13.3%, w 235/1420=16.5%, h 217/1523=14.2% */}
-            <div className="absolute left-[48%] top-[13.3%] w-[16.5%] h-[14.2%]">
-              <div className="relative w-full h-full border-[5px] border-black">
-                <Image
-                  src="/about/Rectangle 19.png"
-                  alt="Hall of Fame"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-            {/* Image: left 447/1420=31.4%, top 203/1523=13.3%, w 235/1420=16.5%, h 217/1523=14.2% */}
-            <div className="absolute left-[31.4%] top-[13.3%] w-[16.5%] h-[14.2%] border-[5px] border-black">
-              <Image
-                src="/about/Rectangle 18.png"
-                alt="Hall of Fame"
-                fill
-                className="object-cover"
-              />
-            </div>
+                      {/* Hover Border Glow */}
+                      <div className="absolute inset-0 border-2 border-[#CCA855] opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl shadow-[0_0_30px_rgba(204,168,85,0.6)]" />
 
-            {/* Row 3 */}
-            {/* Image: left 311/1420=21.9%, top 419/1523=27.5%, w 242/1420=17%, h 218/1523=14.3% */}
-            <div className="absolute left-[21.9%] top-[27.5%] w-[17%] h-[14.3%] border-[5px] border-black">
-              <Image
-                src="/about/Rectangle 13.png"
-                alt="Hall of Fame"
-                fill
-                className="object-cover"
-              />
-            </div>
+                      {/* Corner Accents */}
+                      <div className="absolute top-3 left-3 w-8 h-8 border-l-[3px] border-t-[3px] border-[#CCA855] opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 rounded-tl-lg" />
+                      <div className="absolute top-3 right-3 w-8 h-8 border-r-[3px] border-t-[3px] border-[#CCA855] opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 rounded-tr-lg" />
+                      <div className="absolute bottom-3 left-3 w-8 h-8 border-l-[3px] border-b-[3px] border-[#CCA855] opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 rounded-bl-lg" />
+                      <div className="absolute bottom-3 right-3 w-8 h-8 border-r-[3px] border-b-[3px] border-[#CCA855] opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 rounded-br-lg" />
 
-            {/* Image: left 553/1420=38.9%, top 420/1523=27.5%, w 285/1420=20%, h 212/1523=13.9% */}
-            <div className="absolute left-[38.9%] top-[27.5%] w-[20%] h-[13.9%]">
-              <div className="relative w-full h-full border-[5px] border-black">
-                <Image
-                  src="/about/Rectangle 20.png"
-                  alt="Hall of Fame"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
+                      {/* Center Glow Effect */}
+                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div className="w-16 h-16 rounded-full bg-[#CCA855]/20 blur-xl animate-pulse" />
+                      </div>
 
-            {/* Image: left 838/1420=59%, top 419/1523=27.5%, w 242/1420=17%, h 218/1523=14.3% */}
-            <div className="absolute left-[59%] top-[27.5%] w-[17%] h-[14.3%] border-[5px] border-black">
-              <Image
-                src="/about/Rectangle 14.png"
-                alt="Hall of Fame"
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            {/* Row 4 */}
-            {/* Image: left 553/1420=38.9%, top 632/1523=41.4%, w 285/1420=20%, h 231/1523=15.1% */}
-            <div className="absolute left-[38.9%] top-[41.4%] w-[20%] h-[15.1%] border-[5px] border-black">
-              <Image
-                src="/about/Rectangle 22.png"
-                alt="Hall of Fame"
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            {/* Row 5 */}
-            {/* Image: left 203/1420=14.2%, top 637/1523=41.8%, w 350/1420=24.6%, h 220/1523=14.4% */}
-            <div className="absolute left-[14.2%] top-[41.8%] w-[24.6%] h-[14.4%]">
-              <div className="relative w-full h-full border-[5px] border-black">
-                <Image
-                  src="/about/Rectangle 10.png"
-                  alt="Hall of Fame"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
-
-            {/* Image: left 838/1420=59%, top 637/1523=41.8%, w 350/1420=24.6%, h 220/1523=14.4% */}
-            <div className="absolute left-[59%] top-[41.8%] w-[24.6%] h-[14.4%] border-[5px] border-black">
-              <Image
-                src="/about/Rectangle 11.png"
-                alt="Hall of Fame"
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            {/* Row 6 */}
-            {/* Image: left 311/1420=21.9%, top 857/1523=56.2%, w 242/1420=17%, h 218/1523=14.3% */}
-            <div className="absolute left-[21.9%] top-[56.2%] w-[17%] h-[14.3%] border-[5px] border-black">
-              <Image
-                src="/about/Rectangle 12.png"
-                alt="Hall of Fame"
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            {/* Image: left 553/1420=38.9%, top 863/1523=56.6%, w 285/1420=20%, h 212/1523=13.9% */}
-            <div className="absolute left-[38.9%] top-[56.6%] w-[20%] h-[13.9%] border-[5px] border-black">
-              <Image
-                src="/about/Rectangle 21.png"
-                alt="Hall of Fame"
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            {/* Image: left 838/1420=59%, top 857/1523=56.2%, w 242/1420=17%, h 218/1523=14.3% */}
-            <div className="absolute left-[59%] top-[56.2%] w-[17%] h-[14.3%] border-[5px] border-black">
-              <Image
-                src="/about/Rectangle 15.png"
-                alt="Hall of Fame"
-                fill
-                className="object-cover"
-              />
-            </div>
-
-            {/* Row 7 */}
-            {/* Image: left 447/1420=31.4%, top 1075/1523=70.5%, w 235/1420=16.5%, h 217/1523=14.2% */}
-            <div className="absolute left-[31.4%] top-[70.5%] w-[16.5%] h-[14.2%]">
-              <div className="relative w-full h-full border-[5px] border-black">
-                <Image
-                  src="/about/Rectangle 16.png"
-                  alt="Hall of Fame"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
-
-            {/* Image: left 682/1420=48%, top 1075/1523=70.5%, w 235/1420=16.5%, h 217/1523=14.2% */}
-            <div className="absolute left-[48%] top-[70.5%] w-[16.5%] h-[14.2%]">
-              <div className="relative w-full h-full border-[5px] border-black">
-                <Image
-                  src="/about/Rectangle 17.png"
-                  alt="Hall of Fame"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            </div>
-
-            {/* Row 8 - Bottom */}
-            {/* Image: left 518/1420=36.4%, top 1292/1523=84.8%, w 328/1420=23%, h 160/1523=10.5% */}
-            <div className="absolute left-[36.4%] top-[84.8%] w-[23%] h-[10.5%]">
-              <div className="relative w-full h-full border-[5px] border-black">
-                <Image
-                  src="/about/Rectangle 8.png"
-                  alt="Hall of Fame Bottom"
-                  fill
-                  className="object-cover"
-                />
-              </div>
+                      {/* Image Number Badge */}
+                      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-500 delay-200">
+                        <div className="px-3 py-1 bg-gradient-to-r from-[#B60302] to-[#8f0202] rounded-full border border-[#CCA855]/50 backdrop-blur-sm">
+                          <span className="text-[#CCA855] text-xs font-bold rajdhanifont">
+                            GOT {new Date().getFullYear() - 1}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>

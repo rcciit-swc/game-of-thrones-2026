@@ -8,6 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { Button } from '@/components/ui/button';
 import {
   Select,
@@ -68,6 +69,9 @@ export const EditProfileDialog: FC<EditProfileDialogProps> = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[682px] md:max-w-[682px] max-w-[380px] max-h-[85vh] overflow-y-auto my-scrollbar border-none rounded-[24px] p-0 bg-transparent shadow-2xl">
+        <VisuallyHidden>
+          <DialogTitle>Edit Profile</DialogTitle>
+        </VisuallyHidden>
         <AnimatePresence mode="wait">
           {showSuccess ? (
             <motion.div
