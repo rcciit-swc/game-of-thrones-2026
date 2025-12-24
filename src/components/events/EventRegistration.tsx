@@ -17,22 +17,15 @@ import { useEvents, useUser } from '@/lib/stores';
 import { login } from '@/utils/functions/auth/login';
 import { SoloEventRegistration } from '@/components/events/EventRegistrationDialog';
 import { TeamEventRegistration } from '@/components/events/TeamEventRegistration';
+import eventBackgrounds from '@/lib/eventBackgrounds.json';
 
 type EventRegistrationProps = {
   eventId?: string;
 };
 
-function normalizeBackgroundName(name?: string) {
-  if (!name) return undefined;
-  const compact = name.replace(/[^a-zA-Z0-9]/g, '').trim();
-  return compact.charAt(0).toUpperCase() + compact.slice(1);
-}
-
-function getBackgroundForEvent(name?: string) {
-  const normalized = normalizeBackgroundName(name);
-  if (normalized) {
-    return `/assets/events/Background/${normalized}.svg`;
-  }
+function getBackgroundForEvent(eventId?: string): string | undefined {
+  if (!eventId) return undefined;
+  return eventBackgrounds[eventId as keyof typeof eventBackgrounds];
 }
 
 function parseRulesHtml(html?: string): string[] {
@@ -110,10 +103,6 @@ function parseRulesHtml(html?: string): string[] {
 type TabType = 'description' | 'rules';
 
 const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
-  function getStringBeforeBracket(input: string): string {
-    const match = input.match(/^[^(]*/);
-    return match ? match[0].trim() : input;
-  }
   const { eventsData, eventsLoading } = useEvents();
   const { userData, userLoading } = useUser();
   const router = useRouter();
@@ -128,11 +117,7 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
       ? eventsData.find((e: any) => String(e.id) === String(eventId))
       : undefined;
   console.log(selectedEvent);
-  const bg = getBackgroundForEvent(
-    selectedEvent?.name
-      ? getStringBeforeBracket(selectedEvent.name)
-      : eventId || ''
-  );
+  const bg = getBackgroundForEvent(eventId);
 
   const tabs: { id: TabType; label: string }[] = [
     { id: 'description', label: 'Description' },

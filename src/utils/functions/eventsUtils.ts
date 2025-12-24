@@ -55,7 +55,7 @@ export const getEventsData = async (all: boolean = true) => {
     }
 
     const p_user_id = sessionData?.session?.user?.id || null;
-    const p_fest_id = 'a4bc08e4-9af9-4212-8d32-cd88d2437f18';
+    const p_fest_id = '5bff3a43-43b6-420a-8d42-9a96257cc351';
     const rolesData: {
       role: string;
       event_category_id?: string;
@@ -234,10 +234,10 @@ export const getApprovalDashboardData = async (
 
     const { data, error } = await supabase
       .rpc('get_registrations_by_event_ids', {
-        p_fest_id: '9b890292-2425-4c61-8753-9a1fcdd37acc',
+        p_fest_id: '5bff3a43-43b6-420a-8d42-9a96257cc351',
         p_event_category_id:
           isAdmin?.role === 'super_admin'
-            ? 'bc21d159-b6f4-4f1d-9c4a-45b67e9971b3'
+            ? 'c90f8d69-3520-43ac-85f6-043c6f60bf49'
             : null,
         p_event_id:
           isCoordinator?.role === 'coordinator'

@@ -1,7 +1,5 @@
 import Hero from '@/components/Hero';
 import About from '@/components/about/about';
-import Footer from '@/components/Footer';
-import Navbar from '@/components/Navbar';
 import Playground from '@/components/Playground';
 
 const page = () => {

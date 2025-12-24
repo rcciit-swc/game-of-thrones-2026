@@ -3,12 +3,19 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { userDataType } from '@/lib/types';
-import { useState, Dispatch, SetStateAction, useEffect, memo } from 'react';
+import {
+  useState,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  memo,
+  useRef,
+} from 'react';
 import { motion } from 'framer-motion';
 import { useUser } from '@/lib/stores';
 import { login } from '@/utils/functions/auth/login';
 import { logout } from '@/utils/functions/auth/logout';
-import { LogOut } from 'lucide-react';
+import { LogOut, Music, VolumeX } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,6 +31,44 @@ export default function Navbar() {
   const { userData, userLoading } = useUser();
   const [profileImage, setProfileImage] = useState<string | null>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Initialize and handle audio playback
+  useEffect(() => {
+    audioRef.current = new Audio('/Theme.mp3');
+    audioRef.current.loop = true;
+
+    // Attempt to autoplay (may be blocked by browser policies)
+    const playAudio = async () => {
+      try {
+        await audioRef.current?.play();
+        setIsPlaying(true);
+      } catch {
+        // Autoplay was blocked, user needs to interact first
+        setIsPlaying(false);
+      }
+    };
+
+    playAudio();
+
+    return () => {
+      audioRef.current?.pause();
+      audioRef.current = null;
+    };
+  }, []);
+
+  const toggleMusic = () => {
+    if (!audioRef.current) return;
+
+    if (isPlaying) {
+      audioRef.current.pause();
+      setIsPlaying(false);
+    } else {
+      audioRef.current.play();
+      setIsPlaying(true);
+    }
+  };
 
   // Fetch user session only once on mount
   useEffect(() => {
@@ -114,8 +159,23 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Register Button - Desktop */}
-          <div className="hidden lg:block">
+          {/* Music Toggle & Register Button - Desktop */}
+          <div className="hidden lg:flex items-center gap-4">
+            {/* Music Toggle Button */}
+            <motion.button
+              onClick={toggleMusic}
+              className="relative p-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors border border-[#CCA855]/30"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              aria-label={isPlaying ? 'Pause music' : 'Play music'}
+            >
+              {isPlaying ? (
+                <Music className="w-6 h-6 text-[#CCA855]" />
+              ) : (
+                <VolumeX className="w-6 h-6 text-[#CCA855]/50" />
+              )}
+            </motion.button>
+
             <SignInButton
               userData={userData}
               userLoading={userLoading}
@@ -172,6 +232,24 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
+
+          {/* Music Toggle Button - Mobile */}
+          <motion.button
+            onClick={toggleMusic}
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 transition-colors border border-[#CCA855]/30"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            aria-label={isPlaying ? 'Pause music' : 'Play music'}
+          >
+            {isPlaying ? (
+              <Music className="w-5 h-5 text-[#CCA855]" />
+            ) : (
+              <VolumeX className="w-5 h-5 text-[#CCA855]/50" />
+            )}
+            <span className="font-['Irish_Grover'] text-[#CCA855] text-[18px]">
+              {isPlaying ? 'Music On' : 'Music Off'}
+            </span>
+          </motion.button>
 
           {/* User Specific Links and Section for Mobile */}
           {userData ? (
@@ -305,7 +383,7 @@ const SignInButton = memo(
     return (
       <motion.button
         onClick={login}
-        className="relative w-42 py-2.5 bg-[#B60302] text-[#FAFAFA] text-[20px] font-['Irish_Grover'] rounded-[50px] shadow-[0_8px_15px_rgba(0,0,0,0.25)] hover:bg-[#8f0202] transition-colors duration-200 mt-2 text-center block drop-shadow-text"
+        className="relative w-42 py-2.5 bg-[#B60302] text-[#FAFAFA] text-[20px] font-['Irish_Grover'] rounded-[50px] shadow-[0_8px_15px_rgba(0,0,0,0.25)] hover:bg-[#8f0202] transition-colors duration-200 text-center block drop-shadow-text"
         whileHover={{
           scale: 1.05,
           boxShadow: '0 0 15px rgba(255, 182, 193, 0.6)',
