@@ -4,7 +4,7 @@ import { supabase } from '@/lib/supabase/client';
 export async function uploadPaymentScreenshot(file: File, eventName: string) {
   const bucket = 'fests';
   const fileName = `${Date.now()}-${file.name}`;
-  const filePath = `regalia-2025/${eventName}/${fileName}`;
+  const filePath = `game-of-thrones-2026/${eventName}/${fileName}`;
   const { data, error } = await supabase.storage
     .from(bucket)
     .upload(filePath, file);
@@ -35,6 +35,7 @@ export interface RegisterSoloParams {
   ref?: string;
   paymentMode?: string;
   regMode?: string;
+  account_holder_name?: string;
 }
 
 export async function registerSoloEvent(
@@ -49,6 +50,7 @@ export async function registerSoloEvent(
     ref,
     paymentMode,
     regMode,
+    account_holder_name,
   } = params;
 
   // Call the RPC named 'register_solo_event' with the required parameters.
@@ -64,6 +66,7 @@ export async function registerSoloEvent(
       p_payment_mode: paymentMode || 'UPI',
       p_referral_code: ref || 'TECHTRIX2025',
       p_attendance: false,
+      p_account_holder_name: account_holder_name,
     }
   );
   if (error) {
@@ -93,6 +96,7 @@ export interface RegisterTeamParams {
   ref: string;
   paymentMode?: string;
   regMode?: string;
+  account_holder_name?: string;
 }
 
 export async function registerTeamWithParticipants(
@@ -116,6 +120,10 @@ export async function registerTeamWithParticipants(
     { value: params.teamLeadName, message: 'Team lead name is required.' },
     { value: params.teamLeadPhone, message: 'Team lead phone is required.' },
     { value: params.teamLeadEmail, message: 'Team lead email is required.' },
+    {
+      value: params.account_holder_name,
+      message: 'Account holder name is required.',
+    },
   ].filter(Boolean);
 
   for (const validation of validations) {
@@ -144,6 +152,7 @@ export async function registerTeamWithParticipants(
     ref,
     paymentMode,
     regMode,
+    account_holder_name,
   } = params;
 
   // Call the RPC function 'register_team_with_participants'
@@ -164,6 +173,7 @@ export async function registerTeamWithParticipants(
       p_payment_mode: regMode || 'UPI',
       p_referral_code: ref || 'TECHTRIX2025',
       p_attendance: false,
+      p_account_holder_name: account_holder_name,
     }
   );
 

@@ -53,6 +53,7 @@ const EventCardRes = ({
         <img
           src={image}
           alt={title}
+          loading="lazy"
           className={cn(
             'w-full h-full object-contain transform-gpu transition-all duration-700 ease-out',
             isActive ? 'scale-105 brightness-110' : 'scale-100 brightness-100',

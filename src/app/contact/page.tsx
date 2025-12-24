@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { contactData } from './contact';
 import Navbar from '@/components/Navbar';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -15,11 +15,11 @@ const ContactCard = ({
 
   return (
     <motion.div
-      className="relative w-full max-w-xs h-96 cursor-pointer group"
+      className="relative w-full max-w-xs h-[450px] cursor-pointer group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       whileHover={{ y: -8, scale: 1.02 }}
-      transition={{ duration: 0.3 }}
+      transition={{ duration: 0.2 }}
     >
       {/* Card Container */}
       <div
@@ -30,19 +30,22 @@ const ContactCard = ({
             : '0 10px 30px rgba(182, 3, 2, 0.3), 0 0 20px rgba(204, 168, 85, 0.2)',
         }}
       >
-        {/* Background Image */}
+        {/* Background Image - Original brightness */}
         <img
           src={contact.image}
           alt={contact.name}
-          className={`w-full h-full object-cover transition-all duration-500 ${
-            isHovered
-              ? 'blur-sm brightness-50 scale-110'
-              : 'blur-0 brightness-90'
-          }`}
+          loading="lazy"
+          className="w-full h-full object-cover"
+          style={{
+            filter: isHovered
+              ? 'brightness(1.1) saturate(1.2)'
+              : 'brightness(1)',
+            transition: 'filter 0.5s ease',
+          }}
         />
 
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
 
         {/* Content - Always Visible */}
         <div
@@ -62,12 +65,12 @@ const ContactCard = ({
           </div>
         </div>
 
-        {/* Hover Content - Center */}
+        {/* Hover Content - Center - Optimized for mobile */}
         {isHovered && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-gradient-to-br from-black/90 via-[#B60302]/80 to-black/90 backdrop-blur-sm">
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-6 bg-gradient-to-br from-black/90 via-[#B60302]/80 to-black/90 md:backdrop-blur-sm">
             <div className="text-center">
               <h3
-                className="text-white font-bold text-2xl rajdhanifont mb-3 animate-pulse"
+                className="text-white font-bold text-2xl rajdhanifont mb-3"
                 style={{
                   textShadow: '0 0 20px rgba(204, 168, 85, 0.8)',
                 }}

@@ -234,7 +234,7 @@ export function ViewTeamMembers({
           <div className="h-px w-full bg-[#FF003C]/50 mb-8"></div>
 
           <motion.div
-            className="flex justify-center"
+            className="hidden md:block flex justify-center"
             variants={buttonVariants}
             whileHover="hover"
             whileTap="tap"
@@ -340,7 +340,35 @@ export function ViewTeamMembers({
 
                   <div className="h-1 w-32 bg-[#FF003C] rounded-full mt-2"></div>
                 </DrawerHeader>
-                <div className="p-4 overflow-y-auto max-h-[calc(100vh-10rem)]">
+                {showConfirmTeam && (
+                  <div className="px-4 pt-4 pb-2">
+                    <Button
+                      onClick={confirmTeam}
+                      disabled={registerLoading}
+                      className="w-full bg-[#CCA855] hover:bg-[#CCA855]/90 text-black font-medium flex items-center justify-center gap-2 px-4 py-3 text-base rounded-md border-0 transition-all duration-300 shadow-lg shadow-[#CCA855]/20"
+                    >
+                      {registerLoading ? (
+                        <>
+                          <Loader2 size={22} className="animate-spin" />
+                          <span>Processing...</span>
+                        </>
+                      ) : (
+                        <>
+                          {isFree ? (
+                            'Register'
+                          ) : (
+                            <>
+                              <CreditCard size={20} />
+                              <span>Proceed to Payment</span>
+                              <Check size={20} className="ml-1" />
+                            </>
+                          )}
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                )}
+                <div className="p-4 overflow-y-auto max-h-[calc(100vh-20rem)]">
                   <Content />
                 </div>
               </motion.div>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import bg_eyes from '@/assets/events/backgrounds/bg_eyes.svg';
 import { useEvents } from '@/lib/stores';
 import EventContainer from './EventContainer';
@@ -10,30 +10,75 @@ import LoaderOverlay from './LoaderOverlay';
 const EventsWrapper = () => {
   const { eventsData, eventsLoading } = useEvents();
   const [showLoader, setShowLoader] = useState(true);
-  const [assetsLoaded, setAssetsLoaded] = useState(false);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [contentReady, setContentReady] = useState(false);
 
+  // Track when all critical images are loaded
   useEffect(() => {
-    // Check if events are loaded
     if (!eventsLoading && eventsData && eventsData.length > 0) {
-      // Wait a bit for images to start loading
-      const timer = setTimeout(() => {
-        setAssetsLoaded(true);
-      }, 500);
+      // Get all event image URLs
+      const imageUrls = eventsData
+        .map((event: any) => event.image_url)
+        .filter(Boolean)
+        .slice(0, 10); // Only preload first 10 images for performance
 
-      return () => clearTimeout(timer);
+      if (imageUrls.length === 0) {
+        setImagesLoaded(true);
+        return;
+      }
+
+      let loadedCount = 0;
+      const totalImages = imageUrls.length;
+
+      // Preload images
+      imageUrls.forEach((url: string) => {
+        const img = new Image();
+        img.onload = () => {
+          loadedCount++;
+          if (loadedCount === totalImages) {
+            setImagesLoaded(true);
+          }
+        };
+        img.onerror = () => {
+          loadedCount++;
+          if (loadedCount === totalImages) {
+            setImagesLoaded(true);
+          }
+        };
+        img.src = url;
+      });
+
+      // Fallback timeout - don't wait forever
+      const timeout = setTimeout(() => {
+        setImagesLoaded(true);
+      }, 5000); // 5 second max wait
+
+      return () => clearTimeout(timeout);
     }
   }, [eventsLoading, eventsData]);
 
+  // Mark content as ready when both events and images are loaded
   useEffect(() => {
-    // Hide loader when both events and assets are ready
-    if (assetsLoaded && !eventsLoading) {
+    if (!eventsLoading && imagesLoaded) {
+      // Small delay to ensure smooth transition
+      const timer = setTimeout(() => {
+        setContentReady(true);
+      }, 300);
+
+      return () => clearTimeout(timer);
+    }
+  }, [eventsLoading, imagesLoaded]);
+
+  // Hide loader when content is ready
+  useEffect(() => {
+    if (contentReady) {
       const hideTimer = setTimeout(() => {
         setShowLoader(false);
-      }, 300);
+      }, 100);
 
       return () => clearTimeout(hideTimer);
     }
-  }, [assetsLoaded, eventsLoading]);
+  }, [contentReady]);
 
   const handleLoaderComplete = () => {
     // Loader animation completed
@@ -47,7 +92,7 @@ const EventsWrapper = () => {
         onAnimationComplete={handleLoaderComplete}
       />
 
-      {/* Hero Section - Reduced height */}
+      {/* Hero Section - Optimized for mobile */}
       <div className="min-h-[35vh] md:min-h-[45vh] bg-[url('/assets/events/bg_res.svg')] lg:bg-[url('https://i.postimg.cc/Kj4ygcYw/bg-eyes-copy.png')] bg-cover lg:bg-contain bg-no-repeat bg-top flex lg:items-center justify-center">
         <h1 className="z-3 text-white rajdhanifont text-5xl md:text-7xl text-center translate-y-32 md:translate-y-16">
           <span className="text-4xl md:text-6xl font-thin">CHOOSE YOUR</span>
@@ -57,8 +102,8 @@ const EventsWrapper = () => {
 
       {/* EventContainer background starts here - wrapping ImageMarquee, Quote, and Events */}
       <div className="relative bg-[url('/assets/events/bg.svg')] bg-cover bg-top bg-no-repeat overflow-hidden">
-        {/* Image Marquee - now on EventContainer background */}
-        <ImageMarquee />
+        {/* Image Marquee - Lazy loaded */}
+        {contentReady && <ImageMarquee />}
 
         {/* Quote Section - Compact and responsive */}
         <div className="flex justify-center items-center my-6 md:my-8 px-4 relative">
@@ -74,8 +119,8 @@ const EventsWrapper = () => {
           </h1>
         </div>
 
-        {/* Event Container - without its own background now */}
-        <EventContainer />
+        {/* Event Container - Render when content is ready */}
+        {contentReady && <EventContainer />}
       </div>
     </>
   );

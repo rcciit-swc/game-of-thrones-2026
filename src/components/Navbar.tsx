@@ -95,19 +95,21 @@ export default function Navbar() {
       <div className="absolute inset-0 -z-10 pointer-events-none">
         {/* Soft ambient glow spread */}
         <div
-          className="absolute top-10 left-1/2 -translate-x-1/2 w-[92vw] max-w-[1200px] h-28 lg:h-40 blur-[48px] opacity-90"
+          className="absolute top-10 left-1/2 -translate-x-1/2 w-[92vw] max-w-[1200px] h-28 lg:h-40 blur-[24px] md:blur-[48px] opacity-90"
           style={{
             backgroundImage:
               'radial-gradient(ellipse at center, rgba(255,0,60,0.35) 0%, rgba(255,0,60,0.18) 45%, rgba(255,0,60,0.08) 70%, transparent 85%)',
             filter: 'saturate(1.2)',
+            willChange: 'transform',
           }}
         />
         {/* Bottom bleed to simulate light fall-off */}
         <div
-          className="absolute top-20 left-1/2 -translate-x-1/2 w-[80vw] max-w-[1000px] h-20 blur-[36px] opacity-80"
+          className="absolute top-20 left-1/2 -translate-x-1/2 w-[80vw] max-w-[1000px] h-20 blur-[18px] md:blur-[36px] opacity-80"
           style={{
             backgroundImage:
               'radial-gradient(ellipse at center, rgba(255,0,60,0.5) 0%, rgba(255,0,60,0.18) 55%, transparent 85%)',
+            willChange: 'transform',
           }}
         />
       </div>
@@ -212,13 +214,15 @@ export default function Navbar() {
 
       {/* Mobile Dropdown Menu */}
       <div
-        className={`lg:hidden fixed top-35 left-0 right-0 mx-4 rounded-[15px] bg-[linear-gradient(90deg,rgba(77,4,4,0.95),rgba(32,7,7,0.95))] backdrop-blur-[25px] transition-all duration-300 overflow-hidden z-40 ${
+        className={`lg:hidden fixed top-35 left-0 right-0 mx-4 rounded-[15px] bg-[linear-gradient(90deg,rgba(77,4,4,0.95),rgba(32,7,7,0.95))] backdrop-blur-[10px] transition-all duration-200 overflow-hidden z-40 ${
           isMenuOpen ? 'max-h-[600px] opacity-100 py-8' : 'max-h-0 opacity-0'
         }`}
         style={{
           boxShadow: isMenuOpen
             ? '0 8px 32px rgba(255, 0, 60, 0.4), 0 16px 64px rgba(255, 0, 60, 0.2), inset 0 1px 0 rgba(255, 0, 60, 0.3)'
             : '0 0 0 rgba(255, 0, 60, 0)',
+          willChange: isMenuOpen ? 'max-height, opacity' : 'auto',
+          transform: 'translateZ(0)',
         }}
       >
         <div className="flex flex-col items-center gap-6">

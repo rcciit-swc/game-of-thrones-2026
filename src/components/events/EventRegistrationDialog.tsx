@@ -51,6 +51,7 @@ type SoloLeadFormValues = z.infer<typeof soloLeadSchema>;
 
 // Schema for payment details.
 const paymentSchema = z.object({
+  accountHolderName: z.string().min(1, 'Account Holder Name is required'),
   transactionId: z.string().min(1, 'Transaction ID is required'),
   paymentScreenshot: z
     .any()
@@ -145,6 +146,7 @@ export function SoloEventRegistration({
       name: soloLeadData!.name,
       phone: soloLeadData!.phone,
       email: soloLeadData!.email,
+      account_holder_name: data.accountHolderName,
     };
     const emailData = {
       teamName: null,
@@ -243,7 +245,7 @@ export function SoloEventRegistration({
             <Music size={32} className="text-[#FF003C]" />
             <Ticket size={32} className="text-[#FF003C]" />
           </motion.div>
-          <DialogTitle className="text-center text-white font-antolia tracking-widest font-bold text-3xl pb-2 relative z-10">
+          <DialogTitle className="text-center text-white font-antolia tracking-widest font-bold text-2xl md:text-3xl pb-1 relative z-10">
             Registration for {eventName}
           </DialogTitle>
           <div className="flex justify-center mt-2">
@@ -293,8 +295,8 @@ export function SoloEventRegistration({
               onSubmit={handleSoloLeadSubmit(onSoloLeadSubmit)}
               className="overflow-y-auto my-scrollbar max-h-[65vh] relative z-10 mt-4"
             >
-              <div className="grid gap-6 py-4">
-                <div className="grid gap-2">
+              <div className="grid gap-4 py-2">
+                <div className="grid gap-1.5">
                   <label
                     htmlFor="name"
                     className="flex items-center gap-2 text-[#CCA855] font-medium relative z-10"
@@ -307,7 +309,7 @@ export function SoloEventRegistration({
                       id="name"
                       readOnly
                       {...registerSoloLead('name')}
-                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300 relative z-10"
+                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300 relative z-10"
                       placeholder="Enter your name"
                       defaultValue={userData?.name}
                     />
@@ -323,7 +325,7 @@ export function SoloEventRegistration({
                   )}
                 </div>
 
-                <div className="grid gap-2">
+                <div className="grid gap-1.5">
                   <label
                     htmlFor="phone"
                     className="flex items-center gap-2 text-[#CCA855] font-medium relative z-10"
@@ -337,7 +339,7 @@ export function SoloEventRegistration({
                       type="tel"
                       readOnly
                       {...registerSoloLead('phone')}
-                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300 relative z-10"
+                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300 relative z-10"
                       placeholder="Enter your phone number"
                       defaultValue={userData?.phone}
                     />
@@ -353,7 +355,7 @@ export function SoloEventRegistration({
                   )}
                 </div>
 
-                <div className="grid gap-2">
+                <div className="grid gap-1.5">
                   <label
                     htmlFor="email"
                     className="flex items-center gap-2 text-[#CCA855] font-medium relative z-10"
@@ -366,7 +368,7 @@ export function SoloEventRegistration({
                       id="email"
                       type="email"
                       {...registerSoloLead('email')}
-                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300 relative z-10"
+                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300 relative z-10"
                       placeholder="Enter your email"
                       defaultValue={userData?.email}
                       readOnly
@@ -383,7 +385,7 @@ export function SoloEventRegistration({
                   )}
                 </div>
 
-                <div className="grid gap-2">
+                <div className="grid gap-1.5">
                   <label
                     htmlFor="college"
                     className="flex items-center gap-2 text-[#CCA855] font-medium relative z-10"
@@ -396,7 +398,7 @@ export function SoloEventRegistration({
                       id="college"
                       autoFocus
                       {...registerSoloLead('college')}
-                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300 relative z-10"
+                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300 relative z-10"
                       placeholder="Enter your college name"
                     />
                     <Building
@@ -441,8 +443,35 @@ export function SoloEventRegistration({
               onSubmit={handlePaymentSubmit(onPaymentSubmit)}
               className="overflow-y-auto my-scrollbar max-h-[65vh] relative z-10 mt-4"
             >
-              <div className="grid gap-6 py-4">
-                <div className="grid gap-2">
+              <div className="grid gap-4 py-2">
+                <div className="grid gap-1.5">
+                  <label
+                    htmlFor="accountHolderName"
+                    className="flex items-center gap-2 text-[#CCA855] font-medium relative z-10"
+                  >
+                    <User size={18} />
+                    <span>Account Holder Name</span>
+                  </label>
+                  <div className="relative">
+                    <input
+                      id="accountHolderName"
+                      {...registerPayment('accountHolderName')}
+                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300 relative z-10"
+                      placeholder="Enter account holder name"
+                    />
+                    <User
+                      size={18}
+                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70 z-10"
+                    />
+                  </div>
+                  {paymentErrors.accountHolderName && (
+                    <p className="text-red-400 text-sm ml-2">
+                      {paymentErrors.accountHolderName.message}
+                    </p>
+                  )}
+                </div>
+
+                <div className="grid gap-1.5">
                   <label
                     htmlFor="transactionId"
                     className="flex items-center gap-2 text-[#CCA855] font-medium relative z-10"
@@ -454,7 +483,7 @@ export function SoloEventRegistration({
                     <input
                       id="transactionId"
                       {...registerPayment('transactionId')}
-                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300 relative z-10"
+                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300 relative z-10"
                       placeholder="Enter transaction ID"
                     />
                     <CreditCard
@@ -469,7 +498,7 @@ export function SoloEventRegistration({
                   )}
                 </div>
 
-                <div className="grid gap-2 text-white relative z-10">
+                <div className="grid gap-1.5 text-white relative z-10">
                   <label
                     htmlFor="paymentScreenshot"
                     className="flex items-center gap-2 text-[#CCA855] font-medium"
@@ -498,9 +527,9 @@ export function SoloEventRegistration({
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2 }}
-                className="mt-8 mb-6 relative z-10"
+                className="mt-4 mb-4 relative z-10"
               >
-                <h1 className="text-white text-center text-2xl font-antolia tracking-widest font-semibold">
+                <h1 className="text-white text-center text-xl md:text-2xl font-antolia tracking-widest font-semibold">
                   Pay <span className="text-[#FF003C]">₹ {eventFees}</span>
                 </h1>
                 <div className="mt-4 w-full flex items-center justify-center">
@@ -508,7 +537,7 @@ export function SoloEventRegistration({
                     <div className="absolute inset-0 bg-[#FF003C] rounded-lg blur-lg opacity-50 animate-pulse"></div>
                     <div className="relative p-1 bg-[#FF003C] rounded-lg">
                       <Image
-                        src="https://i.postimg.cc/0j5bd9Dy/Whats-App-Image-2025-04-25-at-04-49-14-be67b65c.jpg"
+                        src="https://i.postimg.cc/h48tnXQb/image.png"
                         alt="Payment QR Code"
                         width={280}
                         height={280}

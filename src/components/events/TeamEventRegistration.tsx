@@ -89,6 +89,7 @@ export function TeamEventRegistration({
 
   // Zod schema for Payment Details (Step 3)
   const paymentSchema = z.object({
+    accountHolderName: z.string().min(1, 'Account Holder Name is required'),
     transactionId: z.string().min(1, 'Transaction ID is required'),
     paymentScreenshot: z
       .any()
@@ -216,6 +217,7 @@ export function TeamEventRegistration({
   });
 
   const onPaymentSubmit = async (data: PaymentFormValues) => {
+    console.log(data);
     setIsRegistering(true);
     let screenshotUrl = '';
     if (eventFees > 0) {
@@ -246,7 +248,8 @@ export function TeamEventRegistration({
       teamLeadPhone: teamLeadData!.phone,
       teamLeadEmail: teamLeadData!.email,
       teamMembers: teamMembers,
-      ref: userData?.referral_code || 'REGALIA2025',
+      ref: userData?.referral_code || 'GOT2026',
+      account_holder_name: data.accountHolderName,
     };
     const emailData = {
       eventName: eventData?.name,
@@ -315,7 +318,8 @@ export function TeamEventRegistration({
       teamLeadPhone: teamLeadData!.phone,
       teamLeadEmail: teamLeadData!.email,
       teamMembers: teamMembers,
-      ref: userData?.referral_code || 'REGALIA2025',
+      ref: userData?.referral_code || 'GOT2026',
+      account_holder_name: '',
     };
     try {
       // Call the registerTeamWithParticipants function.
@@ -444,7 +448,7 @@ export function TeamEventRegistration({
               <UsersRound size={32} className="text-[#FF003C]" />
               <Music size={32} className="text-[#FF003C]" />
             </motion.div>
-            <DialogTitle className="text-center text-white font-antolia tracking-widest font-bold text-3xl pb-2 relative z-10">
+            <DialogTitle className="text-center text-white font-antolia tracking-widest font-bold text-2xl md:text-3xl pb-1 relative z-10">
               Team Registration
             </DialogTitle>
             <div className="flex justify-center">
@@ -543,9 +547,9 @@ export function TeamEventRegistration({
                     onSubmit={handleTeamLeadSubmit(onTeamLeadSubmit)}
                     className="overflow-y-auto my-scrollbar relative z-10 mt-4"
                   >
-                    <div className="grid gap-6 py-4">
+                    <div className="grid gap-4 py-2">
                       {/* Team Name Field */}
-                      <div className="grid gap-2">
+                      <div className="grid gap-1.5">
                         <label
                           htmlFor="teamName"
                           className="flex items-center gap-2 text-[#CCA855] font-medium"
@@ -558,7 +562,7 @@ export function TeamEventRegistration({
                             id="teamName"
                             {...registerTeamLead('teamName')}
                             defaultValue={teamLeadData?.teamName}
-                            className="w-full bg-[#090B0D] border font-antolia tracking-wider text-xl border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300"
+                            className="w-full bg-[#090B0D] border font-antolia tracking-wider border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300"
                             placeholder="Enter your team name"
                             autoFocus
                           />
@@ -574,7 +578,7 @@ export function TeamEventRegistration({
                         )}
                       </div>
 
-                      <div className="grid gap-2">
+                      <div className="grid gap-1.5">
                         <label
                           htmlFor="name"
                           className="flex items-center gap-2 text-[#CCA855] font-medium"
@@ -587,7 +591,7 @@ export function TeamEventRegistration({
                             id="name"
                             readOnly
                             {...registerTeamLead('name')}
-                            className="w-full bg-[#090B0D] border font-antolia tracking-wider text-xl border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300"
+                            className="w-full bg-[#090B0D] border font-antolia tracking-wider border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300"
                             placeholder="Enter team lead name"
                             defaultValue={userData?.name}
                           />
@@ -603,7 +607,7 @@ export function TeamEventRegistration({
                         )}
                       </div>
 
-                      <div className="grid gap-2">
+                      <div className="grid gap-1.5">
                         <label
                           htmlFor="phone"
                           className="flex items-center gap-2 text-[#CCA855] font-medium"
@@ -618,7 +622,7 @@ export function TeamEventRegistration({
                             readOnly
                             defaultValue={userData?.phone}
                             {...registerTeamLead('phone')}
-                            className="w-full bg-[#090B0D] border font-antolia tracking-wider text-xl border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300"
+                            className="w-full bg-[#090B0D] border font-antolia tracking-wider border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300"
                             placeholder="Enter team lead phone number"
                           />
                           <Phone
@@ -633,7 +637,7 @@ export function TeamEventRegistration({
                         )}
                       </div>
 
-                      <div className="grid gap-2">
+                      <div className="grid gap-1.5">
                         <label
                           htmlFor="email"
                           className="flex items-center gap-2 text-[#CCA855] font-medium"
@@ -647,7 +651,7 @@ export function TeamEventRegistration({
                             type="email"
                             defaultValue={userData?.email}
                             {...registerTeamLead('email')}
-                            className="w-full bg-[#090B0D] border font-antolia tracking-wider text-xl border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300"
+                            className="w-full bg-[#090B0D] border font-antolia tracking-wider border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300"
                             placeholder="Enter team lead email"
                             readOnly
                           />
@@ -663,7 +667,7 @@ export function TeamEventRegistration({
                         )}
                       </div>
 
-                      <div className="grid gap-2">
+                      <div className="grid gap-1.5">
                         <label
                           htmlFor="collegeName"
                           className="flex items-center gap-2 text-[#CCA855] font-medium"
@@ -678,7 +682,7 @@ export function TeamEventRegistration({
                             defaultValue={
                               teamLeadData?.collegeName || userData?.college
                             }
-                            className="w-full bg-[#090B0D] border font-antolia tracking-wider text-xl border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300"
+                            className="w-full bg-[#090B0D] border font-antolia tracking-wider border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300"
                             placeholder="Enter college name"
                           />
                           <Building
@@ -766,7 +770,7 @@ export function TeamEventRegistration({
                           }
                           setIsAddingMember(false);
                         })}
-                        className="grid gap-6 py-4"
+                        className="grid gap-4 py-2"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.3 }}
@@ -777,7 +781,7 @@ export function TeamEventRegistration({
                             : 'Add Team Member'}
                         </h3>
 
-                        <div className="grid gap-2">
+                        <div className="grid gap-1.5">
                           <label
                             htmlFor="memberName"
                             className="flex items-center gap-2 text-[#CCA855] font-medium"
@@ -789,7 +793,7 @@ export function TeamEventRegistration({
                             <input
                               id="memberName"
                               {...registerTeamMember('name')}
-                              className="w-full bg-[#090B0D] border font-antolia tracking-wider text-xl border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300"
+                              className="w-full bg-[#090B0D] border font-antolia tracking-wider border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300"
                               placeholder="Enter member name"
                               autoFocus
                             />
@@ -805,7 +809,7 @@ export function TeamEventRegistration({
                           )}
                         </div>
 
-                        <div className="grid gap-2">
+                        <div className="grid gap-1.5">
                           <label
                             htmlFor="memberPhone"
                             className="flex items-center gap-2 text-[#CCA855] font-medium"
@@ -818,7 +822,7 @@ export function TeamEventRegistration({
                               id="memberPhone"
                               type="tel"
                               {...registerTeamMember('phone')}
-                              className="w-full bg-[#090B0D] border font-antolia tracking-wider text-xl border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300"
+                              className="w-full bg-[#090B0D] border font-antolia tracking-wider border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300"
                               placeholder="Enter member phone number"
                             />
                             <Phone
@@ -833,7 +837,7 @@ export function TeamEventRegistration({
                           )}
                         </div>
 
-                        <div className="grid gap-2">
+                        <div className="grid gap-1.5">
                           <label
                             htmlFor="memberEmail"
                             className="flex items-center gap-2 text-[#CCA855] font-medium"
@@ -846,7 +850,7 @@ export function TeamEventRegistration({
                               id="memberEmail"
                               type="email"
                               {...registerTeamMember('email')}
-                              className="w-full bg-[#090B0D] border font-antolia tracking-wider text-xl border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300"
+                              className="w-full bg-[#090B0D] border font-antolia tracking-wider border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300"
                               placeholder="Enter member email"
                             />
                             <Mail
@@ -1025,7 +1029,7 @@ export function TeamEventRegistration({
                     onSubmit={handlePaymentSubmit(onPaymentSubmit)}
                     className="overflow-y-auto my-scrollbar py-4  relative z-10 mt-4"
                   >
-                    <div className="grid gap-6 py-4">
+                    <div className="grid gap-4 py-2">
                       <div className="text-center mb-4">
                         <h3 className="text-[#CCA855] font-antolia tracking-widest text-xl mb-2">
                           Payment Details
@@ -1039,7 +1043,34 @@ export function TeamEventRegistration({
                         </div>
                       </div>
 
-                      <div className="grid gap-2">
+                      <div className="grid gap-1.5">
+                        <label
+                          htmlFor="accountHolderName"
+                          className="flex items-center gap-2 text-[#CCA855] font-medium"
+                        >
+                          <User size={18} />
+                          <span>Account Holder Name</span>
+                        </label>
+                        <div className="relative">
+                          <input
+                            id="accountHolderName"
+                            {...registerPayment('accountHolderName')}
+                            className="w-full bg-[#090B0D] border font-antolia tracking-wider border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300"
+                            placeholder="Enter account holder name"
+                          />
+                          <User
+                            size={18}
+                            className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70"
+                          />
+                        </div>
+                        {paymentErrors.accountHolderName && (
+                          <p className="text-red-400 text-sm ml-2">
+                            {paymentErrors.accountHolderName.message}
+                          </p>
+                        )}
+                      </div>
+
+                      <div className="grid gap-1.5">
                         <label
                           htmlFor="transactionId"
                           className="flex items-center gap-2 text-[#CCA855] font-medium"
@@ -1051,7 +1082,7 @@ export function TeamEventRegistration({
                           <input
                             id="transactionId"
                             {...registerPayment('transactionId')}
-                            className="w-full bg-[#090B0D] border font-antolia tracking-wider text-xl border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300"
+                            className="w-full bg-[#090B0D] border font-antolia tracking-wider border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300"
                             placeholder="Enter transaction ID"
                           />
                           <Ticket
@@ -1066,7 +1097,7 @@ export function TeamEventRegistration({
                         )}
                       </div>
 
-                      <div className="grid gap-2">
+                      <div className="grid gap-1.5">
                         <label
                           htmlFor="paymentScreenshot"
                           className="flex items-center gap-2 text-[#CCA855] font-medium"
@@ -1079,7 +1110,7 @@ export function TeamEventRegistration({
                             id="paymentScreenshot"
                             type="file"
                             {...registerPayment('paymentScreenshot')}
-                            className="w-full bg-[#090B0D] border font-antolia tracking-wider border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-3 pl-10 transition-all duration-300"
+                            className="w-full bg-[#090B0D] border font-antolia tracking-wider border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300"
                             accept="image/*"
                           />
                           <Upload
@@ -1100,7 +1131,7 @@ export function TeamEventRegistration({
                             Scan QR Code to Pay
                           </h4>
                           <Image
-                            src="https://i.postimg.cc/0j5bd9Dy/Whats-App-Image-2025-04-25-at-04-49-14-be67b65c.jpg"
+                            src="https://i.postimg.cc/h48tnXQb/image.png"
                             alt="Payment QR Code"
                             width={200}
                             height={200}

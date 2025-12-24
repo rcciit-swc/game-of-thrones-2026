@@ -17,6 +17,7 @@ export interface RegisterTeamParams {
   teamLeadName: string;
   teamLeadPhone: string;
   teamLeadEmail: string;
+  account_holder_name: string;
   teamMembers: TeamMember[];
 }
 
@@ -58,6 +59,7 @@ export async function registerTeamWithParticipants(params: RegisterTeamParams) {
     teamLeadPhone,
     teamLeadEmail,
     teamMembers,
+    account_holder_name,
   } = params;
 
   // Call the RPC function 'register_team_with_participants'
@@ -74,6 +76,7 @@ export async function registerTeamWithParticipants(params: RegisterTeamParams) {
       p_team_lead_phone: teamLeadPhone,
       p_team_lead_email: teamLeadEmail,
       p_team_members: teamMembers || [],
+      p_account_holder_name: account_holder_name,
     }
   );
 

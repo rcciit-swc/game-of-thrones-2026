@@ -459,7 +459,7 @@ const Hero = () => {
         </div>
 
         {/* Register Button - Mobile only */}
-        <div
+        {/* <div
           className="md:hidden flex justify-center mt-10 opacity-0 animate-fadeInUp"
           style={{ animationDelay: '1.4s' }}
         >
@@ -469,7 +469,7 @@ const Hero = () => {
           >
             Register
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );
