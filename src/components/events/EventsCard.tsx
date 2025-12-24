@@ -141,7 +141,7 @@ const Card = ({
                 </div>
                 <div className="flex-1">
                   <div className="font-bold text-red-200 mb-1.5 tracking-wide">
-                    Schedule
+                    Schedule & Venue
                   </div>
                   <div className="text-gray-200 space-y-0.5 text-xs leading-relaxed">
                     {htmlToLines(schedule).map((line, i) => (
@@ -174,7 +174,7 @@ const Card = ({
                 </div>
                 <div className="flex flex-col">
                   <span className="font-bold text-yellow-200 tracking-wide text-xs">
-                    Entry Fee
+                    Registration Fees
                   </span>
                   <span className="text-2xl font-extrabold text-transparent bg-linear-to-r from-yellow-200 via-yellow-100 to-orange-200 bg-clip-text">
                     {typeof registrationFee === 'number'
@@ -185,6 +185,40 @@ const Card = ({
               </motion.div>
             )}
           </div>
+
+          {/* Register Button */}
+          <motion.button
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            whileHover={{ scale: 1.05, y: -2 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={(e) => {
+              e.stopPropagation();
+              onClick?.();
+            }}
+            className="relative w-full mt-3 px-6 py-3 bg-gradient-to-r from-[#B60302] to-[#8f0202] text-white font-['Irish_Grover'] text-base rounded-full shadow-lg hover:shadow-xl transition-all duration-300 border-2 border-[#FF003C]/30 hover:border-[#FF003C]/60 overflow-hidden group/btn"
+          >
+            <span className="relative z-10 flex items-center justify-center gap-2">
+              Register Now
+              <motion.span
+                animate={{ x: [0, 4, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                →
+              </motion.span>
+            </span>
+            {/* Shimmer effect */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+              animate={{ x: ['-100%', '100%'] }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: 'linear',
+              }}
+            />
+          </motion.button>
 
           {children}
         </div>

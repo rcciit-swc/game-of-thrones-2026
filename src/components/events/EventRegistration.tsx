@@ -18,6 +18,7 @@ import { login } from '@/utils/functions/auth/login';
 import { SoloEventRegistration } from '@/components/events/EventRegistrationDialog';
 import { TeamEventRegistration } from '@/components/events/TeamEventRegistration';
 import eventBackgrounds from '@/lib/eventBackgrounds.json';
+import Link from 'next/link';
 
 type EventRegistrationProps = {
   eventId?: string;
@@ -263,7 +264,7 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
               >
                 <h3 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-300 bg-clip-text text-transparent mb-4 flex items-center gap-2">
                   <Calendar className="w-6 h-6 text-yellow-400" />
-                  Schedule
+                  Schedule & Venue
                 </h3>
                 <div className="space-y-2 bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md rounded-xl p-4 border border-white/20">
                   {scheduleLines.map((line, i) => (
@@ -312,7 +313,12 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
                       </p>
                       <div className="flex items-center gap-2 mt-2 text-gray-300 group-hover:text-gray-100 transition-colors">
                         <Phone className="w-4 h-4 text-yellow-400" />
-                        <p className="text-sm font-medium">{coord.phone}</p>
+                        <Link
+                          href={'tel:' + coord.phone}
+                          className="text-sm font-medium"
+                        >
+                          {coord.phone}
+                        </Link>
                       </div>
                     </motion.div>
                   ))}
@@ -462,7 +468,7 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
             <motion.button
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center gap-2 bg-gradient-to-r from-[#CCA855] to-[#D4B76A] hover:from-[#CCA855]/90 hover:to-[#D4B76A]/90 text-white px-3 pr-5 py-2.5 rounded-full transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl hover:shadow-[#CCA855]/30"
+              className="flex items-center gap-2 bg-gradient-to-r from-[#CCA855] to-[#D4B76A] hover:from-[#CCA855]/90 hover:to-[#D4B76A]/90 text-white px-2 sm:px-3 sm:pr-5 py-2 sm:py-2.5 rounded-full transition-all duration-300 cursor-pointer shadow-lg hover:shadow-xl hover:shadow-[#CCA855]/30"
               onClick={() => router.back()}
             >
               <Image
@@ -470,9 +476,11 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
                 alt="Back"
                 width={20}
                 height={20}
-                className="rounded-full bg-gradient-to-br from-[#FF003C] to-[#C70030] p-2 h-9 w-9 shadow-md"
+                className="rounded-full bg-gradient-to-br from-[#FF003C] to-[#C70030] p-1.5 sm:p-2 h-8 w-8 sm:h-9 sm:w-9 shadow-md"
               />
-              <span className="font-bold text-sm md:text-base">BACK</span>
+              <span className="hidden sm:inline font-bold text-sm md:text-base">
+                BACK
+              </span>
             </motion.button>
 
             {selectedEvent?.id &&

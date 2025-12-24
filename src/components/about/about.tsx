@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const About = () => {
   return (
-    <section className="relative w-full overflow-hidden bg-black">
+    <section id="legacy" className="relative w-full overflow-hidden bg-black">
       {/* Desktop Layout */}
       <div className="hidden lg:block relative w-full h-[881px] max-w-[1920px] mx-auto">
         {/* Background Image */}

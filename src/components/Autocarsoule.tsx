@@ -50,9 +50,9 @@ const fallbackImages = [
    Constants
 ---------------------------- */
 
-const ITEM_WIDTH = 190;
-const GAP = 20;
-const MAX_HEIGHT = 320;
+const ITEM_WIDTH = 260;
+const GAP = 24;
+const MAX_HEIGHT = 400;
 
 /* ---------------------------
    Carousel Item Component
@@ -89,51 +89,58 @@ function CarouselItem({
   const scaleY = useTransform(
     distance,
     [0, ITEM_WIDTH * 0.8, ITEM_WIDTH * 1.8],
-    [1, 0.88, 0.78]
+    [1, 0.9, 0.8]
   );
 
   /* 🔑 SCALE X — subtle depth */
-  const scale = useTransform(distance, [0, ITEM_WIDTH * 1.2], [1.04, 0.92]);
+  const scale = useTransform(distance, [0, ITEM_WIDTH * 1.2], [1.08, 0.94]);
 
-  const opacity = useTransform(distance, [0, ITEM_WIDTH * 1.6], [1, 0.45]);
+  const opacity = useTransform(distance, [0, ITEM_WIDTH * 1.6], [1, 0.5]);
 
   const cardContent = (
     <motion.div
-      className="relative flex-shrink-0 rounded-2xl overflow-hidden shadow-2xl bg-black group"
+      className="relative flex-shrink-0 rounded-3xl overflow-hidden bg-black group"
       style={{
         width: ITEM_WIDTH,
         height: MAX_HEIGHT,
         scale,
         scaleY,
         opacity,
-        border: '6px solid transparent',
+        border: '8px solid transparent',
         backgroundImage:
           'linear-gradient(black, black), linear-gradient(135deg, #B60302, #FF003C, #CCA855)',
         backgroundOrigin: 'border-box',
         backgroundClip: 'padding-box, border-box',
+        boxShadow:
+          '0 20px 60px rgba(182, 3, 2, 0.4), 0 0 40px rgba(204, 168, 85, 0.2)',
       }}
+      whileHover={{
+        boxShadow:
+          '0 30px 80px rgba(182, 3, 2, 0.6), 0 0 60px rgba(204, 168, 85, 0.4)',
+      }}
+      transition={{ duration: 0.3 }}
     >
       <Image
         src={item.src || item.image_url || fallbackImages[0].src}
         alt={item.alt || item.name || 'Event'}
         fill
-        sizes="190px"
+        sizes="260px"
         className="object-cover group-hover:scale-110 transition-transform duration-500"
       />
       {/* Impressive hover overlay */}
       {item.name && (
-        <div className="absolute inset-0 bg-gradient-to-br from-black/95 via-[#B60302]/80 to-black/95 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center backdrop-blur-sm">
-          <div className="text-center px-4 transform scale-75 group-hover:scale-100 transition-transform duration-500">
-            <p className="text-white text-base md:text-lg font-bold leading-tight mb-2 animate-pulse">
+        <div className="absolute inset-0 bg-gradient-to-br from-black/95 via-[#B60302]/85 to-black/95 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center backdrop-blur-sm">
+          <div className="text-center px-6 transform scale-75 group-hover:scale-100 transition-transform duration-500">
+            <p className="text-white text-xl md:text-2xl font-bold leading-tight mb-3 animate-pulse rajdhanifont">
               {item.name}
             </p>
-            <div className="h-1 w-16 mx-auto bg-gradient-to-r from-transparent via-[#CCA855] to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-200"></div>
+            <div className="h-1.5 w-20 mx-auto bg-gradient-to-r from-transparent via-[#CCA855] to-transparent rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 delay-200"></div>
           </div>
           {/* Animated corner accents */}
-          <div className="absolute top-2 left-2 w-8 h-8 border-l-2 border-t-2 border-[#CCA855] opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100"></div>
-          <div className="absolute top-2 right-2 w-8 h-8 border-r-2 border-t-2 border-[#CCA855] opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100"></div>
-          <div className="absolute bottom-2 left-2 w-8 h-8 border-l-2 border-b-2 border-[#CCA855] opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100"></div>
-          <div className="absolute bottom-2 right-2 w-8 h-8 border-r-2 border-b-2 border-[#CCA855] opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100"></div>
+          <div className="absolute top-3 left-3 w-10 h-10 border-l-[3px] border-t-[3px] border-[#CCA855] opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 rounded-tl-lg"></div>
+          <div className="absolute top-3 right-3 w-10 h-10 border-r-[3px] border-t-[3px] border-[#CCA855] opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 rounded-tr-lg"></div>
+          <div className="absolute bottom-3 left-3 w-10 h-10 border-l-[3px] border-b-[3px] border-[#CCA855] opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 rounded-bl-lg"></div>
+          <div className="absolute bottom-3 right-3 w-10 h-10 border-r-[3px] border-b-[3px] border-[#CCA855] opacity-0 group-hover:opacity-100 transition-all duration-500 delay-100 rounded-br-lg"></div>
         </div>
       )}
     </motion.div>

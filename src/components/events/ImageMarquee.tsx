@@ -39,12 +39,12 @@ export default function ImageMarquee() {
     <>
       <div
         ref={containerRef}
-        className="z-3 translate-y-15 relative overflow-hidden font-sans cursor-grab active:cursor-grabbing
-      [--v-offset:100px] [--curve-height:170px]"
+        className="z-3 translate-y-8 md:translate-y-12 relative overflow-hidden font-sans cursor-grab active:cursor-grabbing
+      [--v-offset:80px] [--curve-height:120px] md:[--curve-height:140px]"
       >
         <motion.div
           ref={marqueeRef}
-          className="flex w-max gap-4"
+          className="flex w-max gap-3 md:gap-4"
           style={{ x: baseX }}
           drag="x"
           dragElastic={0.05}
@@ -53,37 +53,52 @@ export default function ImageMarquee() {
           dragConstraints={{ left: -10000, right: 0 }}
         >
           {[...images, ...images].map((src, index) => (
-            <div key={index} className="w-[350px] shrink-0 relative">
+            <div
+              key={index}
+              className="w-[280px] md:w-[320px] lg:w-[350px] shrink-0 relative"
+            >
               <Image
                 src={src}
                 alt=""
                 width={350}
-                height={450}
+                height={400}
                 priority={index < 20}
-                className="w-full h-[400px] xl:h-[450px] object-cover rounded-lg pointer-events-none"
+                className="w-full h-[280px] md:h-[320px] lg:h-[360px] object-cover rounded-lg pointer-events-none"
               />
             </div>
           ))}
         </motion.div>
 
-        {/* Top curve */}
+        {/* Top curve - matches EventContainer background */}
         <div
-          className="border-8  border-red-700 pointer-events-none absolute z-[99] bg-black
+          className="border-6 md:border-8 border-red-700 pointer-events-none absolute z-[99]
         w-[calc(100vw+2*var(--v-offset))]
         h-[var(--curve-height)]
         rounded-[55%]
         left-[calc(-1*var(--v-offset))]
         top-[calc(-0.7*var(--curve-height))]"
+          style={{
+            backgroundImage: "url('/assets/events/bg.svg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'top',
+            backgroundRepeat: 'no-repeat',
+          }}
         />
 
-        {/* Bottom curve */}
+        {/* Bottom curve - matches EventContainer background */}
         <div
-          className="border-8 border-red-700 pointer-events-none absolute z-[99] bg-black
+          className="border-6 md:border-8 border-red-700 pointer-events-none absolute z-[99]
         w-[calc(100vw+2*var(--v-offset))]
         h-[var(--curve-height)]
         rounded-[55%]
         left-[calc(-1*var(--v-offset))]
         bottom-[calc(-0.7*var(--curve-height))]"
+          style={{
+            backgroundImage: "url('/assets/events/bg.svg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'top',
+            backgroundRepeat: 'no-repeat',
+          }}
         />
       </div>
     </>
