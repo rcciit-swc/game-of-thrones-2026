@@ -2,78 +2,66 @@ export const contactData = [
   {
     name: 'Faculty',
     contacts: [
+      // {
+      //   name: 'Mr. Harinandan Tunga',
+      //   role: 'Faculty-In-Charge, SA & SW',
+      //   image: 'https://i.postimg.cc/6p39VZ0Z/image.png',
+      //   phone: '+91 93398 77213',
+      // },
       {
-        name: 'Mr. Harinandan Tunga',
-        role: 'Faculty-In-Charge, SA & SW',
-        image: 'https://i.postimg.cc/6p39VZ0Z/image.png',
-        phone: '+91 93398 77213',
-      },
-      {
-        name: 'Dr. Abhijit Das',
-        role: 'Faculty Advisor (Cultural)',
-        image: 'https://i.postimg.cc/rstgySy7/abhijit.jpg',
-        phone: '+91 9830444823',
+        name: 'Mr. Sarbojit Mukherjee',
+        role: 'Faculty In-Charge (SA & SW) & Sports',
+        image: 'https://i.postimg.cc/yxXgqwVM/image.png',
+        phone: '+91 9433852385',
       },
     ],
   },
   {
-    name: 'SWC Members',
+    name: 'For Event Related Queries',
     contacts: [
       {
-        name: 'Manish Biswas',
-        role: 'Asst. General Secretary (Cultural)',
-        image: 'https://i.postimg.cc/j2NYLWhs/manish.jpg',
-        phone: '+91 9876543210',
+        name: 'Sreya Sahoo',
+        role: 'SWC Member RCCIIT',
+        image: 'https://i.postimg.cc/ydxSZfyk/image.png',
+        phone: '+91 7864061484',
       },
       {
-        name: 'Basanta Kumar Shaw',
-        role: 'General Secretary',
-        image: 'https://i.imgur.com/rOJZqPR.jpg',
-        phone: '+91 7547927975',
-      },
-      {
-        name: 'Ankita Dhara',
-        role: 'Asst. General Secretary (Tech)',
-        image: 'https://i.postimg.cc/4d9j63DS/IMG_1674_(1)_-_ANKITA_DHARA.jpg',
-        phone: '+91 8820534958',
-      },
-      {
-        name: 'Subhranil Saha',
-        role: 'Asst. General Secretary (Sports)',
-        image: 'https://i.postimg.cc/1Rvqp59Y/IMG-1419-SUBHRANIL-SAHA.webp',
-        phone: '+91 81016 96445',
+        name: 'Tuhin Ghosh',
+        role: 'SWC Member RCCIIT',
+        image: 'https://i.postimg.cc/BZ1B7626/image.png',
+        phone: '+91 7679006210',
       },
     ],
   },
   {
-    name: 'Technical Enquiry',
+    name: 'For Overall Queries',
     contacts: [
       {
         name: 'Soumyaraj Bag',
-        role: 'Tech Team Member',
+        role: 'SWC Member RCCIIT',
         image: 'https://i.postimg.cc/G2WNsQVc/Shin-0084.jpg',
         phone: '+91 8337045160',
       },
       {
-        name: 'Arnab Mondal',
-        role: 'Tech Team Member',
-        image: 'https://i.postimg.cc/7Y2yc7kh/IMG-20231016-215431-1.jpg',
-        phone: '+91 6291912672',
+        name: 'Ariyan Bhakat',
+        role: 'SWC Member RCCIIT',
+        image: 'https://i.postimg.cc/yxqcCm0s/image.png',
+        phone: '+91 9547376329',
       },
     ],
   },
-  {
-    name: 'Sponsorship',
-    contacts: [
-      {
-        name: 'Rwitam Ray',
-        role: 'Sponsorship Team Lead',
-        image:
-          'https://i.postimg.cc/MpYBwCYc/IMG-20240401-WA0013-1-Rwitam-Ray.jpg',
-        phone: '+91 9007614799',
-      },
-    ],
-  },
+  // {
+  //   name: 'Sponsorship',
+  //   contacts: [
+  //     // {
+  //     //   name: 'Rwitam Ray',
+  //     //   role: 'Sponsorship Team Lead',
+  //     //   image:
+  //     //     'https://i.postimg.cc/MpYBwCYc/IMG-20240401-WA0013-1-Rwitam-Ray.jpg',
+  //     //   phone: '+91 9007614799',
+  //     // },
+  //   ],
+  // },
   // {
   //   name: 'Event Details',
   //   contacts: [
