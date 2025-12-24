@@ -1,30 +1,30 @@
 'use client';
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { userDataType } from '@/lib/types';
-import {
-  useState,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  memo,
-  useRef,
-} from 'react';
-import { motion } from 'framer-motion';
-import { useUser } from '@/lib/stores';
-import { login } from '@/utils/functions/auth/login';
-import { logout } from '@/utils/functions/auth/logout';
-import { LogOut, Music, VolumeX } from 'lucide-react';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Skeleton } from '@/components/ui/skeleton';
+import { useUser } from '@/lib/stores';
 import { supabase } from '@/lib/supabase/client';
+import { userDataType } from '@/lib/types';
+import { login } from '@/utils/functions/auth/login';
+import { logout } from '@/utils/functions/auth/logout';
+import { motion } from 'framer-motion';
+import { LogOut, Music, VolumeX } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import {
+  Dispatch,
+  memo,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -308,7 +308,7 @@ export default function Navbar() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Register
+              Login
             </motion.button>
           )}
         </div>
@@ -394,7 +394,7 @@ const SignInButton = memo(
         }}
         whileTap={{ scale: 0.95 }}
       >
-        Register
+        Login
         <span className="absolute -inset-0.5 rounded-full blur-md bg-pink-200/20 opacity-40"></span>
       </motion.button>
     );

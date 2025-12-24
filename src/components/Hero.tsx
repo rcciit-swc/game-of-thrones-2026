@@ -230,33 +230,33 @@ const Hero = () => {
 
       {/* RCC logo + text */}
       <div
-        className="top-32 md:top-40 text-center absolute z-20 opacity-0 animate-fadeInUp"
+        className="top-32 md:top-40 xl:top-30 2xl:top-40 text-center absolute z-20 opacity-0 animate-fadeInUp"
         style={{ animationDelay: '0.2s' }}
       >
-        <h1 className="rcc-text mb-2">RCC Institute Of</h1>
+        <h1 className="rcc-text">RCC Institute Of</h1>
         <div className="rcc-divider"></div>
         <Image
           src="/assets/rcc-logo.svg"
           width={70}
           height={70}
           alt="RCCIIT Logo"
-          className="mx-auto my-3 drop-shadow-[0_0_15px_rgba(204,168,85,0.6)]"
+          className="mx-auto drop-shadow-[0_0_15px_rgba(204,168,85,0.6)]"
         />
         <div className="rcc-divider"></div>
-        <h1 className="rcc-text mt-2">Information Technology</h1>
+        <h1 className="rcc-text">Information Technology</h1>
       </div>
 
       {/* Main block with original vertical spacing but horizontally centered */}
-      <div className="absolute top-60 md:top-80 left-1/2 -translate-x-1/2 z-20">
+      <div className="absolute top-60 md:top-80 xl:top-66 2xl:top-80 left-1/2 -translate-x-1/2 z-20">
         <h1
-          className="hidden md:block text-2xl md:text-3xl lg:text-3xl font-bold text-center text-white drop-shadow-lg opacity-0 animate-fadeInUp"
+          className="hidden md:block text-2xl md:text-3xl xl:text-xl 2xl:text-3xl font-bold text-center text-white drop-shadow-lg opacity-0 animate-fadeInUp"
           style={{ fontFamily: 'Rajdhani, sans-serif', animationDelay: '0.4s' }}
         >
           Presents
         </h1>
 
         <div
-          className="w-115.5 h-14 text-center justify-start text-red-600 text-5xl md:text-6xl font-light mt-16 md:mt-2 mb-8 md:mb-2 opacity-0 animate-fadeInUp"
+          className="w-115.5 h-14 text-center justify-start text-red-600 text-5xl md:text-6xl xl:text-4xl 2xl:text-6xl font-light mt-16 md:mt-2 xl:mt-0 2xl:mt-2 mb-8 md:mb-2 xl:mb-0 2xl:mb-2 opacity-0 animate-fadeInUp"
           style={{ fontFamily: 'Agency', animationDelay: '0.6s' }}
         >
           GAME OF{' '}
@@ -340,7 +340,7 @@ const Hero = () => {
 
         {/* Desktop GOT block */}
         <div
-          className="hidden md:block absolute left-1/2 -translate-x-1/2 top-28 z-30 animate-fadeIn animate-scaleGlow animate-flicker"
+          className="hidden md:block absolute left-1/2 -translate-x-1/2 top-28 xl:top-4 2xl:top-28 z-30 animate-fadeIn animate-scaleGlow animate-flicker"
           style={{ animationDelay: '0.8s' }}
         >
           <svg width="821.57" height="384" viewBox="0 0 822 384">
@@ -356,6 +356,7 @@ const Hero = () => {
                   fontSize="300"
                   fontWeight="bold"
                   fontFamily="Agency, Arial Black, sans-serif"
+                  className="xl:text-[260px] 2xl:text-[300px]"
                 >
                   GOT
                 </text>
@@ -386,7 +387,7 @@ const Hero = () => {
         </div>
 
         <div
-          className="text-center text-5xl md:text-7xl font-bold mt-56 md:mt-72 opacity-0 animate-fadeInUp"
+          className="text-center text-5xl md:text-7xl xl:text-5xl 2xl:text-7xl font-bold mt-56 md:mt-72 xl:mt-48 2xl:mt-72 opacity-0 animate-fadeInUp"
           style={{
             fontFamily: 'Agency',
             background: 'linear-gradient(90deg, #CCA855, #FF1B35)',
@@ -401,7 +402,7 @@ const Hero = () => {
 
         {/* Event Dates Section */}
         <div
-          className="text-center mt-4 md:mt-6 px-4 opacity-0 animate-fadeInUp"
+          className="text-center mt-4 md:mt-6 xl:mt-1 2xl:mt-6 px-4 opacity-0 animate-fadeInUp"
           style={{ animationDelay: '1.2s' }}
         >
           {/* Decorative top divider */}
@@ -412,9 +413,9 @@ const Hero = () => {
           </div>
 
           {/* Dates container */}
-          <div className="inline-block bg-gradient-to-r from-transparent via-black/30 to-transparent px-6 py-3 rounded-lg backdrop-blur-sm border border-[#CCA855]/20">
+          <div className="inline-block bg-gradient-to-r from-transparent via-black/30 to-transparent px-6 py-0 rounded-lg backdrop-blur-sm border border-[#CCA855]/20">
             <div
-              className="text-base md:text-xl font-bold tracking-wide animate-shimmer"
+              className="text-base md:text-xl xl:text-base 2xl:text-xl font-bold tracking-wide animate-shimmer"
               style={{
                 fontFamily: 'Rajdhani, sans-serif',
                 background:
@@ -428,13 +429,13 @@ const Hero = () => {
             >
               10th-11th January
             </div>
-            <div className="flex items-center justify-center my-1">
+            <div className="flex items-center justify-center mb-1">
               <div className="w-1 h-1 rounded-full bg-[#CCA855] mx-1"></div>
               <div className="w-1 h-1 rounded-full bg-[#FFD700] mx-1"></div>
               <div className="w-1 h-1 rounded-full bg-[#CCA855] mx-1"></div>
             </div>
             <div
-              className="text-base md:text-xl font-bold tracking-wide animate-shimmer"
+              className="text-base md:text-xl xl:text-lg 2xl:text-xl font-bold tracking-wide animate-shimmer"
               style={{
                 fontFamily: 'Rajdhani, sans-serif',
                 background:
@@ -459,17 +460,17 @@ const Hero = () => {
         </div>
 
         {/* Register Button - Mobile only */}
-        {/* <div
+        <div
           className="md:hidden flex justify-center mt-10 opacity-0 animate-fadeInUp"
           style={{ animationDelay: '1.4s' }}
         >
           <Link
-            href="/register"
+            href="/events"
             className="w-42 py-2.5 bg-[#B60302] text-[#FAFAFA] text-[20px] font-['Irish_Grover'] rounded-[50px] shadow-[0_8px_15px_rgba(0,0,0,0.25)] hover:bg-[#8f0202] transition-colors duration-200 text-center animate-pulse"
           >
             Register
           </Link>
-        </div> */}
+        </div>
       </div>
     </div>
   );
