@@ -36,7 +36,7 @@ export const useEvents = create<EventsStoreType>((set) => ({
   markEventAsRegistered: (eventId: string) =>
     set((state) => ({
       eventsData: state.eventsData.map((event) =>
-        event.id === eventId ? { ...event, registered: true } : event
+        event.event_id === eventId ? { ...event, registered: true } : event
       ),
     })),
 }));

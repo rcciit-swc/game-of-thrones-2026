@@ -73,7 +73,7 @@ export function SoloEventRegistration({
   const { userData } = useUser();
 
   const { markEventAsRegistered, eventsData } = useEvents();
-  const eventData = eventsData?.find((event) => event.id === eventID);
+  const eventData = eventsData?.find((event) => event.event_id === eventID);
   const [step, setStep] = useState(1);
   const [soloLeadData, setSoloLeadData] = useState<SoloLeadFormValues | null>(
     null

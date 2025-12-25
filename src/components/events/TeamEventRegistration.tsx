@@ -235,7 +235,7 @@ export function TeamEventRegistration({
       }
     }
 
-    const eventData = eventsData?.find((event) => event.id === eventID);
+    const eventData = eventsData?.find((event) => event.event_id === eventID);
     // Combine all registration data.
     const registrationParams: RegisterTeamParams = {
       userId: userData?.id!, // non-null assertion since we expect this to be set

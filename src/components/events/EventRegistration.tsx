@@ -117,7 +117,6 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
     eventsData && eventId
       ? eventsData.find((e: any) => String(e.event_id) === String(eventId))
       : undefined;
-  console.log(selectedEvent);
   const bg = getBackgroundForEvent(eventId);
 
   const tabs: { id: TabType; label: string }[] = [
@@ -484,7 +483,7 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
               </span>
             </motion.button>
 
-            {selectedEvent?.id &&
+            {selectedEvent?.event_id &&
               (!selectedEvent.reg_status ? (
                 // Registration Closed Button
                 <motion.button
@@ -513,7 +512,7 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
                     >
                       🔒
                     </motion.span>
-                    Registration Closed
+                    Register Soon
                   </span>
                   {/* Diagonal strike-through effect */}
                   <motion.div
@@ -747,7 +746,7 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
           <SoloEventRegistration
             isOpen={isSoloOpen}
             onClose={() => setIsSoloOpen(false)}
-            eventID={selectedEvent.id as string}
+            eventID={selectedEvent.event_id as string}
             eventName={selectedEvent.name}
             eventFees={selectedEvent.registration_fees}
           />
@@ -755,7 +754,7 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
             eventFees={selectedEvent.registration_fees}
             isOpen={isTeamOpen}
             onClose={() => setIsTeamOpen(false)}
-            eventID={selectedEvent.id as string}
+            eventID={selectedEvent.event_id as string}
             eventName={selectedEvent.name}
             minTeamSize={Number(selectedEvent.min_team_size)}
             maxTeamSize={Number(selectedEvent.max_team_size)}

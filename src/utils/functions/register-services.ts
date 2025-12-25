@@ -57,16 +57,16 @@ export async function registerSoloEvent(
   const { data, error } = await supabase.rpc(
     'register_solo_event_with_details',
     {
-      p_user_id: userId,
+      p_account_holder_name: account_holder_name,
+      p_attendance: false,
+      p_college: college,
       p_event_id: eventId,
+      p_payment_mode: paymentMode || 'UPI',
+      p_referral_code: ref || 'GOT2026',
+      p_reg_mode: regMode || 'ONLINE',
       p_transaction_id: transactionId,
       p_transaction_screenshot: transactionScreenshot,
-      p_college: college,
-      p_reg_mode: regMode || 'ONLINE',
-      p_payment_mode: paymentMode || 'UPI',
-      p_referral_code: ref || 'TECHTRIX2025',
-      p_attendance: false,
-      p_account_holder_name: account_holder_name,
+      p_user_id: userId,
     }
   );
   if (error) {
