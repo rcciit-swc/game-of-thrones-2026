@@ -29,78 +29,6 @@ function getBackgroundForEvent(eventId?: string): string | undefined {
   return eventBackgrounds[eventId as keyof typeof eventBackgrounds];
 }
 
-function parseRulesHtml(html?: string): string[] {
-  if (!html) return [];
-  if (typeof document === 'undefined') {
-    return html
-      .split(/\r?\n|\u2022|\*/)
-      .map((s) => s.trim())
-      .filter(Boolean);
-  }
-
-  const div = document.createElement('div');
-  div.innerHTML = html;
-
-  let nodes: Element[] = Array.from(div.querySelectorAll('li'));
-  if (nodes.length === 0) {
-    nodes = Array.from(div.querySelectorAll('p'));
-  }
-
-  const raw = nodes
-    .map((n) => (n.textContent || '').replace(/\s+/g, ' ').trim())
-    .filter(Boolean);
-
-  const cleaned: string[] = [];
-
-  for (let i = 0; i < raw.length; i++) {
-    let text = raw[i];
-    if (!text) continue;
-
-    while (i + 1 < raw.length) {
-      const nextRaw = raw[i + 1];
-      if (!nextRaw) {
-        i++;
-        continue;
-      }
-
-      const endsWithPunct = /[.?!:]$/.test(text);
-      const nextStartsWithLower = /^[a-z]/.test(nextRaw);
-      const nextIsShort = nextRaw.length < 6;
-
-      if (!endsWithPunct && (nextStartsWithLower || nextIsShort)) {
-        text = `${text} ${nextRaw}`;
-        i++;
-        continue;
-      }
-
-      const nextLooksLikeContinuation =
-        /^[a-z0-9]/i.test(nextRaw) && !/^[0-9]+\./.test(nextRaw);
-      if (!endsWithPunct && nextLooksLikeContinuation) {
-        text = `${text} ${nextRaw}`;
-        i++;
-        continue;
-      }
-
-      break;
-    }
-    text = text.replace(/&amp;/g, '&');
-    text = text.replace(/the(?=raid)/gi, 'the ');
-    text = text.replace(/theraid/gi, 'the raid');
-    text = text.replace(/\s+\./g, '.');
-    cleaned.push(text);
-  }
-
-  if (cleaned.length === 0) {
-    return html
-      .replace(/<br\s*\/?>/gi, '\n')
-      .split(/\r?\n+/)
-      .map((s) => s.replace(/<[^>]*>/g, '').trim())
-      .filter(Boolean);
-  }
-
-  return cleaned;
-}
-
 type TabType = 'description' | 'rules';
 
 const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
@@ -124,61 +52,6 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
     { id: 'rules', label: 'Rules' },
   ];
 
-  let rulesFromEvent: string[] = [];
-  const r = (selectedEvent as any)?.rules;
-
-  if (!r) {
-    rulesFromEvent = [];
-  } else if (Array.isArray(r)) {
-    const out: string[] = [];
-    for (const item of r) {
-      if (!item) continue;
-      if (typeof item !== 'string') {
-        out.push(String(item).trim());
-        continue;
-      }
-      if (/<\/?\s*(li|p|ul|br)/i.test(item)) {
-        out.push(...parseRulesHtml(item));
-      } else {
-        out.push(item.replace(/\s+/g, ' ').trim());
-      }
-    }
-
-    const merged: string[] = [];
-    for (let i = 0; i < out.length; i++) {
-      let text = out[i];
-      if (!text) continue;
-      while (i + 1 < out.length) {
-        const next = out[i + 1];
-        if (!next) {
-          i++;
-          continue;
-        }
-        const endsWithPunct = /[.?!:]$/.test(text);
-        const nextStartsWithLower = /^[a-z]/.test(next);
-        const nextIsShort = next.length < 6;
-        if (!endsWithPunct && (nextStartsWithLower || nextIsShort)) {
-          text = `${text} ${next}`.replace(/\s+/g, ' ').trim();
-          i++;
-          continue;
-        }
-        break;
-      }
-      merged.push(text);
-    }
-
-    rulesFromEvent = merged.length ? merged : out;
-  } else if (typeof r === 'string') {
-    if (/<li\b/i.test(r) || /<ul\b/i.test(r) || /<p\b/i.test(r)) {
-      rulesFromEvent = parseRulesHtml(r);
-    } else {
-      rulesFromEvent = r
-        .split(/\r?\n|\u2022|\*/)
-        .map((s) => s.trim())
-        .filter(Boolean);
-    }
-  }
-
   const coordinatorsFromEvent: { name: string; phone: string }[] =
     Array.isArray((selectedEvent as any)?.coordinators)
       ? ((selectedEvent as any)?.coordinators as any[])
@@ -196,30 +69,6 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
     (selectedEvent as any)?.prize_pool ?? (selectedEvent as any)?.prizes ?? '—';
 
   const scheduleText = (selectedEvent as any)?.schedule || '';
-
-  function parseScheduleLines(html?: string): string[] {
-    if (!html) return [];
-    if (typeof document === 'undefined') {
-      return html
-        .replace(/<br\s*\/?\>/gi, '\n')
-        .split(/\r?\n+/)
-        .map((s) => s.replace(/<[^>]*>/g, '').trim())
-        .filter(Boolean);
-    }
-    const div = document.createElement('div');
-    div.innerHTML = html;
-    const ps = Array.from(div.querySelectorAll('p'))
-      .map((p) => (p.textContent || '').trim())
-      .filter(Boolean);
-    if (ps.length) return ps;
-    const text = (div.textContent || '').replace(/\u00A0/g, ' ').trim();
-    return text
-      .split(/\r?\n+/)
-      .map((s) => s.trim())
-      .filter(Boolean);
-  }
-
-  const scheduleLines = parseScheduleLines(scheduleText);
 
   if (isRedirecting) return null;
 
@@ -255,7 +104,7 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
             />
 
             {/* Schedule Section */}
-            {scheduleLines.length > 0 && (
+            {scheduleText && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -266,22 +115,11 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
                   <Calendar className="w-6 h-6 text-yellow-400" />
                   Schedule & Venue
                 </h3>
-                <div className="space-y-2 bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md rounded-xl p-4 border border-white/20">
-                  {scheduleLines.map((line, i) => (
-                    <motion.div
-                      key={i}
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.3 + i * 0.05 }}
-                      whileHover={{ x: 5 }}
-                      className="text-gray-200 text-sm md:text-base flex items-start gap-3 p-2 rounded-lg hover:bg-white/5 transition-all duration-200"
-                    >
-                      <span className="text-yellow-400 font-bold text-base mt-0.5">
-                        →
-                      </span>
-                      <span className="flex-1">{line}</span>
-                    </motion.div>
-                  ))}
+                <div className="bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-md rounded-xl p-4 border border-white/20">
+                  <div
+                    className="text-gray-200 leading-relaxed text-sm md:text-base prose prose-invert max-w-none"
+                    dangerouslySetInnerHTML={{ __html: scheduleText }}
+                  />
                 </div>
               </motion.div>
             )}
@@ -335,23 +173,14 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
             initial="hidden"
             animate="visible"
             exit="exit"
+            className="space-y-6"
           >
-            <ul className="space-y-3">
-              {rulesFromEvent.map((rule, index) => (
-                <motion.li
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.05 }}
-                  className="text-gray-200 text-sm md:text-base flex items-start gap-3 group"
-                >
-                  <span className="text-yellow-400 font-bold mt-1 group-hover:scale-110 transition-transform">
-                    •
-                  </span>
-                  <span className="flex-1">{rule}</span>
-                </motion.li>
-              ))}
-            </ul>
+            <div
+              className="text-gray-200 leading-relaxed text-sm md:text-base prose prose-invert max-w-none"
+              dangerouslySetInnerHTML={{
+                __html: (selectedEvent as any)?.rules || '',
+              }}
+            />
           </motion.div>
         );
       default:
@@ -731,7 +560,16 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
 
               {/* Tab Content - Scrollable only for rules */}
               <div
-                className={`${activeTab === 'rules' ? 'overflow-auto max-h-[55vh] scrollbar-thin scrollbar-thumb-yellow-400/50 scrollbar-track-white/5' : ''}`}
+                className={`${activeTab === 'rules' ? 'overflow-auto max-h-[65vh] md:max-h-[55vh] scrollbar-thumb-yellow-400/80 scrollbar-track-white/10 scrollbar-w-2' : ''}`}
+                style={
+                  activeTab === 'rules'
+                    ? {
+                        scrollbarWidth: 'thin',
+                        scrollbarColor:
+                          'rgba(251, 191, 36, 0.8) rgba(255, 255, 255, 0.1)',
+                      }
+                    : undefined
+                }
               >
                 <AnimatePresence mode="wait">
                   {renderTabContent()}

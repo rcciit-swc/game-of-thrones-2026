@@ -1,6 +1,7 @@
 'use client';
 import React, { use, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { Search } from 'lucide-react';
 import { StackedCardsInteraction } from './EventsCard';
 import EventCardsRes from './EventCardsRes';
 import LoaderOverlay from './LoaderOverlay';
@@ -12,6 +13,7 @@ const EventContainer = () => {
   const router = useRouter();
   const [showLoader, setShowLoader] = useState(false);
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   const handleEventClick = (eventId: string | number) => {
     setSelectedEventId(String(eventId));
@@ -23,6 +25,54 @@ const EventContainer = () => {
       router.push(`/events/${selectedEventId}`);
     }
   };
+
+  // Define the desired event order
+  const eventOrder = [
+    '67aa6c4d-09b5-4fd0-bb56-b8571e77a515',
+    '8aaee6a6-8d99-4938-a811-d59fb0602655',
+    '0fe473ff-73f6-41a9-a0f0-03aac9289d6f',
+    '34855c5e-2d7e-4609-a9e9-8aa24a6f13b2',
+    '69eea79f-aa25-4482-9c5e-856481bdd682',
+    '5c4fc0c7-93ef-4d8a-aa35-a4cf0ffd4ee9',
+    '6166770d-b367-4c5d-8acd-fed4c6de7256',
+    'd7b8ee6a-6dbe-4bf1-821d-7901e9f05447',
+    '835a4447-9ca4-49ee-bb15-d5db412be779',
+    '64e192a8-a316-4781-8c58-cdb556543459',
+    'c419da97-8980-4dde-b086-76103ee110ed',
+    'ef673113-dec9-4e51-b994-a43d186ea947',
+    'bf1953ca-4303-4062-a349-9d88fa035afa',
+    'e5a51398-d586-4b33-bac3-637f70bd3a81',
+    '3bfc938d-71e9-4d7d-a824-c613cf5bebf5',
+    '49920bc5-0691-46d4-9e91-40c67b00a183',
+    '71fa6f13-6467-46e9-802d-b08c6755346b',
+    '0a66b38a-0b89-4a5d-9ebd-b434d598cd72',
+  ];
+
+  // Filter and sort events based on search query and custom order
+  const filteredEvents = eventsData
+    ? eventsData
+        .filter((event: any) =>
+          event.name?.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        .sort((a: any, b: any) => {
+          const indexA = eventOrder.indexOf(a.event_id);
+          const indexB = eventOrder.indexOf(b.event_id);
+
+          // If both events are in the order list, sort by their position
+          if (indexA !== -1 && indexB !== -1) {
+            return indexA - indexB;
+          }
+
+          // If only A is in the order list, it comes first
+          if (indexA !== -1) return -1;
+
+          // If only B is in the order list, it comes first
+          if (indexB !== -1) return 1;
+
+          // If neither is in the order list, maintain original order
+          return 0;
+        })
+    : [];
 
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center pt-8 md:pt-12 overflow-hidden">
@@ -165,6 +215,49 @@ const EventContainer = () => {
         />
       </motion.div>
 
+      {/* Compact Search Bar */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.6 }}
+        className="relative z-20 mb-8 md:mb-10 px-4 w-full max-w-md mx-auto"
+      >
+        <div className="relative group">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 md:w-5 md:h-5 text-yellow-400/60 group-focus-within:text-yellow-400 transition-colors duration-300" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search events..."
+            className="w-full pl-11 md:pl-12 pr-4 py-2.5 md:py-3 bg-white/5 backdrop-blur-md border border-white/20 rounded-full text-white placeholder:text-gray-400 text-sm md:text-base focus:outline-none focus:border-yellow-400/50 focus:bg-white/10 transition-all duration-300 hover:border-white/30"
+          />
+          {searchQuery && (
+            <button
+              onClick={() => setSearchQuery('')}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors duration-200"
+            >
+              ✕
+            </button>
+          )}
+        </div>
+      </motion.div>
+
+      {/* No Results Message */}
+      {searchQuery && filteredEvents.length === 0 && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="relative z-20 text-center py-12 px-4"
+        >
+          <p className="text-gray-400 text-lg md:text-xl font-['Rajdhani']">
+            No events found for "{searchQuery}"
+          </p>
+          <p className="text-gray-500 text-sm md:text-base mt-2">
+            Try a different search term
+          </p>
+        </motion.div>
+      )}
+
       {/* Mobile Cards - visible below 1150px breakpoint */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -174,8 +267,8 @@ const EventContainer = () => {
       >
         <EventCardsRes
           events={
-            eventsData
-              ? eventsData.map((event: any) => ({
+            filteredEvents
+              ? filteredEvents.map((event: any) => ({
                   id: event.event_id,
                   title: event.name,
                   image: event.image_url,
@@ -194,7 +287,7 @@ const EventContainer = () => {
       <div className="w-full px-8 pb-20 hidden min-[1150px]:block relative z-10">
         {(() => {
           const pattern = [3, 2, 3, 2];
-          const events = (eventsData || []).slice(0, 14);
+          const events = filteredEvents || [];
           const rows: any[] = [];
           let i = 0;
           while (i < events.length) {

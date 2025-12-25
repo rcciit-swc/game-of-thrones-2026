@@ -37,6 +37,7 @@ const cinzel = Cinzel({
 });
 
 export const metadata: Metadata = constructMetaData({
+  image: '/favicon.jpg',
   title: 'Game of Thrones 2026',
   description: 'The Official Sports Fest of RCCIIT.',
 });
