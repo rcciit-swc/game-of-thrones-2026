@@ -214,6 +214,7 @@ interface EventCardsResProps {
 }
 
 const EventCardsRes = ({ events, onCardClick }: EventCardsResProps) => {
+  console.log(events);
   const [activeCardIndex, setActiveCardIndex] = React.useState<number | null>(
     null
   );

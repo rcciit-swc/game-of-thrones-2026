@@ -26,7 +26,7 @@ const Playground = () => {
           const mappedEvents = data
             .slice(0, 10)
             .map((event: any, index: number) => ({
-              id: event.id,
+              id: event.event_id,
               src: event.image_url || '/assest/pics/Ellipse 7.svg',
               alt: event.name || `Event ${index + 1}`,
               name: event.name,

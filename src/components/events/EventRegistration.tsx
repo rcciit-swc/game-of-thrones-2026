@@ -115,7 +115,7 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
 
   const selectedEvent =
     eventsData && eventId
-      ? eventsData.find((e: any) => String(e.id) === String(eventId))
+      ? eventsData.find((e: any) => String(e.event_id) === String(eventId))
       : undefined;
   console.log(selectedEvent);
   const bg = getBackgroundForEvent(eventId);

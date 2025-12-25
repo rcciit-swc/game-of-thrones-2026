@@ -174,7 +174,7 @@ const Card = ({
                 </div>
                 <div className="flex flex-col">
                   <span className="font-bold text-yellow-200 tracking-wide text-xs">
-                    Registration Fees
+                    Registration
                   </span>
                   <span className="text-2xl font-extrabold text-transparent bg-linear-to-r from-yellow-200 via-yellow-100 to-orange-200 bg-clip-text">
                     {typeof registrationFee === 'number'

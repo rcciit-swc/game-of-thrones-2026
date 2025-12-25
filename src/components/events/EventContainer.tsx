@@ -13,8 +13,6 @@ const EventContainer = () => {
   const [showLoader, setShowLoader] = useState(false);
   const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
 
-  console.log('Events Data:', eventsData);
-
   const handleEventClick = (eventId: string | number) => {
     setSelectedEventId(String(eventId));
     setShowLoader(true);
@@ -178,7 +176,7 @@ const EventContainer = () => {
           events={
             eventsData
               ? eventsData.map((event: any) => ({
-                  id: event.id,
+                  id: event.event_id,
                   title: event.name,
                   image: event.image_url,
                   schedule: event.schedule,
@@ -228,7 +226,7 @@ const EventContainer = () => {
               >
                 {row.map((event: any, idx: number) => {
                   const mapped = {
-                    id: event.id,
+                    id: event.event_id,
                     image: event.image_url || event.image,
                     title: event.name || event.title,
                     schedule: event.schedule || event.venue,
