@@ -63,9 +63,7 @@ export default function TeamsPage() {
 
       {/* Content */}
       <div className="relative z-10">
-        <Navbar />
-
-        <div className="container mx-auto px-4 py-12 md:py-16">
+        <div className="container mx-auto px-4 pt-24 md:pt-32 pb-12 md:pb-16">
           {/* Header Section */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -73,19 +71,6 @@ export default function TeamsPage() {
             transition={{ duration: 0.8 }}
             className="text-center mb-12 md:mb-16"
           >
-            {/* Icon with Neon Glow */}
-            <motion.div
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-              className="inline-flex items-center justify-center w-20 h-20 md:w-24 md:h-24 mb-6 relative"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-red-500/40 to-cyan-500/40 rounded-full blur-2xl animate-pulse" />
-              <div className="relative bg-black/90 rounded-full p-5 border-2 border-red-500/80 shadow-[0_0_40px_rgba(239,68,68,0.8)]">
-                <Trophy className="w-10 h-10 md:w-12 md:h-12 text-red-500" />
-              </div>
-            </motion.div>
-
             {/* Main Title with Stranger Things Neon Effect */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
@@ -152,20 +137,6 @@ export default function TeamsPage() {
                 </motion.span>
               </span>
             </motion.h1>
-
-            {/* Subtitle with Retro Feel */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-gray-200 text-lg md:text-xl rajdhanifont max-w-3xl mx-auto leading-relaxed mb-8"
-              style={{
-                textShadow: '0 0 15px rgba(239, 68, 68, 0.4)',
-              }}
-            >
-              The champions behind the ultimate sports showdown. Meet the
-              athletes, the legends, the unstoppable force.
-            </motion.p>
 
             {/* Decorative Line with Neon Accents */}
             <motion.div
@@ -499,7 +470,8 @@ export default function TeamsPage() {
                           <Image
                             src={member.image}
                             alt={member.name}
-                            fill
+                            width={500}
+                            height={500}
                             className="object-cover group-hover:scale-115 transition-transform duration-700"
                           />
 
