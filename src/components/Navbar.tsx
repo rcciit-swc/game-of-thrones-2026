@@ -85,7 +85,7 @@ export default function Navbar() {
     { label: 'About', href: '/#legacy' },
     { label: 'Events', href: '/events' },
     { label: 'Gallery', href: '/#hall-of-fame' },
-    // { label: 'Teams', href: '/team' },
+    { label: 'Teams', href: '/team' },
     { label: 'Contact Us', href: '/contact' },
   ];
 

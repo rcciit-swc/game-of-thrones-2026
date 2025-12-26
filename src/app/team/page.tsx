@@ -276,7 +276,7 @@ export default function TeamsPage() {
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 1 + index * 0.05 }}
                       onClick={() => setSelectedTab(team.id)}
-                      className={`relative px-5 py-3 rounded-lg font-bold transition-all duration-300 flex items-center gap-2 ${
+                      className={`relative p-2 rounded-lg min-w-[75px] font-bold transition-all duration-300 flex flex-col items-center gap-2 ${
                         selectedTab === team.id
                           ? 'bg-black/95 border-2 border-red-500 text-red-500 shadow-[0_0_25px_rgba(239,68,68,0.6)]'
                           : 'bg-black/70 border-2 border-red-500/30 text-gray-400 hover:border-red-500/60 hover:text-red-400'
@@ -288,7 +288,6 @@ export default function TeamsPage() {
                           selectedTab === team.id
                             ? '0 0 12px rgba(239, 68, 68, 1), 0 0 20px rgba(239, 68, 68, 0.6)'
                             : 'none',
-                        minWidth: '160px',
                         justifyContent: 'center',
                       }}
                       whileHover={{ y: -3, scale: 1.05 }}
@@ -315,25 +314,6 @@ export default function TeamsPage() {
                       <span className="text-sm font-black uppercase tracking-wider">
                         {team.category}
                       </span>
-
-                      {/* Member Count Badge */}
-                      <div className="flex items-center gap-1 text-cyan-400 text-xs bg-cyan-500/10 px-2 py-0.5 rounded-full border border-cyan-400/30">
-                        <Users
-                          className="w-3 h-3"
-                          style={{
-                            filter:
-                              'drop-shadow(0 0 4px rgba(6, 182, 212, 0.6))',
-                          }}
-                        />
-                        <span
-                          className="font-bold"
-                          style={{
-                            textShadow: '0 0 8px rgba(6, 182, 212, 0.8)',
-                          }}
-                        >
-                          {team.members.length}
-                        </span>
-                      </div>
 
                       {/* Active Tab Indicator */}
                       {selectedTab === team.id && (

@@ -162,7 +162,7 @@ export default function TeamPage() {
   return (
     <div className="relative min-h-screen py-16 px-2 md:px-6 bg-gradient-to-b from-[#220000] to-[#100000] overflow-hidden">
       {/* Add custom font imports */}
-      <style jsx global>{`
+      <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap');
@@ -359,7 +359,7 @@ export default function TeamPage() {
               <motion.button
                 key={team.id}
                 onClick={() => setActiveTab(team.id)}
-                className={`px-5 py-3 rounded-lg flex items-center gap-2 text-base font-medium transition-all`}
+                className={`px-5 py-3 rounded-lg flex flex-col items-center gap-2 text-base font-medium transition-all`}
                 variants={tabVariants}
                 initial="inactive"
                 animate={activeTab === team.id ? 'active' : 'inactive'}
@@ -650,7 +650,7 @@ export default function TeamPage() {
           GAME OF THRONES 2026 • The Grand Sports Meet
         </motion.p>
       </div>
-      <style jsx global>{`
+      <style>{`
         @keyframes float-slow {
           0%,
           100% {

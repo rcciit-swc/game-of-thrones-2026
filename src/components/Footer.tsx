@@ -71,7 +71,7 @@ export default function Footer() {
               {[
                 { label: 'Home', href: '/' },
                 { label: 'Events', href: '/events' },
-                // { label: 'Team', href: '/team' },
+                { label: 'Team', href: '/team' },
                 { label: 'Gallery', href: '/gallery' },
                 { label: 'Contact', href: '/contact' },
               ].map((link, index) => (
