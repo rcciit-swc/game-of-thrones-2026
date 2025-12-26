@@ -619,7 +619,7 @@ export default function TeamsPage() {
                         </div>
 
                         {/* Phone Number (if available) - Contact Badge */}
-                        {member.phone && (
+                        {/* {member.phone && (
                           <div className="flex items-center justify-center gap-2 text-gray-300 text-sm bg-black/50 rounded-lg py-2 px-3 border border-red-500/30">
                             <Phone
                               className="w-4 h-4 text-red-400"
@@ -630,7 +630,7 @@ export default function TeamsPage() {
                             />
                             <span className="font-mono">{member.phone}</span>
                           </div>
-                        )}
+                        )} */}
                       </div>
 
                       {/* Corner Decorations - Enhanced Neon */}

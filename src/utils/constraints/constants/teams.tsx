@@ -37,29 +37,21 @@ export const teams = [
           'https://i.postimg.cc/N0FVvRfB/WhatsApp_Image_2024-05-06_at_00.41.14_5e8d2db7.jpg',
       },
       {
-        name: 'Mr. Harinandan Tunga',
-        role: 'Faculty-In-Charge SA & SW ',
+        name: 'Mr. Sarbojit Mukherjee',
+        role: 'Faculty In-Charge (SA & SW) & Sports',
         image:
-          'https://i.postimg.cc/K8KbFGrp/78becf57-0d9d-45c3-8dcb-d2de974fe10f.jpg',
-      },
-      {
-        name: 'Dr. Abhijit Das',
-        role: 'Faculty Advisor (Cultural)',
-        image: 'https://i.postimg.cc/rstgySy7/abhijit.jpg',
-        phone: '+91 9830444823',
+          'https://i.postimg.cc/VvD2ngKr/Whats-App-Image-2025-04-27-at-09-25-34-03d51234.jpg',
       },
       {
         name: 'Mr. Rajib Saha',
         role: 'Faculty Coordinator (Technical)',
         image:
           'https://i.postimg.cc/nrJFqwRV/d45a6a91-8afa-4e51-983b-963301a16cd4.jpg',
-        phone: '+91 98303 73904',
       },
       {
-        name: 'Mr. Sarbojit Mukherjee',
-        role: 'Faculty Coordinator (Sports)',
-        image:
-          'https://i.postimg.cc/VvD2ngKr/Whats-App-Image-2025-04-27-at-09-25-34-03d51234.jpg',
+        name: 'Dr. Abhijit Das',
+        role: 'Faculty Advisor (Cultural)',
+        image: 'https://i.postimg.cc/rstgySy7/abhijit.jpg',
       },
     ],
   },
@@ -71,30 +63,60 @@ export const teams = [
     icon: <Award className="text-yellow-200" />,
     members: [
       {
-        name: 'Manish Biswas',
-        role: 'Asst. General Secretary (Cultural)',
-        image:
-          'https://i.postimg.cc/sXJX7yNG/Whats-App-Image-2025-05-09-at-11-58-48-8b435271.jpg',
-        phone: '+91 9876543210',
+        name: 'Sreya Sahoo',
+        role: 'SWC Core Organizer',
+        image: 'https://i.postimg.cc/ydxSZfyk/image.png',
       },
       {
-        name: 'Basanta Kumar Shaw',
-        role: 'General Secretary',
-        image: 'https://i.imgur.com/rOJZqPR.jpg',
-        phone: '+91 7547927975',
+        name: 'Tuhin Ghosh',
+        role: 'SWC Core Organizer',
+        image: 'https://i.postimg.cc/BZ1B7626/image.png',
       },
       {
-        name: 'Ankita Dhara',
-        role: 'Asst. General Secretary (Tech)',
-        image: 'https://i.postimg.cc/4d9j63DS/IMG_1674_(1)_-_ANKITA_DHARA.jpg',
-        phone: '+91 8820534958',
+        name: 'Soumyaraj Bag',
+        role: 'SWC Core Organizer',
+        image: 'https://i.postimg.cc/5NNyXmLV/image.png',
       },
 
       {
-        name: 'Subhranil Saha',
-        role: 'Asst. General Secretary (Sports)',
-        image: 'https://i.postimg.cc/1Rvqp59Y/IMG-1419-SUBHRANIL-SAHA.webp',
-        phone: '+91 81016 96445',
+        name: 'Ariyan Bhakat',
+        role: 'SWC Core Organizer',
+        image: 'https://i.postimg.cc/yxqcCm0s/image.png',
+      },
+      {
+        name: 'Shreya Dutta',
+        role: 'SWC Core Organizer',
+        image:
+          'https://i.postimg.cc/pThyLVF9/IMG_20251208_WA0233_SHREYA_DUTTA.jpg',
+      },
+      {
+        name: 'Tiyasa Raptan',
+        role: 'SWC Core Organizer',
+        image:
+          'https://i.postimg.cc/yNrkK3Wf/IMG_20250921_WA0152_TIYASA_RAPTAN.jpg',
+      },
+      {
+        name: 'Hirak Sabui',
+        role: 'SWC Core Organizer',
+        image:
+          'https://i.postimg.cc/hjzht4d4/IMG_20251114_WA0212(1)_HIRAK_SABUI.jpg',
+      },
+      {
+        name: 'Shreya Sen',
+        role: 'SWC Core Organizer',
+        image: 'https://i.postimg.cc/Twz1L8Vb/IMG20251001211742_SHREYA_SEN.jpg',
+      },
+      {
+        name: 'Anushka Aryan',
+        role: 'SWC Core Organizer',
+        image:
+          'https://i.postimg.cc/VvX6X7gG/In_Shot_20251225_112116517_ANUSHKA_ARYAN.jpg',
+      },
+      {
+        name: 'Pratik Chowdhury',
+        role: 'SWC Core Organizer',
+        image:
+          'https://i.postimg.cc/cHpCgqRV/In_Shot_20240904_215630026_PRATIK_CHOWDHURY.jpg',
       },
     ],
   },
@@ -106,33 +128,34 @@ export const teams = [
     icon: <Star className="text-yellow-200" />,
     members: [
       {
-        name: 'Soham Saha',
-        role: 'Sargam Convenor',
+        name: 'NISHANT KUMAR ROY',
+        role: 'Kabaddi (MALE)',
         image:
-          'https://i.postimg.cc/yYDhwm8g/IMG-20240916-190106-238-SOHAM-SAHA.webp',
+          'https://i.postimg.cc/y6RkqdKn/SAVE_20251225_190017_NISHANT_KUMAR_ROY.jpg',
       },
       {
-        name: 'Swapnil Chowdhury',
-        role: 'Band Bash Convenor',
+        name: 'Parthib Ghoshdastidar',
+        role: 'Chess',
         image:
-          'https://i.postimg.cc/jdyxByTQ/Whats-App-Image-2025-05-09-at-13-34-09-cd361213.jpg',
+          'https://i.postimg.cc/dtMZDCnw/IMG_4715_PARTHIB_GHOSHDASTIDAR.jpg',
       },
       {
-        name: 'Harsh Jaiswal',
-        role: 'Carpe Diem Convenor',
-        image: 'https://i.postimg.cc/ncTNnsNf/harsh.jpg',
+        name: 'Anushka Ghosh',
+        role: 'Badminton (FEMALE)',
+        image:
+          'https://i.postimg.cc/7Pzfv64c/Screenshot_20251225_134148_(1)_ANUSHKA_GHOSH.png',
       },
       {
-        name: 'Sayantika Bera',
-        role: 'Kashish-E-Haya Convenor',
+        name: 'Anushka Aryan',
+        role: 'Tug of War (FEMALE)',
         image:
-          'https://i.postimg.cc/W4Gw5sb5/B612-20250427-210411-075-SAYANTIKA-BERA.jpg',
+          'https://i.postimg.cc/VvX6X7gG/In_Shot_20251225_112116517_ANUSHKA_ARYAN.jpg',
       },
       {
-        name: 'Arhit Ghosh',
-        role: 'Jhankar Convenor',
+        name: 'Pratik Chowdhury',
+        role: 'Tug of War (MALE)',
         image:
-          'https://i.postimg.cc/6QnYFdzL/Adobe-Scan-19-Dec-2020-1-ARHIT-GHOSH.jpg',
+          'https://i.postimg.cc/cHpCgqRV/In_Shot_20240904_215630026_PRATIK_CHOWDHURY.jpg',
       },
 
       {
