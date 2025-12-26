@@ -275,7 +275,7 @@ export default function TeamPage() {
           }}
         >
           The brilliant minds orchestrating{' '}
-          <span className="text-yellow-200">REGALIA 2025</span>
+          <span className="text-yellow-200">GAME OF THRONES 2026</span>
         </motion.p>
       </motion.div>
 
@@ -647,7 +647,7 @@ export default function TeamPage() {
           animate={{ opacity: 0.5 }}
           transition={{ delay: 1.5, duration: 0.8 }}
         >
-          REGALIA 2025 • The Grand Festival
+          GAME OF THRONES 2026 • The Grand Sports Meet
         </motion.p>
       </div>
       <style jsx global>{`

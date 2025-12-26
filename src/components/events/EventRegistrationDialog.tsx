@@ -162,7 +162,7 @@ export function SoloEventRegistration({
       coordinators: eventData?.coordinators || [],
       verificationDays: 2,
       contactEmail: 'rcciit.got.official@gmail.com',
-      logoUrl: 'https://i.postimg.cc/ns8zrs4m/GOT-logo.png',
+      logoUrl: 'https://i.postimg.cc/Gtpt62ST/got.jpg',
       socialLinks: {
         instagram: '#',
         facebook: '#',
