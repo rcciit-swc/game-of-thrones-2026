@@ -128,6 +128,11 @@ export const teams = [
     icon: <Star className="text-yellow-200" />,
     members: [
       {
+        name: 'Sreya Sahoo',
+        role: 'Kabaddi (FEMALE)',
+        image: 'https://i.postimg.cc/ydxSZfyk/image.png',
+      },
+      {
         name: 'NISHANT KUMAR ROY',
         role: 'Kabaddi (MALE)',
         image:
@@ -146,39 +151,27 @@ export const teams = [
           'https://i.postimg.cc/7Pzfv64c/Screenshot_20251225_134148_(1)_ANUSHKA_GHOSH.png',
       },
       {
+        name: 'Pratik Chowdhury',
+        role: 'Badminton (MALE)',
+        image:
+          'https://i.postimg.cc/cHpCgqRV/In_Shot_20240904_215630026_PRATIK_CHOWDHURY.jpg',
+      },
+      {
         name: 'Anushka Aryan',
         role: 'Tug of War (FEMALE)',
         image:
           'https://i.postimg.cc/VvX6X7gG/In_Shot_20251225_112116517_ANUSHKA_ARYAN.jpg',
       },
       {
-        name: 'Pratik Chowdhury',
-        role: 'Tug of War (MALE)',
+        name: 'Shreya Dutta',
+        role: 'Track & Sports',
         image:
-          'https://i.postimg.cc/cHpCgqRV/In_Shot_20240904_215630026_PRATIK_CHOWDHURY.jpg',
-      },
-
-      {
-        name: 'Tanishka Chatterjee',
-        role: 'Nrityam Convenor',
-        image:
-          'https://i.postimg.cc/5t4XMJS7/Shin-3-0038-Original-TANISHKA-CHATTERJEE.jpg',
+          'https://i.postimg.cc/pThyLVF9/IMG_20251208_WA0233_SHREYA_DUTTA.jpg',
       },
       {
-        name: 'Debjit Sarkar',
-        role: 'Voice of Emotions Convenor',
-        image: 'https://i.postimg.cc/vTNr4B3Z/IMG-0544-DEBJIT-SARKAR-1.jpg',
-      },
-      {
-        name: 'Shreya Sarkar',
-        role: ' Convenor',
-        image:
-          'https://i.postimg.cc/1R2NBfG5/IMG-20250513-WA0043-SHREYA-SARKAR.jpg',
-      },
-      {
-        name: 'Debopom Bannerjee',
-        role: ' Convenor',
-        image: 'https://i.postimg.cc/ZKjCWHTg/download.webp',
+        name: 'Soumyaraj Bag',
+        role: 'Track & Sports',
+        image: 'https://i.postimg.cc/5NNyXmLV/image.png',
       },
     ],
   },
@@ -189,67 +182,117 @@ export const teams = [
     icon: <Star className="text-yellow-200" />,
     members: [
       {
-        name: 'Arijit Sarkar',
-        role: 'Sargam',
-        image: 'https://i.postimg.cc/44LbLLsR/IMG-2665-ARIJIT-SARKAR.jpg',
-      },
-      {
-        name: 'Souvik Pratihar',
+        name: 'Sekh Motier Rahaman ',
         role: 'Sargam',
         image:
-          'https://i.postimg.cc/Qt65zCLJ/IMG-20250502-195002-SOUVIK-PRATIHAR.jpg',
+          'https://i.postimg.cc/dV6hWxYf/IMG-20251225-104959-SEKH-MOTIER-RAHAMAN.jpg',
       },
       {
-        name: 'Palas Saha',
+        name: 'Soumik Bag',
+        role: 'Sargam',
+        image:
+          'https://i.postimg.cc/HnbxbSzN/In-Shot-20250928-003052478-SOUMIK-BAG.jpg',
+      },
+      {
+        name: 'Kanchan Debnath',
         role: 'Band Bash',
-        image: 'https://i.postimg.cc/76rQLBbW/123-PALAS-SAHA-1.jpg',
-      },
-      {
-        name: 'Shreya Dutta',
-        role: 'Carpe Diem',
-        image: 'https://i.postimg.cc/MT4HRQ2N/Sou-6617-SHREYA-DUTTA.jpg',
-      },
-      {
-        name: 'Purbasha Haldar',
-        role: 'Kashish-E-Haya',
         image:
-          'https://i.postimg.cc/RZCkGtZ0/Whats-App-Image-2025-05-09-at-13-39-47-4d350bdd.jpg',
+          'https://i.postimg.cc/pLR9JtwR/IMG-20251225-105745-KANCHAN-DEBNATH.jpg',
       },
       {
-        name: 'Soham Mallick',
+        name: 'Ankit Tewary',
+        role: 'Carpe Diem',
+        image:
+          'https://i.postimg.cc/wj21WGzd/IMG-20251225-112110-ANKIT-TEWARY(1).jpg',
+      },
+      {
+        name: 'Soumyadeep Sardar',
+        role: 'Kashish-E-Haya',
+        image: 'https://i.postimg.cc/0yVNGKGQ/IMG-0275-SOUMYADEEP-SARDAR.jpg',
+      },
+      {
+        name: 'AATREYEE MISRA',
         role: 'Kashish-E-Haya',
         image:
           'https://i.postimg.cc/SRDZDkdB/6ef094db-085a-4195-afce-41928ec1c9cb-SOHAM-MALLICK.jpg',
       },
       {
-        name: 'Riddhita Goswami',
+        name: 'Akash Raut',
         role: 'Jhankar',
         image: 'https://i.postimg.cc/CxHRt5kn/Shin-2-0670-RIDDHITA-GOSWAMI.jpg',
       },
       {
-        name: 'Sanmitra Dutta',
+        name: 'Sneha Halder',
         role: 'Wall of Wonders',
         image:
           'https://i.postimg.cc/BQFLTMvg/IMG-20250124-WA0020-SANMITRA-DUTTA.jpg',
       },
       {
-        name: 'Arghadeep Saha',
+        name: 'Pujan Dutta',
         role: 'Pixel Perfect',
         image:
           'https://i.postimg.cc/xTLBhx38/B612-20240120-231801-069-Arghadeep-Saha.jpg',
       },
       {
-        name: 'Shinjan Sarkar',
+        name: 'ARIJIT SAHA',
         role: 'Pixel Perfect',
         image: 'https://i.postimg.cc/HxLx62m1/DSC-1347-Shinjan-Sarkar.jpg',
       },
       {
-        name: 'Astha Haldar',
+        name: 'Aditya Chakraborty',
         role: 'Nrityam',
         image: 'https://i.postimg.cc/pXcGjVp8/1745821552665-ASTHA-HALDER.jpg',
       },
       {
-        name: 'Souravi Samui',
+        name: 'Supriti Ghosh',
+        role: 'Voice of Emotions',
+        image:
+          'https://i.postimg.cc/59TQQZfy/Screenshot-20250429-192042-Instagram-SOURAVI-SAMUI.jpg',
+      },
+      {
+        name: 'Poulami Saha',
+        role: 'Voice of Emotions',
+        image:
+          'https://i.postimg.cc/59TQQZfy/Screenshot-20250429-192042-Instagram-SOURAVI-SAMUI.jpg',
+      },
+      {
+        name: 'Sharmistha Ghosh',
+        role: 'Voice of Emotions',
+        image:
+          'https://i.postimg.cc/59TQQZfy/Screenshot-20250429-192042-Instagram-SOURAVI-SAMUI.jpg',
+      },
+      {
+        name: 'Antara Malik',
+        role: 'Voice of Emotions',
+        image:
+          'https://i.postimg.cc/59TQQZfy/Screenshot-20250429-192042-Instagram-SOURAVI-SAMUI.jpg',
+      },
+      {
+        name: 'Neel Bose',
+        role: 'Voice of Emotions',
+        image:
+          'https://i.postimg.cc/59TQQZfy/Screenshot-20250429-192042-Instagram-SOURAVI-SAMUI.jpg',
+      },
+      {
+        name: 'Sohom Sarkar',
+        role: 'Voice of Emotions',
+        image:
+          'https://i.postimg.cc/59TQQZfy/Screenshot-20250429-192042-Instagram-SOURAVI-SAMUI.jpg',
+      },
+      {
+        name: 'Shreekant Pathak',
+        role: 'Voice of Emotions',
+        image:
+          'https://i.postimg.cc/59TQQZfy/Screenshot-20250429-192042-Instagram-SOURAVI-SAMUI.jpg',
+      },
+      {
+        name: 'SOMSUBHRA MISRA',
+        role: 'Voice of Emotions',
+        image:
+          'https://i.postimg.cc/59TQQZfy/Screenshot-20250429-192042-Instagram-SOURAVI-SAMUI.jpg',
+      },
+      {
+        name: 'Bidisha Das',
         role: 'Voice of Emotions',
         image:
           'https://i.postimg.cc/59TQQZfy/Screenshot-20250429-192042-Instagram-SOURAVI-SAMUI.jpg',
