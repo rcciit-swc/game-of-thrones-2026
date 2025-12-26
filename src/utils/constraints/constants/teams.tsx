@@ -303,7 +303,7 @@ export const teams = [
       {
         name: 'Sharmistha Ghosh',
         role: 'Track & Sports',
-        image: 'https://i.postimg.cc/m2NkD5tt/SEN6621-SHARMISTHA-GHOSH.jpg',
+        image: 'https://i.postimg.cc/2SVW09hM/image.png',
       },
       {
         name: 'Antara Malik',
@@ -742,8 +742,7 @@ export const teams = [
       {
         name: 'Sharmistha Ghosh',
         role: 'PR & Outreach Team Member',
-        image:
-          'https://i.postimg.cc/BQxLFvwm/IMG-20250618-122127-497-SHARMISTHA-GHOSH.jpg',
+        image: 'https://i.postimg.cc/2SVW09hM/image.png',
       },
       {
         name: 'Supriti Ghosh',

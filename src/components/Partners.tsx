@@ -18,6 +18,12 @@ const Partners = () => {
       logo: 'https://i.postimg.cc/QtPC9fKF/alumni.png',
       tier: 'Organising Partner',
     },
+    // {
+    //     id: 3,
+    //     name: 'Sports Authority of India, Kolkata',
+    //     logo: 'https://i.postimg.cc/1tyLQFmQ/image.png',
+    //     tier: 'Venue Partner',
+    // },
   ];
 
   const getTierStyle = (tier: string) => {

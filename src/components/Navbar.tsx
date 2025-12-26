@@ -143,7 +143,7 @@ export default function Navbar() {
               alt="Game of Thrones Logo"
               width={117}
               height={156}
-              className="w-20 h-17.5 lg:w-29.25 lg:h-39"
+              className="w-20 h-auto lg:w-29.25 lg:h-39 object-contain"
               priority
             />
           </Link>
