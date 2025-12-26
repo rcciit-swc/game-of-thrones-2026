@@ -10,7 +10,7 @@ export default function Footer() {
     <div
       className="w-full relative overflow-hidden"
       style={{
-        backgroundImage: "url('https://i.postimg.cc/yd95ZJh8/Footer.png')",
+        backgroundImage: "url('/assets/Footer.png')",
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
@@ -71,7 +71,7 @@ export default function Footer() {
               {[
                 { label: 'Home', href: '/' },
                 { label: 'Events', href: '/events' },
-                { label: 'Team', href: '/team' },
+                // { label: 'Team', href: '/team' },
                 { label: 'Gallery', href: '/gallery' },
                 { label: 'Contact', href: '/contact' },
               ].map((link, index) => (
