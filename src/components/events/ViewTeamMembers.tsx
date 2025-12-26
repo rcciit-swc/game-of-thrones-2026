@@ -72,6 +72,25 @@ export function ViewTeamMembers({
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Stop Lenis smooth scroll when sheet/drawer is open
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).lenis) {
+      if (isOpen) {
+        (window as any).lenis.stop();
+        document.body.style.overflow = 'hidden';
+      } else {
+        (window as any).lenis.start();
+        document.body.style.overflow = '';
+      }
+    }
+
+    return () => {
+      if (typeof window !== 'undefined') {
+        document.body.style.overflow = '';
+      }
+    };
+  }, [isOpen]);
+
   const memberVariants = {
     hidden: { opacity: 0, x: 20 },
     visible: (i: number) => ({
@@ -88,51 +107,62 @@ export function ViewTeamMembers({
   };
 
   const Content = () => (
-    <div className="mt-6 font-antolia tracking-widest">
+    <div className="mt-4 md:mt-6 font-antolia tracking-widest">
       {/* Team Lead Card with enhanced styling */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="mb-6 relative overflow-hidden"
+        className="mb-4 md:mb-6 relative overflow-hidden"
       >
         <div className="absolute inset-0 bg-[#FF003C]/20 rounded-xl blur-sm"></div>
-        <div className="bg-[#090B0D] border-2 border-[#FF003C]/30 rounded-xl p-5 relative">
-          <div className="flex items-center gap-3 mb-4">
+        <div className="bg-[#090B0D] border-2 border-[#FF003C]/30 rounded-xl p-3 md:p-5 relative">
+          <div className="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
             <div className="bg-[#FF003C] rounded-full p-0.5">
-              <div className="bg-[#090B0D] rounded-full p-2">
-                <Crown size={24} className="text-[#CCA855]" />
+              <div className="bg-[#090B0D] rounded-full p-1.5 md:p-2">
+                <Crown size={18} className="text-[#CCA855] md:w-6 md:h-6" />
               </div>
             </div>
-            <h3 className="text-2xl text-[#CCA855] font-bold">Team Lead</h3>
+            <h3 className="text-base md:text-2xl text-[#CCA855] font-bold">
+              Team Lead
+            </h3>
           </div>
 
-          <div className="grid gap-3 pl-4 ml-2 border-l-2 border-[#FF003C]/30">
-            <div className="flex items-center gap-3">
-              <User size={18} className="text-[#CCA855]/70" />
+          <div className="grid gap-2 md:gap-3 pl-3 md:pl-4 ml-1 md:ml-2 border-l-2 border-[#FF003C]/30">
+            <div className="flex items-center gap-2 md:gap-3">
+              <User
+                size={14}
+                className="text-[#CCA855]/70 md:w-[18px] md:h-[18px]"
+              />
               <div>
-                <p className="text-sm text-[#CCA855]/70">Name</p>
-                <p className="font-medium text-white">
+                <p className="text-xs md:text-sm text-[#CCA855]/70">Name</p>
+                <p className="font-medium text-sm md:text-base text-white">
                   {teamLeadData?.name || ''}
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
-              <Mail size={18} className="text-[#CCA855]/70" />
+            <div className="flex items-center gap-2 md:gap-3">
+              <Mail
+                size={14}
+                className="text-[#CCA855]/70 md:w-[18px] md:h-[18px]"
+              />
               <div>
-                <p className="text-sm text-[#CCA855]/70">Email</p>
-                <p className="font-medium text-white">
+                <p className="text-xs md:text-sm text-[#CCA855]/70">Email</p>
+                <p className="font-medium text-sm md:text-base text-white">
                   {teamLeadData?.email || ''}
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
-              <Phone size={18} className="text-[#CCA855]/70" />
+            <div className="flex items-center gap-2 md:gap-3">
+              <Phone
+                size={14}
+                className="text-[#CCA855]/70 md:w-[18px] md:h-[18px]"
+              />
               <div>
-                <p className="text-sm text-[#CCA855]/70">Phone</p>
-                <p className="font-medium text-white">
+                <p className="text-xs md:text-sm text-[#CCA855]/70">Phone</p>
+                <p className="font-medium text-sm md:text-base text-white">
                   {teamLeadData?.phone || ''}
                 </p>
               </div>
@@ -140,16 +170,16 @@ export function ViewTeamMembers({
           </div>
 
           <motion.div
-            className="mt-4"
+            className="mt-3 md:mt-4"
             variants={buttonVariants}
             whileHover="hover"
             whileTap="tap"
           >
             <Button
               onClick={onEditTeamLead}
-              className="bg-[#CCA855] hover:bg-[#CCA855]/90 text-black font-medium flex items-center gap-2 px-4 py-2 rounded-md border-0 transition-all duration-300"
+              className="bg-[#CCA855] hover:bg-[#CCA855]/90 text-black font-medium flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 text-sm rounded-md border-0 transition-all duration-300"
             >
-              <Edit size={16} />
+              <Edit size={14} className="md:w-4 md:h-4" />
               <span>Edit Lead Details</span>
             </Button>
           </motion.div>
@@ -157,10 +187,10 @@ export function ViewTeamMembers({
       </motion.div>
 
       {/* Team Members List */}
-      <h3 className="text-xl text-[#CCA855] mb-4 flex items-center gap-2">
-        <Users size={20} className="text-[#CCA855]" />
+      <h3 className="text-base md:text-xl text-[#CCA855] mb-3 md:mb-4 flex items-center gap-2">
+        <Users size={16} className="text-[#CCA855] md:w-5 md:h-5" />
         Team Members ({teamMembers.length})
-        <div className="h-px grow ml-3 bg-[#FF003C]/50"></div>
+        <div className="h-px grow ml-2 md:ml-3 bg-[#FF003C]/50"></div>
       </h3>
 
       <AnimatePresence>
@@ -175,47 +205,66 @@ export function ViewTeamMembers({
             className="mb-4 relative overflow-hidden"
           >
             <div className="absolute inset-0 bg-[#FF003C]/10 rounded-xl blur-sm"></div>
-            <div className="bg-[#090B0D]/80 border border-[#FF003C]/20 p-5 rounded-xl hover:border-[#FF003C]/40 transition-all duration-300">
-              <div className="grid gap-3 mb-3">
-                <div className="flex items-center gap-3">
-                  <User size={18} className="text-[#CCA855]/70" />
+            <div className="bg-[#090B0D]/80 border border-[#FF003C]/20 p-3 md:p-5 rounded-xl hover:border-[#FF003C]/40 transition-all duration-300">
+              <div className="grid gap-2 md:gap-3 mb-2 md:mb-3">
+                <div className="flex items-center gap-2 md:gap-3">
+                  <User
+                    size={14}
+                    className="text-[#CCA855]/70 md:w-[18px] md:h-[18px]"
+                  />
                   <div>
-                    <p className="text-sm text-[#CCA855]/70">Name</p>
-                    <p className="font-medium text-white">{member.name}</p>
+                    <p className="text-xs md:text-sm text-[#CCA855]/70">Name</p>
+                    <p className="font-medium text-sm md:text-base text-white">
+                      {member.name}
+                    </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <Mail size={18} className="text-[#CCA855]/70" />
+                <div className="flex items-center gap-2 md:gap-3">
+                  <Mail
+                    size={14}
+                    className="text-[#CCA855]/70 md:w-[18px] md:h-[18px]"
+                  />
                   <div>
-                    <p className="text-sm text-[#CCA855]/70">Email</p>
-                    <p className="font-medium text-white">{member.email}</p>
+                    <p className="text-xs md:text-sm text-[#CCA855]/70">
+                      Email
+                    </p>
+                    <p className="font-medium text-sm md:text-base text-white">
+                      {member.email}
+                    </p>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <Phone size={18} className="text-[#CCA855]/70" />
+                <div className="flex items-center gap-2 md:gap-3">
+                  <Phone
+                    size={14}
+                    className="text-[#CCA855]/70 md:w-[18px] md:h-[18px]"
+                  />
                   <div>
-                    <p className="text-sm text-[#CCA855]/70">Phone</p>
-                    <p className="font-medium text-white">{member.phone}</p>
+                    <p className="text-xs md:text-sm text-[#CCA855]/70">
+                      Phone
+                    </p>
+                    <p className="font-medium text-sm md:text-base text-white">
+                      {member.phone}
+                    </p>
                   </div>
                 </div>
               </div>
 
-              <div className="flex gap-3 mt-4">
+              <div className="flex gap-2 md:gap-3 mt-3 md:mt-4">
                 <Button
                   onClick={() => onEditMember(index)}
-                  className="bg-[#CCA855] hover:bg-[#CCA855]/90 text-black font-medium flex items-center gap-2 px-4 py-2 rounded-md border-0 transition-all duration-300 transform hover:scale-105 active:scale-98"
+                  className="bg-[#CCA855] hover:bg-[#CCA855]/90 text-black font-medium flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 text-sm rounded-md border-0 transition-all duration-300 transform hover:scale-105 active:scale-98"
                 >
-                  <Edit size={16} />
+                  <Edit size={14} className="md:w-4 md:h-4" />
                   <span>Edit</span>
                 </Button>
 
                 <Button
                   onClick={() => onRemoveMember(index)}
-                  className="bg-[#FF003C] hover:bg-[#FF003C]/90 text-white font-medium flex items-center gap-2 px-4 py-2 rounded-md border-0 transition-all duration-300 transform hover:scale-105 active:scale-98"
+                  className="bg-[#FF003C] hover:bg-[#FF003C]/90 text-white font-medium flex items-center gap-1.5 md:gap-2 px-3 md:px-4 py-1.5 md:py-2 text-sm rounded-md border-0 transition-all duration-300 transform hover:scale-105 active:scale-98"
                 >
-                  <Trash2 size={16} />
+                  <Trash2 size={14} className="md:w-4 md:h-4" />
                   <span>Remove</span>
                 </Button>
               </div>
@@ -232,44 +281,6 @@ export function ViewTeamMembers({
           className="mt-8 mb-4"
         >
           <div className="h-px w-full bg-[#FF003C]/50 mb-8"></div>
-
-          <motion.div
-            className="hidden md:block flex justify-center"
-            variants={buttonVariants}
-            whileHover="hover"
-            whileTap="tap"
-          >
-            {
-              <Button
-                onClick={confirmTeam}
-                disabled={registerLoading}
-                className="bg-[#CCA855] hover:bg-[#CCA855]/90 text-black font-medium flex items-center gap-2 px-8 py-6 text-lg rounded-md border-0 transition-all duration-300 shadow-lg shadow-[#CCA855]/20"
-              >
-                {registerLoading ? (
-                  <>
-                    <Loader2 size={22} className="animate-spin" />
-                    <span>Processing...</span>
-                  </>
-                ) : (
-                  <>
-                    {isFree ? (
-                      isFree && registerLoading ? (
-                        'Loading...'
-                      ) : (
-                        'Register'
-                      )
-                    ) : (
-                      <>
-                        <CreditCard size={22} />
-                        <span>Proceed to Payment</span>
-                        <Check size={22} className="ml-1" />
-                      </>
-                    )}
-                  </>
-                )}
-              </Button>
-            }
-          </motion.div>
         </motion.div>
       )}
     </div>
@@ -317,39 +328,43 @@ export function ViewTeamMembers({
 
   if (isMobile) {
     return (
-      <Drawer open={isOpen} onOpenChange={onOpenChange}>
+      <Drawer open={isOpen} onOpenChange={onOpenChange} modal={true}>
         <AnimatePresence>
           {isOpen && (
-            <DrawerContent className="bg-[#090B0D] border-t-2 border-[#FF003C]/30">
+            <DrawerContent className="bg-[#090B0D] border-t-2 border-[#FF003C]/30 flex flex-col max-h-[80vh]">
               <motion.div
                 variants={mobileDrawerVariants}
                 initial="hidden"
                 animate="visible"
                 exit="exit"
+                className="flex flex-col h-full"
               >
-                <DrawerHeader>
-                  <DrawerTitle className="text-[#CCA855] text-3xl font-antolia tracking-wider flex items-center gap-3">
-                    <Users size={24} className="text-[#CCA855]" />
+                <DrawerHeader className="flex-shrink-0">
+                  <DrawerTitle className="text-[#CCA855] text-lg md:text-2xl font-antolia tracking-wider flex items-center gap-2">
+                    <Users size={18} className="text-[#CCA855] md:w-6 md:h-6" />
                     Team Roster
                   </DrawerTitle>
-                  <DrawerDescription className="text-[#CCA855]/80 text-xl font-kagitingan tracking-wider">
+                  <DrawerDescription className="text-[#CCA855]/80 text-sm md:text-lg font-kagitingan tracking-wider">
                     {teamMembers.length > 0
                       ? `${teamMembers.length} team member${teamMembers.length > 1 ? 's' : ''}`
                       : 'No team members added yet'}
                   </DrawerDescription>
 
-                  <div className="h-1 w-32 bg-[#FF003C] rounded-full mt-2"></div>
+                  <div className="h-0.5 md:h-1 w-24 md:w-32 bg-[#FF003C] rounded-full mt-1 md:mt-2"></div>
                 </DrawerHeader>
                 {showConfirmTeam && (
-                  <div className="px-4 pt-4 pb-2">
+                  <div className="px-4 pt-2 pb-2 flex-shrink-0">
                     <Button
                       onClick={confirmTeam}
                       disabled={registerLoading}
-                      className="w-full bg-[#CCA855] hover:bg-[#CCA855]/90 text-black font-medium flex items-center justify-center gap-2 px-4 py-3 text-base rounded-md border-0 transition-all duration-300 shadow-lg shadow-[#CCA855]/20"
+                      className="w-full bg-[#CCA855] hover:bg-[#CCA855]/90 text-black font-medium flex items-center justify-center gap-2 px-4 py-2.5 text-sm md:text-base rounded-md border-0 transition-all duration-300 shadow-lg shadow-[#CCA855]/20"
                     >
                       {registerLoading ? (
                         <>
-                          <Loader2 size={22} className="animate-spin" />
+                          <Loader2
+                            size={18}
+                            className="animate-spin md:w-5 md:h-5"
+                          />
                           <span>Processing...</span>
                         </>
                       ) : (
@@ -358,9 +373,9 @@ export function ViewTeamMembers({
                             'Register'
                           ) : (
                             <>
-                              <CreditCard size={20} />
+                              <CreditCard size={18} className="md:w-5 md:h-5" />
                               <span>Proceed to Payment</span>
-                              <Check size={20} className="ml-1" />
+                              <Check size={18} className="ml-1 md:w-5 md:h-5" />
                             </>
                           )}
                         </>
@@ -368,7 +383,13 @@ export function ViewTeamMembers({
                     </Button>
                   </div>
                 )}
-                <div className="p-4 overflow-y-auto max-h-[calc(100vh-20rem)]">
+                <div
+                  className="px-4 pb-4 overflow-y-auto flex-1 my-scrollbar"
+                  onTouchMove={(e) => {
+                    // Stop propagation to prevent background scroll
+                    e.stopPropagation();
+                  }}
+                >
                   <Content />
                 </div>
               </motion.div>
@@ -380,18 +401,23 @@ export function ViewTeamMembers({
   }
 
   return (
-    <Sheet open={isOpen} onOpenChange={onOpenChange}>
+    <Sheet open={isOpen} onOpenChange={onOpenChange} modal={true}>
       <SheetContent
         side="right"
-        className="bg-[#090B0D] border-l-2 border-[#FF003C]/30 w-100 sm:w-135 overflow-y-auto my-scrollbar"
+        className="bg-[#090B0D] border-l-2 border-[#FF003C]/30 w-100 sm:w-135 overflow-hidden flex flex-col"
+        onWheel={(e) => {
+          // Prevent wheel event from propagating to background
+          e.stopPropagation();
+        }}
       >
         <motion.div
           variants={desktopSidebarVariants}
           initial="hidden"
           animate="visible"
           exit="exit"
+          className="flex flex-col h-full"
         >
-          <SheetHeader>
+          <SheetHeader className="flex-shrink-0">
             <SheetTitle className="text-[#CCA855] text-3xl font-antolia tracking-wider flex items-center gap-3">
               <Users size={24} className="text-[#CCA855]" />
               Team Roster
@@ -404,7 +430,43 @@ export function ViewTeamMembers({
 
             <div className="h-1 w-32 bg-[#FF003C] rounded-full mt-2"></div>
           </SheetHeader>
-          <div className="overflow-y-auto max-h-[calc(100vh-10rem)] pr-2 my-scrollbar">
+
+          {showConfirmTeam && (
+            <div className="px-4 pt-4 pb-2 flex-shrink-0">
+              <Button
+                onClick={confirmTeam}
+                disabled={registerLoading}
+                className="w-full bg-[#CCA855] hover:bg-[#CCA855]/90 text-black font-medium flex items-center justify-center gap-2 px-4 py-3 text-base rounded-md border-0 transition-all duration-300 shadow-lg shadow-[#CCA855]/20"
+              >
+                {registerLoading ? (
+                  <>
+                    <Loader2 size={22} className="animate-spin" />
+                    <span>Processing...</span>
+                  </>
+                ) : (
+                  <>
+                    {isFree ? (
+                      'Register'
+                    ) : (
+                      <>
+                        <CreditCard size={20} />
+                        <span>Proceed to Payment</span>
+                        <Check size={20} className="ml-1" />
+                      </>
+                    )}
+                  </>
+                )}
+              </Button>
+            </div>
+          )}
+
+          <div
+            className="overflow-y-auto flex-1 pr-2 my-scrollbar"
+            onWheel={(e) => {
+              // Stop propagation to prevent background scroll
+              e.stopPropagation();
+            }}
+          >
             <Content />
           </div>
 

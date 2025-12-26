@@ -327,13 +327,82 @@ const Playground = () => {
 
         {/* ================= REGISTER NOW SECTION ================= */}
         <div className="relative z-10 flex justify-center w-auto -mx-2 mt-12 lg:mt-24 lg:mx-0 pb-5">
-          <Image
-            src="/about/Lucid_Origin_Design_a_REGISTER_NOW_calltoaction_image_that_mat_2 2.png"
-            alt="Register Now"
-            width={800}
-            height={300}
-            className="w-full lg:w-[800px] h-auto object-contain hover:scale-105 transition-transform cursor-pointer"
-          />
+          <Link
+            href="/events"
+            className="register-now-container group relative block"
+          >
+            {/* Glitter particles overlay */}
+            <div className="glitter-overlay pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+              <div
+                className="glitter-particle"
+                style={{ left: '10%', top: '20%', animationDelay: '0s' }}
+              ></div>
+              <div
+                className="glitter-particle"
+                style={{ left: '30%', top: '40%', animationDelay: '0.2s' }}
+              ></div>
+              <div
+                className="glitter-particle"
+                style={{ left: '50%', top: '15%', animationDelay: '0.4s' }}
+              ></div>
+              <div
+                className="glitter-particle"
+                style={{ left: '70%', top: '35%', animationDelay: '0.1s' }}
+              ></div>
+              <div
+                className="glitter-particle"
+                style={{ left: '85%', top: '25%', animationDelay: '0.3s' }}
+              ></div>
+              <div
+                className="glitter-particle"
+                style={{ left: '15%', top: '60%', animationDelay: '0.5s' }}
+              ></div>
+              <div
+                className="glitter-particle"
+                style={{ left: '40%', top: '70%', animationDelay: '0.15s' }}
+              ></div>
+              <div
+                className="glitter-particle"
+                style={{ left: '65%', top: '65%', animationDelay: '0.35s' }}
+              ></div>
+              <div
+                className="glitter-particle"
+                style={{ left: '90%', top: '55%', animationDelay: '0.25s' }}
+              ></div>
+              <div
+                className="glitter-particle"
+                style={{ left: '25%', top: '80%', animationDelay: '0.45s' }}
+              ></div>
+            </div>
+
+            {/* Blood drip effect */}
+            <div className="blood-drip-container pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 overflow-hidden">
+              <div
+                className="blood-drip"
+                style={{ left: '20%', animationDelay: '0.3s' }}
+              ></div>
+              <div
+                className="blood-drip"
+                style={{ left: '45%', animationDelay: '0.6s' }}
+              ></div>
+              <div
+                className="blood-drip"
+                style={{ left: '70%', animationDelay: '0.9s' }}
+              ></div>
+              <div
+                className="blood-drip"
+                style={{ left: '85%', animationDelay: '0.4s' }}
+              ></div>
+            </div>
+
+            <Image
+              src="/about/Lucid_Origin_Design_a_REGISTER_NOW_calltoaction_image_that_mat_2 2.png"
+              alt="Register Now"
+              width={800}
+              height={300}
+              className="register-now-image w-full lg:w-[800px] h-auto object-contain transition-all duration-300"
+            />
+          </Link>
         </div>
       </section>
     </>

@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import '@/styles/lenis.css';
+import '@/styles/scroll-animations.css';
 import { constructMetaData } from '@/utils/functions';
 import SessionProvider from '@/lib/SessionProvider';
 import {
@@ -11,6 +13,7 @@ import {
 import { Toaster } from 'sonner';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import SmoothScroll from '@/components/SmoothScroll';
 
 const irishGrover = Irish_Grover({
   weight: '400',
@@ -61,6 +64,7 @@ export default function RootLayout({
         className={`${irishGrover.variable} ${robotoCondensed.variable} ${rajdhani.variable} ${cinzel.variable} antialiased`}
         suppressHydrationWarning
       >
+        <SmoothScroll />
         <Navbar />
         {children}
         <Toaster position="bottom-right" richColors duration={5000} />

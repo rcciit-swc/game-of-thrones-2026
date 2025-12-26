@@ -81,6 +81,25 @@ export function SoloEventRegistration({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
+  // Stop Lenis smooth scroll when modal is open
+  useEffect(() => {
+    if (typeof window !== 'undefined' && (window as any).lenis) {
+      if (isOpen) {
+        (window as any).lenis.stop();
+        document.body.style.overflow = 'hidden';
+      } else {
+        (window as any).lenis.start();
+        document.body.style.overflow = '';
+      }
+    }
+
+    return () => {
+      if (typeof window !== 'undefined') {
+        document.body.style.overflow = '';
+      }
+    };
+  }, [isOpen]);
+
   // Form for solo lead details.
   const {
     register: registerSoloLead,
@@ -220,9 +239,9 @@ export function SoloEventRegistration({
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={onClose} modal={true}>
       <DialogContent
-        className="sm:max-w-[550px] my-scrollbar border-2 border-[#FF003C] rounded-xl p-8 shadow-xl overflow-hidden"
+        className="sm:max-w-[450px] my-scrollbar border-2 border-[#FF003C] rounded-xl p-8 shadow-xl overflow-hidden"
         style={{
           backgroundImage:
             'url(https://i.postimg.cc/C5SMqWV1/cae8d04277c25697532890b8f73997b82d3609a1.jpg)',
@@ -239,25 +258,25 @@ export function SoloEventRegistration({
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="flex items-center justify-center gap-3 mb-4 relative z-10"
+            className="hidden xl:flex items-center justify-center gap-2 mb-2 md:mb-3 relative z-10"
           >
-            <PartyPopper size={32} className="text-[#FF003C]" />
-            <Music size={32} className="text-[#FF003C]" />
-            <Ticket size={32} className="text-[#FF003C]" />
+            <PartyPopper size={20} className="text-[#FF003C] md:w-6 md:h-6" />
+            <Music size={20} className="text-[#FF003C] md:w-6 md:h-6" />
+            <Ticket size={20} className="text-[#FF003C] md:w-6 md:h-6" />
           </motion.div>
-          <DialogTitle className="text-center text-white font-antolia tracking-widest font-bold text-2xl md:text-3xl pb-1 relative z-10">
+          <DialogTitle className="text-center text-white font-antolia tracking-widest font-bold text-sm md:text-2xl lg:text-xl pb-1 relative z-10">
             Registration for {eventName}
           </DialogTitle>
-          <div className="flex justify-center mt-2">
-            <div className="h-1 w-32 bg-[#FF003C] rounded-full"></div>
+          <div className="flex justify-center mt-1 md:mt-2">
+            <div className="h-0.5 md:h-1 w-24 md:w-32 bg-[#FF003C] rounded-full"></div>
           </div>
-          <div className="flex justify-center mt-4">
-            <div className="flex gap-4">
+          <div className="flex justify-center mt-2 md:mt-3">
+            <div className="flex gap-3 md:gap-4">
               <div
-                className={`w-3 h-3 rounded-full ${step === 1 ? 'bg-[#FF003C]' : 'bg-gray-600'} transition-colors duration-300`}
+                className={`w-2.5 h-2.5 md:w-3 md:h-3 rounded-full ${step === 1 ? 'bg-[#FF003C]' : 'bg-gray-600'} transition-colors duration-300`}
               ></div>
               <div
-                className={`w-3 h-3 rounded-full ${step === 2 ? 'bg-[#FF003C]' : 'bg-gray-600'} transition-colors duration-300`}
+                className={`w-2.5 h-2.5 md:w-3 md:h-3 rounded-full ${step === 2 ? 'bg-[#FF003C]' : 'bg-gray-600'} transition-colors duration-300`}
               ></div>
             </div>
           </div>
@@ -293,15 +312,15 @@ export function SoloEventRegistration({
               animate="visible"
               exit="exit"
               onSubmit={handleSoloLeadSubmit(onSoloLeadSubmit)}
-              className="overflow-y-auto my-scrollbar max-h-[65vh] relative z-10 mt-4"
+              className="overflow-y-auto my-scrollbar max-h-[60vh] md:max-h-[55vh] 2xl:max-h-[60vh] relative z-10 mt-2 md:mt-4"
             >
-              <div className="grid gap-4 py-2">
+              <div className="grid gap-2 md:gap-4 py-1 md:py-2">
                 <div className="grid gap-1.5">
                   <label
                     htmlFor="name"
-                    className="flex items-center gap-2 text-[#CCA855] font-medium relative z-10"
+                    className="flex items-center gap-1 md:gap-2 text-[#CCA855] font-medium text-xs md:text-sm relative z-10"
                   >
-                    <User size={18} />
+                    <User size={14} className="md:w-[18px] md:h-[18px]" />
                     <span>Name</span>
                   </label>
                   <div className="relative">
@@ -309,13 +328,13 @@ export function SoloEventRegistration({
                       id="name"
                       readOnly
                       {...registerSoloLead('name')}
-                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300 relative z-10"
+                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-1.5 pl-7 md:p-2 md:pl-9 text-xs md:text-sm transition-all duration-300 relative z-10"
                       placeholder="Enter your name"
                       defaultValue={userData?.name}
                     />
                     <User
-                      size={18}
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70 z-10"
+                      size={14}
+                      className="absolute left-2 md:left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70 z-10 md:w-[18px] md:h-[18px]"
                     />
                   </div>
                   {soloLeadErrors.name && (
@@ -328,9 +347,9 @@ export function SoloEventRegistration({
                 <div className="grid gap-1.5">
                   <label
                     htmlFor="phone"
-                    className="flex items-center gap-2 text-[#CCA855] font-medium relative z-10"
+                    className="flex items-center gap-1 md:gap-2 text-[#CCA855] font-medium text-xs md:text-sm relative z-10"
                   >
-                    <Phone size={18} />
+                    <Phone size={14} className="md:w-[18px] md:h-[18px]" />
                     <span>Phone</span>
                   </label>
                   <div className="relative">
@@ -339,13 +358,13 @@ export function SoloEventRegistration({
                       type="tel"
                       readOnly
                       {...registerSoloLead('phone')}
-                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300 relative z-10"
+                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-1.5 pl-7 md:p-2 md:pl-9 text-xs md:text-sm transition-all duration-300 relative z-10"
                       placeholder="Enter your phone number"
                       defaultValue={userData?.phone}
                     />
                     <Phone
-                      size={18}
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70 z-10"
+                      size={14}
+                      className="absolute left-2 md:left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70 z-10 md:w-[18px] md:h-[18px]"
                     />
                   </div>
                   {soloLeadErrors.phone && (
@@ -358,9 +377,9 @@ export function SoloEventRegistration({
                 <div className="grid gap-1.5">
                   <label
                     htmlFor="email"
-                    className="flex items-center gap-2 text-[#CCA855] font-medium relative z-10"
+                    className="flex items-center gap-1 md:gap-2 text-[#CCA855] font-medium text-xs md:text-sm relative z-10"
                   >
-                    <Mail size={18} />
+                    <Mail size={14} className="md:w-[18px] md:h-[18px]" />
                     <span>Email</span>
                   </label>
                   <div className="relative">
@@ -368,14 +387,14 @@ export function SoloEventRegistration({
                       id="email"
                       type="email"
                       {...registerSoloLead('email')}
-                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300 relative z-10"
+                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-1.5 pl-7 md:p-2 md:pl-9 text-xs md:text-sm transition-all duration-300 relative z-10"
                       placeholder="Enter your email"
                       defaultValue={userData?.email}
                       readOnly
                     />
                     <Mail
-                      size={18}
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70 z-10"
+                      size={14}
+                      className="absolute left-2 md:left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70 z-10 md:w-[18px] md:h-[18px]"
                     />
                   </div>
                   {soloLeadErrors.email && (
@@ -388,9 +407,9 @@ export function SoloEventRegistration({
                 <div className="grid gap-1.5">
                   <label
                     htmlFor="college"
-                    className="flex items-center gap-2 text-[#CCA855] font-medium relative z-10"
+                    className="flex items-center gap-1 md:gap-2 text-[#CCA855] font-medium text-xs md:text-sm relative z-10"
                   >
-                    <Building size={18} />
+                    <Building size={14} className="md:w-[18px] md:h-[18px]" />
                     <span>College</span>
                   </label>
                   <div className="relative">
@@ -398,12 +417,12 @@ export function SoloEventRegistration({
                       id="college"
                       autoFocus
                       {...registerSoloLead('college')}
-                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300 relative z-10"
+                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-1.5 pl-7 md:p-2 md:pl-9 text-xs md:text-sm transition-all duration-300 relative z-10"
                       placeholder="Enter your college name"
                     />
                     <Building
-                      size={18}
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70 z-10"
+                      size={14}
+                      className="absolute left-2 md:left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70 z-10 md:w-[18px] md:h-[18px]"
                     />
                   </div>
                   {soloLeadErrors.college && (
@@ -414,7 +433,7 @@ export function SoloEventRegistration({
                 </div>
               </div>
 
-              <div className="flex justify-end gap-4 mt-6 relative z-10">
+              <div className="flex justify-end gap-2 md:gap-4 mt-2 md:mt-4 relative z-10">
                 <Button
                   type="button"
                   variant="outline"
@@ -441,27 +460,27 @@ export function SoloEventRegistration({
               animate="visible"
               exit="exit"
               onSubmit={handlePaymentSubmit(onPaymentSubmit)}
-              className="overflow-y-auto my-scrollbar max-h-[65vh] relative z-10 mt-4"
+              className="overflow-y-auto my-scrollbar  max-h-[70vh] md:max-h-[55vh] relative z-10 mt-2"
             >
-              <div className="grid gap-4 py-2">
+              <div className="grid gap-2 md:gap-2.5 py-1 md:py-1">
                 <div className="grid gap-1.5">
                   <label
                     htmlFor="accountHolderName"
-                    className="flex items-center gap-2 text-[#CCA855] font-medium relative z-10"
+                    className="flex items-center gap-1 md:gap-1.5 text-[#CCA855] font-medium text-xs md:text-xs relative z-10"
                   >
-                    <User size={18} />
+                    <User size={14} className="md:w-[14px] md:h-[14px]" />
                     <span>Account Holder Name</span>
                   </label>
                   <div className="relative">
                     <input
                       id="accountHolderName"
                       {...registerPayment('accountHolderName')}
-                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300 relative z-10"
+                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-1.5 pl-7 md:p-1.5 md:pl-8 text-xs transition-all duration-300 relative z-10"
                       placeholder="Enter account holder name"
                     />
                     <User
-                      size={18}
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70 z-10"
+                      size={14}
+                      className="absolute left-2 md:left-2.5 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70 z-10 md:w-[14px] md:h-[14px]"
                     />
                   </div>
                   {paymentErrors.accountHolderName && (
@@ -474,21 +493,21 @@ export function SoloEventRegistration({
                 <div className="grid gap-1.5">
                   <label
                     htmlFor="transactionId"
-                    className="flex items-center gap-2 text-[#CCA855] font-medium relative z-10"
+                    className="flex items-center gap-1 md:gap-1.5 text-[#CCA855] font-medium text-xs md:text-xs relative z-10"
                   >
-                    <CreditCard size={18} />
+                    <CreditCard size={14} className="md:w-[14px] md:h-[14px]" />
                     <span>Transaction ID</span>
                   </label>
                   <div className="relative">
                     <input
                       id="transactionId"
                       {...registerPayment('transactionId')}
-                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-2 pl-9 text-sm md:text-base transition-all duration-300 relative z-10"
+                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] focus:ring-1 focus:ring-[#FF003C] focus:outline-none text-[#CCA855] rounded-md p-1.5 pl-7 md:p-1.5 md:pl-8 text-xs transition-all duration-300 relative z-10"
                       placeholder="Enter transaction ID"
                     />
                     <CreditCard
-                      size={18}
-                      className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70 z-10"
+                      size={14}
+                      className="absolute left-2 md:left-2.5 top-1/2 transform -translate-y-1/2 text-[#FF003C]/70 z-10 md:w-[14px] md:h-[14px]"
                     />
                   </div>
                   {paymentErrors.transactionId && (
@@ -501,9 +520,9 @@ export function SoloEventRegistration({
                 <div className="grid gap-1.5 text-white relative z-10">
                   <label
                     htmlFor="paymentScreenshot"
-                    className="flex items-center gap-2 text-[#CCA855] font-medium"
+                    className="flex items-center gap-1 md:gap-1.5 text-[#CCA855] font-medium text-xs md:text-xs"
                   >
-                    <Upload size={18} />
+                    <Upload size={14} className="md:w-[14px] md:h-[14px]" />
                     <span>Payment Screenshot</span>
                   </label>
                   <div className="relative">
@@ -511,7 +530,7 @@ export function SoloEventRegistration({
                       id="paymentScreenshot"
                       type="file"
                       {...registerPayment('paymentScreenshot')}
-                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] outline-none rounded-md p-2 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:bg-[#FF003C] file:text-white file:font-medium file:hover:bg-[#FF003C]/90 file:transition-all file:duration-300 relative z-10"
+                      className="w-full bg-[#090B0D] border border-[#FF003C] focus:border-[#FF003C] outline-none rounded-md p-1.5 md:p-1.5 text-xs file:mr-2 md:file:mr-3 file:py-1 md:file:py-1 file:px-2 md:file:px-3 file:rounded-md file:border-0 file:bg-[#FF003C] file:text-white file:text-xs file:font-medium file:hover:bg-[#FF003C]/90 file:transition-all file:duration-300 relative z-10"
                       accept="image/*"
                     />
                   </div>
@@ -527,28 +546,28 @@ export function SoloEventRegistration({
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2 }}
-                className="mt-4 mb-4 relative z-10"
+                className="mt-1 md:mt-2 mb-1 md:mb-2 relative z-10"
               >
-                <h1 className="text-white text-center text-xl md:text-2xl font-antolia tracking-widest font-semibold">
+                <h1 className="text-white text-center text-sm md:text-sm font-antolia tracking-widest font-semibold">
                   Pay <span className="text-[#FF003C]">₹ {eventFees}</span>
                 </h1>
-                <div className="mt-4 w-full flex items-center justify-center">
+                <div className="mt-1 md:mt-2 w-full flex items-center justify-center">
                   <div className="relative">
                     <div className="absolute inset-0 bg-[#FF003C] rounded-lg blur-lg opacity-50 animate-pulse"></div>
-                    <div className="relative p-1 bg-[#FF003C] rounded-lg">
+                    <div className="relative p-0.5 md:p-1 bg-[#FF003C] rounded-lg">
                       <Image
                         src="https://i.postimg.cc/h48tnXQb/image.png"
                         alt="Payment QR Code"
-                        width={280}
-                        height={280}
-                        className="rounded-md"
+                        width={160}
+                        height={160}
+                        className="rounded-md md:w-[140px] md:h-[140px] lg:w-[150px] lg:h-[150px] xl:w-[160px] xl:h-[160px]"
                       />
                     </div>
                   </div>
                 </div>
               </motion.div>
 
-              <div className="flex flex-col sm:flex-row gap-4 mt-6 sm:justify-between relative z-10">
+              <div className="flex flex-row gap-2 md:gap-3 mt-2 md:mt-2.5 justify-between relative z-10">
                 <Button
                   type="button"
                   variant="outline"
