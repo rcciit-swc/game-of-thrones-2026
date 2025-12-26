@@ -3,15 +3,27 @@
 import Navbar from '@/components/Navbar';
 import { motion, AnimatePresence } from 'framer-motion';
 import { teams } from '@/utils/constraints/constants/teams';
-import { useState } from 'react';
-import { Zap, Users, Trophy, Phone, Award, Flame, Target } from 'lucide-react';
+import { useState, useMemo } from 'react';
+import { Zap, Flame, Target } from 'lucide-react';
 import Image from 'next/image';
 
 export default function TeamsPage() {
   const [selectedTab, setSelectedTab] = useState(teams[0].id);
   const [hoveredMember, setHoveredMember] = useState<number | null>(null);
 
-  const selectedTeam = teams.find((team) => team.id === selectedTab);
+  // Memoize selected team to avoid recalculation
+  const selectedTeam = useMemo(
+    () => teams.find((team) => team.id === selectedTab),
+    [selectedTab]
+  );
+
+  // Detect mobile for performance optimizations
+  const isMobile = useMemo(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 768;
+    }
+    return false;
+  }, []);
 
   return (
     <div
@@ -21,7 +33,7 @@ export default function TeamsPage() {
           "url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=2070')",
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
+        backgroundAttachment: isMobile ? 'scroll' : 'fixed', // scroll on mobile for better performance
       }}
     >
       {/* Dark Overlay for Better Contrast */}
@@ -30,18 +42,30 @@ export default function TeamsPage() {
       {/* Intense Flickering Red Lights - Stranger Things Style */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
+        style={{ willChange: 'opacity' }}
         animate={{
-          opacity: [0.15, 0.35, 0.08, 0.28, 0.15],
+          opacity: isMobile
+            ? [0.1, 0.2, 0.1] // Simpler animation on mobile
+            : [0.15, 0.35, 0.08, 0.28, 0.15],
         }}
         transition={{
-          duration: 2.5,
+          duration: isMobile ? 3 : 2.5,
           repeat: Infinity,
           ease: 'easeInOut',
         }}
       >
-        <div className="absolute top-0 left-1/4 w-[700px] h-[700px] bg-red-600/60 rounded-full blur-[250px]" />
-        <div className="absolute bottom-0 right-1/4 w-[700px] h-[700px] bg-cyan-500/50 rounded-full blur-[250px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-purple-700/40 rounded-full blur-[280px]" />
+        <div
+          className="absolute top-0 left-1/4 w-[700px] h-[700px] bg-red-600/60 rounded-full"
+          style={{ filter: `blur(${isMobile ? '120px' : '250px'})` }}
+        />
+        <div
+          className="absolute bottom-0 right-1/4 w-[700px] h-[700px] bg-cyan-500/50 rounded-full"
+          style={{ filter: `blur(${isMobile ? '120px' : '250px'})` }}
+        />
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-purple-700/40 rounded-full"
+          style={{ filter: `blur(${isMobile ? '150px' : '280px'})` }}
+        />
       </motion.div>
 
       {/* VHS Static Noise Overlay - Retro 80s Effect */}
@@ -369,17 +393,20 @@ export default function TeamsPage() {
                     initial={{ opacity: 0, y: 50, scale: 0.9 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     transition={{
-                      delay: index * 0.1,
+                      delay: isMobile ? index * 0.05 : index * 0.1, // Faster stagger on mobile
                       duration: 0.5,
                       type: 'spring',
                       stiffness: 100,
                     }}
-                    onHoverStart={() => setHoveredMember(index)}
-                    onHoverEnd={() => setHoveredMember(null)}
+                    onHoverStart={() => !isMobile && setHoveredMember(index)} // Disable hover on mobile
+                    onHoverEnd={() => !isMobile && setHoveredMember(null)}
                     className="group cursor-pointer"
+                    style={{ willChange: 'transform, opacity' }}
                   >
                     {/* Member Card - Sports Jersey Style */}
-                    <div className="relative h-full bg-gradient-to-br from-black/95 via-red-950/20 to-black/95 backdrop-blur-md rounded-2xl overflow-hidden border-2 border-red-500/40 hover:border-red-500 transition-all duration-500 hover:shadow-[0_0_40px_rgba(239,68,68,0.7)] hover:scale-105">
+                    <div
+                      className={`relative h-full bg-gradient-to-br from-black/95 via-red-950/20 to-black/95 ${isMobile ? 'backdrop-blur-sm' : 'backdrop-blur-md'} rounded-2xl overflow-hidden border-2 border-red-500/40 hover:border-red-500 transition-all duration-500 hover:shadow-[0_0_40px_rgba(239,68,68,0.7)] hover:scale-105`}
+                    >
                       {/* Sports Flame Icon - Top Right */}
                       <div className="absolute top-4 right-4 z-20">
                         <motion.div
@@ -472,6 +499,8 @@ export default function TeamsPage() {
                             alt={member.name}
                             width={500}
                             height={500}
+                            loading={index < 4 ? 'eager' : 'lazy'} // Eager load first 4, lazy load rest
+                            priority={index < 4} // Priority for first 4 images
                             className="object-cover group-hover:scale-115 transition-transform duration-700"
                           />
 
@@ -496,41 +525,44 @@ export default function TeamsPage() {
                             }}
                           />
 
-                          {/* Speed Lines - Sports Motion Effect */}
-                          <motion.div
-                            className="absolute inset-0 z-10 pointer-events-none"
-                            animate={
-                              hoveredMember === index
-                                ? { opacity: [0, 0.4, 0] }
-                                : { opacity: 0 }
-                            }
-                            transition={{
-                              duration: 1.5,
-                              repeat: hoveredMember === index ? Infinity : 0,
-                            }}
-                          >
-                            {[...Array(6)].map((_, i) => (
-                              <motion.div
-                                key={i}
-                                className="absolute h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
-                                style={{
-                                  top: `${15 + i * 15}%`,
-                                  left: 0,
-                                  right: 0,
-                                  boxShadow: '0 0 10px rgba(6, 182, 212, 0.8)',
-                                }}
-                                animate={{
-                                  x: ['-100%', '100%'],
-                                }}
-                                transition={{
-                                  duration: 0.8,
-                                  delay: i * 0.1,
-                                  repeat: Infinity,
-                                  repeatDelay: 1,
-                                }}
-                              />
-                            ))}
-                          </motion.div>
+                          {/* Speed Lines - Sports Motion Effect - Disabled on mobile for performance */}
+                          {!isMobile && (
+                            <motion.div
+                              className="absolute inset-0 z-10 pointer-events-none"
+                              animate={
+                                hoveredMember === index
+                                  ? { opacity: [0, 0.4, 0] }
+                                  : { opacity: 0 }
+                              }
+                              transition={{
+                                duration: 1.5,
+                                repeat: hoveredMember === index ? Infinity : 0,
+                              }}
+                            >
+                              {[...Array(6)].map((_, i) => (
+                                <motion.div
+                                  key={i}
+                                  className="absolute h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
+                                  style={{
+                                    top: `${15 + i * 15}%`,
+                                    left: 0,
+                                    right: 0,
+                                    boxShadow:
+                                      '0 0 10px rgba(6, 182, 212, 0.8)',
+                                  }}
+                                  animate={{
+                                    x: ['-100%', '100%'],
+                                  }}
+                                  transition={{
+                                    duration: 0.8,
+                                    delay: i * 0.1,
+                                    repeat: Infinity,
+                                    repeatDelay: 1,
+                                  }}
+                                />
+                              ))}
+                            </motion.div>
+                          )}
 
                           {/* Energy Pulse - Bottom of Image */}
                           <motion.div

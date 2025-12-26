@@ -8,6 +8,7 @@ import Sponsors from '@/components/Sponsors';
 import Playground from '@/components/Playground';
 import LoaderOverlay from '@/components/events/LoaderOverlay';
 import { useLoaderStore } from '@/lib/stores/loader';
+import Partners from '@/components/Partners';
 
 const Page = () => {
   const [showLoader, setShowLoader] = useState(false);
@@ -37,6 +38,7 @@ const Page = () => {
 
         <Playground />
         <PrincipalsDesk />
+        <Partners />
         <Sponsors />
       </div>
     </>

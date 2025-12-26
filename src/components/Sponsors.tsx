@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Sponsors = () => {
   const sponsorshipData = {
@@ -10,10 +11,35 @@ const Sponsors = () => {
     contactLink: '/contact',
   };
 
+  // Add your sponsor logos here
+  const sponsors = [
+    {
+      id: 1,
+      name: 'Times of India',
+      logo: 'https://i.postimg.cc/C1ffwRm6/toi.png',
+      tier: 'Awards & Media Partner',
+    },
+  ];
+
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   const handleBrochureClick = () => {
     window.open(sponsorshipData.brochureLink, '_blank');
+  };
+
+  const getTierStyle = (tier: string) => {
+    switch (tier) {
+      case 'title':
+        return 'border-[#FFD700] shadow-[0_0_35px_rgba(255,215,0,0.5)]';
+      case 'platinum':
+        return 'border-[#E5E4E2] shadow-[0_0_30px_rgba(229,228,226,0.4)]';
+      case 'gold':
+        return 'border-[#CCA855] shadow-[0_0_25px_rgba(204,168,85,0.4)]';
+      case 'silver':
+        return 'border-[#C0C0C0] shadow-[0_0_20px_rgba(192,192,192,0.3)]';
+      default:
+        return 'border-[#CCA855]';
+    }
   };
 
   return (
@@ -38,7 +64,76 @@ const Sponsors = () => {
       <div className="pointer-events-none absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black via-black/50 to-transparent z-1" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main Content Card */}
+        {/* Section Header */}
+        <div className="text-center mb-12 lg:mb-16">
+          <h2
+            className="font-['Irish_Grover'] text-[35px] lg:text-[60px] text-[#CCA855] mb-4 uppercase"
+            style={{
+              textShadow: '0px 0px 20px rgba(204, 168, 85, 0.5)',
+            }}
+          >
+            Our Sponsors
+          </h2>
+          <div className="flex items-center justify-center gap-4 w-full max-w-[500px] mx-auto">
+            <div className="h-[2px] flex-1 bg-gradient-to-r from-transparent via-[#FF003C] to-[#CCA855]" />
+            <div className="w-3 h-3 rotate-45 bg-[#CCA855]" />
+            <div className="h-[2px] flex-1 bg-gradient-to-l from-transparent via-[#FF003C] to-[#CCA855]" />
+          </div>
+        </div>
+
+        {/* Sponsors Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 mb-16 lg:mb-20">
+          {sponsors.map((sponsor, index) => (
+            <div
+              key={sponsor.id}
+              className="relative group"
+              style={{
+                animationDelay: `${index * 0.1}s`,
+              }}
+            >
+              {/* Animated Border Glow */}
+              <div
+                className={`absolute -inset-1 ${getTierStyle(sponsor.tier)} rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500`}
+              />
+
+              {/* Sponsor Card */}
+              <div className="relative bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] rounded-2xl border-2 border-[#CCA855]/30 p-6 backdrop-blur-sm h-full flex flex-col items-center justify-between transition-all duration-300 group-hover:border-[#CCA855]/60 group-hover:scale-105 min-h-[220px]">
+                {/* Corner Accents */}
+                <div className="absolute top-2 left-2 w-10 h-10 border-l-2 border-t-2 border-[#CCA855]/50 rounded-tl-xl transition-all duration-300 group-hover:border-[#CCA855]" />
+                <div className="absolute top-2 right-2 w-10 h-10 border-r-2 border-t-2 border-[#CCA855]/50 rounded-tr-xl transition-all duration-300 group-hover:border-[#CCA855]" />
+                <div className="absolute bottom-2 left-2 w-10 h-10 border-l-2 border-b-2 border-[#CCA855]/50 rounded-bl-xl transition-all duration-300 group-hover:border-[#CCA855]" />
+                <div className="absolute bottom-2 right-2 w-10 h-10 border-r-2 border-b-2 border-[#CCA855]/50 rounded-br-xl transition-all duration-300 group-hover:border-[#CCA855]" />
+
+                {/* Tier Badge */}
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-gradient-to-r from-[#1a1a1a] to-[#0a0a0a] border-2 border-[#CCA855]/50 rounded-full shadow-lg transition-all duration-300 group-hover:border-[#CCA855] group-hover:shadow-[0_0_15px_rgba(204,168,85,0.5)]">
+                  <span className="font-['Rajdhani'] text-[11px] text-[#CCA855] uppercase font-bold tracking-wider">
+                    {sponsor.tier}
+                  </span>
+                </div>
+
+                {/* Logo Container */}
+                <div className="relative w-full flex-1 flex items-center justify-center pt-4 pb-2">
+                  <Image
+                    src={sponsor.logo}
+                    alt={sponsor.name}
+                    width={200}
+                    height={100}
+                    className="object-contain transition-all duration-300 group-hover:scale-110"
+                  />
+                </div>
+
+                {/* Sponsor Name */}
+                <div className="w-full text-center pt-3 border-t border-[#CCA855]/20">
+                  <h3 className="font-['Rajdhani'] text-[16px] lg:text-[18px] text-[#F2EFE9] font-semibold transition-all duration-300 group-hover:text-[#CCA855]">
+                    {sponsor.name}
+                  </h3>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Sponsorship Inquiry Section */}
         <div className="relative group">
           {/* Animated Border Glow */}
           <div className="absolute -inset-1 bg-gradient-to-r from-[#CCA855] via-[#FF003C] to-[#CCA855] rounded-3xl opacity-75 blur-sm group-hover:opacity-100 transition duration-500" />
@@ -125,7 +220,7 @@ const Sponsors = () => {
                   <div className="w-64 h-64 lg:w-96 lg:h-96 bg-gradient-radial from-[#CCA855]/20 via-[#CCA855]/5 to-transparent rounded-full blur-2xl animate-pulse" />
                 </div>
 
-                {/* GOT Logo/Sword Graphic - You can replace this with your actual graphic */}
+                {/* GOT Logo/Sword Graphic */}
                 <div className="relative z-10 w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 xl:w-96 xl:h-96">
                   <svg
                     viewBox="0 0 200 200"
