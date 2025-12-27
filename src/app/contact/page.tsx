@@ -1,8 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { contactData } from './contact';
-import Navbar from '@/components/Navbar';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaPhone, FaMapMarkerAlt, FaTrophy, FaSubway } from 'react-icons/fa';
 
@@ -344,8 +343,6 @@ const ContactPage = () => {
 
       {/* Content */}
       <div className="relative z-10">
-        <Navbar />
-
         <div className="container mx-auto px-4 py-12 md:py-16">
           {/* Page Title */}
           <div className="mb-16 text-center mt-24 md:mt-32">
@@ -360,8 +357,8 @@ const ContactPage = () => {
               CONTACT US
             </h1>
             <p className="text-gray-300 text-base md:text-lg rajdhanifont max-w-3xl mx-auto leading-relaxed">
-              Need information about GOT'26? Contact our team members below for
-              any queries regarding events, sponsorships, or general
+              Need information about GOT&apos;26? Contact our team members below
+              for any queries regarding events, sponsorships, or general
               information.
             </p>
           </div>
