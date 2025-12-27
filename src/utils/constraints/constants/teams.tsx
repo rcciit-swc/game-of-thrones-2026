@@ -38,8 +38,7 @@ export const teams = [
       {
         name: 'Mr. Sarbojit Mukherjee',
         role: 'Faculty In-Charge (SA & SW) & Sports',
-        image:
-          'https://i.postimg.cc/VvD2ngKr/Whats-App-Image-2025-04-27-at-09-25-34-03d51234.jpg',
+        image: 'https://i.postimg.cc/fysFsZy0/image.png',
       },
       {
         name: 'Mr. Rajib Saha',
@@ -64,7 +63,7 @@ export const teams = [
       {
         name: 'Sreya Sahoo',
         role: 'SWC Core Organizer',
-        image: 'https://i.postimg.cc/MKJR9GHC/image.png',
+        image: 'https://i.postimg.cc/NFhyfCvk/image.png',
       },
       {
         name: 'Tuhin Ghosh',
@@ -149,13 +148,23 @@ export const teams = [
       {
         name: 'Sreya Sahoo',
         role: 'Kabaddi (FEMALE)',
-        image: 'https://i.postimg.cc/MKJR9GHC/image.png',
+        image: 'https://i.postimg.cc/NFhyfCvk/image.png',
       },
       {
         name: 'NISHANT KUMAR ROY',
         role: 'Kabaddi (MALE)',
         image:
           'https://i.postimg.cc/y6RkqdKn/SAVE_20251225_190017_NISHANT_KUMAR_ROY.jpg',
+      },
+      {
+        name: 'Ankan Ghosh',
+        role: 'Short Hand Cricket',
+        image: 'https://i.postimg.cc/8cYYxv2Y/image.png',
+      },
+      {
+        name: 'Deep Das',
+        role: 'Football',
+        image: 'https://i.postimg.cc/JzS1jDtK/image.png',
       },
       {
         name: 'Anushka Ghosh',
@@ -736,7 +745,7 @@ export const teams = [
       {
         name: 'Sreya Sahoo',
         role: 'PR & Outreach Lead',
-        image: 'https://i.postimg.cc/MKJR9GHC/image.png',
+        image: 'https://i.postimg.cc/NFhyfCvk/image.png',
       },
       {
         name: 'Aditya Roy',
