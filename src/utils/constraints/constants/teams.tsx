@@ -1,13 +1,10 @@
 import {
   Award,
-  Camera,
-  Code,
   Code2Icon,
   HeartHandshake,
   Mic,
   Paintbrush,
   Star,
-  Zap,
 } from 'lucide-react';
 import { FaMoneyCheck, FaTruck } from 'react-icons/fa';
 
@@ -353,127 +350,6 @@ export const teams = [
       },
     ],
   },
-  // {
-  //   category: 'Volunteers',
-  //   id: 'volunteers',
-  //   path: '/team/volunteers',
-  //   icon: <Star className="text-yellow-200" />,
-  //   members: [
-  //     {
-  //       name: 'Anubhab Das',
-  //       role: 'Band Bash',
-  //       image:
-  //         'https://i.postimg.cc/yxVcKdZs/Whats-App-Image-2025-05-09-at-20-08-24-b67912e4.jpg',
-  //     },
-  //     {
-  //       name: 'Supratim Sen',
-  //       role: 'Band Bash',
-  //       image:
-  //         'https://i.postimg.cc/SsKYc4X2/IMG-20250503-162323-SUPRATIM-SEN.jpg',
-  //     },
-  //     {
-  //       name: 'Aatreyee Misra',
-  //       role: 'Carpe Diem',
-  //       image:
-  //         'https://i.postimg.cc/j5vQrvfN/e2b0320ab9d7439ebf158e87668f91ef-AATREYEE-MISRA.jpg',
-  //     },
-  //     {
-  //       name: 'Bidisha Das',
-  //       role: 'Carpe Diem',
-  //       image:
-  //         'https://i.postimg.cc/j2X8J8N4/Whats-App-Image-2025-05-09-at-14-12-52-9644c484.jpg',
-  //     },
-  //     {
-  //       name: 'Omi Dhir',
-  //       role: 'Kashish-E-Haya',
-  //       image: 'https://i.postimg.cc/MGSyMgbV/IMG-20250223-205826-OMI-DHIR.jpg',
-  //     },
-
-  //     {
-  //       name: 'Kanchan Debanth',
-  //       role: 'Wall of Wonders',
-  //       image:
-  //         'https://i.postimg.cc/jSGM886S/1746168820429-KANCHAN-DEBNATH.jpg',
-  //     },
-  //     {
-  //       name: 'Shubhechha Samanta',
-  //       role: 'Nrityam',
-  //       image:
-  //         'https://i.postimg.cc/m21MdTm7/IMG-20250503-101707-SHUBHECHHA-SAMANTA.jpg',
-  //     },
-  //     {
-  //       name: 'Swapnanil Chakraborty',
-  //       role: 'Jhankar',
-  //       image:
-  //         'https://i.postimg.cc/HnV51mdD/IMG-20250502-073015-SWAPNANIL-CHAKRABORTY.jpg',
-  //     },
-  //     {
-  //       name: 'Meghna Santra',
-  //       role: 'Voice of Emotions',
-  //       image:
-  //         'https://i.postimg.cc/v833R87j/B612-20250403-090420-762-MEGHNA-SANTRA-1.jpg',
-  //     },
-  //     {
-  //       name: 'Saikat Saha',
-  //       role: 'Kashish-E-Haya',
-  //       image:
-  //         'https://i.postimg.cc/QdFHG5Hj/IMG20250109221612-SAIKAT-SAHA.jpg',
-  //     },
-  //     {
-  //       name: 'Swagata Ganguly',
-  //       role: 'Voice of Emotions',
-  //       image:
-  //         'https://i.postimg.cc/fyHT1Ts3/IMG-20250509-WA0074-SWAGATA-GANGULY.jpg',
-  //     },
-  //     {
-  //       name: 'Shuvojyoti Biswas',
-  //       role: 'PR & Outreach Team Member',
-  //       image:
-  //         'https://i.postimg.cc/kXpgc4wz/FB-IMG-1746147121058-SHUVOJYOTI-BISWAS.jpg',
-  //     },
-
-  //     {
-  //       name: 'Subhradeep Baidya',
-  //       role: 'PR & Outreach Team Member',
-  //       image: 'https://i.postimg.cc/mDmRrbKq/IMG-8593-Subhradeep-Baidya.jpg',
-  //     },
-  //     {
-  //       name: 'Aditya Chakraborty',
-  //       role: 'Logistics Team Member',
-  //       image:
-  //         'https://i.postimg.cc/rsjNBTZY/IMG-20231128-WA0006-ADITYA-CHAKRABORTY.jpg',
-  //     },
-  //     {
-  //       name: 'DeepMalya Ghosh Dastidar',
-  //       role: 'Security Team Member',
-  //       image:
-  //         'https://i.postimg.cc/BZz1pMWK/IMG-20250425-001838-Deepmalya-Ghosh-Dastider-Official.webp',
-  //     },
-  //     {
-  //       name: 'Soumyadeep Sardar',
-  //       role: 'Security Team Member',
-  //       image: 'https://i.postimg.cc/fThS1kLz/IMG-2869-SOUMYADEEP-SARDAR.webp',
-  //     },
-  //     {
-  //       name: 'Shree kant pathak ',
-  //       role: 'Logistics Team Member',
-  //       image:
-  //         'https://i.postimg.cc/c4w1ycz2/IMG-20250322-211321-211-SHREE-KANT-PATHAK.webp',
-  //     },
-  //     {
-  //       name: 'Mohit Chowdhury',
-  //       role: 'Logistics Team Member',
-  //       image: 'https://i.postimg.cc/h4Xxg9zt/IMG-9828-MOHIT-CHOWDHURY.jpg',
-  //     },
-  //     {
-  //       name: 'Sagar Raj Yadav',
-  //       role: 'Logistics Team Member',
-  //       image:
-  //         'https://i.postimg.cc/nr9n5VLn/IMG20240710105920-SAGAR-RAJYADAV.jpg',
-  //     },
-  //   ],
-  // },
-  // //tech team completed
   {
     category: 'Tech',
     id: 'tech',
@@ -624,8 +500,7 @@ export const teams = [
       {
         name: 'Niloy Das',
         role: 'Graphics Team Member',
-        image:
-          'https://i.postimg.cc/RZ43Lzjs/IMG-20251205-100926-068-NILOY-DAS(1).jpg',
+        image: 'https://i.postimg.cc/W4gzY6kk/image.png',
       },
       {
         name: 'Poulami Saha',
@@ -645,72 +520,6 @@ export const teams = [
       },
     ],
   },
-  // // coverage team completed
-  // {
-  //   category: 'Coverage Team',
-  //   id: 'coverage',
-  //   path: '/team/coverage',
-  //   icon: <Camera className="text-yellow-200" />,
-  //   members: [
-  //     {
-  //       name: 'Sambit Sarkar',
-  //       role: 'Coverage Team Lead',
-  //       image:
-  //         'https://i.postimg.cc/9fCz72NM/IMG-20230318-133918-244-Sambit-Sarkar.jpg',
-  //     },
-  //     {
-  //       name: 'Shinjan Sarkar',
-  //       role: 'Coverage Team Member',
-  //       image: 'https://i.postimg.cc/HxLx62m1/DSC-1347-Shinjan-Sarkar.jpg',
-  //     },
-  //     {
-  //       name: 'Arghadeep Saha',
-  //       role: 'Coverage Team Member',
-  //       image:
-  //         'https://i.postimg.cc/xTLBhx38/B612-20240120-231801-069-Arghadeep-Saha.jpg',
-  //     },
-  //     {
-  //       name: 'Ritam Kar',
-  //       role: 'Coverage Team Member',
-  //       image: 'https://i.postimg.cc/zvYYH9km/ritamkar.jpg',
-  //     },
-  //     {
-  //       name: 'Rishav Pramanik',
-  //       role: 'Coverage Team Member',
-  //       image:
-  //         'https://i.postimg.cc/T1z3YvDT/IMG-20241013-WA0036-Rishav-Pramanik.jpg',
-  //     },
-  //     {
-  //       name: 'Shubham Paul',
-  //       role: 'Coverage Team Member',
-  //       image: 'https://i.postimg.cc/kG65mgDj/DSC-2534-1-Subham-Paul.jpg',
-  //     },
-  //     {
-  //       name: 'Saikat Mondal',
-  //       role: 'Coverage Team Member',
-  //       image:
-  //         'https://i.postimg.cc/cC2rg8Vy/Untitled-design-SAIKAT-MONDAL.jpg',
-  //     },
-  //     {
-  //       name: 'Ranit Sarkar',
-  //       role: 'Coverage Team Member',
-  //       image:
-  //         'https://i.postimg.cc/8z87TMRL/Whats-App-Image-2025-02-22-at-19-04-31-f0b88fad-Texh-Uf.jpg',
-  //     },
-  //     {
-  //       name: 'Soumya Das',
-  //       role: 'Coverage Team Member',
-  //       image:
-  //         'https://i.postimg.cc/Jndhvk7D/PSX-20240308-115804-Soumya-Das.jpg',
-  //     },
-
-  //     {
-  //       name: 'Nirmalya Karmakar',
-  //       role: 'Coverage Team Member',
-  //       image: 'https://i.postimg.cc/x11DmGLd/nirmalya.jpg',
-  //     },
-  //   ],
-  // },
   {
     category: 'Social Media',
     id: 'social-media',
@@ -1016,6 +825,72 @@ export const teams = [
       },
     ],
   },
+  // // coverage team completed
+  // {
+  //   category: 'Coverage Team',
+  //   id: 'coverage',
+  //   path: '/team/coverage',
+  //   icon: <Camera className="text-yellow-200" />,
+  //   members: [
+  //     {
+  //       name: 'Sambit Sarkar',
+  //       role: 'Coverage Team Lead',
+  //       image:
+  //         'https://i.postimg.cc/9fCz72NM/IMG-20230318-133918-244-Sambit-Sarkar.jpg',
+  //     },
+  //     {
+  //       name: 'Shinjan Sarkar',
+  //       role: 'Coverage Team Member',
+  //       image: 'https://i.postimg.cc/HxLx62m1/DSC-1347-Shinjan-Sarkar.jpg',
+  //     },
+  //     {
+  //       name: 'Arghadeep Saha',
+  //       role: 'Coverage Team Member',
+  //       image:
+  //         'https://i.postimg.cc/xTLBhx38/B612-20240120-231801-069-Arghadeep-Saha.jpg',
+  //     },
+  //     {
+  //       name: 'Ritam Kar',
+  //       role: 'Coverage Team Member',
+  //       image: 'https://i.postimg.cc/zvYYH9km/ritamkar.jpg',
+  //     },
+  //     {
+  //       name: 'Rishav Pramanik',
+  //       role: 'Coverage Team Member',
+  //       image:
+  //         'https://i.postimg.cc/T1z3YvDT/IMG-20241013-WA0036-Rishav-Pramanik.jpg',
+  //     },
+  //     {
+  //       name: 'Shubham Paul',
+  //       role: 'Coverage Team Member',
+  //       image: 'https://i.postimg.cc/kG65mgDj/DSC-2534-1-Subham-Paul.jpg',
+  //     },
+  //     {
+  //       name: 'Saikat Mondal',
+  //       role: 'Coverage Team Member',
+  //       image:
+  //         'https://i.postimg.cc/cC2rg8Vy/Untitled-design-SAIKAT-MONDAL.jpg',
+  //     },
+  //     {
+  //       name: 'Ranit Sarkar',
+  //       role: 'Coverage Team Member',
+  //       image:
+  //         'https://i.postimg.cc/8z87TMRL/Whats-App-Image-2025-02-22-at-19-04-31-f0b88fad-Texh-Uf.jpg',
+  //     },
+  //     {
+  //       name: 'Soumya Das',
+  //       role: 'Coverage Team Member',
+  //       image:
+  //         'https://i.postimg.cc/Jndhvk7D/PSX-20240308-115804-Soumya-Das.jpg',
+  //     },
+
+  //     {
+  //       name: 'Nirmalya Karmakar',
+  //       role: 'Coverage Team Member',
+  //       image: 'https://i.postimg.cc/x11DmGLd/nirmalya.jpg',
+  //     },
+  //   ],
+  // },
   // {
   //   category: 'Security Team',
   //   id: 'security',
