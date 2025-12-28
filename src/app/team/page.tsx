@@ -1,11 +1,11 @@
 'use client';
 
-import Navbar from '@/components/Navbar';
 import { motion, AnimatePresence } from 'framer-motion';
 import { teams } from '@/utils/constraints/constants/teams';
 import { useState, useMemo } from 'react';
 import { Zap, Flame, Target } from 'lucide-react';
 import Image from 'next/image';
+import ElectricBorder from '@/components/ElectricBorder';
 
 export default function TeamsPage() {
   const [selectedTab, setSelectedTab] = useState(teams[0].id);
@@ -400,230 +400,240 @@ export default function TeamsPage() {
                     }}
                     onHoverStart={() => !isMobile && setHoveredMember(index)} // Disable hover on mobile
                     onHoverEnd={() => !isMobile && setHoveredMember(null)}
-                    className="group cursor-pointer"
+                    className="group cursor-pointer h-full"
                     style={{ willChange: 'transform, opacity' }}
+                    whileHover={{ scale: 1.05 }}
                   >
-                    {/* Member Card - Sports Jersey Style */}
-                    <div
-                      className={`relative h-full bg-gradient-to-br from-black/95 via-red-950/20 to-black/95 ${isMobile ? 'backdrop-blur-sm' : 'backdrop-blur-md'} rounded-2xl overflow-hidden border-2 border-red-500/40 hover:border-red-500 transition-all duration-500 hover:shadow-[0_0_40px_rgba(239,68,68,0.7)] hover:scale-105`}
+                    <ElectricBorder
+                      color="#7df9ff"
+                      speed={1}
+                      chaos={0.5}
+                      thickness={2}
+                      style={{ borderRadius: 16 }}
+                      className="h-full"
                     >
-                      {/* Sports Flame Icon - Top Right */}
-                      <div className="absolute top-4 right-4 z-20">
+                      {/* Member Card - Sports Jersey Style */}
+                      <div
+                        className={`relative h-full bg-gradient-to-br from-black/95 via-red-950/20 to-black/95 ${isMobile ? 'backdrop-blur-sm' : 'backdrop-blur-md'} rounded-2xl overflow-hidden transition-all duration-500`}
+                      >
+                        {/* Sports Flame Icon - Top Right */}
+                        <div className="absolute top-4 right-4 z-20">
+                          <motion.div
+                            className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500/30 to-red-600/30 border-2 border-orange-400/60 flex items-center justify-center shadow-[0_0_20px_rgba(251,146,60,0.6)] backdrop-blur-sm"
+                            animate={
+                              hoveredMember === index
+                                ? {
+                                    scale: [1, 1.2, 1],
+                                    rotate: [0, 10, -10, 0],
+                                  }
+                                : { scale: 1, rotate: 0 }
+                            }
+                            transition={{
+                              duration: 0.6,
+                              repeat: hoveredMember === index ? Infinity : 0,
+                              repeatDelay: 1,
+                            }}
+                          >
+                            <Flame
+                              className="w-6 h-6 text-orange-400"
+                              style={{
+                                filter:
+                                  'drop-shadow(0 0 8px rgba(251, 146, 60, 1))',
+                              }}
+                            />
+                          </motion.div>
+                        </div>
+
+                        {/* Target/Aim Icon - Top Left */}
+                        <div className="absolute top-4 left-4 z-20">
+                          <motion.div
+                            className="w-10 h-10 rounded-lg bg-cyan-500/20 border border-cyan-400/60 flex items-center justify-center backdrop-blur-sm shadow-[0_0_15px_rgba(6,182,212,0.5)]"
+                            whileHover={{ scale: 1.2, rotate: 180 }}
+                            transition={{ duration: 0.5 }}
+                          >
+                            <Target
+                              className="w-5 h-5 text-cyan-400"
+                              style={{
+                                filter:
+                                  'drop-shadow(0 0 8px rgba(6, 182, 212, 0.8))',
+                              }}
+                            />
+                          </motion.div>
+                        </div>
+
+                        {/* Animated Neon Glow Background */}
                         <motion.div
-                          className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500/30 to-red-600/30 border-2 border-orange-400/60 flex items-center justify-center shadow-[0_0_20px_rgba(251,146,60,0.6)] backdrop-blur-sm"
+                          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                           animate={
                             hoveredMember === index
                               ? {
-                                  scale: [1, 1.2, 1],
-                                  rotate: [0, 10, -10, 0],
+                                  background: [
+                                    'radial-gradient(circle at 0% 0%, rgba(239, 68, 68, 0.4) 0%, transparent 50%)',
+                                    'radial-gradient(circle at 100% 100%, rgba(6, 182, 212, 0.4) 0%, transparent 50%)',
+                                    'radial-gradient(circle at 0% 100%, rgba(239, 68, 68, 0.4) 0%, transparent 50%)',
+                                    'radial-gradient(circle at 100% 0%, rgba(168, 85, 247, 0.4) 0%, transparent 50%)',
+                                  ],
                                 }
-                              : { scale: 1, rotate: 0 }
+                              : {}
+                          }
+                          transition={{ duration: 3, repeat: Infinity }}
+                        />
+
+                        {/* Intense Flickering Light Effect on Hover */}
+                        <motion.div
+                          className="absolute inset-0 bg-red-500/10 pointer-events-none"
+                          animate={
+                            hoveredMember === index
+                              ? {
+                                  opacity: [0, 0.3, 0, 0.2, 0],
+                                }
+                              : { opacity: 0 }
                           }
                           transition={{
-                            duration: 0.6,
+                            duration: 0.4,
                             repeat: hoveredMember === index ? Infinity : 0,
-                            repeatDelay: 1,
+                            repeatDelay: 0.8,
                           }}
-                        >
-                          <Flame
-                            className="w-6 h-6 text-orange-400"
-                            style={{
-                              filter:
-                                'drop-shadow(0 0 8px rgba(251, 146, 60, 1))',
-                            }}
-                          />
-                        </motion.div>
-                      </div>
+                        />
 
-                      {/* Target/Aim Icon - Top Left */}
-                      <div className="absolute top-4 left-4 z-20">
-                        <motion.div
-                          className="w-10 h-10 rounded-lg bg-cyan-500/20 border border-cyan-400/60 flex items-center justify-center backdrop-blur-sm shadow-[0_0_15px_rgba(6,182,212,0.5)]"
-                          whileHover={{ scale: 1.2, rotate: 180 }}
-                          transition={{ duration: 0.5 }}
-                        >
-                          <Target
-                            className="w-5 h-5 text-cyan-400"
-                            style={{
-                              filter:
-                                'drop-shadow(0 0 8px rgba(6, 182, 212, 0.8))',
-                            }}
-                          />
-                        </motion.div>
-                      </div>
+                        {/* Content */}
+                        <div className="relative p-6">
+                          {/* Image Container - Sports Card Style */}
+                          <div className="relative w-full aspect-square mb-4 rounded-xl overflow-hidden border-2 border-red-500/40 group-hover:border-red-500 transition-all duration-500 shadow-[0_0_20px_rgba(239,68,68,0.3)]">
+                            {/* Diagonal Stripe Overlay - Sports Jersey Effect */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-red-500/30 via-transparent to-cyan-500/30 group-hover:opacity-70 transition-opacity duration-500 z-10" />
 
-                      {/* Animated Neon Glow Background */}
-                      <motion.div
-                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-                        animate={
-                          hoveredMember === index
-                            ? {
-                                background: [
-                                  'radial-gradient(circle at 0% 0%, rgba(239, 68, 68, 0.4) 0%, transparent 50%)',
-                                  'radial-gradient(circle at 100% 100%, rgba(6, 182, 212, 0.4) 0%, transparent 50%)',
-                                  'radial-gradient(circle at 0% 100%, rgba(239, 68, 68, 0.4) 0%, transparent 50%)',
-                                  'radial-gradient(circle at 100% 0%, rgba(168, 85, 247, 0.4) 0%, transparent 50%)',
-                                ],
-                              }
-                            : {}
-                        }
-                        transition={{ duration: 3, repeat: Infinity }}
-                      />
+                            <Image
+                              src={member.image}
+                              alt={member.name}
+                              width={500}
+                              height={500}
+                              loading={index < 4 ? 'eager' : 'lazy'} // Eager load first 4, lazy load rest
+                              priority={index < 4} // Priority for first 4 images
+                              className="object-cover group-hover:scale-115 transition-transform duration-700"
+                            />
 
-                      {/* Intense Flickering Light Effect on Hover */}
-                      <motion.div
-                        className="absolute inset-0 bg-red-500/10 pointer-events-none"
-                        animate={
-                          hoveredMember === index
-                            ? {
-                                opacity: [0, 0.3, 0, 0.2, 0],
-                              }
-                            : { opacity: 0 }
-                        }
-                        transition={{
-                          duration: 0.4,
-                          repeat: hoveredMember === index ? Infinity : 0,
-                          repeatDelay: 0.8,
-                        }}
-                      />
-
-                      {/* Content */}
-                      <div className="relative p-6">
-                        {/* Image Container - Sports Card Style */}
-                        <div className="relative w-full aspect-square mb-4 rounded-xl overflow-hidden border-2 border-red-500/40 group-hover:border-red-500 transition-all duration-500 shadow-[0_0_20px_rgba(239,68,68,0.3)]">
-                          {/* Diagonal Stripe Overlay - Sports Jersey Effect */}
-                          <div className="absolute inset-0 bg-gradient-to-br from-red-500/30 via-transparent to-cyan-500/30 group-hover:opacity-70 transition-opacity duration-500 z-10" />
-
-                          <Image
-                            src={member.image}
-                            alt={member.name}
-                            width={500}
-                            height={500}
-                            loading={index < 4 ? 'eager' : 'lazy'} // Eager load first 4, lazy load rest
-                            priority={index < 4} // Priority for first 4 images
-                            className="object-cover group-hover:scale-115 transition-transform duration-700"
-                          />
-
-                          {/* VHS Scan Line on Image */}
-                          <motion.div
-                            className="absolute inset-0 opacity-0 group-hover:opacity-50 pointer-events-none z-20"
-                            style={{
-                              background:
-                                'linear-gradient(180deg, transparent 0%, rgba(239, 68, 68, 1) 50%, transparent 100%)',
-                              height: '4px',
-                              boxShadow: '0 0 20px rgba(239, 68, 68, 1)',
-                            }}
-                            animate={
-                              hoveredMember === index
-                                ? { y: [0, 300, 0] }
-                                : { y: 0 }
-                            }
-                            transition={{
-                              duration: 1.8,
-                              repeat: hoveredMember === index ? Infinity : 0,
-                              ease: 'linear',
-                            }}
-                          />
-
-                          {/* Speed Lines - Sports Motion Effect - Disabled on mobile for performance */}
-                          {!isMobile && (
+                            {/* VHS Scan Line on Image */}
                             <motion.div
-                              className="absolute inset-0 z-10 pointer-events-none"
+                              className="absolute inset-0 opacity-0 group-hover:opacity-50 pointer-events-none z-20"
+                              style={{
+                                background:
+                                  'linear-gradient(180deg, transparent 0%, rgba(239, 68, 68, 1) 50%, transparent 100%)',
+                                height: '4px',
+                                boxShadow: '0 0 20px rgba(239, 68, 68, 1)',
+                              }}
                               animate={
                                 hoveredMember === index
-                                  ? { opacity: [0, 0.4, 0] }
+                                  ? { y: [0, 300, 0] }
+                                  : { y: 0 }
+                              }
+                              transition={{
+                                duration: 1.8,
+                                repeat: hoveredMember === index ? Infinity : 0,
+                                ease: 'linear',
+                              }}
+                            />
+
+                            {/* Speed Lines - Sports Motion Effect - Disabled on mobile for performance */}
+                            {!isMobile && (
+                              <motion.div
+                                className="absolute inset-0 z-10 pointer-events-none"
+                                animate={
+                                  hoveredMember === index
+                                    ? { opacity: [0, 0.4, 0] }
+                                    : { opacity: 0 }
+                                }
+                                transition={{
+                                  duration: 1.5,
+                                  repeat:
+                                    hoveredMember === index ? Infinity : 0,
+                                }}
+                              >
+                                {[...Array(6)].map((_, i) => (
+                                  <motion.div
+                                    key={i}
+                                    className="absolute h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
+                                    style={{
+                                      top: `${15 + i * 15}%`,
+                                      left: 0,
+                                      right: 0,
+                                      boxShadow:
+                                        '0 0 10px rgba(6, 182, 212, 0.8)',
+                                    }}
+                                    animate={{
+                                      x: ['-100%', '100%'],
+                                    }}
+                                    transition={{
+                                      duration: 0.8,
+                                      delay: i * 0.1,
+                                      repeat: Infinity,
+                                      repeatDelay: 1,
+                                    }}
+                                  />
+                                ))}
+                              </motion.div>
+                            )}
+
+                            {/* Energy Pulse - Bottom of Image */}
+                            <motion.div
+                              className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-orange-500 to-transparent z-10"
+                              animate={
+                                hoveredMember === index
+                                  ? {
+                                      opacity: [0.3, 1, 0.3],
+                                      boxShadow: [
+                                        '0 0 10px rgba(251, 146, 60, 0.5)',
+                                        '0 0 25px rgba(251, 146, 60, 1)',
+                                        '0 0 10px rgba(251, 146, 60, 0.5)',
+                                      ],
+                                    }
                                   : { opacity: 0 }
                               }
                               transition={{
                                 duration: 1.5,
                                 repeat: hoveredMember === index ? Infinity : 0,
                               }}
-                            >
-                              {[...Array(6)].map((_, i) => (
-                                <motion.div
-                                  key={i}
-                                  className="absolute h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
-                                  style={{
-                                    top: `${15 + i * 15}%`,
-                                    left: 0,
-                                    right: 0,
-                                    boxShadow:
-                                      '0 0 10px rgba(6, 182, 212, 0.8)',
-                                  }}
-                                  animate={{
-                                    x: ['-100%', '100%'],
-                                  }}
-                                  transition={{
-                                    duration: 0.8,
-                                    delay: i * 0.1,
-                                    repeat: Infinity,
-                                    repeatDelay: 1,
-                                  }}
-                                />
-                              ))}
-                            </motion.div>
-                          )}
+                            />
+                          </div>
 
-                          {/* Energy Pulse - Bottom of Image */}
-                          <motion.div
-                            className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-orange-500 to-transparent z-10"
-                            animate={
-                              hoveredMember === index
-                                ? {
-                                    opacity: [0.3, 1, 0.3],
-                                    boxShadow: [
-                                      '0 0 10px rgba(251, 146, 60, 0.5)',
-                                      '0 0 25px rgba(251, 146, 60, 1)',
-                                      '0 0 10px rgba(251, 146, 60, 0.5)',
-                                    ],
-                                  }
-                                : { opacity: 0 }
-                            }
-                            transition={{
-                              duration: 1.5,
-                              repeat: hoveredMember === index ? Infinity : 0,
-                            }}
-                          />
-                        </div>
-
-                        {/* Member Name - Stranger Things Font Style */}
-                        <h3
-                          className="text-xl md:text-2xl font-bold mb-2 text-center uppercase tracking-widest"
-                          style={{
-                            fontFamily: "'Courier New', monospace",
-                            fontWeight: 900,
-                            letterSpacing: '0.15em',
-                            color: '#ef4444',
-                            textShadow: `
+                          {/* Member Name - Stranger Things Font Style */}
+                          <h3
+                            className="text-xl md:text-2xl font-bold mb-2 text-center uppercase tracking-widest"
+                            style={{
+                              fontFamily: "'Courier New', monospace",
+                              fontWeight: 900,
+                              letterSpacing: '0.15em',
+                              color: '#ef4444',
+                              textShadow: `
                               0 0 15px rgba(239, 68, 68, 1),
                               0 0 25px rgba(239, 68, 68, 0.6),
                               2px 2px 4px rgba(0, 0, 0, 0.8),
                               -1px -1px 0 rgba(239, 68, 68, 0.3),
                               1px 1px 0 rgba(239, 68, 68, 0.3)
                             `,
-                          }}
-                        >
-                          {member.name}
-                        </h3>
+                            }}
+                          >
+                            {member.name}
+                          </h3>
 
-                        {/* Member Role - Neon Badge */}
-                        <div className="flex justify-center mb-3">
-                          <div className="px-4 py-1 bg-cyan-500/20 border border-cyan-400/60 rounded-full backdrop-blur-sm">
-                            <p
-                              className="text-cyan-400 text-xs md:text-sm text-center font-semibold uppercase tracking-wider"
-                              style={{
-                                textShadow: '0 0 10px rgba(6, 182, 212, 0.8)',
-                                fontFamily: "'Courier New', monospace",
-                                letterSpacing: '0.1em',
-                              }}
-                            >
-                              {member.role}
-                            </p>
+                          {/* Member Role - Neon Badge */}
+                          <div className="flex justify-center mb-3">
+                            <div className="px-4 py-1 bg-cyan-500/20 border border-cyan-400/60 rounded-full backdrop-blur-sm">
+                              <p
+                                className="text-cyan-400 text-xs md:text-sm text-center font-semibold uppercase tracking-wider"
+                                style={{
+                                  textShadow: '0 0 10px rgba(6, 182, 212, 0.8)',
+                                  fontFamily: "'Courier New', monospace",
+                                  letterSpacing: '0.1em',
+                                }}
+                              >
+                                {member.role}
+                              </p>
+                            </div>
                           </div>
-                        </div>
 
-                        {/* Phone Number (if available) - Contact Badge */}
-                        {/* {member.phone && (
+                          {/* Phone Number (if available) - Contact Badge */}
+                          {/* {member.phone && (
                           <div className="flex items-center justify-center gap-2 text-gray-300 text-sm bg-black/50 rounded-lg py-2 px-3 border border-red-500/30">
                             <Phone
                               className="w-4 h-4 text-red-400"
@@ -635,26 +645,11 @@ export default function TeamsPage() {
                             <span className="font-mono">{member.phone}</span>
                           </div>
                         )} */}
-                      </div>
+                        </div>
 
-                      {/* Corner Decorations - Enhanced Neon */}
-                      <div
-                        className="absolute top-0 left-0 w-12 h-12 border-t-2 border-l-2 border-red-500/50 group-hover:border-red-500 transition-colors duration-300"
-                        style={{ boxShadow: '0 0 15px rgba(239, 68, 68, 0.4)' }}
-                      />
-                      <div
-                        className="absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 border-cyan-500/50 group-hover:border-cyan-500 transition-colors duration-300"
-                        style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.4)' }}
-                      />
-                      <div
-                        className="absolute bottom-0 left-0 w-12 h-12 border-b-2 border-l-2 border-cyan-500/50 group-hover:border-cyan-500 transition-colors duration-300"
-                        style={{ boxShadow: '0 0 15px rgba(6, 182, 212, 0.4)' }}
-                      />
-                      <div
-                        className="absolute bottom-0 right-0 w-12 h-12 border-b-2 border-r-2 border-red-500/50 group-hover:border-red-500 transition-colors duration-300"
-                        style={{ boxShadow: '0 0 15px rgba(239, 68, 68, 0.4)' }}
-                      />
-                    </div>
+                        {/* Corner Decorations - Enhanced Neon */}
+                      </div>
+                    </ElectricBorder>
                   </motion.div>
                 ))}
               </motion.div>

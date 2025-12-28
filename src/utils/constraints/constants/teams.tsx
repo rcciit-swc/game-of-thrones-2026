@@ -76,6 +76,12 @@ export const teams = [
         role: 'SWC Core Organizer',
         image: 'https://i.postimg.cc/5NNyXmLV/image.png',
       },
+      {
+        name: 'Deep Das',
+        role: 'SWC Core Organizer',
+        image:
+          'https://i.postimg.cc/vBsLJ5d4/Whats-App-Image-2025-12-27-at-2-33-05-PM.jpg',
+      },
 
       {
         name: 'Ariyan Bhakat',
