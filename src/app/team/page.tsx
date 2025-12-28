@@ -7,6 +7,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { Zap, Flame, Target } from 'lucide-react';
 import Image from 'next/image';
 import TeamLoader from '@/components/TeamLoader';
+import ElectricBorder from '@/components/ElectricBorder';
 
 export default function TeamsPage() {
   // Get teams data and actions from the store
@@ -45,6 +46,16 @@ export default function TeamsPage() {
     }
     return false;
   }, []);
+
+  // Function to dynamically determine font size based on name length to ensure it fits in one line
+  const getNameFontSize = (name: string) => {
+    const baseSize = isMobile ? 1.25 : 1.5;
+    const len = name.length;
+    if (len <= 12) return `${baseSize}rem`;
+    const shrinkFactor = isMobile ? 0.025 : 0.035;
+    const estimatedSize = baseSize - (len - 12) * shrinkFactor;
+    return `${Math.max(isMobile ? 0.8 : 0.9, estimatedSize)}rem`;
+  };
 
   return (
     <div
@@ -426,7 +437,7 @@ export default function TeamsPage() {
                     whileHover={{ scale: 1.05 }}
                   >
                     <ElectricBorder
-                      color="#7df9ff"
+                      color="#ef4444"
                       speed={1}
                       chaos={0.5}
                       thickness={2}
@@ -437,34 +448,6 @@ export default function TeamsPage() {
                       <div
                         className={`relative h-full bg-gradient-to-br from-black/95 via-red-950/20 to-black/95 ${isMobile ? 'backdrop-blur-sm' : 'backdrop-blur-md'} rounded-2xl overflow-hidden transition-all duration-500`}
                       >
-                        {/* Sports Flame Icon - Top Right */}
-                        <div className="absolute top-4 right-4 z-20">
-                          <motion.div
-                            className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500/30 to-red-600/30 border-2 border-orange-400/60 flex items-center justify-center shadow-[0_0_20px_rgba(251,146,60,0.6)] backdrop-blur-sm"
-                            animate={
-                              hoveredMember === index
-                                ? {
-                                    scale: [1, 1.2, 1],
-                                    rotate: [0, 10, -10, 0],
-                                  }
-                                : { scale: 1, rotate: 0 }
-                            }
-                            transition={{
-                              duration: 0.6,
-                              repeat: hoveredMember === index ? Infinity : 0,
-                              repeatDelay: 1,
-                            }}
-                          >
-                            <Flame
-                              className="w-6 h-6 text-orange-400"
-                              style={{
-                                filter:
-                                  'drop-shadow(0 0 8px rgba(251, 146, 60, 1))',
-                              }}
-                            />
-                          </motion.div>
-                        </div>
-
                         {/* Target/Aim Icon - Top Left */}
                         <div className="absolute top-4 left-4 z-20">
                           <motion.div
@@ -619,7 +602,7 @@ export default function TeamsPage() {
 
                           {/* Member Name - Stranger Things Font Style */}
                           <h3
-                            className="text-xl md:text-2xl font-bold mb-2 text-center uppercase tracking-widest"
+                            className="text-2xl md:text-2xl font-bold mb-2 text-center uppercase tracking-widest"
                             style={{
                               fontFamily: "'Courier New', monospace",
                               fontWeight: 900,
