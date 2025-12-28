@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { contactData } from './contact';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaPhone, FaMapMarkerAlt, FaTrophy, FaSubway } from 'react-icons/fa';
+import Link from 'next/link';
 
 const ContactCard = ({
   contact,
@@ -14,7 +15,7 @@ const ContactCard = ({
 
   return (
     <motion.div
-      className="relative w-full max-w-xs h-[450px] cursor-pointer group"
+      className="relative w-full w-xs h-[450px] cursor-pointer group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       whileHover={{ y: -8, scale: 1.02 }}
@@ -52,16 +53,19 @@ const ContactCard = ({
             isHovered ? 'opacity-0 invisible' : 'opacity-100 visible'
           }`}
         >
-          <h3 className="text-white font-bold text-xl rajdhanifont text-center mb-2 drop-shadow-lg">
+          <h3 className="text-white font-bold text-3xl rajdhanifont text-center mb-2 drop-shadow-lg">
             {contact.name}
           </h3>
-          <p className="text-[#CCA855] text-sm rajdhanifont text-center mb-3 font-semibold">
+          <p className="text-[#CCA855] text-xl rajdhanifont text-center mb-3 font-semibold">
             {contact.role}
           </p>
-          <div className="flex items-center justify-center gap-2 text-gray-200 text-sm">
+          <Link
+            href={`tel:${contact.phone}`}
+            className="flex items-center justify-center gap-2 text-gray-200 text-lg"
+          >
             <FaPhone className="w-3 h-3" />
             <span className="font-mono">{contact.phone}</span>
-          </div>
+          </Link>
         </div>
 
         {/* Hover Content - Center - Optimized for mobile */}

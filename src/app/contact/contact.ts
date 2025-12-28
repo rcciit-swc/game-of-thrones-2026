@@ -11,7 +11,7 @@ export const contactData = [
       {
         name: 'Mr. Sarbojit Mukherjee',
         role: 'Faculty In-Charge (SA & SW) & Sports',
-        image: 'https://i.postimg.cc/yxXgqwVM/image.png',
+        image: 'https://i.postimg.cc/fysFsZy0/image.png',
         phone: '+91 9433852385',
       },
     ],
@@ -22,7 +22,7 @@ export const contactData = [
       {
         name: 'Sreya Sahoo',
         role: 'SWC Member RCCIIT',
-        image: 'https://i.postimg.cc/ydxSZfyk/image.png',
+        image: 'https://i.postimg.cc/NFhyfCvk/image.png',
         phone: '+91 7864061484',
       },
       {
@@ -39,7 +39,7 @@ export const contactData = [
       {
         name: 'Soumyaraj Bag',
         role: 'SWC Member RCCIIT',
-        image: 'https://i.postimg.cc/G2WNsQVc/Shin-0084.jpg',
+        image: 'https://i.postimg.cc/5NNyXmLV/image.png',
         phone: '+91 8337045160',
       },
       {

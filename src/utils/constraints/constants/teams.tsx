@@ -1,15 +1,12 @@
 import {
   Award,
-  Camera,
-  Code,
   Code2Icon,
   HeartHandshake,
   Mic,
   Paintbrush,
   Star,
-  Zap,
 } from 'lucide-react';
-import { FaMoneyCheck } from 'react-icons/fa';
+import { FaMoneyCheck, FaTruck } from 'react-icons/fa';
 
 export const teams = [
   {
@@ -38,8 +35,7 @@ export const teams = [
       {
         name: 'Mr. Sarbojit Mukherjee',
         role: 'Faculty In-Charge (SA & SW) & Sports',
-        image:
-          'https://i.postimg.cc/VvD2ngKr/Whats-App-Image-2025-04-27-at-09-25-34-03d51234.jpg',
+        image: 'https://i.postimg.cc/fysFsZy0/image.png',
       },
       {
         name: 'Mr. Rajib Saha',
@@ -64,12 +60,28 @@ export const teams = [
       {
         name: 'Sreya Sahoo',
         role: 'SWC Core Organizer',
-        image: 'https://i.postimg.cc/MKJR9GHC/image.png',
+        image: 'https://i.postimg.cc/NFhyfCvk/image.png',
       },
       {
         name: 'Tuhin Ghosh',
         role: 'SWC Core Organizer',
         image: 'https://i.postimg.cc/BZ1B7626/image.png',
+      },
+      {
+        name: 'Ariyan Bhakat',
+        role: 'SWC Core Organizer',
+        image: 'https://i.postimg.cc/yxqcCm0s/image.png',
+      },
+      {
+        name: 'Deep Das',
+        role: 'SWC Core Organizer',
+        image: 'https://i.postimg.cc/JzS1jDtK/image.png',
+      },
+      {
+        name: 'Tiyasa Raptan',
+        role: 'SWC Core Organizer',
+        image:
+          'https://i.postimg.cc/yNrkK3Wf/IMG_20250921_WA0152_TIYASA_RAPTAN.jpg',
       },
       {
         name: 'Soumyaraj Bag',
@@ -84,22 +96,11 @@ export const teams = [
       },
 
       {
-        name: 'Ariyan Bhakat',
-        role: 'SWC Core Organizer',
-        image: 'https://i.postimg.cc/yxqcCm0s/image.png',
-      },
-      {
         name: 'Shreya Dutta',
         role: 'SWC Core Organizer',
-        image:
-          'https://i.postimg.cc/pThyLVF9/IMG_20251208_WA0233_SHREYA_DUTTA.jpg',
+        image: 'https://i.postimg.cc/prMhCcT4/image.png',
       },
-      {
-        name: 'Tiyasa Raptan',
-        role: 'SWC Core Organizer',
-        image:
-          'https://i.postimg.cc/yNrkK3Wf/IMG_20250921_WA0152_TIYASA_RAPTAN.jpg',
-      },
+
       {
         name: 'Hirak Sabui',
         role: 'SWC Core Organizer',
@@ -133,6 +134,11 @@ export const teams = [
         role: 'SWC Core Organizer',
         image: 'https://i.postimg.cc/ry4c8VjF/image.png',
       },
+      {
+        name: 'Souravi Samui',
+        role: 'SWC Core Organizer',
+        image: 'https://i.postimg.cc/QtQx888c/image.png',
+      },
     ],
   },
   //convener team picture done
@@ -145,13 +151,23 @@ export const teams = [
       {
         name: 'Sreya Sahoo',
         role: 'Kabaddi (FEMALE)',
-        image: 'https://i.postimg.cc/MKJR9GHC/image.png',
+        image: 'https://i.postimg.cc/NFhyfCvk/image.png',
       },
       {
         name: 'NISHANT KUMAR ROY',
         role: 'Kabaddi (MALE)',
         image:
           'https://i.postimg.cc/y6RkqdKn/SAVE_20251225_190017_NISHANT_KUMAR_ROY.jpg',
+      },
+      {
+        name: 'Ankan Ghosh',
+        role: 'Short Hand Cricket',
+        image: 'https://i.postimg.cc/8cYYxv2Y/image.png',
+      },
+      {
+        name: 'Deep Das',
+        role: 'Football',
+        image: 'https://i.postimg.cc/JzS1jDtK/image.png',
       },
       {
         name: 'Anushka Ghosh',
@@ -184,10 +200,14 @@ export const teams = [
           'https://i.postimg.cc/VvX6X7gG/In_Shot_20251225_112116517_ANUSHKA_ARYAN.jpg',
       },
       {
+        name: 'Aghniv Paul',
+        role: 'Table Tennis',
+        image: 'https://i.postimg.cc/W340rkQd/image.png',
+      },
+      {
         name: 'Shreya Dutta',
         role: 'Track & Sports',
-        image:
-          'https://i.postimg.cc/pThyLVF9/IMG_20251208_WA0233_SHREYA_DUTTA.jpg',
+        image: 'https://i.postimg.cc/prMhCcT4/image.png',
       },
       {
         name: 'Soumyaraj Bag',
@@ -205,8 +225,7 @@ export const teams = [
       {
         name: 'Soumik Bag',
         role: 'Short Hand Cricket',
-        image:
-          'https://i.postimg.cc/HnbxbSzN/In-Shot-20250928-003052478-SOUMIK-BAG.jpg',
+        image: 'https://i.postimg.cc/nhFmNW1g/image.png',
       },
       {
         name: 'Sekh Motier Rahaman ',
@@ -214,7 +233,11 @@ export const teams = [
         image:
           'https://i.postimg.cc/dV6hWxYf/IMG-20251225-104959-SEKH-MOTIER-RAHAMAN.jpg',
       },
-
+      {
+        name: 'Sayantan Biswas',
+        role: 'Football',
+        image: 'https://i.postimg.cc/VkLszWMC/image.png',
+      },
       {
         name: 'Kanchan Debnath',
         role: 'Football',
@@ -233,7 +256,11 @@ export const teams = [
         image:
           'https://i.postimg.cc/KYsRb34w/IMG-20250413-WA0111-BIDISHA-DAS.jpg',
       },
-
+      {
+        name: 'Ditiya Porel',
+        role: 'Handball',
+        image: 'https://i.postimg.cc/XqjdfDXB/image.png',
+      },
       {
         name: 'Sneha Halder',
         role: 'Kabaddi (FEMALE)',
@@ -274,7 +301,7 @@ export const teams = [
       {
         name: 'Aditya Chakraborty',
         role: 'Badminton (MALE)',
-        image: 'https://i.postimg.cc/fR8b7S7f/IMG-1251-ADITYA-CHAKRABORTY.jpg',
+        image: 'https://i.postimg.cc/Zq9SRTcv/image.png',
       },
       {
         name: 'Pujan Dutta',
@@ -303,8 +330,7 @@ export const teams = [
       {
         name: 'Supriti Ghosh',
         role: 'Track & Sports',
-        image:
-          'https://i.postimg.cc/B6rbLWTL/IMG-20251225-WA0284-Supriti-Ghosh.jpg',
+        image: 'https://i.postimg.cc/NFRTwqVS/image.png',
       },
       {
         name: 'Sharmistha Ghosh',
@@ -330,127 +356,6 @@ export const teams = [
       },
     ],
   },
-  // {
-  //   category: 'Volunteers',
-  //   id: 'volunteers',
-  //   path: '/team/volunteers',
-  //   icon: <Star className="text-yellow-200" />,
-  //   members: [
-  //     {
-  //       name: 'Anubhab Das',
-  //       role: 'Band Bash',
-  //       image:
-  //         'https://i.postimg.cc/yxVcKdZs/Whats-App-Image-2025-05-09-at-20-08-24-b67912e4.jpg',
-  //     },
-  //     {
-  //       name: 'Supratim Sen',
-  //       role: 'Band Bash',
-  //       image:
-  //         'https://i.postimg.cc/SsKYc4X2/IMG-20250503-162323-SUPRATIM-SEN.jpg',
-  //     },
-  //     {
-  //       name: 'Aatreyee Misra',
-  //       role: 'Carpe Diem',
-  //       image:
-  //         'https://i.postimg.cc/j5vQrvfN/e2b0320ab9d7439ebf158e87668f91ef-AATREYEE-MISRA.jpg',
-  //     },
-  //     {
-  //       name: 'Bidisha Das',
-  //       role: 'Carpe Diem',
-  //       image:
-  //         'https://i.postimg.cc/j2X8J8N4/Whats-App-Image-2025-05-09-at-14-12-52-9644c484.jpg',
-  //     },
-  //     {
-  //       name: 'Omi Dhir',
-  //       role: 'Kashish-E-Haya',
-  //       image: 'https://i.postimg.cc/MGSyMgbV/IMG-20250223-205826-OMI-DHIR.jpg',
-  //     },
-
-  //     {
-  //       name: 'Kanchan Debanth',
-  //       role: 'Wall of Wonders',
-  //       image:
-  //         'https://i.postimg.cc/jSGM886S/1746168820429-KANCHAN-DEBNATH.jpg',
-  //     },
-  //     {
-  //       name: 'Shubhechha Samanta',
-  //       role: 'Nrityam',
-  //       image:
-  //         'https://i.postimg.cc/m21MdTm7/IMG-20250503-101707-SHUBHECHHA-SAMANTA.jpg',
-  //     },
-  //     {
-  //       name: 'Swapnanil Chakraborty',
-  //       role: 'Jhankar',
-  //       image:
-  //         'https://i.postimg.cc/HnV51mdD/IMG-20250502-073015-SWAPNANIL-CHAKRABORTY.jpg',
-  //     },
-  //     {
-  //       name: 'Meghna Santra',
-  //       role: 'Voice of Emotions',
-  //       image:
-  //         'https://i.postimg.cc/v833R87j/B612-20250403-090420-762-MEGHNA-SANTRA-1.jpg',
-  //     },
-  //     {
-  //       name: 'Saikat Saha',
-  //       role: 'Kashish-E-Haya',
-  //       image:
-  //         'https://i.postimg.cc/QdFHG5Hj/IMG20250109221612-SAIKAT-SAHA.jpg',
-  //     },
-  //     {
-  //       name: 'Swagata Ganguly',
-  //       role: 'Voice of Emotions',
-  //       image:
-  //         'https://i.postimg.cc/fyHT1Ts3/IMG-20250509-WA0074-SWAGATA-GANGULY.jpg',
-  //     },
-  //     {
-  //       name: 'Shuvojyoti Biswas',
-  //       role: 'PR & Outreach Team Member',
-  //       image:
-  //         'https://i.postimg.cc/kXpgc4wz/FB-IMG-1746147121058-SHUVOJYOTI-BISWAS.jpg',
-  //     },
-
-  //     {
-  //       name: 'Subhradeep Baidya',
-  //       role: 'PR & Outreach Team Member',
-  //       image: 'https://i.postimg.cc/mDmRrbKq/IMG-8593-Subhradeep-Baidya.jpg',
-  //     },
-  //     {
-  //       name: 'Aditya Chakraborty',
-  //       role: 'Logistics Team Member',
-  //       image:
-  //         'https://i.postimg.cc/rsjNBTZY/IMG-20231128-WA0006-ADITYA-CHAKRABORTY.jpg',
-  //     },
-  //     {
-  //       name: 'DeepMalya Ghosh Dastidar',
-  //       role: 'Security Team Member',
-  //       image:
-  //         'https://i.postimg.cc/BZz1pMWK/IMG-20250425-001838-Deepmalya-Ghosh-Dastider-Official.webp',
-  //     },
-  //     {
-  //       name: 'Soumyadeep Sardar',
-  //       role: 'Security Team Member',
-  //       image: 'https://i.postimg.cc/fThS1kLz/IMG-2869-SOUMYADEEP-SARDAR.webp',
-  //     },
-  //     {
-  //       name: 'Shree kant pathak ',
-  //       role: 'Logistics Team Member',
-  //       image:
-  //         'https://i.postimg.cc/c4w1ycz2/IMG-20250322-211321-211-SHREE-KANT-PATHAK.webp',
-  //     },
-  //     {
-  //       name: 'Mohit Chowdhury',
-  //       role: 'Logistics Team Member',
-  //       image: 'https://i.postimg.cc/h4Xxg9zt/IMG-9828-MOHIT-CHOWDHURY.jpg',
-  //     },
-  //     {
-  //       name: 'Sagar Raj Yadav',
-  //       role: 'Logistics Team Member',
-  //       image:
-  //         'https://i.postimg.cc/nr9n5VLn/IMG20240710105920-SAGAR-RAJYADAV.jpg',
-  //     },
-  //   ],
-  // },
-  // //tech team completed
   {
     category: 'Tech',
     id: 'tech',
@@ -528,6 +433,11 @@ export const teams = [
         image:
           'https://i.postimg.cc/gchn9JpN/Picsart-25-09-17-00-32-33-937-NILOTPAL-GUHA.jpg',
       },
+      {
+        name: 'Sritama Chatterjee',
+        role: 'Tech Team Member',
+        image: 'https://i.postimg.cc/gk68vR2B/image.png',
+      },
     ],
   },
   {
@@ -573,21 +483,30 @@ export const teams = [
           'https://i.postimg.cc/R0bNmJNV/IMG-20250930-WA0043-DIPTISH-DE.jpg',
       },
       {
-        name: 'Bhumika Das',
-        role: 'Graphics Team Member',
-        image: 'https://i.postimg.cc/0ykQJ0Sq/bhumika_BHUMIKA_DAS.jpg',
-      },
-      {
         name: 'Anushka Deb',
         role: 'Graphics Team Member',
         image:
           'https://i.postimg.cc/XvDpWBXD/IMG-20250925-WA0059-ANUSHKA-DEB(1).jpg',
       },
       {
+        name: 'Bhumika Das',
+        role: 'Graphics Team Member',
+        image: 'https://i.postimg.cc/0ykQJ0Sq/bhumika_BHUMIKA_DAS.jpg',
+      },
+      {
+        name: 'SREYASHI DUBEY',
+        role: 'Graphics Team Member',
+        image: 'https://i.postimg.cc/YjB4XGyb/image.png',
+      },
+      {
+        name: 'Anuvab Das',
+        role: 'Graphics Team Member',
+        image: 'https://i.postimg.cc/LXhxtXWW/image.png',
+      },
+      {
         name: 'Niloy Das',
         role: 'Graphics Team Member',
-        image:
-          'https://i.postimg.cc/RZ43Lzjs/IMG-20251205-100926-068-NILOY-DAS(1).jpg',
+        image: 'https://i.postimg.cc/W4gzY6kk/image.png',
       },
       {
         name: 'Poulami Saha',
@@ -599,6 +518,316 @@ export const teams = [
         name: 'Shreya Chakraborty',
         role: 'Graphics Team Member',
         image: 'https://i.postimg.cc/jdVnCfcF/IMG-4542-Shreya-Chakraborty.jpg',
+      },
+      {
+        name: 'Souranil Das',
+        role: 'Graphics Team Member',
+        image: 'https://i.postimg.cc/L81D6wPp/image.png',
+      },
+    ],
+  },
+  {
+    category: 'Social Media',
+    id: 'social-media',
+    path: '/team/social-media',
+    icon: <Mic className="text-yellow-200" />,
+    members: [
+      {
+        name: 'Shreya Sen',
+        role: 'Social Media Lead',
+        image: 'https://i.postimg.cc/Twz1L8Vb/IMG20251001211742_SHREYA_SEN.jpg',
+      },
+      {
+        name: 'Antara Malik',
+        role: 'Social Media Member',
+        image:
+          'https://i.postimg.cc/kMSBr4C1/Screenshot-2025-12-25-214847-ANTARA-MALIK.png',
+      },
+    ],
+  },
+  // //PR team completed
+  {
+    category: 'PR & Outreach',
+    id: 'pr',
+    path: '/team/pr',
+    icon: <Mic className="text-yellow-200" />,
+    members: [
+      {
+        name: 'Shreya Dutta',
+        role: 'PR & Outreach Lead',
+        image: 'https://i.postimg.cc/prMhCcT4/image.png',
+      },
+      {
+        name: 'Sreya Sahoo',
+        role: 'PR & Outreach Lead',
+        image: 'https://i.postimg.cc/NFhyfCvk/image.png',
+      },
+      {
+        name: 'Aditya Roy',
+        role: 'PR & Outreach Team Member',
+        image: 'https://i.postimg.cc/kXFG4pBp/20250925-154618-ADITYA-ROY.jpg',
+      },
+      {
+        name: 'Aditya Chakraborty',
+        role: 'PR & Outreach Team Member',
+        image: 'https://i.postimg.cc/Zq9SRTcv/image.png',
+      },
+      {
+        name: 'Bidisha Das',
+        role: 'PR & Outreach Team Member',
+        image:
+          'https://i.postimg.cc/KYsRb34w/IMG-20250413-WA0111-BIDISHA-DAS.jpg',
+      },
+      {
+        name: 'Ankit Tewary',
+        role: 'PR & Outreach Team Member',
+        image:
+          'https://i.postimg.cc/wj21WGzd/IMG-20251225-112110-ANKIT-TEWARY(1).jpg',
+      },
+      {
+        name: 'Neel Bose',
+        role: 'PR & Outreach Team Member',
+        image:
+          'https://i.postimg.cc/8kvj85G2/Snapchat-1901994285(1)-NEEL-BOSE(2).jpg',
+      },
+      {
+        name: 'Ditiya Porel',
+        role: 'PR & Outreach Team Member',
+        image: 'https://i.postimg.cc/XqjdfDXB/image.png',
+      },
+      {
+        name: 'Meghna Santra',
+        role: 'PR & Outreach Team Member',
+        image:
+          'https://i.postimg.cc/v833R87j/B612-20250403-090420-762-MEGHNA-SANTRA-1.jpg',
+      },
+      {
+        name: 'Ishita Barman',
+        role: 'PR & Outreach Team Member',
+        image: 'https://i.postimg.cc/N0GKPrQ0/image.png',
+      },
+      {
+        name: 'Pujan Dutta',
+        role: 'PR & Outreach Team Member',
+        image:
+          'https://i.postimg.cc/kMSBr4CK/Pi7_Passport_Photo_PUJAN_DUTTA(1).jpg',
+      },
+      {
+        name: 'Sneha Halder',
+        role: 'PR & Outreach Team Member',
+        image:
+          'https://i.postimg.cc/CK6z0nds/IMG-20250331-WA0051-(1)-SNEHA-HALDER(1).jpg',
+      },
+      {
+        name: 'Sharmistha Ghosh',
+        role: 'PR & Outreach Team Member',
+        image: 'https://i.postimg.cc/2SVW09hM/image.png',
+      },
+      {
+        name: 'Supriti Ghosh',
+        role: 'PR & Outreach Team Member',
+        image:
+          'https://i.postimg.cc/B6rbLWTL/IMG-20251225-WA0284-Supriti-Ghosh.jpg',
+      },
+      {
+        name: 'Soumyadeep Sardar',
+        role: 'PR & Outreach Team Member',
+        image: 'https://i.postimg.cc/0yVNGKGQ/IMG_0275_SOUMYADEEP_SARDAR.jpg',
+      },
+      {
+        name: 'Sohom Sarkar',
+        role: 'PR & Outreach Team Member',
+        image:
+          'https://i.postimg.cc/VkgJ7Vwt/IMG-20251226-014922-SOHOM-SARKAR(2).jpg',
+      },
+      {
+        name: 'Swastik Saha',
+        role: 'PR & Outreach Team Member',
+        image:
+          'https://i.postimg.cc/G289m3yD/IMG-20251220-WA0070-SWASTIK-SAHA(1).jpg',
+      },
+      {
+        name: 'Sirsho Biswas',
+        role: 'PR & Outreach Team Member',
+        image:
+          'https://i.postimg.cc/HkdJ9Cf0/IMG-20250928-171529-SIRSHO-BISWAS(1).jpg',
+      },
+      {
+        name: 'Snehasish Bhattacharyya',
+        role: 'PR & Outreach Team Member',
+        image: 'https://i.postimg.cc/TYcHvZn0/image.png',
+      },
+      {
+        name: 'Hemant Gaura',
+        role: 'PR & Outreach Team Member',
+        image:
+          'https://i.postimg.cc/K8GzgDM9/1000377176_Picsart_Ai_Image_Enhancer_HEMANT_GAURA(1).png',
+      },
+      {
+        name: 'Tiasha Sarkar',
+        role: 'PR & Outreach Team Member',
+        image:
+          'https://i.postimg.cc/mDzhgZHC/IMG-20251225-WA0047-TIASHA-SARKAR(1).jpg',
+      },
+      {
+        name: 'Suchana Barua',
+        role: 'PR & Outreach Team Member',
+        image:
+          'https://i.postimg.cc/3Jg4GwbR/IMG-20250614-162048-SUCHANA-BARUA(1).jpg',
+      },
+      {
+        name: 'Arko Chakraborty',
+        role: 'PR & Outreach Team Member',
+        image:
+          'https://i.postimg.cc/1tn43Rqf/IMG-20251218-WA0071-ARKO-CHAKRABORTY.jpg',
+      },
+      {
+        name: 'Junaid Khan',
+        role: 'PR & Outreach Team Member',
+        image:
+          'https://i.postimg.cc/0ynztBvm/IMG-20251226-101304-095-JUNAID-KHAN.webp',
+      },
+      {
+        name: 'Umar Raza Ansari',
+        role: 'PR & Outreach Team Member',
+        image:
+          'https://i.postimg.cc/k55BLvMQ/IMG-20251226-123650-UMAR-RAZA-ANSARI.jpg',
+      },
+      {
+        name: 'Spandan Biswas',
+        role: 'PR & Outreach Team Member',
+        image:
+          'https://i.postimg.cc/28pL3WTY/IMG-20240929-195913-601-SPANDAN-BISWAS.webp',
+      },
+      {
+        name: 'Joyeeta Majumder',
+        role: 'PR & Outreach Team Member',
+        image: 'https://i.postimg.cc/NGp1gp2F/image.png',
+      },
+    ],
+  },
+  // // logistics team completed
+  {
+    category: 'Logistics',
+    id: 'logistics',
+    path: '/team/logistics',
+    icon: <FaTruck className="text-yellow-200" />,
+    members: [
+      {
+        name: 'Aditya Mohan Mondal',
+        role: 'Logistics Lead',
+        image: 'https://i.postimg.cc/52Y7QjhM/image.png',
+      },
+
+      {
+        name: 'Aditya Chakraborty',
+        role: 'Logistics Team Member',
+        image: 'https://i.postimg.cc/Zq9SRTcv/image.png',
+      },
+
+      {
+        name: 'Sagar Raj Yadav',
+        role: 'Logistics Team Member',
+        image: 'https://i.postimg.cc/vmyr8BM5/image.png',
+      },
+      {
+        name: 'Sirsho Biswas',
+        role: 'Logistics Team Member',
+        image:
+          'https://i.postimg.cc/HkdJ9Cf0/IMG-20250928-171529-SIRSHO-BISWAS(1).jpg',
+      },
+      {
+        name: 'SK ARMAN',
+        role: 'Logistics Team Member',
+        image: 'https://i.postimg.cc/1tcYRTLR/image.png',
+      },
+      {
+        name: 'Spandan Biswas',
+        role: 'Logistics Team Member',
+        image:
+          'https://i.postimg.cc/28pL3WTY/IMG-20240929-195913-601-SPANDAN-BISWAS.webp',
+      },
+    ],
+  },
+  //sponsorship team completed
+  {
+    category: 'Sponsorship',
+    id: 'sponsorship',
+    path: '/team/sponsorship',
+    icon: <FaMoneyCheck className="text-yellow-200" />,
+    members: [
+      {
+        name: 'Tiyasa Raptan',
+        role: 'Sponsorship Team Lead',
+        image:
+          'https://i.postimg.cc/yNrkK3Wf/IMG_20250921_WA0152_TIYASA_RAPTAN.jpg',
+      },
+      {
+        name: 'Soumyaraj Bag',
+        role: 'Sponsorship Team Lead',
+        image: 'https://i.postimg.cc/5NNyXmLV/image.png',
+      },
+      {
+        name: 'Neel Bose',
+        role: 'Sponsorship Team Member',
+        image:
+          'https://i.postimg.cc/8kvj85G2/Snapchat-1901994285(1)-NEEL-BOSE(2).jpg',
+      },
+      {
+        name: 'Biswajyoti Dutta',
+        role: 'Sponsorship Team Member',
+        image: 'https://i.postimg.cc/pLYVH1yC/image.png',
+      },
+      {
+        name: 'Sourodeep Paul',
+        role: 'Sponsorship Team Member',
+        image: 'https://i.postimg.cc/8c2XPSZ8/image.png',
+      },
+      {
+        name: 'Arijit Saha',
+        role: 'Sponsorship Team Member',
+        image:
+          'https://i.postimg.cc/5tt6DS9n/IMG-20241211-WA0167(3)-ARIJIT-SAHA(1).jpg',
+      },
+      {
+        name: 'Adrika Mukherjee',
+        role: 'Sponsorship Team Member',
+        image:
+          'https://i.postimg.cc/DZJmwfXm/IMG_20251119_WA0123_ADRIKA_MUKHERJEE.jpg',
+      },
+      {
+        name: 'Rajdeep Shome',
+        role: 'Sponsorship Team Member',
+        image:
+          'https://i.postimg.cc/cL0KBNVD/IMG-20251201-221135-RAJDEEP-SHOME.jpg',
+      },
+      {
+        name: 'Tilak Sadhukhan',
+        role: 'Sponsorship Team Member',
+        image:
+          'https://i.postimg.cc/vZb1tdJy/IMG-20251218-193556-TILAK-SADHUKHAN.jpg',
+      },
+      {
+        name: 'Pushkar Das',
+        role: 'Sponsorship Team Member',
+        image: 'https://i.postimg.cc/CMPqy59k/image.png',
+      },
+      {
+        name: 'Biswarup Ganguly',
+        role: 'Sponsorship Team Member',
+        image:
+          'https://i.postimg.cc/mr6t41tG/IMG-20250929-WA0287-BISWARUP-GANGULY.jpg',
+      },
+
+      {
+        name: 'Shreya Chakraborty',
+        role: 'Sponsorship Team Member',
+        image: 'https://i.postimg.cc/jdVnCfcF/IMG-4542-Shreya-Chakraborty.jpg',
+      },
+      {
+        name: 'SREYASHI DUBEY',
+        role: 'Sponsorship Team Member',
+        image: 'https://i.postimg.cc/YjB4XGyb/image.png',
       },
     ],
   },
@@ -668,294 +897,6 @@ export const teams = [
   //     },
   //   ],
   // },
-  {
-    category: 'Social Media',
-    id: 'social-media',
-    path: '/team/social-media',
-    icon: <Mic className="text-yellow-200" />,
-    members: [
-      {
-        name: 'Shreya Sen',
-        role: 'Social Media Lead',
-        image: 'https://i.postimg.cc/Twz1L8Vb/IMG20251001211742_SHREYA_SEN.jpg',
-      },
-      {
-        name: 'Antara Malik',
-        role: 'Social Media Member',
-        image:
-          'https://i.postimg.cc/kMSBr4C1/Screenshot-2025-12-25-214847-ANTARA-MALIK.png',
-      },
-    ],
-  },
-  // //PR team completed
-  {
-    category: 'PR & Outreach',
-    id: 'pr',
-    path: '/team/pr',
-    icon: <Mic className="text-yellow-200" />,
-    members: [
-      {
-        name: 'Shreya Dutta',
-        role: 'PR & Outreach Lead',
-        image:
-          'https://i.postimg.cc/pThyLVF9/IMG_20251208_WA0233_SHREYA_DUTTA.jpg',
-      },
-      {
-        name: 'Sreya Sahoo',
-        role: 'PR & Outreach Lead',
-        image: 'https://i.postimg.cc/MKJR9GHC/image.png',
-      },
-      {
-        name: 'Aditya Roy',
-        role: 'PR & Outreach Team Member',
-        image: 'https://i.postimg.cc/kXFG4pBp/20250925-154618-ADITYA-ROY.jpg',
-      },
-      {
-        name: 'Aditya Chakraborty',
-        role: 'PR & Outreach Team Member',
-        image: 'https://i.postimg.cc/fR8b7S7f/IMG-1251-ADITYA-CHAKRABORTY.jpg',
-      },
-      {
-        name: 'Bidisha Das',
-        role: 'PR & Outreach Team Member',
-        image:
-          'https://i.postimg.cc/KYsRb34w/IMG-20250413-WA0111-BIDISHA-DAS.jpg',
-      },
-      {
-        name: 'Ankit Tewary',
-        role: 'PR & Outreach Team Member',
-        image:
-          'https://i.postimg.cc/wj21WGzd/IMG-20251225-112110-ANKIT-TEWARY(1).jpg',
-      },
-      {
-        name: 'Neel Bose',
-        role: 'PR & Outreach Team Member',
-        image:
-          'https://i.postimg.cc/8kvj85G2/Snapchat-1901994285(1)-NEEL-BOSE(2).jpg',
-      },
-      {
-        name: 'Pujan Dutta',
-        role: 'PR & Outreach Team Member',
-        image:
-          'https://i.postimg.cc/kMSBr4CK/Pi7_Passport_Photo_PUJAN_DUTTA(1).jpg',
-      },
-      {
-        name: 'Sneha Halder',
-        role: 'PR & Outreach Team Member',
-        image:
-          'https://i.postimg.cc/CK6z0nds/IMG-20250331-WA0051-(1)-SNEHA-HALDER(1).jpg',
-      },
-      {
-        name: 'Sharmistha Ghosh',
-        role: 'PR & Outreach Team Member',
-        image: 'https://i.postimg.cc/2SVW09hM/image.png',
-      },
-      {
-        name: 'Supriti Ghosh',
-        role: 'PR & Outreach Team Member',
-        image:
-          'https://i.postimg.cc/B6rbLWTL/IMG-20251225-WA0284-Supriti-Ghosh.jpg',
-      },
-      {
-        name: 'Soumyadeep Sardar',
-        role: 'PR & Outreach Team Member',
-        image: 'https://i.postimg.cc/0yVNGKGQ/IMG_0275_SOUMYADEEP_SARDAR.jpg',
-      },
-      {
-        name: 'Sohom Sarkar',
-        role: 'PR & Outreach Team Member',
-        image:
-          'https://i.postimg.cc/VkgJ7Vwt/IMG-20251226-014922-SOHOM-SARKAR(2).jpg',
-      },
-      {
-        name: 'Swastik Saha',
-        role: 'PR & Outreach Team Member',
-        image:
-          'https://i.postimg.cc/G289m3yD/IMG-20251220-WA0070-SWASTIK-SAHA(1).jpg',
-      },
-      {
-        name: 'Sirsho Biswas',
-        role: 'PR & Outreach Team Member',
-        image:
-          'https://i.postimg.cc/HkdJ9Cf0/IMG-20250928-171529-SIRSHO-BISWAS(1).jpg',
-      },
-      {
-        name: 'Hemant Gaura',
-        role: 'PR & Outreach Team Member',
-        image:
-          'https://i.postimg.cc/K8GzgDM9/1000377176_Picsart_Ai_Image_Enhancer_HEMANT_GAURA(1).png',
-      },
-      {
-        name: 'Tiasha Sarkar',
-        role: 'PR & Outreach Team Member',
-        image:
-          'https://i.postimg.cc/mDzhgZHC/IMG-20251225-WA0047-TIASHA-SARKAR(1).jpg',
-      },
-      {
-        name: 'Suchana Barua',
-        role: 'PR & Outreach Team Member',
-        image:
-          'https://i.postimg.cc/3Jg4GwbR/IMG-20250614-162048-SUCHANA-BARUA(1).jpg',
-      },
-      {
-        name: 'Arko Chakraborty',
-        role: 'PR & Outreach Team Member',
-        image:
-          'https://i.postimg.cc/1tn43Rqf/IMG-20251218-WA0071-ARKO-CHAKRABORTY.jpg',
-      },
-      {
-        name: 'Junaid Khan',
-        role: 'PR & Outreach Team Member',
-        image:
-          'https://i.postimg.cc/0ynztBvm/IMG-20251226-101304-095-JUNAID-KHAN.webp',
-      },
-      {
-        name: 'Umar Raza Ansari',
-        role: 'PR & Outreach Team Member',
-        image:
-          'https://i.postimg.cc/k55BLvMQ/IMG-20251226-123650-UMAR-RAZA-ANSARI.jpg',
-      },
-      {
-        name: 'Spandan Biswas',
-        role: 'PR & Outreach Team Member',
-        image:
-          'https://i.postimg.cc/28pL3WTY/IMG-20240929-195913-601-SPANDAN-BISWAS.webp',
-      },
-      {
-        name: 'Joyeeta Majumder',
-        role: 'PR & Outreach Team Member',
-        image:
-          'https://i.postimg.cc/RF6qZCH4/img20251123-19060340-JOYEETA-MAJUMDER.jpg',
-      },
-    ],
-  },
-  // // logistics team completed
-  // {
-  //   category: 'Logistics Team',
-  //   id: 'logistics',
-  //   path: '/team/logistics',
-  //   members: [
-  //     {
-  //       name: 'Arnab Dey',
-  //       role: 'Logistics Team Lead',
-  //       image: 'https://i.postimg.cc/0NGnY7ds/EjMuVkC.jpg',
-  //     },
-  //     {
-  //       name: 'Aditya Chakraborty',
-  //       role: 'Logistics Team Member',
-  //       image:
-  //         'https://i.postimg.cc/rsjNBTZY/IMG-20231128-WA0006-ADITYA-CHAKRABORTY.jpg',
-  //     },
-  //     {
-  //       name: 'Arnob Podder',
-  //       role: 'Logistics Team Member',
-  //       image: 'https://i.postimg.cc/3RcKn0YL/IMG-2897-ARNOB-PODDER.jpg',
-  //     },
-  //     {
-  //       name: 'Ankan Ghosh',
-  //       role: 'Logistics Team Member',
-  //       image:
-  //         'https://i.postimg.cc/kXrypj1m/IMG-20250224-WA0046-ANKAN-GHOSH.jpg',
-  //     },
-  //     {
-  //       name: 'Mohit Chowdhury',
-  //       role: 'Logistics Team Member',
-  //       image: 'https://i.postimg.cc/h4Xxg9zt/IMG-9828-MOHIT-CHOWDHURY.jpg',
-  //     },
-  //     {
-  //       name: 'Tarif Chowdhury',
-  //       role: 'Logistics Team Member',
-  //       image:
-  //         'https://i.postimg.cc/52X2Ch4r/9b562a9e-eeb4-4170-b15c-694e8c584c30.jpg',
-  //     },
-  //     {
-  //       name: 'Pratik Chowdhury',
-  //       role: 'Logistics Team Member',
-  //       image:
-  //         'https://i.postimg.cc/28v0jpby/20250304-142312-ANUSHKA-GHOSH.jpg',
-  //     },
-  //     {
-  //       name: 'Somen Saha',
-  //       role: 'Logistics Team Member',
-  //       image:
-  //         'https://i.postimg.cc/hjq8hvH5/IMG20250203162227-imresizer-SOMEN-SAHA.jpg',
-  //     },
-  //     {
-  //       name: 'Supratim Sen',
-  //       role: 'Logistics Team Member',
-  //       image:
-  //         'https://i.postimg.cc/kDr7drVK/IMG-20250305-020623-SUPRATIM-SEN.jpg',
-  //     },
-  //     {
-  //       name: 'Sagar Raj Yadav',
-  //       role: 'Logistics Team Member',
-  //       image:
-  //         'https://i.postimg.cc/nr9n5VLn/IMG20240710105920-SAGAR-RAJYADAV.jpg',
-  //     },
-  //   ],
-  // },
-  //sponsorship team completed
-  {
-    category: 'Sponsorship',
-    id: 'sponsorship',
-    path: '/team/sponsorship',
-    icon: <FaMoneyCheck className="text-yellow-200" />,
-    members: [
-      {
-        name: 'Tiyasa Raptan',
-        role: 'Sponsorship Team Lead',
-        image:
-          'https://i.postimg.cc/yNrkK3Wf/IMG_20250921_WA0152_TIYASA_RAPTAN.jpg',
-      },
-      {
-        name: 'Soumyaraj Bag',
-        role: 'Sponsorship Team Lead',
-        image: 'https://i.postimg.cc/5NNyXmLV/image.png',
-      },
-      {
-        name: 'Neel Bose',
-        role: 'Sponsorship Team Member',
-        image:
-          'https://i.postimg.cc/8kvj85G2/Snapchat-1901994285(1)-NEEL-BOSE(2).jpg',
-      },
-      {
-        name: 'Arijit Saha',
-        role: 'Sponsorship Team Member',
-        image:
-          'https://i.postimg.cc/5tt6DS9n/IMG-20241211-WA0167(3)-ARIJIT-SAHA(1).jpg',
-      },
-      {
-        name: 'Adrika Mukherjee',
-        role: 'Sponsorship Team Member',
-        image:
-          'https://i.postimg.cc/DZJmwfXm/IMG_20251119_WA0123_ADRIKA_MUKHERJEE.jpg',
-      },
-      {
-        name: 'Rajdeep Shome',
-        role: 'Sponsorship Team Member',
-        image:
-          'https://i.postimg.cc/cL0KBNVD/IMG-20251201-221135-RAJDEEP-SHOME.jpg',
-      },
-      {
-        name: 'Tilak Sadhukhan',
-        role: 'Sponsorship Team Member',
-        image:
-          'https://i.postimg.cc/vZb1tdJy/IMG-20251218-193556-TILAK-SADHUKHAN.jpg',
-      },
-      {
-        name: 'Biswarup Ganguly',
-        role: 'Sponsorship Team Member',
-        image:
-          'https://i.postimg.cc/mr6t41tG/IMG-20250929-WA0287-BISWARUP-GANGULY.jpg',
-      },
-
-      {
-        name: 'Shreya Chakraborty',
-        role: 'Sponsorship Team Member',
-        image: 'https://i.postimg.cc/jdVnCfcF/IMG-4542-Shreya-Chakraborty.jpg',
-      },
-    ],
-  },
   // {
   //   category: 'Security Team',
   //   id: 'security',

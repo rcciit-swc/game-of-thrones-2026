@@ -1,20 +1,41 @@
 'use client';
 
+import Navbar from '@/components/Navbar';
 import { motion, AnimatePresence } from 'framer-motion';
-import { teams } from '@/utils/constraints/constants/teams';
-import { useState, useMemo } from 'react';
+import { useTeams } from '@/lib/stores/teams';
+import { useState, useMemo, useEffect } from 'react';
 import { Zap, Flame, Target } from 'lucide-react';
 import Image from 'next/image';
-import ElectricBorder from '@/components/ElectricBorder';
+import TeamLoader from '@/components/TeamLoader';
 
 export default function TeamsPage() {
-  const [selectedTab, setSelectedTab] = useState(teams[0].id);
+  // Get teams data and actions from the store
+  const { teams, teamsLoading, fetchTeams } = useTeams();
+
+  const [selectedTab, setSelectedTab] = useState<string>('');
   const [hoveredMember, setHoveredMember] = useState<number | null>(null);
+
+  // Fetch teams on component mount
+  useEffect(() => {
+    fetchTeams();
+  }, [fetchTeams]);
+
+  // Set initial selected tab when teams are loaded
+  useEffect(() => {
+    if (teams.length > 0 && !selectedTab) {
+      setSelectedTab(teams[0].id);
+    }
+  }, [teams, selectedTab]);
+
+  // Show loader while teams are loading
+  if (teamsLoading || teams.length === 0) {
+    return <TeamLoader />;
+  }
 
   // Memoize selected team to avoid recalculation
   const selectedTeam = useMemo(
     () => teams.find((team) => team.id === selectedTab),
-    [selectedTab]
+    [selectedTab, teams]
   );
 
   // Detect mobile for performance optimizations
