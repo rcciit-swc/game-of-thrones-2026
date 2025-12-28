@@ -3,6 +3,7 @@ import type { NextConfig } from 'next';
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
+  allowedDevOrigins: ['i.postimg.cc', 'i.postimg.cc'],
   images: {
     remotePatterns: [
       {
