@@ -10,8 +10,8 @@ const Autocarsoule = dynamic(() => import('./Autocarsoule'), { ssr: false });
 import './playground-animations.css';
 
 const Playground = () => {
-  const imageSize = 20; // size of orbiting images (% of ring)
-  const orbitRadius = 45; // radius from center (%)
+  const imageSize = 12; // size of orbiting images (% of ring)
+  const orbitRadius = 42; // radius from center (%)
   const [events, setEvents] = useState<any[]>([]); // Initialize with fallbackImages
   const [loading, setLoading] = useState(true);
 
@@ -23,15 +23,13 @@ const Playground = () => {
 
         if (data && data.length > 0) {
           // Map events to the format needed for display
-          const mappedEvents = data
-            .slice(0, 10)
-            .map((event: any, index: number) => ({
-              id: event.event_id,
-              src: event.image_url || '/assest/pics/Ellipse 7.svg',
-              alt: event.name || `Event ${index + 1}`,
-              name: event.name,
-              angle: index * 36, // Distribute evenly around circle
-            }));
+          const mappedEvents = data.map((event: any, index: number) => ({
+            id: event.event_id,
+            src: event.image_url || '/assest/pics/Ellipse 7.svg',
+            alt: event.name || `Event ${index + 1}`,
+            name: event.name,
+            angle: (index * 360) / data.length, // Distribute evenly around circle
+          }));
           setEvents(mappedEvents);
         } else {
           setEvents([]);
@@ -109,7 +107,7 @@ const Playground = () => {
             }}
           >
             {/* Outer Ring - Ellipse 1 */}
-            <div className="absolute inset-0">
+            <div className="absolute inset-0 flex items-center justify-center scale-[0.9] z-0">
               <Image
                 src="/assest/circle/Ellipse 1.svg"
                 alt="Outer Ring"
@@ -119,7 +117,7 @@ const Playground = () => {
             </div>
 
             {/* Inner Ring - Ellipse 2 */}
-            <div className="absolute inset-0 flex items-center justify-center scale-[0.85]">
+            <div className="absolute inset-0 flex items-center justify-center scale-[0.80] z-0">
               <Image
                 src="/assest/circle/Ellipse 2.svg"
                 alt="Inner Ring"
@@ -175,7 +173,7 @@ const Playground = () => {
                 return (
                   <div
                     key={event.id || index}
-                    className="absolute group"
+                    className="absolute group z-10"
                     style={{
                       width: `${imageSize}%`,
                       height: `${imageSize}%`,
