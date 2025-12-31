@@ -465,12 +465,12 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="w-full lg:w-2/5 flex flex-col gap-4"
+              className="w-full lg:w-2/5 flex flex-col items-center lg:items-start gap-4"
             >
               <motion.div
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
-                className="mx-auto w-[300px] md:w-[400px] h-fit rounded-2xl overflow-hidden shadow-2xl border-2 border-white/20"
+                className="w-full max-w-[300px] sm:max-w-[350px] md:max-w-[400px] lg:max-w-[450px] h-fit rounded-2xl overflow-hidden shadow-2xl border-2 border-white/20"
               >
                 <img
                   src={
@@ -478,18 +478,18 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
                     '/assets/events/default-event.jpg'
                   }
                   alt={selectedEvent?.name || 'Event Poster'}
-                  className="w-[300px] md:w-[400px] object-cover"
+                  className="w-full h-auto object-cover"
                 />
               </motion.div>
 
               {/* Registration Fees & Prize Pool */}
-              <div className="grid grid-cols-1 md:grid-cols-2 mx-auto gap-3 w-full lg:w-4/5">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full max-w-[300px] sm:max-w-[350px] md:max-w-[800px] lg:max-w-[450px]">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
                   whileHover={{ scale: 1.05, y: -2 }}
-                  className="bg-gradient-to-br from-emerald-500/20 via-emerald-500/10 to-transparent backdrop-blur-md rounded-xl p-4 border-2 border-emerald-400/30 shadow-lg hover:shadow-xl hover:border-emerald-400/50 transition-all duration-300"
+                  className="bg-gradient-to-br from-emerald-500/20 via-emerald-500/10 to-transparent backdrop-blur-md rounded-xl p-4 border-2 border-emerald-400/30 shadow-lg hover:shadow-xl hover:border-emerald-400/50 transition-all duration-300 text-center"
                 >
                   <p className="text-emerald-300 text-xs md:text-sm font-medium mb-1 uppercase tracking-wide">
                     Registration Fees
@@ -504,9 +504,9 @@ const EventRegistration: React.FC<EventRegistrationProps> = ({ eventId }) => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
                   whileHover={{ scale: 1.05, y: -2 }}
-                  className="bg-gradient-to-br from-amber-500/20 via-amber-500/10 to-transparent backdrop-blur-md rounded-xl p-4 border-2 border-amber-400/30 shadow-lg hover:shadow-xl hover:border-amber-400/50 transition-all duration-300"
+                  className="bg-gradient-to-br from-amber-500/20 via-amber-500/10 to-transparent backdrop-blur-md rounded-xl p-4 border-2 border-amber-400/30 shadow-lg hover:shadow-xl hover:border-amber-400/50 transition-all duration-300 text-center"
                 >
-                  <div className="flex items-center gap-2 mb-1">
+                  <div className="flex items-center justify-center gap-2 mb-1">
                     <Trophy className="w-4 h-4 text-amber-400" />
                     <p className="text-amber-300 text-xs md:text-sm font-medium uppercase tracking-wide">
                       Prize Pool
